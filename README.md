@@ -9,7 +9,9 @@
 ## Getting Started
 
 `sudo npm install -g cordova`
+
 `sudo npm install -g ionic`
+
 `npm install`
 
 To start:
@@ -18,14 +20,18 @@ To start:
 ## Build
 
 To build iOS:
+
 `ionic build ios`
 
 To emulate iOS:
+
 `ionic emulate ios`
 
 To build iOS:
+
 `ionic build android`
 
 To emulate iOS:
+
 `ionic emulate android`
 
