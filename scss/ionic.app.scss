@@ -65,10 +65,10 @@ $colourSubtitle: #CCCCCC;
   text-transform: uppercase;
 }
 
+$nav-bar-height: 50px;
+
 // Navbar styles
 .nav-bar-block {
-  $nav-bar-height: 50px;
-
   .bar-header {
     background-color: $colourPrimary;
     height: $nav-bar-height !important;
@@ -83,16 +83,21 @@ $colourSubtitle: #CCCCCC;
       @include uppercase-bold-font();
       font-size: 17px;
     }
-    .buttons.header-item span{
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-    .button.button-icon.button-clear {
+    .button.button-icon.button-clear, .icon {
       &:before {
         font-size: 22px;  
       }
       max-height: $nav-bar-height;
+      padding-left: 16px;
+      padding-right: 16px;
     }
+  }
+}
+
+// View container styles
+.view-container {
+  .scroll-content.has-header {
+    top: $nav-bar-height;
   }
 }
 
@@ -142,3 +147,4 @@ $colourSubtitle: #CCCCCC;
     }
   }
 }
+

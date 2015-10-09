@@ -40,7 +40,29 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: 'HomeCtrl'
       }
     }
-  });
+  })
+
+  .state('app.chats', {
+    url: '/chats',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/chats.html',
+        controller: 'ChatsCtrl'
+      }
+    }
+  })
+
+  .state('app.chat', {
+    url: '/chats/:chatId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/chat.html',
+        controller: 'ChatCtrl'
+      }
+    }
+  })
+
+  ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
