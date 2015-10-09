@@ -142,3 +142,24 @@ $colourSubtitle: #CCCCCC;
     }
   }
 }
+
+// Profile Cards Styles
+td-cards {
+  display: block;
+  padding: 10px;
+}
+
+td-card {
+  position: absolute;
+  border-radius: 5px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  height: 75%;
+  width: 95%;
+  border-radius: 5px;
+
+  .profile-name {
+    text-align: center;
+  }
+}
+

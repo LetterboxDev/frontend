@@ -1,4 +1,15 @@
 <ion-view view-title="Letterbox">
   <ion-content>
+    <td-cards>
+      <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+        <div class="item item-image">
+          <img src="http://lorempixel.com/300/300" alt="Image" />
+        </div>
+        <div class="item item-body">
+          <p class="profile-name">Ai Mei Mei</p>
+        </div>
+      </td-card>
+    </td-cards>
   </ion-content>
 </ion-view>
+
