@@ -22,12 +22,20 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
 // Letterbox Branding Colors
-$primary: #fa5c4f;
+$colourPrimary: #fa5c4f;
+$colourPositive: #69C333;
+$colourNegative: #FA5C4F;
+$colourSideMenu: #4D4D4D;
+$colourSideMenuItem: #534741;
+$colourPrimaryText: #4D4D4D;
+$colourSecondaryText: #999999;
+$colourSubtitle: #CCCCCC;
+
 
 // Navbar styles
 .nav-bar-block {
   .bar-header {
-    background-color: $primary;
+    background-color: $colourPrimary;
   }
   .bar.bar-stable .title,
   .bar.bar-stable .button {
