@@ -58,6 +58,13 @@ $colourSubtitle: #CCCCCC;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+@mixin uppercase-bold-font() {
+  font-weight: bold;
+  font-family: "Montserrat";
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 // Navbar styles
 .nav-bar-block {
   $nav-bar-height: 60px;
@@ -73,10 +80,7 @@ $colourSubtitle: #CCCCCC;
     }
     .title {
       top: 8px;
-      font-weight: bold;
-      font-family: "Montserrat";
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      @include uppercase-bold-font();
     }
     .buttons.header-item span{
       padding-left: 16px;
@@ -91,3 +95,46 @@ $colourSubtitle: #CCCCCC;
   }
 }
 
+// Left side menu styles
+.left-side-menu {
+  $header-bar-height: 120px;
+  background-color: $colourSideMenu;
+
+  .bar.bar-stable {
+    height: $header-bar-height;
+    border: none;
+    background-color: $colourSideMenu;
+
+    h1 {
+      @include uppercase-bold-font();
+      color: $colourPrimary;
+      font-size: 20px;
+      line-height: 1.1em;
+      margin: 15% auto 0;
+      padding: 0 40px;
+      word-wrap: break-word;
+      white-space: normal;
+      text-align: left;
+      height: 100%;
+      max-height: 0.6 * $header-bar-height;
+    }
+  }
+
+  .scroll-content.has-header {
+    top: $header-bar-height;
+
+    .item {
+      border: none;
+      .item-content {
+        color: white;
+        background-color: $colourSideMenu;
+        padding-left: 40px;
+        @include uppercase-bold-font();
+        .icon {
+          margin-right: 20px;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
