@@ -18,9 +18,6 @@ $dark:                            #444 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
-// Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
-
 // Custom fonts
 @font-face {
   font-family: 'Montserrat';
@@ -46,7 +43,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   font-style: normal;
 }
 
-$font-family-base: "Montserrat", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
+$font-family-sans-serif: "Montserrat", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
 
 // Letterbox Branding Colors
 $colourPrimary: #fa5c4f;
@@ -58,6 +55,8 @@ $colourPrimaryText: #4D4D4D;
 $colourSecondaryText: #999999;
 $colourSubtitle: #CCCCCC;
 
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
 
 // Navbar styles
 .nav-bar-block {
