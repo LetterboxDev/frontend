@@ -6,4 +6,5 @@ platforms/
 plugins/
 www/css/*.min.css
 www/css/*.css
+www/lib/
 
