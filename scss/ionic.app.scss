@@ -67,7 +67,7 @@ $colourSubtitle: #CCCCCC;
 
 // Navbar styles
 .nav-bar-block {
-  $nav-bar-height: 60px;
+  $nav-bar-height: 50px;
 
   .bar-header {
     background-color: $colourPrimary;
@@ -79,8 +79,9 @@ $colourSubtitle: #CCCCCC;
       color: white;
     }
     .title {
-      top: 8px;
+      top: 3px;
       @include uppercase-bold-font();
+      font-size: 17px;
     }
     .buttons.header-item span{
       padding-left: 16px;
@@ -88,7 +89,7 @@ $colourSubtitle: #CCCCCC;
     }
     .button.button-icon.button-clear {
       &:before {
-        font-size: 26px;  
+        font-size: 22px;  
       }
       max-height: $nav-bar-height;
     }
@@ -108,7 +109,7 @@ $colourSubtitle: #CCCCCC;
     h1 {
       @include uppercase-bold-font();
       color: $colourPrimary;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1.1em;
       margin: 15% auto 0;
       padding: 0 40px;
@@ -130,7 +131,10 @@ $colourSubtitle: #CCCCCC;
         background-color: $colourSideMenu;
         padding-left: 40px;
         @include uppercase-bold-font();
+        font-size: 14px;
+        letter-spacing: 2px;
         .icon {
+          vertical-align: text-top;
           margin-right: 20px;
           font-size: 20px;
         }
