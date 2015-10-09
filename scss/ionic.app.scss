@@ -21,6 +21,33 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+// Custom fonts
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/montserrat-bold-webfont.eot');
+  src: url('../fonts/montserrat-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/montserrat-bold-webfont.woff2') format('woff2'),
+       url('../fonts/montserrat-bold-webfont.woff') format('woff'),
+       url('../fonts/montserrat-bold-webfont.ttf') format('truetype'),
+       url('../fonts/montserrat-bold-webfont.svg#montserratbold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/montserrat-light-webfont.eot');
+  src: url('../fonts/montserrat-light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/montserrat-light-webfont.woff2') format('woff2'),
+       url('../fonts/montserrat-light-webfont.woff') format('woff'),
+       url('../fonts/montserrat-light-webfont.ttf') format('truetype'),
+       url('../fonts/montserrat-light-webfont.svg#montserratlight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-family-base: "Montserrat", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
+
 // Letterbox Branding Colors
 $colourPrimary: #fa5c4f;
 $colourPositive: #69C333;
@@ -43,6 +70,9 @@ $colourSubtitle: #CCCCCC;
   }
   .bar.bar-stable .title {
     font-weight: bold;
+    font-family: "Montserrat";
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 }
 
