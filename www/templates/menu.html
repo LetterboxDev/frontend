@@ -8,6 +8,11 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>
+
+      <ion-nav-buttons side="right">
+        <button class="button button-small button-icon button-clear ion-chatbubbles">
+        </button>
+      </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
@@ -19,21 +24,27 @@
     <ion-content>
       <ion-list>
         <ion-item menu-close href="#/app/home">
+          <i class="icon ion-home"></i>
           Home
         </ion-item>
         <ion-item menu-close href="#/app/chats">
+          <i class="icon ion-chatbubbles"></i>
           Chats
         </ion-item>
         <ion-item menu-close href="#/app/activities">
+          <i class="icon ion-happy-outline"></i>
           Activities
         </ion-item>
         <ion-item menu-close href="#/app/notifications">
+          <i class="icon ion-ios-bell"></i>
           Notifications
         </ion-item>
         <ion-item menu-close href="#/app/profile">
+          <i class="icon ion-person"></i>
           Profile
         </ion-item>
         <ion-item menu-close href="#/app/settings">
+          <i class="icon ion-gear-b"></i>
           Settings
         </ion-item>
       </ion-list>
