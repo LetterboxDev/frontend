@@ -61,18 +61,34 @@ $colourSubtitle: #CCCCCC;
 
 // Navbar styles
 .nav-bar-block {
+  $nav-bar-height: 60px;
+
   .bar-header {
     background-color: $colourPrimary;
+    height: $nav-bar-height !important;
   }
-  .bar.bar-stable .title,
-  .bar.bar-stable .button {
-    color: white;
-  }
-  .bar.bar-stable .title {
-    font-weight: bold;
-    font-family: "Montserrat";
-    letter-spacing: 1px;
-    text-transform: uppercase;
+
+  .bar.bar-stable {
+    .title, .button {
+      color: white;
+    }
+    .title {
+      top: 8px;
+      font-weight: bold;
+      font-family: "Montserrat";
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .buttons.header-item span{
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .button.button-icon.button-clear {
+      &:before {
+        font-size: 26px;  
+      }
+      max-height: $nav-bar-height;
+    }
   }
 }
 
