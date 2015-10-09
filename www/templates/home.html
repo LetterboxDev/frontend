@@ -2,11 +2,18 @@
   <ion-content>
     <td-cards>
       <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
-        <div class="item item-image">
-          <img src="http://lorempixel.com/300/300" alt="Image" />
-        </div>
-        <div class="item item-body">
-          <p class="profile-name">Ai Mei Mei</p>
+        <div class="list card">
+          <div class="item item-image">
+            <img src="http://lorempixel.com/300/300" alt="Image" />
+          </div>
+          <div class="item item-header">
+            <p class="profile-name">Ai Mei Mei<span class="age">, 25</span><span class="location">1km</span></p>
+          </div>
+          <div class="item item-body">
+            <span class="subtitle">Bio</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</p>
+          </div>
         </div>
       </td-card>
     </td-cards>
