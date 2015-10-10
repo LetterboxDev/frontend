@@ -71,6 +71,14 @@ ion-content {
 }
 
 $nav-bar-height: 50px;
+$ios-status-bar-height: 20px;
+
+// ios-specific style
+.platform-ios {
+  .bar-header {
+    height: $nav-bar-height + $ios-status-bar-height !important;
+  }
+}
 
 // Navbar styles
 .nav-bar-block {
@@ -92,9 +100,25 @@ $nav-bar-height: 50px;
       &:before {
         font-size: 22px;
       }
+
       max-height: $nav-bar-height;
       padding-left: 8px;
       padding-right: 8px;
+    }
+    .notification-bubble {
+      border-radius: 40px; // make it circle
+      width: 18px;
+      height: 18px;
+      background-color: $colourPositive;
+      text-align: center;
+      color: white;
+      font-size: 10px;
+      padding-bottom: 2px;
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      z-index: 1;
+      cursor: pointer;
     }
   }
 }
@@ -277,7 +301,6 @@ swipe-card {
   }
 }
 
-
 // Chat messages styles
 @mixin message($sent-or-received) {
   padding: 10px 15px;
@@ -371,5 +394,3 @@ swipe-card {
   width: 100%;
   z-index: 999;
 }
-
-
