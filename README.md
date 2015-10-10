@@ -33,11 +33,11 @@ To emulate iOS:
 
 `ionic emulate ios`
 
-To build iOS:
+To build Android:
 
 `ionic build android`
 
-To emulate iOS:
+To emulate Android:
 
 `ionic emulate android`
 
