@@ -14,24 +14,24 @@ angular.module('starter.controllers')
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
   var cardTypes = [
     {
-      title: 'Hello',
-      content: 'World!'
+      title: '1',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
     },
     {
-      title: 'Hello',
-      content: 'World!'
+      title: '2',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
     },
     {
-      title: 'Hello',
-      content: 'World!'
+      title: '3',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
     },
     {
-      title: 'Hello',
-      content: 'World!'
+      title: '4',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
     },
     {
-      title: 'Hello',
-      content: 'World!'
+      title: '5',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
     }
   ];
 
@@ -39,15 +39,18 @@ angular.module('starter.controllers')
 
   $scope.cardSwiped = function(index) {
     $scope.addCard();
+    console.log($scope.cards);
   };
 
   $scope.cardDestroyed = function(index) {
     $scope.cards.splice(index, 1);
+    console.log('destroyed');
   };
 
   $scope.addCard = function() {
     var newCard = { title: 'New', content: 'New' };
     $scope.cards.push(angular.extend({}, newCard));
+    console.log('card added');
   };
 });
 
