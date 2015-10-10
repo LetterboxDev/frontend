@@ -62,6 +62,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+  .state('app.notifications', {
+    url: '/notifications',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/notifications.html',
+        controller: 'NotificationsCtrl'
+      }
+    }
+  })
   ;
 
   // if none of the above states are matched, use this as the fallback
