@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, Facebook, $cordovaOauth, backend) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -9,35 +9,68 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
+  $ionicModal.fromTemplateUrl('templates/onboard.html', {
+    scope: $scope,
+    hardwareBackButtonClose: false
+  }).then(function(onboardModal) {
+    $scope.onboardModal = onboardModal;
   });
 
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
+  $ionicModal.fromTemplateUrl('templates/login.html', {
+    scope: $scope,
+    hardwareBackButtonClose: false
+  }).then(function(loginModal) {
+    $scope.loginModal = loginModal;
+    if (!window.localStorage.getItem('token')) {
+      $scope.loginModal.show();
+    }
+    $scope.beginOnboarding();
+  });
+
+  $scope.beginOnboarding = function() {
+    if (window.localStorage.getItem('token') && window.localStorage.getItem('isRegistered') === 'false') {
+      $scope.onboardModal.show();
+    }
   };
 
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
+  $scope.completeOnboarding = function() {
+    window.localStorage.setItem('isRegistered', 'true');
+    $scope.onboardModal.hide();
+  };
+
+  $scope.authenticateToken = function(fbToken) {
+    $scope.testing = 'fb_token: ' + fbToken;
+    backend.auth(fbToken).$promise.then(function(success) {
+      window.localStorage.setItem('token', success.letterbox_token);
+      window.localStorage.setItem('firstName', success.user.firstName);
+      window.localStorage.setItem('hashedId', success.user.hashedId);
+      window.localStorage.setItem('isRegistered', success.user.isRegistered);
+      $scope.loginModal.hide();
+      $scope.beginOnboarding();
+    }, function(error) {
+      // error something went wrong
+    });
   };
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+    if (!window.cordova) {
+      Facebook.login(function(response) {
+        if (response.status === 'connected') {
+          $scope.authenticateToken(response.authResponse.accessToken);
+        } else {
+          // error, something went wrong
+        }
+        // make request to server if new or returning, get letterbox_token
+      });
+    } else {
+      $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_education_history','user_work_history']).then(function(res) {
+        // make request to server if new or returning, get letterbox_token
+        $scope.authenticateToken(res.access_token);
+      }, function(err) {
+        // inform of error
+      });
+    }
   };
 });
 

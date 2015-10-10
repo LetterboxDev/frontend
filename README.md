@@ -14,6 +14,10 @@
 
 `npm install`
 
+`cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git`
+
+`ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git`
+
 To start:
 `ionic serve`
 
