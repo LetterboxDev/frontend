@@ -11,7 +11,7 @@
   "dependencies": {
     "angular": "~1.4.7",
     "collide": "~0.0.4",
-    "ionic-ion-tinder-cards": "*",
+    "ionic-ion-swipe-cards": "*"
     "angular-facebook": "~0.2.3",
     "angular-resource": "~1.4.7"
   }
