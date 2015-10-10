@@ -1,4 +1,24 @@
 <ion-view view-title="Letterbox">
   <ion-content>
+    <div ng-controller="CardsCtrl">
+      <swipe-cards>
+        <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
+          <div ng-controller="CardCtrl">
+            <div class="item item-image">
+              <img src="http://lorempixel.com/300/300" alt="Image" />
+            </div>
+            <div class="item item-header">
+              <span class="name">Ai Mei Mei</span><span class="age">, 25</span><span class="location">1km</span>
+            </div>
+            <div class="item item-body">
+              <span class="subtitle">Bio</span>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+          </div>
+        </swipe-card>
+      </swipe-cards>
+    </div>
   </ion-content>
 </ion-view>
+
