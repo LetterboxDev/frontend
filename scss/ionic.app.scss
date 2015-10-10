@@ -65,10 +65,10 @@ $colourSubtitle: #CCCCCC;
   text-transform: uppercase;
 }
 
+$nav-bar-height: 50px;
+
 // Navbar styles
 .nav-bar-block {
-  $nav-bar-height: 50px;
-
   .bar-header {
     background-color: $colourPrimary;
     height: $nav-bar-height !important;
@@ -83,16 +83,21 @@ $colourSubtitle: #CCCCCC;
       @include uppercase-bold-font();
       font-size: 17px;
     }
-    .buttons.header-item span{
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-    .button.button-icon.button-clear {
+    .button.button-icon.button-clear, .icon {
       &:before {
         font-size: 22px;  
       }
       max-height: $nav-bar-height;
+      padding-left: 8px;
+      padding-right: 8px;
     }
+  }
+}
+
+// View container styles
+.view-container {
+  .scroll-content.has-header {
+    top: $nav-bar-height;
   }
 }
 
@@ -140,5 +145,59 @@ $colourSubtitle: #CCCCCC;
         }
       }
     }
+  }
+}
+
+// List item styles which can be extended by any list
+.list-item-heading {
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: $colourPrimaryText;
+}
+.list-item-message {
+  font-size: 13px;
+}
+.list-item-meta {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 12px;
+  color: $colourSecondaryText;
+}
+
+
+.chats-list {
+  .chat-from {
+    @extend .list-item-heading;
+  }
+  .chat-last-message {
+    @extend .list-item-message;
+  }
+  .chat-last-activity {
+    @extend .list-item-meta;
+  }
+}
+
+.notifications-list {
+  .notification-from {
+    @extend .list-item-heading;
+  }
+  .notification-message {
+    @extend .list-item-message;
+    white-space: normal;
+    line-height: 1.4em;
+  }
+  .notification-timestamp {
+    @extend .list-item-meta;
+  }
+}
+
+.settings-list {
+  .setting-description {
+    @extend .list-item-heading; 
+    font-size: 14px;
+    white-space: normal;
+    line-height: 1.4em;
   }
 }

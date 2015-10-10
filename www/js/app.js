@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'facebook', 'ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ngResource', 'starter.services', 'facebook', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -44,9 +44,51 @@ angular.module('starter', ['ionic', 'starter.controllers', 'facebook', 'ngCordov
         controller: 'HomeCtrl'
       }
     }
-  });
+  })
+
+  .state('app.chats', {
+    url: '/chats',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/chats.html',
+        controller: 'ChatsCtrl'
+      }
+    }
+  })
+
+  .state('app.chat', {
+    url: '/chats/:chatId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/chat.html',
+        controller: 'ChatCtrl'
+      }
+    }
+  })
+
+  .state('app.notifications', {
+    url: '/notifications',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/notifications.html',
+        controller: 'NotificationsCtrl'
+      }
+    }
+  })
+
+  .state('app.settings', {
+    url: '/settings',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/settings.html',
+        controller: 'SettingsCtrl'
+      }
+    }
+  })
+  ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
 
+angular.module('starter.services', []);

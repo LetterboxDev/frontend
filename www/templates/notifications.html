@@ -1,0 +1,12 @@
+<ion-view view-title="Notifications">
+  <ion-content>
+    <ion-list class="notifications-list">
+      <ion-item ng-repeat="notification in notifications" href="#/app/notifications/{{notification.id}}" class="item item-avatar">
+        <img class="notification-profile-pic" src="{{notification.profile_pic}}">
+        <h2 class="notification-from">{{notification.from}}</h2>
+        <p class="notification-message">{{notification.message}}</p>
+        <span class="notification-timestamp">{{notification.timestamp}}</span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
