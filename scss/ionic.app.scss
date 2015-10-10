@@ -47,6 +47,7 @@ $font-family-sans-serif: "Montserrat", "Helvetica Neue", "Roboto", "Segoe UI", s
 
 // Letterbox Branding Colors
 $colourPrimary: #fa5c4f;
+$colourBackground: #F7F7F7;
 $colourPositive: #69C333;
 $colourNegative: #FA5C4F;
 $colourSideMenu: #4D4D4D;
@@ -63,6 +64,10 @@ $colourSubtitle: #CCCCCC;
   font-family: "Montserrat";
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+ion-content {
+  background-color: $colourBackground;
 }
 
 $nav-bar-height: 50px;
@@ -128,6 +133,7 @@ $nav-bar-height: 50px;
 
   .scroll-content.has-header {
     top: $header-bar-height;
+    background-color: $colourSideMenu;
 
     .item {
       border: none;
@@ -157,7 +163,7 @@ swipe-card {
   display: none;
   position: fixed;
   -webkit-transform: scale(1,1);
-  background-color: rgb(255,255,255);
+  background-color: $colourBackground;
   -webkit-animation-fill-mode: forwards;
   box-sizing: border-box;
   .image {
@@ -186,6 +192,7 @@ swipe-card {
     position: absolute;
     bottom: 0;
     opacity: 0.9;
+    border: none;
     .name {
       @include uppercase-bold-font();
     }
