@@ -72,12 +72,25 @@ ion-content {
 
 $nav-bar-height: 50px;
 $ios-status-bar-height: 20px;
+$ios-side-menu-title-height: 120px;
 
 // ios-specific style
 .platform-ios {
   .nav-bar-block {
     .bar-header {
       height: $nav-bar-height + $ios-status-bar-height !important;
+    }
+  }
+  .left-side-menu {
+    .bar.bar-stable {
+      height: $ios-side-menu-title-height !important;
+      background-image: none !important;
+      .title {
+        margin-top: 15% !important;
+      }
+    }
+    .scroll-content.has-header {
+      top: $ios-side-menu-title-height;
     }
   }
 }
