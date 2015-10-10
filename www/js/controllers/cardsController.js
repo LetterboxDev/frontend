@@ -1,16 +1,5 @@
 angular.module('starter.controllers')
 
-.directive('noScroll', function($document) {
-  return {
-    restrict: 'A',
-    link: function($scope, $element, $attr) {
-      $document.on('touchmove', function(e) {
-        e.preventDefault();
-      });
-    }
-  };
-})
-
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
   var cardTypes = [
     {
