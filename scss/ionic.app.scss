@@ -66,6 +66,7 @@ $colourSubtitle: #CCCCCC;
 }
 
 $nav-bar-height: 50px;
+$ios-status-bar-height: 20px;
 
 // Navbar styles
 .nav-bar-block {
@@ -87,6 +88,7 @@ $nav-bar-height: 50px;
       &:before {
         font-size: 22px;
       }
+      // margin-top: -15px;
       max-height: $nav-bar-height;
       padding-left: 8px;
       padding-right: 8px;
@@ -267,5 +269,12 @@ swipe-card {
     font-size: 14px;
     white-space: normal;
     line-height: 1.4em;
+  }
+}
+
+// ios-specific style
+.platform-ios {
+  .bar-header {
+    height: $nav-bar-height + $ios-status-bar-height !important;
   }
 }
