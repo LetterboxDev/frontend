@@ -8,20 +8,41 @@
     <div ng-controller="CardsCtrl">
       <swipe-cards>
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-          <div class="card" ng-controller="CardCtrl">
-            <div class="card-image">
-              <div class="item item-image">
-                <img ng-src="{{ card.profile_pic }}" alt="Image" />
+          <div class="flipper-container" ontouchstart="this.classList.toggle('hover');">
+            <div class="flipper">
+              <div class="card front">
+                <div class="card-image">
+                  <div class="item item-image">
+                    <img ng-src="{{ card.profile_pic }}" alt="Image" />
+                  </div>
+                  <div class="item item-header">
+                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
+                  </div>
+                </div>
+                <div class="item item-body">
+                  <p>{{ card.bio }}</p>
+                </div>
+                <div class="item item-footer">
+                  <i class="icon ion-information-circled"></i>
+                </div>
               </div>
-              <div class="item item-header">
-                <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
+
+              <div class="card back" ng-controller="CardCtrl">
+                <div class="card-image">
+                  <div class="item item-image">
+                    <img ng-src="{{ card.profile_pic }}" alt="Image" />
+                  </div>
+                  <div class="item item-header">
+                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
+                  </div>
+                </div>
+                <div class="item item-body">
+                  <p>{{ card.bio }}</p>
+                </div>
+                <div class="item item-footer">
+                  <i class="icon ion-information-circled"></i>
+                </div>
               </div>
-            </div>
-            <div class="item item-body">
-              <p>{{ card.bio }}</p>
-            </div>
-            <div class="item item-footer">
-              <i class="icon ion-information-circled"></i>
             </div>
           </div>
         </swipe-card>

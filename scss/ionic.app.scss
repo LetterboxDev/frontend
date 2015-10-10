@@ -244,6 +244,37 @@ swipe-card {
     font-size: 20px;
     color: $colourPrimary;
   }
+
+  // For card flip
+  .flipper-container {
+    perspective: 1000;
+    &:hover,
+    &.hover {
+      .flipper {
+        transform: rotateY(180deg);
+      }
+    }
+    .flipper {
+      transition: 0.6s;
+      transform-style: preserve-3d;
+
+      position: relative;
+    }
+    .front,
+    .back {
+      backface-visibility: hidden;
+    }
+    .front {
+      z-index: 2;
+      transform: rotateY(0deg);
+    }
+    .back {
+      position: absolute;
+      top: -5%; // This is a hack
+
+      transform: rotateY(180deg);
+    }
+  }
 }
 
 
@@ -329,7 +360,7 @@ swipe-card {
     @if $sent-or-received == sent {
       right: -10px;
       margin-left: 15px;
-      border-left-color: white;  
+      border-left-color: white;
     } @else if $sent-or-received == received {
       left: -10px;
       margin-right: 15px;
