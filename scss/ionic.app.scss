@@ -75,8 +75,10 @@ $ios-status-bar-height: 20px;
 
 // ios-specific style
 .platform-ios {
-  .bar-header {
-    height: $nav-bar-height + $ios-status-bar-height !important;
+  .nav-bar-block {
+    .bar-header {
+      height: $nav-bar-height + $ios-status-bar-height !important;
+    }
   }
 }
 
