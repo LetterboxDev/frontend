@@ -154,7 +154,6 @@ swipe-card {
   position: fixed;
   -webkit-transform: scale(1,1);
   background-color: rgb(255,255,255);
-  border-radius: 5px;
   -webkit-animation-fill-mode: forwards;
   .image {
     overflow: hidden;
@@ -173,6 +172,25 @@ swipe-card {
   &.pop-in {
     -webkit-animation: scale(0,0);
   }
+  .item-header {
+    .name {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .location {
+      float: right;
+      font-size: 12px;
+      color: $colourSubtitle;
+    }
+  }
+  .item-body {
+    .subtitle {
+      font-size: 12px;
+      color: $colourSubtitle;
+    }
+    p {
+      margin-top: 0;
+    }
+  }
 }
-// Taken from example app
 
