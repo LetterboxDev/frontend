@@ -155,6 +155,7 @@ swipe-card {
   -webkit-transform: scale(1,1);
   background-color: rgb(255,255,255);
   -webkit-animation-fill-mode: forwards;
+  box-sizing: border-box;
   .image {
     overflow: hidden;
     max-height: 210px;

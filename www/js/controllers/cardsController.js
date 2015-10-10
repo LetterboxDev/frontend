@@ -36,17 +36,16 @@ angular.module('starter.controllers')
   ];
 
   $scope.cardSwiped = function(index) {
-    $scope.addCard();
-  }
+  };
 
   $scope.cardDestroyed = function(index) {
     $scope.cards.splice(index, 1);
+    $scope.addCard();
   };
 
   $scope.addCard = function() {
     var newCard = { title: 'New', content: 'New' };
-    $scope.cards.push(angular.extend({}, newCard));
-    console.log($scope.cards);
+    $scope.cards.unshift(angular.extend({}, newCard));
   };
 });
 
