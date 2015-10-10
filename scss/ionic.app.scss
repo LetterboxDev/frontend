@@ -154,7 +154,6 @@ $nav-bar-height: 50px;
 }
 
 swipe-card {
-  margin: 15px 15px 10px 15px;
   display: none;
   position: fixed;
   -webkit-transform: scale(1,1);
@@ -178,7 +177,15 @@ swipe-card {
   &.pop-in {
     -webkit-animation: scale(0,0);
   }
+  .card-image {
+    position: relative;
+  }
   .item-header {
+    width: 100%;
+    z-index: 5;
+    position: absolute;
+    bottom: 0;
+    opacity: 0.9;
     .name {
       @include uppercase-bold-font();
     }
@@ -194,6 +201,10 @@ swipe-card {
       color: $colourSubtitle;
     }
     p {
+      max-width: 240px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       margin-top: 0;
       letter-spacing: 0.5px;
     }
