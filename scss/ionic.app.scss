@@ -149,20 +149,13 @@ $colourSubtitle: #CCCCCC;
 }
 
 swipe-card {
-  margin-top: 5px;
-  padding: 5px;
+  margin: 15px 15px 10px 15px;
   display: none;
   position: fixed;
   -webkit-transform: scale(1,1);
   background-color: rgb(255,255,255);
   border-radius: 5px;
   -webkit-animation-fill-mode: forwards;
-  .title {
-    height: 40px;
-    padding: 5px;
-    line-height: 30px;
-    color: #444;
-  }
   .image {
     overflow: hidden;
     max-height: 210px;
