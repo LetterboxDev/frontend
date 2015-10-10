@@ -4,7 +4,7 @@ angular.module('starter.services')
   return {
     getRecipientName: function(chatId) {
       var dfd = $q.defer();
-      dfd.resolve("Cassandra Ong");
+      dfd.resolve("Cassandra");
       return dfd.promise;
     },
     getMessagesFromBackend: function(chatId) {
@@ -21,7 +21,55 @@ angular.module('starter.services')
         content: "hello!",
         timestamp: "2m",
         received: false
-      }
+      },
+      {
+        id: 1,
+        content: "hi",
+        timestamp: "3m",
+        received: true
+      },
+      {
+        id: 1,
+        content: "hi",
+        timestamp: "3m",
+        received: true
+      },
+      {
+        id: 1,
+        content: "hi",
+        timestamp: "3m",
+        received: true
+      },
+      {
+        id: 1,
+        content: "hi",
+        timestamp: "3m",
+        received: true
+      },
+      {
+        id: 1,
+        content: "hi",
+        timestamp: "3m",
+        received: true
+      },
+      {
+        id: 1,
+        content: "hi",
+        timestamp: "3m",
+        received: true
+      },
+      {
+        id: 1,
+        content: "hi",
+        timestamp: "3m",
+        received: true
+      },
+      {
+        id: 1,
+        content: "hi",
+        timestamp: "3m",
+        received: true
+      },
       ])
       return dfd.promise;
     }
