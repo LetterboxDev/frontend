@@ -5,14 +5,14 @@
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
           <div ng-controller="CardCtrl">
             <div class="item item-image">
-              <img src="http://lorempixel.com/300/300" alt="Image" />
+              <img src="{{ card.profile_pic }}" alt="Image" />
             </div>
             <div class="item item-header">
-              <span class="name">{{ card.title }}</span><span class="age">, 25</span><span class="location">1km</span>
+              <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
             </div>
             <div class="item item-body">
               <span class="subtitle">Bio</span>
-              <p>{{ card.content }}</p>
+              <p>{{ card.bio }}</p>
             </div>
           </div>
         </swipe-card>

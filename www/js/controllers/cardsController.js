@@ -1,26 +1,34 @@
 angular.module('starter.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, backend) {
   var cardTypes = [
     {
-      title: '1',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
+      name: 'Jenny Ang',
+      age: '21',
+      location: '1km',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
+      profile_pic: 'http://semantic-ui.com/images/avatar/large/jenny.jpg'
     },
     {
-      title: '2',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
+      name: 'Russell Ho',
+      age: '22',
+      location: '3km',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
+      profile_pic: 'http://semantic-ui.com/images/avatar/large/stevie.jpg'
     },
     {
-      title: '3',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
+      name: 'Douche Koh',
+      age: '13',
+      location: '2km',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
+      profile_pic: 'http://semantic-ui.com/images/avatar/large/stevie.jpg'
     },
     {
-      title: '4',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
-    },
-    {
-      title: '5',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!'
+      name: 'Semi Aunty',
+      age: '24',
+      location: '4km',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
+      profile_pic: 'http://semantic-ui.com/images/avatar/large/jenny.jpg'
     }
   ];
 
@@ -37,7 +45,13 @@ angular.module('starter.controllers')
   };
 
   $scope.addCard = function() {
-    var newCard = { title: 'New', content: 'New' };
+    var newCard = {
+      name: 'New Aunty',
+      age: '24',
+      location: '4km',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
+      profile_pic: 'http://semantic-ui.com/images/avatar/large/jenny.jpg'
+    };
     $scope.cards.push(angular.extend({}, newCard));
     console.log('card added');
   };
