@@ -12,7 +12,7 @@ angular.module('starter.controllers')
 })
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
-  $scope.cards = [
+  var cardTypes = [
     {
       title: 'Hello',
       content: 'World!'
@@ -35,17 +35,19 @@ angular.module('starter.controllers')
     }
   ];
 
+  $scope.cards = Array.prototype.slice.call(cardTypes, 0, 1);
+
   $scope.cardSwiped = function(index) {
+    $scope.addCard();
   };
 
   $scope.cardDestroyed = function(index) {
     $scope.cards.splice(index, 1);
-    $scope.addCard();
   };
 
   $scope.addCard = function() {
     var newCard = { title: 'New', content: 'New' };
-    $scope.cards.unshift(angular.extend({}, newCard));
+    $scope.cards.push(angular.extend({}, newCard));
   };
 });
 
