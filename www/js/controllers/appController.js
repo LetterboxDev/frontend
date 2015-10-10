@@ -9,16 +9,34 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // TODO Check if user is already logged in
+  $ionicModal.fromTemplateUrl('templates/onboard.html', {
+    scope: $scope,
+    hardwareBackButtonClose: false
+  }).then(function(onboardModal) {
+    $scope.onboardModal = onboardModal;
+  });
+
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope,
     hardwareBackButtonClose: false
-  }).then(function(modal) {
-    $scope.modal = modal;
+  }).then(function(loginModal) {
+    $scope.loginModal = loginModal;
     if (!window.localStorage.getItem('token')) {
-      $scope.modal.show();      
+      $scope.loginModal.show();
     }
+    $scope.beginOnboarding();
   });
+
+  $scope.beginOnboarding = function() {
+    if (window.localStorage.getItem('token') && window.localStorage.getItem('isRegistered') === 'false') {
+      $scope.onboardModal.show();
+    }
+  };
+
+  $scope.completeOnboarding = function() {
+    window.localStorage.setItem('isRegistered', 'true');
+    $scope.onboardModal.hide();
+  };
 
   $scope.authenticateToken = function(fbToken) {
     $scope.testing = 'fb_token: ' + fbToken;
@@ -27,7 +45,8 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
       window.localStorage.setItem('firstName', success.user.firstName);
       window.localStorage.setItem('hashedId', success.user.hashedId);
       window.localStorage.setItem('isRegistered', success.user.isRegistered);
-      $scope.modal.hide();
+      $scope.loginModal.hide();
+      $scope.beginOnboarding();
     }, function(error) {
       // error something went wrong
     });
