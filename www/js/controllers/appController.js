@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
+angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
