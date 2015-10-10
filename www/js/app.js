@@ -61,7 +61,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngResource', 'starte
     views: {
       'menuContent': {
         templateUrl: 'templates/chat.html',
-        controller: 'ChatCtrl'
+        controller: 'ChatCtrl',
+      }
+    },
+    resolve: {
+      recipient: function($stateParams, ChatService) {
+        return ChatService.getRecipientName($stateParams.chatId);
+      },
+      messages: function($stateParams, ChatService) {
+        console.log("resolving");
+        return ChatService.getMessagesFromBackend($stateParams.chatId);
       }
     }
   })

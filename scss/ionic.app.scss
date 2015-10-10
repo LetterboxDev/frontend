@@ -85,7 +85,7 @@ $nav-bar-height: 50px;
     }
     .button.button-icon.button-clear, .icon {
       &:before {
-        font-size: 22px;  
+        font-size: 22px;
       }
       max-height: $nav-bar-height;
       padding-left: 8px;
@@ -148,6 +148,58 @@ $nav-bar-height: 50px;
   }
 }
 
+// Profile Cards Styles
+.swipe-cards {
+  position: fixed;
+}
+
+swipe-card {
+  margin: 15px 15px 10px 15px;
+  display: none;
+  position: fixed;
+  -webkit-transform: scale(1,1);
+  background-color: rgb(255,255,255);
+  -webkit-animation-fill-mode: forwards;
+  box-sizing: border-box;
+  .image {
+    overflow: hidden;
+    max-height: 210px;
+    img {
+      width: 100%;
+      border-radius: 0px 0px 4px 4px;
+    }
+  }
+  .button {
+    border: none;
+  }
+  &.pop-in-start {
+    -webkit-transform: scale(0,0);
+  }
+  &.pop-in {
+    -webkit-animation: scale(0,0);
+  }
+  .item-header {
+    .name {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .location {
+      float: right;
+      font-size: 12px;
+      color: $colourSubtitle;
+    }
+  }
+  .item-body {
+    .subtitle {
+      font-size: 12px;
+      color: $colourSubtitle;
+    }
+    p {
+      margin-top: 0;
+    }
+  }
+}
+
 // List item styles which can be extended by any list
 .list-item-heading {
   font-weight: bold;
@@ -195,7 +247,7 @@ $nav-bar-height: 50px;
 
 .settings-list {
   .setting-description {
-    @extend .list-item-heading; 
+    @extend .list-item-heading;
     font-size: 14px;
     white-space: normal;
     line-height: 1.4em;

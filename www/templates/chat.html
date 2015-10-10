@@ -1,5 +1,16 @@
-<ion-view view-title="Chat">
+<ion-view view-title="{{recipient}}">
   <ion-content>
-    <h1>Chat</h1>
+    <ion-list class="messages-list">
+      <ion-item ng-repeat="message in messages" class="item">
+        <div ng-if="message.received == true" class="received-msg">
+          <h2 class="message-from">{{recipient}}</h2>
+          <p class="message-content">{{message.content}}</p>  
+        </div>
+        <div ng-if="message.received != true" class="sent-msg">
+          <h2 class="message-from">You</h2>
+          <p class="message-content">{{message.content}}</p>  
+        </div>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
