@@ -144,36 +144,42 @@ $colourSubtitle: #CCCCCC;
 }
 
 // Profile Cards Styles
-td-cards {
-  display: block;
-  padding: 10px;
+.swipe-cards {
+  position: fixed;
 }
 
-td-card {
-  position: absolute;
+swipe-card {
+  margin-top: 5px;
+  padding: 5px;
+  display: none;
+  position: fixed;
+  -webkit-transform: scale(1,1);
+  background-color: rgb(255,255,255);
   border-radius: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 90%;
-  width: 95%;
-  border-radius: 5px;
-
-  .subtitle {
-    font-size: 12px;
-    color:
+  -webkit-animation-fill-mode: forwards;
+  .title {
+    height: 40px;
+    padding: 5px;
+    line-height: 30px;
+    color: #444;
   }
-  .item-body.p {
-    margin-top: 0;
-    margin-bottom: 0j
+  .image {
+    overflow: hidden;
+    max-height: 210px;
+    img {
+      width: 100%;
+      border-radius: 0px 0px 4px 4px;
+    }
   }
-  p.profile-name {
-    font-weight: bold;
+  .button {
+    border: none;
   }
-  span.age {
-    font-weight: normal;
+  &.pop-in-start {
+    -webkit-transform: scale(0,0);
   }
-  span.location {
-    float: right;
+  &.pop-in {
+    -webkit-animation: scale(0,0);
   }
 }
+// Taken from example app
 
