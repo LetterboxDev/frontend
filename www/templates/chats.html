@@ -1,8 +1,11 @@
 <ion-view view-title="Chats">
   <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="chat in chats" href="#/app/chats/{{chat.id}}">
-        {{chat.from}}
+    <ion-list class="chats-list">
+      <ion-item ng-repeat="chat in chats" href="#/app/chats/{{chat.id}}" class="item item-avatar">
+        <img class="chat-profile-pic" src="{{chat.profile_pic}}">
+        <h2 class="chat-from">{{chat.from}}</h2>
+        <p class="chat-last-message">{{chat.last_message}}</p>
+        <span class="chat-last-activity">{{chat.last_activity}}</span>
       </ion-item>
     </ion-list>
   </ion-content>
