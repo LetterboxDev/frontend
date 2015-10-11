@@ -36,12 +36,10 @@ angular.module('starter.controllers')
 
   $scope.cardSwiped = function(index) {
     $scope.addCard();
-    console.log($scope.cards);
   };
 
   $scope.cardDestroyed = function(index) {
     $scope.cards.splice(index, 1);
-    console.log('destroyed');
   };
 
   $scope.addCard = function() {
@@ -53,7 +51,6 @@ angular.module('starter.controllers')
       profile_pic: 'http://semantic-ui.com/images/avatar/large/jenny.jpg'
     };
     $scope.cards.push(angular.extend({}, newCard));
-    console.log('card added');
   };
 });
 
