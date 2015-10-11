@@ -93,9 +93,10 @@ $ios-side-menu-title-height: 120px;
     -webkit-flex-flow: column nowrap; /* Safari */
     align-items: center;
     -webkit-align-items: center; /* Safari */
-    
+
     img {
-      width: 60vw;
+      width: 60vh;
+      max-width: 90vw;
     }
   }
 
@@ -111,7 +112,7 @@ $ios-side-menu-title-height: 120px;
   -webkit-align-items: center; /* Safari */
   justify-content: center;
   -webkit-justify-content: center; /* Safari */
-  
+
   .gender, .gender-preference {
     display: flex;
     display: -webkit-flex; /* Safari */
@@ -121,20 +122,23 @@ $ios-side-menu-title-height: 120px;
     -webkit-align-items: center; /* Safari */
     margin: 30px 0;
   }
-  
+
   h2 {
     @include uppercase-bold-font();
     color: $colourPrimaryText;
     font-size: 18px;
   }
 
-  .button.button-large {
+  .gender-option {
     background-color: white;
     border-color: $colourBorder;
     min-width: 30vw;
     min-height: 12vh;
     &:before {
       font-size: 8vh;
+    }
+    &.selected {
+      background-color: $colourPositive;
     }
   }
 
@@ -424,11 +428,15 @@ swipe-card {
       position: absolute;
       top: -5%; // This is a hack
       -webkit-transform: rotateY(180deg);
+      .back-container {
+        height: 100%;
+        position: relative;
+      }
       .item-image {
         padding: 10px;
-        i {
-          color: $colourPrimary;
-          float: right;
+        img {
+          width: 25%;
+          border-radius: 50%;
         }
       }
       .item-body {
@@ -440,9 +448,11 @@ swipe-card {
           text-overflow: visible;
         }
       }
-      img {
-        width: 25%;
-        border-radius: 50%;
+      .item-footer {
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
       }
     }
   }

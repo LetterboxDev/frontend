@@ -29,6 +29,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngResource', 'starte
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'OnboardingCtrl'
+  })
+
+  .state('onboarding', {
+    url: '/onboarding/:onboardStep',
+    templateUrl: function ($stateParams){
+      return '/templates/onboard' + $stateParams.onboardStep + '.html';
+    },
+    controller: 'OnboardingCtrl'
+  })
+
   .state('app', {
     url: '/app',
     abstract: true,
