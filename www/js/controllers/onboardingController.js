@@ -85,7 +85,7 @@ angular.module('starter.controllers')
   }
   
   $scope.getNewQn = function(question) {
-    var qnIds = $scope.questions.map(function(qn) { return qn.id });
+    var qnIds = $scope.questions.map(function(qn){ return qn.id });
     backend.getOneRandomQuestion(qnIds).$promise.then(function(res){
       var index = $scope.questions.indexOf(question);
       $scope.questions[index] = res;
@@ -101,9 +101,25 @@ angular.module('starter.controllers')
   }
 
   $scope.completeOnboarding = function() {
-    window.localStorage.setItem('isRegistered', 'true');
-    $state.go('app.home');
+    for (var i = 0; i < 5; i++) {
+      if (typeof $scope.questions[i].answer === 'undefined') {
+        //TODO handle error
+        return;
+      }
+    }
+    
+    var questions = $scope.questions.map(function(qn){ 
+      return { id: qn.id, answer: qn.answer }
+    });
+
+    backend.setQuestionsAndAnswers(questions, function(res){
+      window.localStorage.setItem('isRegistered', 'true');
+      $state.go('app.home');
+    }, function(err){
+      console.log("Couldn't save question and answers");
+    });
   };
+
 
   var init = function() {
     if (window.localStorage.getItem('token')) {
