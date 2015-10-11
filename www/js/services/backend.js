@@ -13,6 +13,10 @@ angular.module('starter.services')
   var questionsPath = '/questions';
   var roomsPath = '/rooms';
 
+  function getToken() {
+    return window.getItem('token');
+  }
+
   var auth = $resource(URL.concat(authPath), {}, {
     get: {
       method: 'GET'
@@ -60,15 +64,18 @@ angular.module('starter.services')
     return auth.get({fb_token: fbToken});
   };
 
-  backend.renewToken = function(token) {
+  backend.renewToken = function() {
+    var token = getToken();
     return renewToken.get({letterbox_token: token});
   };
 
-  backend.getMatch = function(token, maxDistance) {
+  backend.getMatch = function(maxDistance) {
+    var token = getToken();
     return matchGetter.get({letterbox_token: token, maxDistance: maxDistance});
   }
 
-  backend.updateUserLocation = function(token, latitude, longitude, successPromise) {
+  backend.updateUserLocation = function(latitude, longitude, successPromise) {
+    var token = getToken();
     locationUpdater = new updateUserLocation();
     locationUpdater.token = token;
     locationUpdater.latitude = latitude;
@@ -78,7 +85,8 @@ angular.module('starter.services')
 
   // Gender:           'male' or 'female'
   // GenderPreference: 'male' or 'female'
-  backend.updateGender = function(token, gender, genderPreference, successPromise) {
+  backend.updateGender = function(gender, genderPreference, successPromise) {
+    var token = getToken();
     genderUpdater = new updateGender();
     genderUpdater.token = token;
     genderUpdater.gender = gender;
@@ -86,7 +94,8 @@ angular.module('starter.services')
     return genderUpdater.$update(successPromise);
   };
 
-  backend.getRandomQuestions = function(token) {
+  backend.getRandomQuestions = function() {
+    var token = getToken();
     return questionsGetter.get({letterbox_token: token});
   };
 
