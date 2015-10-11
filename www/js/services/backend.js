@@ -47,7 +47,7 @@ angular.module('starter.services')
   });
 
   var updateGender = $resource(URL.concat(updateGenderPath), {}, {
-    update: {
+    updateGender: {
       method: 'PUT',
       params: {
         letterbox_token: '@token'
@@ -56,11 +56,8 @@ angular.module('starter.services')
   });
 
   var questionsHandler = $resource(URL.concat(questionsPath), {}, {
-    get: {
-      method: 'GET',
-      isArray: true
-    },
-    put: {
+
+    updateQuestions: {
       method: 'PUT',
       params: {
         letterbox_token: '@token'
@@ -118,7 +115,7 @@ angular.module('starter.services')
     genderUpdater.token = token;
     genderUpdater.gender = gender;
     genderUpdater.genderPreference = genderPreference;
-    return genderUpdater.$update(successPromise);
+    return genderUpdater.$updateGender(successPromise);
   };
 
   backend.getRandomQuestions = function() {
@@ -133,9 +130,10 @@ angular.module('starter.services')
 
   backend.setQuestionsAndAnswers = function(questions, successPromise, errorPromise) {
     var token = getToken();
-    questionsHandler.token = token;
-    questionsHandler.questions = questions;
-    return questionsHandler.$put(successPromise, errorPromise);
+    var handler = new questionsHandler();
+    handler.token = token;
+    handler.questions = questions;
+    return handler.$updateQuestions(successPromise, errorPromise);
   };
 
   backend.getRooms = function() {
