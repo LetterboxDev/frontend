@@ -176,6 +176,7 @@ $ios-side-menu-title-height: 120px;
     margin: 20px 0;
     .btn-randomise {
       margin-right: 10px;
+      height: 100%;
     }
     .question {
       margin: 10px 0;
@@ -183,13 +184,12 @@ $ios-side-menu-title-height: 120px;
       display: -webkit-flex; /* Safari */
       flex-flow: row nowrap;
       -webkit-flex-flow: row nowrap; /* Safari */
-      align-items: center;
-      -webkit-align-items: center; /* Safari */
       justify-content: center;
       -webkit-justify-content: center;
 
       .option {
         flex-grow: 2;
+        max-width: 40vw;
         background-color: white;
         border: 1px solid $colourBorder;
         border-radius: 2px;
