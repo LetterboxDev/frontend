@@ -9,6 +9,7 @@ angular.module('starter.services')
   var otherUserPath = '/user/id/:UserId';
   var updateLocationPath = '/user/location';
   var updateGender = '/user/gender';
+  var matchPath = '/match';
   var questionsPath = '/questions';
   var roomsPath = '/rooms';
 
@@ -19,6 +20,12 @@ angular.module('starter.services')
   });
 
   var renewToken = $resource(URL.concat(renewPath), {}, {
+    get: {
+      method: 'GET'
+    }
+  });
+
+  var matchGetter = $resource(URL.concat(matchPath), {}, {
     get: {
       method: 'GET'
     }
@@ -49,6 +56,10 @@ angular.module('starter.services')
   backend.renewToken = function(token) {
     return renewToken.get({letterbox_token: token});
   };
+
+  backend.getMatch = function(token, maxDistance) {
+    return matchGetter.get({letterbox_token: token, maxDistance: maxDistance});
+  }
 
   backend.updateUserLocation = function(token, latitude, longitude, successPromise) {
     locationUpdater = new updateUserLocation();
