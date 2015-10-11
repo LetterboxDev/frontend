@@ -56,6 +56,8 @@ $colourPrimaryText: #4D4D4D;
 $colourSecondaryText: #999999;
 $colourSubtitle: #CCCCCC;
 
+$positive: $colourPositive !default;
+
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
@@ -72,6 +74,69 @@ ion-content {
 
 $nav-bar-height: 50px;
 $ios-status-bar-height: 20px;
+
+.login-page {
+  background-color: $colourPrimary;
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  align-items: center;
+  -webkit-align-items: center; /* Safari */
+  justify-content: center;
+  -webkit-justify-content: center; /* Safari */
+
+  .branding {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    
+    img {
+      width: 60vw;
+    }
+  }
+
+  .btn-login {
+    width: 100%;
+  }
+}
+
+.onboard1-page {
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  align-items: center;
+  -webkit-align-items: center; /* Safari */
+  justify-content: center;
+  -webkit-justify-content: center; /* Safari */
+  
+  .gender, .gender-preference {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    margin: 30px 0;
+  }
+  
+  h2 {
+    @include uppercase-bold-font();
+    color: $colourPrimaryText;
+    font-size: 18px;
+  }
+
+  .btn-continue {
+    width: 100%;
+  }
+  .button.button-large {
+    min-width: 30vw;
+    min-height: 12vh;
+    &:before {
+      font-size: 8vh;
+    }
+  }
+}
 
 // ios-specific style
 .platform-ios {
