@@ -83,11 +83,9 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
         } else {
           // error, something went wrong
         }
-        // make request to server if new or returning, get letterbox_token
       });
     } else {
       $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_education_history','user_work_history']).then(function(res) {
-        // make request to server if new or returning, get letterbox_token
         $scope.authenticateToken(res.access_token);
       }, function(err) {
         // inform of error
