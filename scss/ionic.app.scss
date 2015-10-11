@@ -142,7 +142,7 @@ $ios-side-menu-title-height: 120px;
     }
   }
 
-  .btn-continue {
+  .btn-complete {
     width: 100%;
   }
 }
@@ -209,6 +209,45 @@ $ios-side-menu-title-height: 120px;
         }
       }
 
+    }
+  }
+
+  .btn-complete {
+    width: 100%;
+  }
+}
+
+.onboard3-page {
+  padding: 30px 20px;
+
+  .header {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    flex-direction: column;
+    -webkit-flex-direction: column; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    text-align: center;
+    h2 {
+      @include uppercase-bold-font();
+      color: $colourPrimaryText;
+      font-size: 18px;
+      max-width: 70vw;
+    }
+    h3 {
+      margin: 0;
+      color: $colourSecondaryText;
+      font-size: 15px;
+      max-width: 80vw;
+    }
+  }
+
+  .bio {
+    margin: 20px 0;
+    .counter {
+      @include uppercase-bold-font();
+      color: $colourSubtitle;
+      font-size: 11px;
     }
   }
 
