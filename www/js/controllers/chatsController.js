@@ -6,7 +6,7 @@ angular.module('starter.controllers')
     { id: 2, from: 'Michelle Lee', profile_pic: "http://semantic-ui.com/images/avatar/large/stevie.jpg", last_message: "Ok great! See you later!", last_activity: "2h"},
   ];
 
-  backend.getRooms().then(function(res) {
+  backend.getRooms().$promise.then(function(res) {
     // $scope.chats = rooms;
     res.forEach(function(chat) {
       console.log(chat);

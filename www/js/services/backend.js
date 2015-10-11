@@ -67,6 +67,13 @@ angular.module('starter.services')
     }
   });
 
+  var roomsGetter = $resource(URL.concat(roomsPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    }
+  });
+
   backend.auth = function(fbToken) {
     return auth.get({fb_token: fbToken});
   };
@@ -79,7 +86,7 @@ angular.module('starter.services')
   backend.getMatch = function(maxDistance) {
     var token = getToken();
     return matchGetter.get({letterbox_token: token, maxDistance: maxDistance});
-  }
+  };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
     var token = getToken();
@@ -109,6 +116,11 @@ angular.module('starter.services')
   backend.getOneRandomQuestion = function(currentIds) {
     var token = getToken();
     return singleQuestionGetter.get({letterbox_token: token, currentQuestionIds: currentIds});
+  };
+
+  backend.getRooms = function() {
+    var token = getToken();
+    return roomsGetter.get({letterbox_token: token});
   };
 
   return backend;
