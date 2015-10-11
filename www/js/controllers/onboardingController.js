@@ -127,13 +127,16 @@ angular.module('starter.controllers')
   }
 
   $scope.onEnterText = function() {
-    console.log($scope.data.bio);
+    // console.log($scope.data.bio);
   }
 
   $scope.completeOnboardingStep3 = function() {
     if ($scope.data.bio.length > 0) {
-      //send to backend
-      $scope.completeOnboarding();
+      backend.updateUserBio($scope.data.bio, function(res){
+        $scope.completeOnboarding();
+      }, function(err){
+        console.log("Couldn't save bio");
+      });
     }
   }
 
