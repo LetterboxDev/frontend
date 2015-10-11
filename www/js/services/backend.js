@@ -8,7 +8,7 @@ angular.module('starter.services')
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:UserId';
   var updateLocationPath = '/user/location';
-  var updateGender = '/user/gender';
+  var updateGenderPath = '/user/gender';
   var matchPath = '/match';
   var questionsPath = '/questions';
   var roomsPath = '/rooms';
@@ -40,12 +40,19 @@ angular.module('starter.services')
     }
   });
 
-  var updateGender = $resource(URL.concat(updateGender), {}, {
+  var updateGender = $resource(URL.concat(updateGenderPath), {}, {
     update: {
       method: 'PUT',
       params: {
         letterbox_token: '@token'
       }
+    }
+  });
+
+  var questionsGetter = $resource(URL.concat(questionsPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
     }
   });
 
@@ -77,6 +84,10 @@ angular.module('starter.services')
     genderUpdater.gender = gender;
     genderUpdater.genderPreference = genderPreference;
     return genderUpdater.$update(successPromise);
+  };
+
+  backend.getRandomQuestions = function(token) {
+    return questionsGetter.get({letterbox_token: token});
   };
 
   return backend;
