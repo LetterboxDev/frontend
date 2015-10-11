@@ -96,9 +96,9 @@ angular.module('starter.services')
     return renewToken.get({letterbox_token: token});
   };
 
-  backend.getMatch = function(maxDistance) {
+  backend.getMatch = function(maxDistance, previousId) {
     var token = getToken();
-    return matchGetter.get({letterbox_token: token, maxDistance: maxDistance});
+    return matchGetter.get({letterbox_token: token, maxDistance: maxDistance, previousId: previousId});
   };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
