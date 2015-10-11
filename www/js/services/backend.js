@@ -11,10 +11,11 @@ angular.module('starter.services')
   var updateGenderPath = '/user/gender';
   var matchPath = '/match';
   var questionsPath = '/questions';
+  var oneQuestionPath = '/question';
   var roomsPath = '/rooms';
 
   function getToken() {
-    return window.getItem('token');
+    return window.localStorage.getItem('token');
   }
 
   var auth = $resource(URL.concat(authPath), {}, {
@@ -60,6 +61,12 @@ angular.module('starter.services')
     }
   });
 
+  var singleQuestionGetter = $resource(URL.concat(oneQuestionPath), {}, {
+    get: {
+      method: 'GET'
+    }
+  });
+
   backend.auth = function(fbToken) {
     return auth.get({fb_token: fbToken});
   };
@@ -97,6 +104,11 @@ angular.module('starter.services')
   backend.getRandomQuestions = function() {
     var token = getToken();
     return questionsGetter.get({letterbox_token: token});
+  };
+
+  backend.getOneRandomQuestion = function(currentIds) {
+    var token = getToken();
+    return singleQuestionGetter.get({letterbox_token: token, currentQuestionIds: currentIds});
   };
 
   return backend;
