@@ -50,26 +50,14 @@ angular.module('starter.controllers')
 
   $scope.selectGender = function(gender) {
     if (gender === 'male' || gender === 'female') {
-      if (gender === 'male') {
-        this.isMale = true;
-        this.isFemale = false;
-      } else {
-        this.isMale = false;
-        this.isFemale = true;
-      }
+      $scope.gender = gender;
       window.localStorage.setItem('gender', gender);
     }
   }
 
   $scope.selectGenderPref = function(gender) {
     if (gender === 'male' || gender === 'female') {
-      if (gender === 'male') {
-        this.likesMales = true;
-        this.likesFemales = false;
-      } else {
-        this.likesMales = false;
-        this.likesFemales = true;
-      }
+      $scope.genderPref = gender;
       window.localStorage.setItem('genderPref', gender);
     }
   }
