@@ -54,10 +54,16 @@ angular.module('starter.services')
     }
   });
 
-  var questionsGetter = $resource(URL.concat(questionsPath), {}, {
+  var questionsHandler = $resource(URL.concat(questionsPath), {}, {
     get: {
       method: 'GET',
       isArray: true
+    },
+    put: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
     }
   });
 
@@ -103,13 +109,20 @@ angular.module('starter.services')
 
   backend.getRandomQuestions = function() {
     var token = getToken();
-    return questionsGetter.get({letterbox_token: token});
+    return questionsHandler.get({letterbox_token: token});
   };
 
   backend.getOneRandomQuestion = function(currentIds) {
     var token = getToken();
     return singleQuestionGetter.get({letterbox_token: token, currentQuestionIds: currentIds});
   };
+
+  backend.setQuestionsAndAnswers = function(questions, successPromise, errorPromise) {
+    var token = getToken();
+    questionsHandler.token = token;
+    questionsHandler.questions = questions;
+    return questionsHandler.$put(successPromise, errorPromise);
+  }
 
   return backend;
 });
