@@ -14,5 +14,7 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
   } else if (window.localStorage.getItem('isRegistered') === 'false') {
     $state.go('onboarding', {onboardStep: 1});
   }
+
+  $scope.username = window.localStorage.getItem('firstName');
 });
 
