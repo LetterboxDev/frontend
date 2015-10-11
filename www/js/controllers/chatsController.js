@@ -1,10 +1,28 @@
 angular.module('starter.controllers')
 
-.controller('ChatsCtrl', function($scope, $state, NotificationsService) {
-  $scope.chats = [
-    { id: 1, from: 'Cassandra Ong', profile_pic: "http://semantic-ui.com/images/avatar/large/jenny.jpg", last_message: "Hello!", last_activity: "1h"},
-    { id: 2, from: 'Michelle Lee', profile_pic: "http://semantic-ui.com/images/avatar/large/stevie.jpg", last_message: "Ok great! See you later!", last_activity: "2h"},
-  ];
+.controller('ChatsCtrl', function($scope, $state, NotificationsService, backend) {
+  $scope.chats = [];
+
+  backend.getRooms().$promise.then(function(res) {
+    res.forEach(function(chat) {
+      var partnerId = (chat.user1 === window.localStorage.getItem('hashedId')) ? chat.user2 : chat.user1;
+      backend.getOtherUser(partnerId).$promise.then(function(res) {
+        var newChat = {
+          hash: chat.hash,
+          from: res.firstName,
+          profile_pic: res.pictureThumb,
+          last_message: "I'm hungry",
+          last_activity: "1h"
+        };
+        $scope.chats.push(newChat);
+      }, function(err) {
+
+      });
+
+    });
+  }, function(err) {
+
+  });
 
   $scope.numberOfNotifications = NotificationsService.getNumberOfNotifications();
 

@@ -2,11 +2,12 @@ angular.module('starter.services')
 .service('backend', function($resource, $http) {
   var backend = {};
   var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
+  // var URL = 'http://localhost:8080';
 
   var authPath = '/auth';
   var renewPath = '/auth/renew'
   var userSelfPath = '/user/self';
-  var otherUserPath = '/user/id/:UserId';
+  var otherUserPath = '/user/id/:userId';
   var updateLocationPath = '/user/location';
   var updateGenderPath = '/user/gender';
   var matchPath = '/match';
@@ -73,6 +74,19 @@ angular.module('starter.services')
     }
   });
 
+  var roomsGetter = $resource(URL.concat(roomsPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    }
+  });
+
+  var otherUserGetter = $resource(URL.concat(otherUserPath), {}, {
+    get: {
+      method: 'GET'
+    }
+  });
+
   backend.auth = function(fbToken) {
     return auth.get({fb_token: fbToken});
   };
@@ -82,10 +96,10 @@ angular.module('starter.services')
     return renewToken.get({letterbox_token: token});
   };
 
-  backend.getMatch = function(maxDistance) {
+  backend.getMatch = function(maxDistance, previousId) {
     var token = getToken();
-    return matchGetter.get({letterbox_token: token, maxDistance: maxDistance});
-  }
+    return matchGetter.get({letterbox_token: token, maxDistance: maxDistance, previousId: previousId});
+  };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
     var token = getToken();
@@ -122,7 +136,17 @@ angular.module('starter.services')
     questionsHandler.token = token;
     questionsHandler.questions = questions;
     return questionsHandler.$put(successPromise, errorPromise);
-  }
+  };
+
+  backend.getRooms = function() {
+    var token = getToken();
+    return roomsGetter.get({letterbox_token: token});
+  };
+
+  backend.getOtherUser = function(userId) {
+    var token = getToken();
+    return otherUserGetter.get({userId: userId, letterbox_token: token});
+  };
 
   return backend;
 });
