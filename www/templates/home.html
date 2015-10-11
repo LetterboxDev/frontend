@@ -8,7 +8,7 @@
     <div ng-controller="CardsCtrl">
       <swipe-cards>
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-          <div class="flipper-container" ontouchstart="this.classList.toggle('hover');">
+          <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
                 <div class="card-image">
