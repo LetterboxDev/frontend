@@ -2,6 +2,7 @@ angular.module('starter.controllers')
 
 .controller('OnboardingCtrl', function($scope, $state, $timeout, Facebook, $cordovaOauth, backend) {
 
+
   // Login logic
 
   $scope.authenticateToken = function(fbToken) {
@@ -48,48 +49,85 @@ angular.module('starter.controllers')
 
   $scope.selectGender = function(gender) {
     if (gender === 'male' || gender === 'female') {
-      if (gender === 'male') {
-        this.isMale = true;
-        this.isFemale = false;
-      } else {
-        this.isMale = false;
-        this.isFemale = true;
-      }
+      $scope.gender = gender;
       window.localStorage.setItem('gender', gender);
     }
   }
 
   $scope.selectGenderPref = function(gender) {
     if (gender === 'male' || gender === 'female') {
-      if (gender === 'male') {
-        this.likesMales = true;
-        this.likesFemales = false;
-      } else {
-        this.likesMales = false;
-        this.likesFemales = true;
-      }
+      $scope.genderPref = gender;
       window.localStorage.setItem('genderPref', gender);
     }
   }
 
   $scope.completeOnboardingStep1 = function() {
-    if (!window.localStorage.getItem('gender') ||
-        !window.localStorage.getItem('genderPref')) {
-      // TODO handle error
+    var gender = window.localStorage.getItem('gender');
+    var genderPref = window.localStorage.getItem('genderPref')
+    if (gender && genderPref) {
+      backend.updateGender(gender, genderPref, function(res){
+        $state.go('onboarding', {onboardStep: 2});
+      });
     } else {
-      $state.go('onboarding', {onboardStep: 2});
+      // TODO handle error
     }
   };
 
 
   // Onboarding step 2 logic
 
-  $scope.getNewQn = function(qnNum) {
-    // get new qn and replace the existing qn
+  $scope.getRandomQuestions = function() {
+    backend.getRandomQuestions().$promise.then(function(res){
+      $scope.questions = res.splice(0,5);
+    }, function(err){
+      console.log("Couldn't retrive questions");
+    });
+  }
+  
+  $scope.getNewQn = function(question) {
+    var qnIds = $scope.questions.map(function(qn){ return qn.id });
+    backend.getOneRandomQuestion(qnIds).$promise.then(function(res){
+      var index = $scope.questions.indexOf(question);
+      $scope.questions[index] = res;
+    }, function(err){
+      console.log("Couldn't retrive new question");
+    });
+  }
+
+  $scope.selectOption = function(question, option) {
+    var index = $scope.questions.indexOf(question);
+    question.answer = option;
+    $scope.questions[index] = question;
   }
 
   $scope.completeOnboarding = function() {
-    window.localStorage.setItem('isRegistered', 'true');
-    $state.go('app.home');
+    for (var i = 0; i < 5; i++) {
+      if (typeof $scope.questions[i].answer === 'undefined') {
+        //TODO handle error
+        return;
+      }
+    }
+    
+    var questions = $scope.questions.map(function(qn){ 
+      return { id: qn.id, answer: qn.answer }
+    });
+
+    backend.setQuestionsAndAnswers(questions, function(res){
+      window.localStorage.setItem('isRegistered', 'true');
+      $state.go('app.home');
+    }, function(err){
+      console.log("Couldn't save question and answers");
+    });
   };
+
+
+  var init = function() {
+    if (window.localStorage.getItem('token')) {
+      $scope.getRandomQuestions();
+    }
+    $scope.gender = window.localStorage.getItem('gender');
+    $scope.genderPref = window.localStorage.getItem('genderPref');
+  }
+
+  init();
 });

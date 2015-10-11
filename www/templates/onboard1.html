@@ -3,15 +3,15 @@
     <div class="gender">
       <h2>I am</h2>
       <div class="gender-choices">
-        <button class="gender-option button button-large icon ion-woman" ng-class="{'selected': isFemale}" ng-click="selectGender('female')"></button>
-        <button class="gender-option button button-large icon ion-man" ng-class="{'selected': isMale}" ng-click="selectGender('male')"></button>
+        <button class="gender-option button button-large icon ion-woman" ng-class="gender == 'female' ? 'selected' : ''" ng-click="selectGender('female')"></button>
+        <button class="gender-option button button-large icon ion-man" ng-class="gender == 'male' ? 'selected' : ''" ng-click="selectGender('male')"></button>
       </div>
     </div>
     <div class="gender-preference">
       <h2>Looking for</h2>
       <div class="preference-choices">
-        <button class="gender-option button button-large icon ion-woman" ng-class="{'selected': likesFemales}" ng-click="selectGenderPref('female')"></button>
-        <button class="gender-option button button-large icon ion-man" ng-class="{'selected': likesMales}" ng-click="selectGenderPref('male')"></button>
+        <button class="gender-option button button-large icon ion-woman" ng-class="genderPref == 'female' ? 'selected' : ''" ng-click="selectGenderPref('female')"></button>
+        <button class="gender-option button button-large icon ion-man" ng-class="genderPref == 'male' ? 'selected' : ''" ng-click="selectGenderPref('male')"></button>
       </div>
     </div>
     <button class="btn-continue button button-light" ng-click="completeOnboardingStep1()">Next</button>

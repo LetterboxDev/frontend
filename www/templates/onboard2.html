@@ -5,49 +5,13 @@
       <h3>People will answer these 5 questions</h3>
     </div>
     <div class="questions">
-      <div class="question">
-        <button class="btn-randomise button button-small button-dark icon ion-shuffle" ng-click='getNewQn(id)'></button>
-        <div class="option">
-          Live 1 life that lasts 1000 years
+      <div ng-repeat="question in questions" class="question" >
+        <button class="btn-randomise button button-small button-dark icon ion-shuffle" ng-click='getNewQn(question)'></button>
+        <div class="option" ng-class="question.answer == 0 ? 'selected' : ''" ng-click="selectOption(question, 0)">
+          {{question.option0}}
         </div>
-        <div class="option selected">
-          Live 10 lives that last 100 years each
-        </div>
-      </div>
-      <div class="question">
-        <button class="btn-randomise button button-small button-dark icon ion-shuffle"></button>
-        <div class="option selected">
-          Live 1 life that lasts 1000 years
-        </div>
-        <div class="option">
-          Live 10 lives that last 100 years each
-        </div>
-      </div>
-      <div class="question">
-        <button class="btn-randomise button button-small button-dark icon ion-shuffle"></button>
-        <div class="option">
-          Live 1 life that lasts 1000 years
-        </div>
-        <div class="option">
-          Live 10 lives that last 100 years each
-        </div>
-      </div>
-      <div class="question">
-        <button class="btn-randomise button button-small button-dark icon ion-shuffle"></button>
-        <div class="option">
-          Live 1 life that lasts 1000 years
-        </div>
-        <div class="option">
-          Live 10 lives that last 100 years each
-        </div>
-      </div>
-      <div class="question">
-        <button class="btn-randomise button button-small button-dark icon ion-shuffle"></button>
-        <div class="option">
-          Live 1 life that lasts 1000 years
-        </div>
-        <div class="option">
-          Live 10 lives that last 100 years each
+        <div class="option" ng-class="question.answer == 1 ? 'selected' : ''" ng-click="selectOption(question, 1)">
+          {{question.option1}}
         </div>
       </div>
     </div>
