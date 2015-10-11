@@ -424,11 +424,15 @@ swipe-card {
       position: absolute;
       top: -5%; // This is a hack
       -webkit-transform: rotateY(180deg);
+      .back-container {
+        height: 100%;
+        position: relative;
+      }
       .item-image {
         padding: 10px;
-        i {
-          color: $colourPrimary;
-          float: right;
+        img {
+          width: 25%;
+          border-radius: 50%;
         }
       }
       .item-body {
@@ -440,9 +444,11 @@ swipe-card {
           text-overflow: visible;
         }
       }
-      img {
-        width: 25%;
-        border-radius: 50%;
+      .item-footer {
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
       }
     }
   }
