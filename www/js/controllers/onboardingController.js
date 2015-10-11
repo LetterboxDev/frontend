@@ -2,6 +2,7 @@ angular.module('starter.controllers')
 
 .controller('OnboardingCtrl', function($scope, $state, $timeout, Facebook, $cordovaOauth, backend) {
 
+
   // Login logic
 
   $scope.authenticateToken = function(fbToken) {
@@ -85,4 +86,14 @@ angular.module('starter.controllers')
     window.localStorage.setItem('isRegistered', 'true');
     $state.go('app.home');
   };
+
+  var init = function() {
+    if (window.localStorage.getItem('token')) {
+      $scope.getRandomQuestions();
+    }
+    $scope.gender = window.localStorage.getItem('gender');
+    $scope.genderPref = window.localStorage.getItem('genderPref');
+  }
+
+  init();
 });
