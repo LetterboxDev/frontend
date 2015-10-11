@@ -277,18 +277,25 @@ $ios-side-menu-title-height: 120px;
     border: none;
     background-color: $colourSideMenu;
     background-image: none;
+    
+    padding: 20px 40px;
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    justify-content: center;
+    -webkit-justify-content: center; /* Safari */
 
-    h1 {
+    .greeting {
+      position: relative;
       @include uppercase-bold-font();
       color: $colourPrimary;
       font-size: 18px;
       line-height: 1.1em;
-      margin: 15% auto 0;
-      padding: 0 40px;
       word-wrap: break-word;
       white-space: normal;
       text-align: left;
-      height: 100%;
+      max-width: 100%;
       max-height: 0.6 * $header-bar-height;
     }
   }
