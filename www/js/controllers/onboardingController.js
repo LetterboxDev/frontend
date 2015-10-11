@@ -63,11 +63,14 @@ angular.module('starter.controllers')
   }
 
   $scope.completeOnboardingStep1 = function() {
-    if (!window.localStorage.getItem('gender') ||
-        !window.localStorage.getItem('genderPref')) {
-      // TODO handle error
+    var gender = window.localStorage.getItem('gender');
+    var genderPref = window.localStorage.getItem('genderPref')
+    if (gender && genderPref) {
+      backend.updateGender(gender, genderPref, function(res){
+        $state.go('onboarding', {onboardStep: 2});
+      });
     } else {
-      $state.go('onboarding', {onboardStep: 2});
+      // TODO handle error
     }
   };
 
