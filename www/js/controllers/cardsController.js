@@ -1,38 +1,18 @@
 angular.module('starter.controllers')
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, backend) {
-  var cardTypes = [
-    {
-      name: 'Jenny Ang',
-      age: '21',
-      location: '1km',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
-      profile_pic: 'http://semantic-ui.com/images/avatar/large/jenny.jpg'
-    },
-    {
-      name: 'Russell Ho',
-      age: '22',
-      location: '3km',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
-      profile_pic: 'http://semantic-ui.com/images/avatar/large/stevie.jpg'
-    },
-    {
-      name: 'Douche Koh',
-      age: '13',
-      location: '2km',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
-      profile_pic: 'http://semantic-ui.com/images/avatar/large/stevie.jpg'
-    },
-    {
-      name: 'Semi Aunty',
-      age: '24',
-      location: '4km',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
-      profile_pic: 'http://semantic-ui.com/images/avatar/large/jenny.jpg'
-    }
-  ];
+  var cards = [];
+  var previousId = '';
 
-  $scope.cards = Array.prototype.slice.call(cardTypes, 0, 1);
+  // Initial card load
+  backend.getMatch(1000)
+    .$promise
+    .then(function(match) {
+      previousId = match.hashedId;
+      cards.push(createNewCard(match));
+      $scope.cards = cards;
+      $state.reload();
+    });
 
   $scope.cardSwiped = function(index) {
     $scope.addCard();
@@ -43,14 +23,26 @@ angular.module('starter.controllers')
   };
 
   $scope.addCard = function() {
-    var newCard = {
-      name: 'New Aunty',
-      age: '24',
-      location: '4km',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!',
-      profile_pic: 'http://semantic-ui.com/images/avatar/large/jenny.jpg'
-    };
-    $scope.cards.push(angular.extend({}, newCard));
+    backend.getMatch(1000, previousId)
+      .$promise
+      .then(function(match) {
+        previousId = match.hashedId;
+        $scope.cards.push(createNewCard(match));
+      });
   };
+
+  /**
+   * Helper functions
+   */
+  function createNewCard(match) {
+    return {
+      name: match.firstName,
+      age: match.age,
+      location: match.location,
+      bio: match.bio,
+      profile_pic: match.pictureMed,
+      distance: match.distance
+    };
+  }
 });
 
