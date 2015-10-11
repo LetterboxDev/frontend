@@ -262,32 +262,32 @@ swipe-card {
 
   // For card flip
   .flipper-container {
-    perspective: 1000;
+    -webkit-perspective: 1000;
     &:hover,
     &.hover {
       .flipper {
-        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
       }
     }
     .flipper {
-      transition: 0.6s;
-      transform-style: preserve-3d;
+      -webkit-transition: 0.6s;
+      -webkit-transform-style: preserve-3d;
 
       position: relative;
     }
     .front,
     .back {
-      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
     .front {
       z-index: 2;
-      transform: rotateY(0deg);
+      -webkit-transform: rotateY(0deg);
     }
     .back {
       position: absolute;
       top: -5%; // This is a hack
 
-      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
     }
   }
 }
