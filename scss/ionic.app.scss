@@ -93,7 +93,7 @@ $ios-side-menu-title-height: 120px;
     -webkit-flex-flow: column nowrap; /* Safari */
     align-items: center;
     -webkit-align-items: center; /* Safari */
-    
+
     img {
       width: 60vw;
     }
@@ -111,7 +111,7 @@ $ios-side-menu-title-height: 120px;
   -webkit-align-items: center; /* Safari */
   justify-content: center;
   -webkit-justify-content: center; /* Safari */
-  
+
   .gender, .gender-preference {
     display: flex;
     display: -webkit-flex; /* Safari */
@@ -121,7 +121,7 @@ $ios-side-menu-title-height: 120px;
     -webkit-align-items: center; /* Safari */
     margin: 30px 0;
   }
-  
+
   h2 {
     @include uppercase-bold-font();
     color: $colourPrimaryText;
