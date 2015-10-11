@@ -1,0 +1,19 @@
+<ion-modal-view>
+  <ion-content class="onboard1-page">
+    <div class="gender">
+      <h2>I am</h2>
+      <div class="gender-choices">
+        <button class="female button button-large icon ion-woman" ng-click="selectGender('woman')"></button>
+        <button class="male button button-large icon ion-man" ng-click="selectGender('man')"></button>
+      </div>
+    </div>
+    <div class="gender-preference">
+      <h2>Looking for</h2>
+      <div class="preference-choices">
+        <button class="button button-large icon ion-woman" ng-click="selectGenderPref('woman')"></button>
+        <button class="button button-large icon ion-man" ng-click="selectGenderPref('man')"></button>
+      </div>
+    </div>
+    <button class="btn-continue button button-light" ng-click="completeOnboardingStep1()">Next</button>
+  </ion-content>
+</ion-modal-view>

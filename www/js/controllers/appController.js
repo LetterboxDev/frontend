@@ -9,11 +9,18 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $ionicModal.fromTemplateUrl('templates/onboard.html', {
+  $ionicModal.fromTemplateUrl('templates/onboard1.html', {
     scope: $scope,
     hardwareBackButtonClose: false
   }).then(function(onboardModal) {
-    $scope.onboardModal = onboardModal;
+    $scope.onboardModal1 = onboardModal;
+  });
+
+  $ionicModal.fromTemplateUrl('templates/onboard2.html', {
+    scope: $scope,
+    hardwareBackButtonClose: false
+  }).then(function(onboardModal) {
+    $scope.onboardModal2 = onboardModal;
   });
 
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -29,13 +36,28 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
 
   $scope.beginOnboarding = function() {
     if (window.localStorage.getItem('token') && window.localStorage.getItem('isRegistered') === 'false') {
-      $scope.onboardModal.show();
+      $scope.onboardModal1.show();
     }
+  };
+
+  $scope.selectGender = function(gender) {
+    $scope.gender = gender;
+    console.log($scope.gender);
+  }
+
+  $scope.selectGenderPref = function(gender) {
+    $scope.genderPref = gender;
+    console.log($scope.genderPref);
+  }
+
+  $scope.completeOnboardingStep1 = function() {
+    $scope.onboardModal1.hide();
+    $scope.onboardModal2.show();
   };
 
   $scope.completeOnboarding = function() {
     window.localStorage.setItem('isRegistered', 'true');
-    $scope.onboardModal.hide();
+    $scope.onboardModal2.hide();
   };
 
   $scope.authenticateToken = function(fbToken) {
