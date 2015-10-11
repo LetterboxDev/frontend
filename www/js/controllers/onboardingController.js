@@ -40,6 +40,8 @@ angular.module('starter.controllers')
     if (window.localStorage.getItem('token') &&
         window.localStorage.getItem('isRegistered') === 'false') {
       $state.go('onboarding', {onboardStep: 1});
+    } else {
+      $state.go('app.home');
     }
   };
 
