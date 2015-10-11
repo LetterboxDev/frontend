@@ -199,12 +199,12 @@ $ios-side-menu-title-height: 120px;
 }
 
 swipe-card {
+  background-color: $colourBackground;
   display: none;
   position: fixed;
-  -webkit-transform: scale(1,1);
-  background-color: $colourBackground;
-  -webkit-animation-fill-mode: forwards;
   box-sizing: border-box;
+  -webkit-transform: scale(1,1);
+  -webkit-animation-fill-mode: forwards;
   .image {
     overflow: hidden;
     max-height: 210px;
@@ -263,17 +263,15 @@ swipe-card {
   // For card flip
   .flipper-container {
     -webkit-perspective: 1000;
-    &:hover,
     &.hover {
       .flipper {
         -webkit-transform: rotateY(180deg);
       }
     }
     .flipper {
+      position: relative;
       -webkit-transition: 0.6s;
       -webkit-transform-style: preserve-3d;
-
-      position: relative;
     }
     .front,
     .back {
@@ -286,7 +284,6 @@ swipe-card {
     .back {
       position: absolute;
       top: -5%; // This is a hack
-
       -webkit-transform: rotateY(180deg);
     }
   }
