@@ -207,7 +207,6 @@ swipe-card {
   -webkit-animation-fill-mode: forwards;
   .image {
     overflow: hidden;
-    max-height: 210px;
     img {
       width: 100%;
       border-radius: 0px 0px 4px 4px;
@@ -256,7 +255,7 @@ swipe-card {
     border: 0;
     padding: 5px;
     text-align: center;
-    font-size: 20px;
+    font-size: 32px;
     color: $colourPrimary;
   }
 
@@ -282,9 +281,30 @@ swipe-card {
       -webkit-transform: rotateY(0deg);
     }
     .back {
+      height: 100%;
       position: absolute;
       top: -5%; // This is a hack
       -webkit-transform: rotateY(180deg);
+      .item-image {
+        padding: 10px;
+        i {
+          color: $colourPrimary;
+          float: right;
+        }
+      }
+      .item-body {
+        p {
+          max-width: 100%;
+          font-size: 14px;
+          overflow: visible;
+          white-space: normal;
+          text-overflow: visible;
+        }
+      }
+      img {
+        width: 25%;
+        border-radius: 50%;
+      }
     }
   }
 }
