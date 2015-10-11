@@ -56,7 +56,10 @@ angular.module('starter.services')
   });
 
   var questionsHandler = $resource(URL.concat(questionsPath), {}, {
-
+    get: {
+      method: 'GET',
+      isArray: true
+    },
     updateQuestions: {
       method: 'PUT',
       params: {
