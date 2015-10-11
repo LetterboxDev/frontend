@@ -100,10 +100,11 @@ angular.module('starter.controllers')
     $scope.questions[index] = question;
   }
 
-  $scope.completeOnboarding = function() {
+  $scope.completeOnboardingStep2 = function() {
     for (var i = 0; i < 5; i++) {
       if (typeof $scope.questions[i].answer === 'undefined') {
         //TODO handle error
+        console.log('Answer all questions');
         return;
       }
     }
@@ -113,16 +114,40 @@ angular.module('starter.controllers')
     });
 
     backend.setQuestionsAndAnswers(questions, function(res){
-      window.localStorage.setItem('isRegistered', 'true');
-      $state.go('app.home');
+      $state.go('onboarding', {onboardStep: 3});
     }, function(err){
       console.log("Couldn't save question and answers");
     });
-  };
+  }
+
+
+  // Onboarding step 3 logic
+  $scope.data = {
+    bio: ""
+  }
+
+  $scope.onEnterText = function() {
+    // console.log($scope.data.bio);
+  }
+
+  $scope.completeOnboardingStep3 = function() {
+    if ($scope.data.bio.length > 0) {
+      backend.updateUserBio($scope.data.bio, function(res){
+        $scope.completeOnboarding();
+      }, function(err){
+        console.log("Couldn't save bio");
+      });
+    }
+  }
+
+  $scope.completeOnboarding = function() {
+    window.localStorage.setItem('isRegistered', 'true');
+    $state.go('app.home');
+  }
 
 
   var init = function() {
-    if (window.localStorage.getItem('token')) {
+    if (window.localStorage.getItem('token') && !$scope.questions) {
       $scope.getRandomQuestions();
     }
     $scope.gender = window.localStorage.getItem('gender');

@@ -1,7 +1,7 @@
 angular.module('starter.services')
 .service('backend', function($resource, $http) {
   var backend = {};
-  var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
+  var URL = '/backend';
   // var URL = 'http://localhost:8080';
 
   var authPath = '/auth';
@@ -9,6 +9,7 @@ angular.module('starter.services')
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:userId';
   var updateLocationPath = '/user/location';
+  var updateBioPath = '/user/bio';
   var updateGenderPath = '/user/gender';
   var matchPath = '/match';
   var questionsPath = '/questions';
@@ -39,6 +40,15 @@ angular.module('starter.services')
 
   var updateUserLocation = $resource(URL.concat(updateLocationPath), {}, {
     updateLocation: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
+  var updateUserBio = $resource(URL.concat(updateBioPath), {}, {
+    updateBio: {
       method: 'PUT',
       params: {
         letterbox_token: '@token'
@@ -108,6 +118,14 @@ angular.module('starter.services')
     locationUpdater.latitude = latitude;
     locationUpdater.longitude = longitude;
     return locationUpdater.$updateLocation(successPromise);
+  };
+
+  backend.updateUserBio = function(bio, successPromise, errorPromise) {
+    var token = getToken();
+    var bioUpdater = new updateUserBio();
+    bioUpdater.token = token;
+    bioUpdater.bio = bio;
+    return bioUpdater.$updateBio(successPromise, errorPromise);
   };
 
   // Gender:           'male' or 'female'
