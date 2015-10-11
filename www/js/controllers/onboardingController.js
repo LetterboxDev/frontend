@@ -23,10 +23,8 @@ angular.module('starter.controllers')
       Facebook.login(function(response) {
         if (response.status === 'connected') {
           $scope.authenticateToken(response.authResponse.accessToken);
-        } else {
-          // error, something went wrong
         }
-      });
+      }, {scope: 'public_profile,user_birthday,user_education_history,user_work_history', return_scopes: true});
     } else {
       $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_education_history','user_work_history']).then(function(res) {
         $scope.authenticateToken(res.access_token);
@@ -40,6 +38,8 @@ angular.module('starter.controllers')
     if (window.localStorage.getItem('token') &&
         window.localStorage.getItem('isRegistered') === 'false') {
       $state.go('onboarding', {onboardStep: 1});
+    } else {
+      $state.go('app.home');
     }
   };
 
