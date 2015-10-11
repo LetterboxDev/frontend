@@ -8,7 +8,7 @@
     <div ng-controller="CardsCtrl">
       <swipe-cards>
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-          <div class="flipper-container" ontouchstart="this.classList.toggle('hover');">
+          <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
                 <div class="card-image">
@@ -23,24 +23,22 @@
                   <p>{{ card.bio }}</p>
                 </div>
                 <div class="item item-footer">
-                  <i class="icon ion-information-circled"></i>
+                  <i class="icon ion-ios-person-outline"></i>
                 </div>
               </div>
 
               <div class="card back" ng-controller="CardCtrl">
-                <div class="card-image">
-                  <div class="item item-image">
-                    <img ng-src="{{ card.profile_pic }}" alt="Image" />
-                  </div>
-                  <div class="item item-header">
-                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
-                  </div>
+                <div class="item item-image">
+                  <img ng-src="{{ card.profile_pic }}" />
+                  <i class="icon ion-ios-undo-outline"></i>
+                  <ul>
+                    <li>{{ card.name }}</li>
+                  </ul>
                 </div>
                 <div class="item item-body">
                   <p>{{ card.bio }}</p>
-                </div>
-                <div class="item item-footer">
-                  <i class="icon ion-information-circled"></i>
+                  <h3>Mutual Friends</h3>
+                  <h3>Likes</h3>
                 </div>
               </div>
             </div>
