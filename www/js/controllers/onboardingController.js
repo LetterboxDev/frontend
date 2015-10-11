@@ -144,7 +144,7 @@ angular.module('starter.controllers')
 
 
   var init = function() {
-    if (window.localStorage.getItem('token')) {
+    if (window.localStorage.getItem('token') && !$scope.questions) {
       $scope.getRandomQuestions();
     }
     $scope.gender = window.localStorage.getItem('gender');
