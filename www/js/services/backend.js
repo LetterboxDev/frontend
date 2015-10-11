@@ -2,11 +2,12 @@ angular.module('starter.services')
 .service('backend', function($resource, $http) {
   var backend = {};
   var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
+  // var URL = 'http://localhost:8080';
 
   var authPath = '/auth';
   var renewPath = '/auth/renew'
   var userSelfPath = '/user/self';
-  var otherUserPath = '/user/id/:UserId';
+  var otherUserPath = '/user/id/:userId';
   var updateLocationPath = '/user/location';
   var updateGenderPath = '/user/gender';
   var matchPath = '/match';
@@ -80,6 +81,12 @@ angular.module('starter.services')
     }
   });
 
+  var otherUserGetter = $resource(URL.concat(otherUserPath), {}, {
+    get: {
+      method: 'GET'
+    }
+  });
+
   backend.auth = function(fbToken) {
     return auth.get({fb_token: fbToken});
   };
@@ -134,6 +141,11 @@ angular.module('starter.services')
   backend.getRooms = function() {
     var token = getToken();
     return roomsGetter.get({letterbox_token: token});
+  };
+
+  backend.getOtherUser = function(userId) {
+    var token = getToken();
+    return otherUserGetter.get({userId: userId, letterbox_token: token});
   };
 
   return backend;
