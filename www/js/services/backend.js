@@ -8,6 +8,7 @@ angular.module('starter.services')
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:UserId';
   var updateLocationPath = '/user/location';
+  var updateGender = '/user/gender';
   var questionsPath = '/questions';
   var roomsPath = '/rooms';
 
@@ -32,6 +33,15 @@ angular.module('starter.services')
     }
   });
 
+  var updateGender = $resource(URL.concat(updateGender), {}, {
+    update: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
   backend.auth = function(fbToken) {
     return auth.get({fb_token: fbToken});
   };
@@ -46,6 +56,16 @@ angular.module('starter.services')
     locationUpdater.latitude = latitude;
     locationUpdater.longitude = longitude;
     return locationUpdater.$updateLocation(successPromise);
+  };
+
+  // Gender:           'male' or 'female'
+  // GenderPreference: 'male' or 'female'
+  backend.updateGender = function(token, gender, genderPreference, successPromise) {
+    genderUpdater = new updateGender();
+    genderUpdater.token = token;
+    genderUpdater.gender = gender;
+    genderUpdater.genderPreference = genderPreference;
+    return genderUpdater.$update(successPromise);
   };
 
   return backend;
