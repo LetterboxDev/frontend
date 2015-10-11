@@ -95,7 +95,8 @@ $ios-side-menu-title-height: 120px;
     -webkit-align-items: center; /* Safari */
     
     img {
-      width: 60vw;
+      width: 60vh;
+      max-width: 90vw;
     }
   }
 
@@ -128,13 +129,16 @@ $ios-side-menu-title-height: 120px;
     font-size: 18px;
   }
 
-  .button.button-large {
+  .gender-option {
     background-color: white;
     border-color: $colourBorder;
     min-width: 30vw;
     min-height: 12vh;
     &:before {
       font-size: 8vh;
+    }
+    &.selected {
+      background-color: $colourPositive;
     }
   }
 
