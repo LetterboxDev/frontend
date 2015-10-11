@@ -55,6 +55,7 @@ $colourSideMenuItem: #534741;
 $colourPrimaryText: #4D4D4D;
 $colourSecondaryText: #999999;
 $colourSubtitle: #CCCCCC;
+$colourBorder: #ddd;
 
 $positive: $colourPositive !default;
 
@@ -127,15 +128,88 @@ $ios-side-menu-title-height: 120px;
     font-size: 18px;
   }
 
-  .btn-continue {
-    width: 100%;
-  }
   .button.button-large {
+    background-color: white;
+    border-color: $colourBorder;
     min-width: 30vw;
     min-height: 12vh;
     &:before {
       font-size: 8vh;
     }
+  }
+
+  .btn-continue {
+    width: 100%;
+  }
+}
+
+.onboard2-page {
+  padding: 30px 20px;
+
+  .header {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    flex-direction: column;
+    -webkit-flex-direction: column; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    text-align: center;
+    h2 {
+      @include uppercase-bold-font();
+      color: $colourPrimaryText;
+      font-size: 18px;
+      max-width: 70vw;
+    }
+    h3 {
+      margin: 0;
+      color: $colourSecondaryText;
+      font-size: 15px;
+      max-width: 80vw;
+    }
+  }
+
+  .questions {
+    margin: 20px 0;
+    .btn-randomise {
+      margin-right: 10px;
+    }
+    .question {
+      margin: 10px 0;
+      display: flex;
+      display: -webkit-flex; /* Safari */
+      flex-flow: row nowrap;
+      -webkit-flex-flow: row nowrap; /* Safari */
+      align-items: center;
+      -webkit-align-items: center; /* Safari */
+      justify-content: center;
+      -webkit-justify-content: center;
+
+      .option {
+        flex-grow: 2;
+        background-color: white;
+        border: 1px solid $colourBorder;
+        border-radius: 2px;
+        padding: 10px;
+        font-size: 13px;
+        line-height: 1.25em;
+        color: $colourPrimaryText;
+        cursor: pointer;
+
+        &:last-child {
+          margin-left: 5px;
+        }
+
+        &.selected {
+          background-color: $colourPositive;
+          color: white;
+        }
+      }
+
+    }
+  }
+
+  .btn-complete {
+    width: 100%;
   }
 }
 
