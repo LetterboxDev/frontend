@@ -78,8 +78,28 @@ angular.module('starter.controllers')
 
   // Onboarding step 2 logic
 
-  $scope.getNewQn = function(qnNum) {
-    // get new qn and replace the existing qn
+  $scope.getRandomQuestions = function() {
+    backend.getRandomQuestions().$promise.then(function(res){
+      $scope.questions = res.splice(0,5);
+    }, function(err){
+      console.log("Couldn't retrive questions");
+    });
+  }
+  
+  $scope.getNewQn = function(question) {
+    var qnIds = $scope.questions.map(function(qn) { return qn.id });
+    backend.getOneRandomQuestion(qnIds).$promise.then(function(res){
+      var index = $scope.questions.indexOf(question);
+      $scope.questions[index] = res;
+    }, function(err){
+      console.log("Couldn't retrive new question");
+    });
+  }
+
+  $scope.selectOption = function(question, option) {
+    var index = $scope.questions.indexOf(question);
+    question.answer = option;
+    $scope.questions[index] = question;
   }
 
   $scope.completeOnboarding = function() {
