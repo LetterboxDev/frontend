@@ -20,7 +20,7 @@
                   </div>
                 </div>
                 <div class="item item-body">
-                  <p>{{ card.bio }}</p>
+                  <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
                 </div>
                 <div class="item item-footer">
                   <i class="icon ion-ios-person-outline"></i>
