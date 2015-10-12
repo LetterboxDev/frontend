@@ -19,27 +19,27 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/home">
+        <ion-item menu-close data-ng-class="{true: 'item-active', false: 'item-inactive'}[currentPage() === 'home']" href="#/app/home">
           <i class="icon ion-home"></i>
           Home
         </ion-item>
-        <ion-item menu-close href="#/app/chats">
+        <ion-item menu-close data-ng-class="{true: 'item-active', false: 'item-inactive'}[currentPage() === 'chats']" href="#/app/chats">
           <i class="icon ion-chatbubbles"></i>
           Chats
         </ion-item>
-        <ion-item menu-close href="#/app/activities">
+        <ion-item menu-close data-ng-class="{true: 'item-active', false: 'item-inactive'}[currentPage() === 'activities']" href="#/app/activities">
           <i class="icon ion-happy"></i>
           Activities
         </ion-item>
-        <ion-item menu-close href="#/app/notifications">
+        <ion-item menu-close data-ng-class="{true: 'item-active', false: 'item-inactive'}[currentPage() === 'notifications']" href="#/app/notifications">
           <i class="icon ion-ios-bell"></i>
           Notifications
         </ion-item>
-        <ion-item menu-close href="#/app/profile">
+        <ion-item menu-close data-ng-class="{true: 'item-active', false: 'item-inactive'}[currentPage() === 'profile']" href="#/app/profile">
           <i class="icon ion-person"></i>
           Profile
         </ion-item>
-        <ion-item menu-close href="#/app/settings">
+        <ion-item menu-close data-ng-class="{true: 'item-active', false: 'item-inactive'}[currentPage() === 'settings']" href="#/app/settings">
           <i class="icon ion-gear-b"></i>
           Settings
         </ion-item>

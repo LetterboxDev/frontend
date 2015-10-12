@@ -316,7 +316,7 @@ $ios-side-menu-title-height: 120px;
     border: none;
     background-color: $colourSideMenu;
     background-image: none;
-    
+
     padding: 20px 40px;
     display: flex;
     display: -webkit-flex; /* Safari */
@@ -347,7 +347,6 @@ $ios-side-menu-title-height: 120px;
       border: none;
       .item-content {
         color: white;
-        background-color: $colourSideMenu;
         padding-left: 40px;
         @include uppercase-bold-font();
         font-size: 14px;
@@ -357,6 +356,18 @@ $ios-side-menu-title-height: 120px;
           margin-right: 20px;
           font-size: 20px;
         }
+      }
+    }
+
+    .item-inactive {
+      .item-content {
+        background-color: $colourSideMenu;
+      }
+    }
+
+    .item-active {
+      .item-content {
+        background-color: $colourSideMenuItem;
       }
     }
   }
