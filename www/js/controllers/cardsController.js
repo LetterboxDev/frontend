@@ -1,18 +1,18 @@
 angular.module('starter.controllers')
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, backend) {
-  var cards = [];
   var previousId = '';
+  $scope.cards = [];
 
-  // Initial card load
-  backend.getMatch(1000)
-    .$promise
-    .then(function(match) {
-      previousId = match.hashedId;
-      cards.push(createNewCard(match));
-      $scope.cards = cards;
-      $state.reload();
-    });
+  // Initial card load - loads two cards
+  for (var i=0; i<2; i++) {
+    backend.getMatch(1000)
+      .$promise
+      .then(function(match) {
+        previousId = match.hashedId;
+        $scope.cards.push(createNewCard(match));
+      });
+  }
 
   $scope.cardSwiped = function(index) {
     $scope.addCard();
