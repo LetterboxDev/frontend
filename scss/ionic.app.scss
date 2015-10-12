@@ -378,9 +378,9 @@ $ios-side-menu-title-height: 120px;
   position: fixed;
 }
 
-swipe-card {
+.swipe-card {
   background-color: $colourBackground;
-  display: none;
+  // display: none;
   position: fixed;
   box-sizing: border-box;
   -webkit-transform: scale(1,1);

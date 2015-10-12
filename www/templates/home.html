@@ -6,8 +6,8 @@
 
   <ion-content>
     <div ng-controller="CardsCtrl">
-      <swipe-cards>
-        <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
+      <div class="swipe-cards">
+        <div class="swipe-card" ng-repeat="card in cards">
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
@@ -47,8 +47,8 @@
               </div>
             </div>
           </div>
-        </swipe-card>
-      </swipe-cards>
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>
