@@ -1,7 +1,7 @@
 angular.module('starter.services')
 .service('backend', function($resource, $http) {
   var backend = {};
-  var URL = '/backend';
+  var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
   // var URL = 'http://localhost:8080';
 
   var authPath = '/auth';
@@ -12,6 +12,7 @@ angular.module('starter.services')
   var updateBioPath = '/user/bio';
   var updateGenderPath = '/user/gender';
   var matchPath = '/match';
+  var matchesPath = '/matches';
   var questionsPath = '/questions';
   var oneQuestionPath = '/question';
   var roomsPath = '/rooms';
@@ -35,6 +36,13 @@ angular.module('starter.services')
   var matchGetter = $resource(URL.concat(matchPath), {}, {
     get: {
       method: 'GET'
+    }
+  });
+
+  var matchesGetter = $resource(URL.concat(matchesPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
     }
   });
 
@@ -110,6 +118,12 @@ angular.module('starter.services')
     var token = getToken();
     return matchGetter.get({letterbox_token: token, maxDistance: maxDistance, previousId: previousId});
   };
+
+  // limit is the max number of matches to return
+  backend.getMatches = function(maxDistance, limit, previousId) {
+    var token = getToken();
+    return matchesGetter.get({letterbox_token: token, maxDistance: maxDistance, limit: limit, previousId: previousId});
+  }
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
     var token = getToken();
