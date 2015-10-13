@@ -238,7 +238,7 @@ angular.module('starter.services')
     handler = new singleLetterHandler();
     handler.token = token;
     handler.letterId = letterHash;
-    return handler.$readLetter(successPromise, errorPromise);
+    return handler.$approveLetter(successPromise, errorPromise);
   }
 
   return backend;
