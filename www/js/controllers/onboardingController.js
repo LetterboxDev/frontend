@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('OnboardingCtrl', function($scope, $state, $timeout, Facebook, $cordovaOauth, backend) {
+.controller('OnboardingCtrl', function($scope, $state, $timeout, Facebook, $cordovaOauth, backend, eventbus) {
 
 
   // Login logic
@@ -12,6 +12,7 @@ angular.module('starter.controllers')
       window.localStorage.setItem('firstName', success.user.firstName);
       window.localStorage.setItem('hashedId', success.user.hashedId);
       window.localStorage.setItem('isRegistered', success.user.isRegistered);
+      eventbus.call('loginCompleted');
       $scope.beginOnboarding();
     }, function(error) {
       // error something went wrong
