@@ -16,6 +16,8 @@ angular.module('starter.services')
   var questionsPath = '/questions';
   var oneQuestionPath = '/question';
   var roomsPath = '/rooms';
+  var lettersPath = '/letters';
+  var singleLetterPath = '/letters/:letterId';
 
   function getToken() {
     return window.localStorage.getItem('token');
@@ -105,6 +107,34 @@ angular.module('starter.services')
     }
   });
 
+  var lettersHandler = $resource(URL.concat(lettersPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    },
+    createLetter: {
+      method: 'POST',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
+  var singleLetterHandler = $resource(URL.concat(singleLetterPath), {letterId: '@letterId'}, {
+    approveLetter: {
+      method: 'POST',
+      params: {
+        letterbox_token: '@token'
+      }
+    },
+    readLetter: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
   backend.auth = function(fbToken) {
     return auth.get({fb_token: fbToken});
   };
@@ -180,6 +210,36 @@ angular.module('starter.services')
     var token = getToken();
     return otherUserGetter.get({userId: userId, letterbox_token: token});
   };
+
+  backend.getAllLetters = function() {
+    var token = getToken();
+    return lettersHandler.get({letterbox_token: token});
+  };
+
+  backend.sendALetter = function(recipient, questionsWithAnswers, successPromise, errorPromise) {
+    var token = getToken();
+    handler = new lettersHandler();
+    handler.token = token;
+    handler.recipient = recipient;
+    handler.questions = questionsWithAnswers;
+    return handler.$createLetter(successPromise, errorPromise);
+  };
+
+  backend.markLetterAsRead = function(letterHash, successPromise, errorPromise) {
+    var token = getToken();
+    handler = new singleLetterHandler();
+    handler.token = token;
+    handler.letterId = letterHash;
+    return handler.$readLetter(successPromise, errorPromise);
+  }
+
+  backend.approveLetter = function(letterHash, successPromise, errorPromise) {
+    var token = getToken();
+    handler = new singleLetterHandler();
+    handler.token = token;
+    handler.letterId = letterHash;
+    return handler.$readLetter(successPromise, errorPromise);
+  }
 
   return backend;
 });
