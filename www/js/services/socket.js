@@ -23,6 +23,9 @@ angular.module('starter.services')
       IOContainer.socketio.on('roomMessage', function(data) {
         eventbus.call('roomMessage', data);
       });
+      IOContainer.socketio.on('letter', function(letter) {
+        eventbus.call('letterReceived', letter);
+      });
     }
   };
 
