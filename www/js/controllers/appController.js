@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
 
-.controller('AppCtrl', function($scope, $state, $location, $cordovaGeolocation, eventbus, socket, backend, LocationService) {
+.controller('AppCtrl', function($scope, $state, $location, eventbus, socket, LocationService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -14,7 +14,7 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
   eventbus.registerListener('loginCompleted', socket.init);
   // Update user location when logged in
   eventbus.registerListener('loginCompleted', LocationService.updateLocation);
-  
+
   eventbus.registerListener('roomCreated', function(data) {
     console.log(data);
     alert('Room created: ' + JSON.stringify(data));
