@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.service('eventbus', function($q) {
+.service('eventbus', function() {
   var Eventbus = {};
   var listeners = {};
 
