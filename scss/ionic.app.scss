@@ -374,14 +374,14 @@ $ios-side-menu-title-height: 120px;
 }
 
 // Profile Cards Styles
-.swipe-cards {
+.partner-cards {
   position: fixed;
 }
 
-swipe-card {
+.partner-card {
   background-color: $colourBackground;
-  display: none;
-  position: fixed;
+  // display: none;
+  position: relative;
   box-sizing: border-box;
   -webkit-transform: scale(1,1);
   -webkit-animation-fill-mode: forwards;
@@ -431,12 +431,34 @@ swipe-card {
       letter-spacing: 0.5px;
     }
   }
-  .item-footer {
+
+  .card-buttons {
     border: 0;
-    padding: 5px;
     text-align: center;
-    font-size: 32px;
-    color: $colourPrimary;
+    font-size: 22px;
+
+    i {
+      border: 1px solid;
+      border-radius: 50px;
+      margin: 0px 10px;
+    }
+
+    .button-reject {
+      color: $colourPrimary;
+      padding: 2px 8px 2px 8px;
+    }
+
+    .button-profile, .button-back {
+      color: $colourSecondaryText;
+      font-size: 32px;
+      padding: 2px 9px 2px 9px;
+    }
+
+    .button-answer {
+      color: $colourPositive;
+      padding: 2px 6px 2px 7px;
+    }
+
   }
 
   // For card flip

@@ -4,7 +4,7 @@ angular.module('starter.directives')
   return {
     restrict: 'A',
     link: function($scope, $element, $attr) {
-      $element.find('i').on('touch', function(e) {
+      angular.element($element[0].querySelectorAll('.button-flip')).on('touch', function(e) {
         $element.toggleClass('hover');
       });
     }
