@@ -24,9 +24,7 @@ angular.module('starter.controllers')
 
           $scope.foldedCard.stairs(0, 'top');
 
-          angular.element($element[0].querySelectorAll('.button-flip')).on('touch', function(e) {
-            angular.element($element[0].querySelectorAll('.flipper-container')).toggleClass('hover');
-          });
+          registerEventHandler();
         }, 200);
       });
   // }
@@ -53,9 +51,7 @@ angular.module('starter.controllers')
 
           $scope.foldedCard.stairs(0, 'top');
 
-          angular.element($element[0].querySelectorAll('.button-flip')).on('touch', function(e) {
-            angular.element($element[0].querySelectorAll('.flipper-container')).toggleClass('hover');
-          });
+          registerEventHandler();
         }, 200);
       });
   };
@@ -96,6 +92,20 @@ angular.module('starter.controllers')
       profile_pic: match.pictureMed,
       distance: match.distance
     };
+  }
+
+  function registerEventHandler() {
+    var selectFirst = function(selector) {
+      return angular.element($element[0].querySelectorAll(selector));
+    }
+
+    selectFirst('.button-flip').on('touch', function(e) {
+      selectFirst('.flipper-container').toggleClass('hover');
+    });
+
+    selectFirst('.button-reject').on('touch', function(e) {
+      $scope.changeCard();
+    })
   }
 });
 
