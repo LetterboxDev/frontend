@@ -18,21 +18,17 @@ angular.module('starter.controllers')
             ripple:  true,
             shading: false,
             perspective: 600,
-            speed: 200,
+            speed: 400,
             maxAngle: 60
           });
 
           $scope.foldedCard.stairs(0, 'top');
-        }, 200);
+        }, 1200);
       });
   // }
 
-  $scope.cardSwiped = function(index) {
+  $scope.changeCard = function() {
     $scope.addCard();
-  };
-
-  $scope.cardDestroyed = function(index) {
-    $scope.cards.splice(index, 1);
   };
 
   $scope.addCard = function() {
@@ -40,17 +36,19 @@ angular.module('starter.controllers')
       .$promise
       .then(function(match) {
         previousId = match.hashedId;
-        $scope.cards.push(createNewCard(match));
-        $scope.foldedCard = new OriDomi('.partner-card', {
-          hPanels: 5,
-          ripple:  true,
-          shading: false,
-          perspective: 600,
-          speed: 400,
-          maxAngle: 60
-        });
+        $scope.cards = [createNewCard(match)];
+        $timeout(function() {
+          $scope.foldedCard = new OriDomi('.partner-card', {
+            hPanels: 5,
+            ripple:  true,
+            shading: false,
+            perspective: 600,
+            speed: 400,
+            maxAngle: 60
+          });
 
-        $scope.foldedCard.stairs(0, 'top');
+          $scope.foldedCard.stairs(0, 'top');
+        }, 200);
       });
   };
 
@@ -71,7 +69,8 @@ angular.module('starter.controllers')
     console.log(foldingIndex);
 
     if (foldingIndex <= 0) {
-      console.log('die');
+      $scope.foldedCard.twist(-1230);
+      $timeout($scope.changeCard, 400);
     } else {
       $scope.foldedCard.stairs(0, 'top');
     }
