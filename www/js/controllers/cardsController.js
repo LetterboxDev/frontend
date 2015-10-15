@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $element, backend) {
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $element, $timeout, backend) {
   var previousId = '';
   $scope.cards = [];
 
@@ -11,6 +11,19 @@ angular.module('starter.controllers')
       .then(function(match) {
         previousId = match.hashedId;
         $scope.cards.push(createNewCard(match));
+
+        $timeout(function() {
+          $scope.foldedCard = new OriDomi('.partner-card', {
+            hPanels: 5,
+            ripple:  true,
+            shading: false,
+            perspective: 600,
+            speed: 200,
+            maxAngle: 60
+          });
+
+          $scope.foldedCard.stairs(0, 'top');
+        }, 200);
       });
   // }
 
@@ -28,21 +41,18 @@ angular.module('starter.controllers')
       .then(function(match) {
         previousId = match.hashedId;
         $scope.cards.push(createNewCard(match));
+        $scope.foldedCard = new OriDomi('.partner-card', {
+          hPanels: 5,
+          ripple:  true,
+          shading: false,
+          perspective: 600,
+          speed: 400,
+          maxAngle: 60
+        });
+
+        $scope.foldedCard.stairs(0, 'top');
       });
   };
-
-  angular.element(document).ready(function() {
-    var foldedCard = new OriDomi('.partner-card', {
-      hPanels: 5,
-      ripple:  true,
-      shading: false,
-      perspective: 600,
-      speed: 40000,
-      maxAngle: 60
-    });
-
-    foldedCard.stairs(0, 'top');
-  });
 
   $ionicGesture.on('dragend', function(e){
     var el = (document.getElementsByClassName("oridomi-panel"))[8];
@@ -62,6 +72,8 @@ angular.module('starter.controllers')
 
     if (foldingIndex <= 0) {
       console.log('die');
+    } else {
+      $scope.foldedCard.stairs(0, 'top');
     }
   }, $element);
 
