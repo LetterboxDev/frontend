@@ -13,6 +13,8 @@ angular.module('starter.controllers')
         $scope.cards.push(createNewCard(match));
 
         $timeout(function() {
+          selectFirst('.partner-card').removeClass('moving-in');
+
           $scope.foldedCard = new OriDomi('.partner-card', {
             hPanels: 5,
             ripple:  true,
@@ -25,12 +27,13 @@ angular.module('starter.controllers')
           $scope.foldedCard.stairs(0, 'top');
 
           registerEventHandler();
-        }, 200);
+        }, 500);
       });
   // }
 
   $scope.changeCard = function() {
-    $scope.addCard();
+    selectFirst('.partner-card').addClass('moving-out');
+    $timeout($scope.addCard, 100);
   };
 
   $scope.addCard = function() {
@@ -38,21 +41,26 @@ angular.module('starter.controllers')
       .$promise
       .then(function(match) {
         previousId = match.hashedId;
-        $scope.cards = [createNewCard(match)];
+        $scope.cards.push(createNewCard(match));
         $timeout(function() {
-          $scope.foldedCard = new OriDomi('.partner-card', {
-            hPanels: 5,
-            ripple:  true,
-            shading: false,
-            perspective: 600,
-            speed: 400,
-            maxAngle: 60
-          });
+          $scope.cards.splice(0, 1);
 
-          $scope.foldedCard.stairs(0, 'top');
+          $timeout(function() {
+            $scope.foldedCard = new OriDomi('.partner-card.moving-in', {
+              hPanels: 5,
+              ripple:  true,
+              shading: false,
+              perspective: 600,
+              speed: 400,
+              maxAngle: 60
+            });
 
-          registerEventHandler();
-        }, 200);
+            $scope.foldedCard.stairs(0, 'top');
+            selectFirst('.partner-card').removeClass('moving-in');
+
+            registerEventHandler();
+          }, 200);
+        }, 500);
       });
   };
 
@@ -73,8 +81,7 @@ angular.module('starter.controllers')
     console.log(foldingIndex);
 
     if (foldingIndex <= 0) {
-      $scope.foldedCard.twist(-1230);
-      $timeout($scope.changeCard, 400);
+      $scope.changeCard();
     } else {
       $scope.foldedCard.stairs(0, 'top');
     }
@@ -94,11 +101,11 @@ angular.module('starter.controllers')
     };
   }
 
-  function registerEventHandler() {
-    var selectFirst = function(selector) {
-      return angular.element($element[0].querySelectorAll(selector));
-    }
+  function selectFirst(selector) {
+    return angular.element($element[0].querySelectorAll(selector));
+  }
 
+  function registerEventHandler() {
     selectFirst('.button-flip').on('touch', function(e) {
       selectFirst('.flipper-container').toggleClass('hover');
     });
