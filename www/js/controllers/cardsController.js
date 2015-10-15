@@ -23,7 +23,11 @@ angular.module('starter.controllers')
           });
 
           $scope.foldedCard.stairs(0, 'top');
-        }, 1200);
+
+          angular.element($element[0].querySelectorAll('.button-flip')).on('touch', function(e) {
+            angular.element($element[0].querySelectorAll('.flipper-container')).toggleClass('hover');
+          });
+        }, 200);
       });
   // }
 
@@ -48,6 +52,10 @@ angular.module('starter.controllers')
           });
 
           $scope.foldedCard.stairs(0, 'top');
+
+          angular.element($element[0].querySelectorAll('.button-flip')).on('touch', function(e) {
+            angular.element($element[0].querySelectorAll('.flipper-container')).toggleClass('hover');
+          });
         }, 200);
       });
   };
