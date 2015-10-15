@@ -21,7 +21,8 @@ angular.module('starter.controllers')
             shading: false,
             perspective: 600,
             speed: 400,
-            maxAngle: 60
+            maxAngle: 60,
+            gapNudge: 0
           });
 
           $scope.foldedCard.stairs(0, 'top');
@@ -52,7 +53,8 @@ angular.module('starter.controllers')
               shading: false,
               perspective: 600,
               speed: 400,
-              maxAngle: 60
+              maxAngle: 60,
+              gapNudge: 0
             });
 
             $scope.foldedCard.stairs(0, 'top');
