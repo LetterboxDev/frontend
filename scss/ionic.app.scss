@@ -374,14 +374,14 @@ $ios-side-menu-title-height: 120px;
 }
 
 // Profile Cards Styles
-.swipe-cards {
+.partner-cards {
   position: fixed;
 }
 
-.swipe-card {
+.partner-card {
   background-color: $colourBackground;
   // display: none;
-  position: fixed;
+  position: relative;
   box-sizing: border-box;
   -webkit-transform: scale(1,1);
   -webkit-animation-fill-mode: forwards;

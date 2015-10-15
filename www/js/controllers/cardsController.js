@@ -31,6 +31,18 @@ angular.module('starter.controllers')
       });
   };
 
+  angular.element(document).ready(function() {
+    var foldedCard = new OriDomi('.partner-card', {
+      hPanels: 5,
+      ripple:  true,
+      shading: false,
+      perspective: 600,
+      speed: 40000
+    });
+
+    foldedCard.stairs(0, 'top');
+  });
+
   /**
    * Helper functions
    */
