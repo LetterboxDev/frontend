@@ -77,6 +77,22 @@ $nav-bar-height: 50px;
 $ios-status-bar-height: 20px;
 $ios-side-menu-title-height: 120px;
 
+@keyframes card-move-out {
+  100% {
+    transform: translateY(-600px);
+  }
+}
+
+@keyframes card-move-in {
+  0% {
+    transform: scale(0, 0);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
 .login-page {
   background-color: $colourPrimary;
   display: flex;
@@ -380,7 +396,6 @@ $ios-side-menu-title-height: 120px;
 
 .partner-card {
   background-color: $colourBackground;
-  // display: none;
   position: relative;
   box-sizing: border-box;
   -webkit-transform: scale(1,1);
@@ -400,6 +415,13 @@ $ios-side-menu-title-height: 120px;
   }
   &.pop-in {
     -webkit-animation: scale(0,0);
+  }
+  &.moving-out {
+    top: 10px;
+    -webkit-animation: card-move-out 0.4s linear forwards;
+  }
+  &.moving-in {
+    -webkit-animation: card-move-in 0.4s linear forwards;
   }
   .card-image {
     position: relative;
