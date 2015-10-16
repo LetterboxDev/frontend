@@ -120,7 +120,7 @@ angular.module('starter.controllers')
   };
 
   $scope.submitQuestionAnswer = function() {
-    if (!$scope.questionAnswers.length === 5) {
+    if ($scope.selectedAnswer.length !== 5) {
       console.log('Error, fill in all answers first.');
     } else {
       backend.sendALetter($scope.cards[0].hashedId, $scope.cards[0].questions);
@@ -155,7 +155,11 @@ angular.module('starter.controllers')
 
     selectFirst('.button-reject').on('touch', function(e) {
       $scope.changeCard();
-    })
+    });
+
+    selectFirst('.button-answer').on('touch', function(e) {
+      $scope.openQuestionModal();
+    });
   }
 });
 
