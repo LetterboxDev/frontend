@@ -1,16 +1,11 @@
 <ion-view view-title="Notifications">
-  <ion-nav-buttons side="right">
-    <button class="button button-small button-icon button-clear ion-home" ng-click="goHome()">
-    </button>
-  </ion-nav-buttons>
-
   <ion-content>
     <ion-list class="notifications-list">
       <ion-item ng-repeat="notification in notifications" href="#/app/notifications/{{notification.id}}" class="item item-avatar">
-        <img class="notification-profile-pic" src="{{notification.profile_pic}}">
+        <img class="notification-profile-pic" src="{{notification.profilePicThumb}}">
         <h2 class="notification-from">{{notification.from}}</h2>
         <p class="notification-message">{{notification.message}}</p>
-        <span class="notification-timestamp">{{notification.timestamp}}</span>
+        <span am-time-ago="notification.createdAt" class="notification-timestamp"></span>
       </ion-item>
     </ion-list>
   </ion-content>

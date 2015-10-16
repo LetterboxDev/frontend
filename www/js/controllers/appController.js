@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
 
-.controller('AppCtrl', function($scope, $state, $location, eventbus, socket, LocationService) {
+.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -24,8 +24,14 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
     alert('Message received: ' + JSON.stringify(data));
   });
   eventbus.registerListener('letterReceived', function(data) {
-    console.log(data);
-    alert('Letter received: ' + JSON.stringify(data));
+    $ionicPopup.confirm({
+     title: 'New Letter Received!',
+     template: 'Proceed to notifications?'
+   }).then(function(res) {
+    if (res) {
+      $state.go('app.notifications');
+    }
+   });
   });
   if (window.localStorage.getItem('token')) {
     eventbus.call('loginCompleted');

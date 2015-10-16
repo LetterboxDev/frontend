@@ -1,10 +1,14 @@
 angular.module('starter.controllers')
 
-.controller('NotificationsCtrl', function($scope, $state, NotificationsService) {
-  $scope.notifications = NotificationsService.getNotificationsList();
+.controller('NotificationsCtrl', function($scope, $state, NotificationsService, eventbus) {
+  $scope.notifications = [];
 
-  // navigation
-  $scope.goHome = function() {
-    $state.go('app.home');
-  };
+  function refreshNotifications() {
+    NotificationsService.getNotificationsList().then(function(notifications) {
+      $scope.notifications = notifications;
+    });
+  }
+
+  refreshNotifications();
+  eventbus.registerListener('letterReceived', refreshNotifications);
 });
