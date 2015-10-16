@@ -100,7 +100,6 @@ angular.module('starter.controllers')
   });
 
   $scope.openQuestionModal = function() {
-    console.log($scope.cards[0]);
     $scope.modal.show();
   };
 
