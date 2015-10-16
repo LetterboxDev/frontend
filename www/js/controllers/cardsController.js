@@ -115,7 +115,6 @@ angular.module('starter.controllers')
       hashedId: match.hashedId,
       name: match.firstName,
       age: match.age,
-      location: match.location,
       bio: match.bio,
       profile_pic: match.pictureMed,
       distance: match.distance,
