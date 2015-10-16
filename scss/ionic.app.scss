@@ -490,7 +490,7 @@ $ios-side-menu-title-height: 120px;
         text-align: center;
         @include uppercase-bold-font();
         position: fixed;
-        margin-top: 3vh;
+        margin-top: 20px;
         font-size: 9px;
         color: lighten($colourSubtitle, 8%);
       }
@@ -509,7 +509,7 @@ $ios-side-menu-title-height: 120px;
       width: $size;
       height: $size;
       .button-detail {
-        margin-top: 4vh;
+        margin-top: 28px;
         width: $size;
       }
     }
