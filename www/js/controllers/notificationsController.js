@@ -6,9 +6,4 @@ angular.module('starter.controllers')
   NotificationsService.getNotificationsList().then(function(notifications) {
     $scope.notifications = notifications;
   });
-
-  // navigation
-  $scope.goHome = function() {
-    $state.go('app.home');
-  };
 });
