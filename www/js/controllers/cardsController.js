@@ -1,25 +1,40 @@
 angular.module('starter.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, backend) {
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $element, $timeout, backend) {
   var previousId = '';
   $scope.cards = [];
 
   // Initial card load - loads two cards
-  for (var i=0; i<2; i++) {
+  // for (var i=0; i<2; i++) {
     backend.getMatch(1000)
       .$promise
       .then(function(match) {
         previousId = match.hashedId;
         $scope.cards.push(createNewCard(match));
+
+        $timeout(function() {
+          selectFirst('.partner-card').removeClass('moving-in');
+
+          $scope.foldedCard = new OriDomi('.partner-card', {
+            hPanels: 5,
+            ripple:  true,
+            shading: false,
+            perspective: 600,
+            speed: 400,
+            maxAngle: 60,
+            gapNudge: 0
+          });
+
+          $scope.foldedCard.stairs(0, 'top');
+
+          registerEventHandler();
+        }, 500);
       });
-  }
+  // }
 
-  $scope.cardSwiped = function(index) {
-    $scope.addCard();
-  };
-
-  $scope.cardDestroyed = function(index) {
-    $scope.cards.splice(index, 1);
+  $scope.changeCard = function() {
+    selectFirst('.partner-card').addClass('moving-out');
+    $timeout($scope.addCard, 100);
   };
 
   $scope.addCard = function() {
@@ -28,8 +43,51 @@ angular.module('starter.controllers')
       .then(function(match) {
         previousId = match.hashedId;
         $scope.cards.push(createNewCard(match));
+        $timeout(function() {
+          $scope.cards.splice(0, 1);
+
+          $timeout(function() {
+            $scope.foldedCard = new OriDomi('.partner-card.moving-in', {
+              hPanels: 5,
+              ripple:  true,
+              shading: false,
+              perspective: 600,
+              speed: 400,
+              maxAngle: 60,
+              gapNudge: 0
+            });
+
+            $scope.foldedCard.stairs(0, 'top');
+            selectFirst('.partner-card').removeClass('moving-in');
+
+            registerEventHandler();
+          }, 200);
+        }, 500);
       });
   };
+
+  $ionicGesture.on('dragend', function(e){
+    var el = (document.getElementsByClassName("oridomi-panel"))[8];
+
+    var st = window.getComputedStyle(el, null);
+
+    var tr = st.getPropertyValue("-webkit-transform") ||
+             st.getPropertyValue("-moz-transform") ||
+             st.getPropertyValue("-ms-transform") ||
+             st.getPropertyValue("-o-transform") ||
+             st.getPropertyValue("transform") ||
+             "Either no transform set, or browser doesn't do getComputedStyle";
+
+    var foldingIndex = (tr.split(','))[5];
+
+    console.log(foldingIndex);
+
+    if (foldingIndex <= 0) {
+      $scope.changeCard();
+    } else {
+      $scope.foldedCard.stairs(0, 'top');
+    }
+  }, $element);
 
   /**
    * Helper functions
@@ -43,6 +101,20 @@ angular.module('starter.controllers')
       profile_pic: match.pictureMed,
       distance: match.distance
     };
+  }
+
+  function selectFirst(selector) {
+    return angular.element($element[0].querySelectorAll(selector));
+  }
+
+  function registerEventHandler() {
+    selectFirst('.button-flip').on('touch', function(e) {
+      selectFirst('.flipper-container').toggleClass('hover');
+    });
+
+    selectFirst('.button-reject').on('touch', function(e) {
+      $scope.changeCard();
+    })
   }
 });
 

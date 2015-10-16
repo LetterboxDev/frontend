@@ -77,6 +77,22 @@ $nav-bar-height: 50px;
 $ios-status-bar-height: 20px;
 $ios-side-menu-title-height: 120px;
 
+@keyframes card-move-out {
+  100% {
+    transform: translateY(-600px);
+  }
+}
+
+@keyframes card-move-in {
+  0% {
+    transform: scale(0, 0);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
 .login-page {
   background-color: $colourPrimary;
   display: flex;
@@ -374,14 +390,13 @@ $ios-side-menu-title-height: 120px;
 }
 
 // Profile Cards Styles
-.swipe-cards {
+.partner-cards {
   position: fixed;
 }
 
-swipe-card {
+.partner-card {
   background-color: $colourBackground;
-  display: none;
-  position: fixed;
+  position: relative;
   box-sizing: border-box;
   -webkit-transform: scale(1,1);
   -webkit-animation-fill-mode: forwards;
@@ -400,6 +415,13 @@ swipe-card {
   }
   &.pop-in {
     -webkit-animation: scale(0,0);
+  }
+  &.moving-out {
+    top: 10px;
+    -webkit-animation: card-move-out 0.4s linear forwards;
+  }
+  &.moving-in {
+    -webkit-animation: card-move-in 0.4s linear forwards;
   }
   .card-image {
     position: relative;
@@ -431,12 +453,34 @@ swipe-card {
       letter-spacing: 0.5px;
     }
   }
-  .item-footer {
+
+  .card-buttons {
     border: 0;
-    padding: 5px;
     text-align: center;
-    font-size: 32px;
-    color: $colourPrimary;
+    font-size: 22px;
+
+    i {
+      border: 1px solid;
+      border-radius: 50px;
+      margin: 0px 10px;
+    }
+
+    .button-reject {
+      color: $colourPrimary;
+      padding: 2px 8px 2px 8px;
+    }
+
+    .button-profile, .button-back {
+      color: $colourSecondaryText;
+      font-size: 32px;
+      padding: 2px 9px 2px 9px;
+    }
+
+    .button-answer {
+      color: $colourPositive;
+      padding: 2px 6px 2px 7px;
+    }
+
   }
 
   // For card flip

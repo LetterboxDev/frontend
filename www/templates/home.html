@@ -6,9 +6,9 @@
 
   <ion-content>
     <div ng-controller="CardsCtrl">
-      <swipe-cards>
-        <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-          <div class="flipper-container" flip-card>
+      <div class="partner-cards">
+        <div class="partner-card moving-in" ng-repeat="card in cards">
+          <div class="flipper-container">
             <div class="flipper">
               <div class="card front">
                 <div class="card-image">
@@ -22,8 +22,12 @@
                 <div class="item item-body">
                   <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
                 </div>
-                <div class="item item-footer">
-                  <i class="icon ion-ios-person-outline"></i>
+                <div class="item item-footer card-buttons">
+                  <i class="icon ion-android-close button-reject"></i>
+                  <span class="button-flip">
+                    <i class="icon ion-android-person button-profile"></i>
+                  </span>
+                  <i class="icon ion-android-done button-answer"></i>
                 </div>
               </div>
 
@@ -40,15 +44,17 @@
                     <h3>Mutual Friends</h3>
                     <h3>Likes</h3>
                   </div>
-                  <div class="item item-footer">
-                    <i class="icon ion-ios-undo-outline"></i>
+                  <div class="item item-footer card-buttons">
+                    <span class="button-flip">
+                      <i class="icon ion-ios-undo button-back"></i>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </swipe-card>
-      </swipe-cards>
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>
