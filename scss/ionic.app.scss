@@ -552,10 +552,14 @@ $ios-side-menu-title-height: 120px;
         position: relative;
       }
       .item-image {
-        padding: 10px;
+        padding: 20px;
         img {
-          width: 25%;
+          width: 20%;
           border-radius: 50%;
+        }
+        .name {
+          padding-top: 10px;
+          @include uppercase-bold-font();
         }
       }
       .item-body {
