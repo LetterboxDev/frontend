@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "app_id": "",
+  "app_id": "f664f09e",
   "gulpStartupTasks": [
     "sass",
     "watch"

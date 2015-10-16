@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $element, $timeout, backend) {
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $ionicModal, $element, $timeout, backend) {
   var previousId = '';
   $scope.cards = [];
 
@@ -90,16 +90,57 @@ angular.module('starter.controllers')
   }, $element);
 
   /**
+   * Modal Logic
+   */
+  $ionicModal.fromTemplateUrl('templates/question-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.openQuestionModal = function() {
+    console.log($scope.cards[0]);
+    $scope.modal.show();
+  };
+
+  $scope.closeQuestionModal = function() {
+    $scope.modal.hide();
+  };
+
+  $scope.selectedAnswer = [];
+
+  $scope.updateQuestionAnswer = function(choice, index) {
+    $scope.cards[0].questions[index].answer = false;
+    $scope.selectedAnswer[index] = 0;
+    if (choice === 1) {
+      $scope.selectedAnswer[index] = 1
+      $scope.cards[0].questions[index].answer = true;
+    }
+  };
+
+  $scope.submitQuestionAnswer = function() {
+    if ($scope.selectedAnswer.length !== 5) {
+      console.log('Error, fill in all answers first.');
+    } else {
+      backend.sendALetter($scope.cards[0].hashedId, $scope.cards[0].questions);
+      $scope.closeQuestionModal();
+    }
+  };
+
+  /**
    * Helper functions
    */
   function createNewCard(match) {
     return {
+      hashedId: match.hashedId,
       name: match.firstName,
       age: match.age,
       location: match.location,
       bio: match.bio,
       profile_pic: match.pictureMed,
-      distance: match.distance
+      distance: match.distance,
+      questions: match.questions
     };
   }
 
@@ -114,7 +155,11 @@ angular.module('starter.controllers')
 
     selectFirst('.button-reject').on('touch', function(e) {
       $scope.changeCard();
-    })
+    });
+
+    selectFirst('.button-answer').on('touch', function(e) {
+      $scope.openQuestionModal();
+    });
   }
 });
 
