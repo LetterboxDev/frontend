@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.service('socket', function(eventbus) {
+.service('socket', function(eventbus, $q) {
   var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
   // var URL = 'http://localhost:8080';
 
@@ -30,13 +30,20 @@ angular.module('starter.services')
   };
 
   SocketService.sendMessage = function(roomHash, message) {
-    if (IOContainer.isInitialized) {
-      IOContainer.socketio.emit('roomMessage', {
+    var deferred = $q.defer();
+    if (IOContainer.isInitialized && IOContainer.socketio.connected) {
+      var message = {
         roomHash: roomHash,
-        authorName: window.localStorage.getItem('firstName'),
         message: message
-      });
+      };
+      IOContainer.socketio.emit('roomMessage', message);
+      deferred.resolve(message);
+    } else if (IOContainer.isInitialized && IOContainer.socketio.connected) {
+      deferred.reject({error: 'socketio not connected'});
+    } else {
+      deferred.reject({error: 'socketio not initialized'});
     }
+    return deferred.promise;
   };
 
   return SocketService;
