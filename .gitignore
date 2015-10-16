@@ -7,4 +7,5 @@ plugins/
 www/css/*.min.css
 www/css/*.css
 www/lib/
+.io-config.json
 
