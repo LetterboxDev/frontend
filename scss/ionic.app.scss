@@ -418,6 +418,10 @@ $ios-side-menu-title-height: 120px;
   }
   &.moving-out {
     top: 10px;
+    position: absolute;
+    width: 100vw;
+    height: 1000px;
+    z-index: 100;
     -webkit-animation: card-move-out 0.4s linear forwards;
   }
   &.moving-in {
