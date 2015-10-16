@@ -155,7 +155,11 @@ angular.module('starter.controllers')
 
     selectFirst('.button-reject').on('touch', function(e) {
       $scope.changeCard();
-    })
+    });
+
+    selectFirst('.button-answer').on('touch', function(e) {
+      $scope.openQuestionModal();
+    });
   }
 });
 
