@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('ChatsCtrl', function($scope, $state, NotificationsService, backend) {
+.controller('ChatsCtrl', function($scope, $state, backend) {
   $scope.chats = [];
 
   backend.getRooms().$promise.then(function(res) {
@@ -23,12 +23,5 @@ angular.module('starter.controllers')
   }, function(err) {
 
   });
-
-  $scope.numberOfNotifications = NotificationsService.getNumberOfNotifications();
-
-  // navigation
-  $scope.goNotifications = function() {
-    $state.go('app.notifications');
-  };
 });
 
