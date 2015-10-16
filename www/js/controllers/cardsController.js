@@ -88,7 +88,6 @@ angular.module('starter.controllers')
       $scope.foldedCard.stairs(0, 'top');
     }
   }, $element);
-  */
 
   /**
    * Modal Logic
