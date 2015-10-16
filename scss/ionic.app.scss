@@ -517,6 +517,13 @@ $ios-side-menu-title-height: 120px;
   }
 }
 
+// Answer Question styles
+.answer-question {
+  .answer-left,
+  .answer-right {
+    text-align: center;
+  }
+}
 
 // List item styles which can be extended by any list
 .list-item-heading {

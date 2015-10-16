@@ -1,0 +1,22 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Answer {{ cards[0].name }}'s Questions!</h1>
+  </ion-header-bar>
+
+  <ion-content>
+    <div class="answer-question" ng-controller="QuestionsCtrl">
+      <div class="question-choice" ng-repeat="question in cards[0].questions">
+        <div class="row">
+          <div class="answer-left col">
+            {{ question.option0 }}
+          </div>
+          <div class="answer-right col">
+            {{ question.option1 }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-modal-view>
+

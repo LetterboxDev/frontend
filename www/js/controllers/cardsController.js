@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $element, $timeout, backend) {
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $ionicModal, $element, $timeout, backend) {
   var previousId = '';
   $scope.cards = [];
 
@@ -76,6 +76,26 @@ angular.module('starter.controllers')
       $scope.foldedCard.stairs(0, 'top');
     }
   }, $element);
+  */
+
+  /**
+   * Modal Logic
+   */
+  $ionicModal.fromTemplateUrl('templates/question-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.openQuestionModal = function() {
+    console.log($scope.cards[0]);
+    $scope.modal.show();
+  };
+
+  $scope.closeQuestionModal = function() {
+    $scope.modal.hide();
+  };
 
   /**
    * Helper functions
@@ -87,7 +107,8 @@ angular.module('starter.controllers')
       location: match.location,
       bio: match.bio,
       profile_pic: match.pictureMed,
-      distance: match.distance
+      distance: match.distance,
+      questions: match.questions
     };
   }
 });
