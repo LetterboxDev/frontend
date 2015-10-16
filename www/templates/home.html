@@ -23,11 +23,18 @@
                   <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
                 </div>
                 <div class="item item-footer card-buttons">
-                  <i class="icon ion-android-close button-reject"></i>
-                  <span class="button-flip">
-                    <i class="icon ion-android-person button-profile"></i>
-                  </span>
-                  <i class="icon ion-android-done button-answer" ng-click="openQuestionModal()"></i>
+                  <div class="card-button button-reject">
+                    <i class="icon ion-close"></i>
+                    <div class="button-detail">skip</div>
+                  </div>
+                  <div class="button-flip card-button button-profile">
+                    <i class="icon ion-person"></i>
+                    <div class="button-detail">profile</div>
+                  </div>
+                  <div class="card-button button-answer" ng-click="openQuestionModal()">
+                    <i class="icon ion-edit"></i>
+                    <div class="button-detail">answer</div>
+                  </div>
                 </div>
               </div>
 

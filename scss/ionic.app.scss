@@ -456,29 +456,67 @@ $ios-side-menu-title-height: 120px;
 
   .card-buttons {
     border: 0;
-    text-align: center;
-    font-size: 22px;
+    padding: 3vh 5vh 6vh;
 
-    i {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    justify-content: center;
+    -webkit-justify-content: center; /* Safari */
+
+    .card-button {
+      $size: 45px;
+      cursor: pointer;
+      width: $size;
+      height: $size;
       border: 1px solid;
-      border-radius: 50px;
+      border-radius: 50%;
       margin: 0px 10px;
+      font-size: 13px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+      display: flex;
+      display: -webkit-flex; /* Safari */
+      flex-flow: column nowrap;
+      -webkit-flex-flow: column nowrap; /* Safari */
+      align-items: center;
+      -webkit-align-items: center; /* Safari */
+      justify-content: center;
+      -webkit-justify-content: center; /* Safari */
+
+      .button-detail {
+        width: $size;
+        text-align: center;
+        @include uppercase-bold-font();
+        position: fixed;
+        margin-top: 3vh;
+        font-size: 9px;
+        color: lighten($colourSubtitle, 8%);
+      }
     }
 
     .button-reject {
       color: $colourPrimary;
-      padding: 2px 8px 2px 8px;
+      border-color: lighten($colourPrimary, 15%);
     }
 
     .button-profile, .button-back {
+      $size: 65px;
       color: $colourSecondaryText;
-      font-size: 32px;
-      padding: 2px 9px 2px 9px;
+      border-color: lighten($colourSecondaryText, 15%);
+      font-size: 25px;
+      width: $size;
+      height: $size;
+      .button-detail {
+        margin-top: 4vh;
+        width: $size;
+      }
     }
 
     .button-answer {
       color: $colourPositive;
-      padding: 2px 6px 2px 7px;
+      border-color: lighten($colourPositive, 15%);
     }
 
   }
