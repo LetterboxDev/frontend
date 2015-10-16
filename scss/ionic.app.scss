@@ -456,7 +456,7 @@ $ios-side-menu-title-height: 120px;
 
   .card-buttons {
     border: 0;
-    padding: 3vh 5vh 6vh;
+    padding: 3vh 5vh 7vh;
 
     display: flex;
     display: -webkit-flex; /* Safari */
@@ -545,7 +545,7 @@ $ios-side-menu-title-height: 120px;
     .back {
       height: 100%;
       position: absolute;
-      top: -5%; // This is a hack
+      top: -3%; // This is a hack
       -webkit-transform: rotateY(180deg);
       .back-container {
         height: 100%;
