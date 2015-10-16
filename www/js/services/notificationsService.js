@@ -11,6 +11,7 @@ angular.module('starter.services')
         answer: question.WyrQuestion.answer
       });
     }
+    var message = 'answered your questions. Click here to see ' + (letter.UserAccount.gender === 'male' ? 'his' : 'her') + ' responses.';
     return {
       id: letter.hash,
       isRead: letter.isRead,
@@ -19,7 +20,8 @@ angular.module('starter.services')
       fromGender: letter.UserAccount.gender,
       profilePicThumb: letter.UserAccount.pictureThumb,
       profilePicMed: letter.UserAccount.pictureMed,
-      questionsAnswers: questionsAnswers
+      questionsAnswers: questionsAnswers,
+      message: message
     };
   }
 
@@ -38,7 +40,16 @@ angular.module('starter.services')
     },
 
     getNumberOfNotifications: function() {
-      return notifications.length;
+      var deferred = $q.defer();
+      backend.getAllLetters().$promise
+      .then(function(letters) {
+        var count = 0;
+        letters.forEach(function(letter) {
+          if (letter.isRead) count++;
+        });
+        deferred.resolve(count);
+      });
+      return deferred.promise;
     }
   };
 });
