@@ -541,11 +541,18 @@ $ios-side-menu-title-height: 120px;
 
 // Answer Question styles
 .answer-question {
-  .answer-left,
-  .answer-right {
+  padding: 10px;
+  .answer {
     text-align: center;
+    &.selected {
+      color: $colourPrimary;
+    }
+  }
+  .button {
+    width: 100%;
   }
 }
+
 
 // List item styles which can be extended by any list
 .list-item-heading {
