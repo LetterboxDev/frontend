@@ -1,9 +1,14 @@
 angular.module('starter.controllers')
 
-.controller('NotificationsCtrl', function($scope, $state, NotificationsService) {
+.controller('NotificationsCtrl', function($scope, $state, NotificationsService, eventbus) {
   $scope.notifications = [];
 
-  NotificationsService.getNotificationsList().then(function(notifications) {
-    $scope.notifications = notifications;
-  });
+  function refreshNotifications() {
+    NotificationsService.getNotificationsList().then(function(notifications) {
+      $scope.notifications = notifications;
+    });
+  }
+
+  refreshNotifications();
+  eventbus.registerListener('letterReceived', refreshNotifications);
 });
