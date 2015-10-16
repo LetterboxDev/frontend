@@ -115,9 +115,9 @@ angular.module('starter.controllers')
       hashedId: match.hashedId,
       name: match.firstName,
       age: match.age,
+      location: Math.floor(match.distance) + 'km',
       bio: match.bio,
       profile_pic: match.pictureMed,
-      distance: match.distance,
       questions: match.questions
     };
   }
