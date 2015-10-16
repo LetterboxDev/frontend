@@ -17,6 +17,18 @@ angular.module('starter.services')
     }
   };
 
+  DbService.addRoom = function(roomHash, userHash, userFirstName, thumbnailPic, mediumPic) {
+    var deferred = $q.defer();
+    checkInit(deferred);
+
+    db.sqlite.transaction(function(tx) {
+      tx.executeSql("INSERT INTO rooms VALUES (?,?,?,?,?)", [roomHash, userHash, userFirstName, thumbnailPic, mediumPic], function(tx, res) {
+        deferred.resolve(res);
+      });
+    });
+    return deferred.promise;
+  };
+
   DbService.addMessage = function(roomHash, sender, content, timeSent) {
     var deferred = $q.defer();
     checkInit(deferred);
@@ -34,6 +46,17 @@ angular.module('starter.services')
     checkInit(deferred);
     db.sqlite.transaction(function(tx) {
       tx.executeSql("UPDATE messages SET isRead=1 WHERE roomHash=? AND timeSent<=? ORDER BY timeSent DESC", [roomHash, timeSent], function(tx, res) {
+        deferred.resolve(res);
+      });
+    });
+    return deferred.promise;
+  };
+
+  DbService.getRooms = function() {
+    var deferred = $q.defer();
+    checkInit(deferred);
+    db.sqlite.transaction(function(tx) {
+      tx.executeSql("SELECT * FROM rooms", [], function(tx, res) {
         deferred.resolve(res);
       });
     });
@@ -66,8 +89,19 @@ angular.module('starter.services')
     var deferred = $q.defer();
     checkInit(deferred);
     db.sqlite.transaction(function(tx) {
-      tx.executeSql("SELECT sender, content FROM messages WHERE roomHash=? ORDER BY timeSent DESC LIMIT 1", [roomHash], function(tx, res) {
+      tx.executeSql("SELECT sender, content, timeSent FROM messages WHERE roomHash=? ORDER BY timeSent DESC LIMIT 1", [roomHash], function(tx, res) {
         deferred.resolve(res.rows.item(0));
+      });
+    });
+    return deferred.promise;
+  };
+
+  DbService.deleteRoom = function(roomHash) {
+    var deferred = $q.defer();
+    checkInit(deferred);
+    db.sqlite.transaction(function(tx) {
+      tx.executeSql("DELETE FROM rooms WHERE hash=?", [roomHash], function(tx, res) {
+        deferred.resolve(res);
       });
     });
     return deferred.promise;
