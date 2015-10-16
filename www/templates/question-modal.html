@@ -3,7 +3,7 @@
     <h1 class="title">Answer {{ cards[0].name }}'s Questions!</h1>
   </ion-header-bar>
 
-  <ion-content>
+  <ion-content scroll="false">
     <div class="answer-question" ng-controller="QuestionsCtrl">
       <div class="question-choice" ng-repeat="question in cards[0].questions">
         <div class="row">
