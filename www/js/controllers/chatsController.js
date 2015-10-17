@@ -18,7 +18,7 @@ angular.module('starter.controllers')
     }
     $scope.chats = temp;
   }
-  RoomsService.getRooms().then(updateRooms, function(err) {});
+  RoomsService.updateRooms();
   eventbus.registerListener('roomsUpdated', updateRooms);
 });
 

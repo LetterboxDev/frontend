@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
 
-.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService, DbService) {
+.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService, DbService, RoomsService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -18,6 +18,7 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
   eventbus.registerListener('loginCompleted', LocationService.updateLocation);
 
   eventbus.registerListener('roomCreated', function(data) {
+    RoomsService.updateRooms();
     $ionicPopup.confirm({
       title: data.approverName + ' just started a chat with you!',
       template: 'Start chatting?'
