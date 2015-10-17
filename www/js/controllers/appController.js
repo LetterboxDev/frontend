@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
+angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
 
 .controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService, DbService, RoomsService) {
 

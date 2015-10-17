@@ -1,11 +1,11 @@
-angular.module('starter.services')
+angular.module('letterbox.services')
 .service('LocationService', function(backend, $cordovaGeolocation) {
   var LocationService = {};
 
   function locationObtainedCallback(position) {
     updateBackendLocation(position.coords.latitude, position.coords.longitude);
   }
-  
+
   function getCordovaLocation() {
     var options = {
       timeout: 10000,

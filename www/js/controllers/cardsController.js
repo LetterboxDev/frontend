@@ -1,17 +1,7 @@
-angular.module('starter.controllers')
+angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $ionicModal, $element, $timeout, backend) {
+.controller('CardsCtrl', function($scope, $ionicScrollDelegate, $ionicGesture, $ionicModal, $element, $timeout, backend) {
   var previousId = '';
-  var oridomiConfig = {
-    hPanels: 5,
-    ripple:  true,
-    shading: false,
-    perspective: 600,
-    speed: 400,
-    maxAngle: 60,
-    gapNudge: 0
-  };
-
   $scope.cards = [];
 
   backend.getMatch(1000)
@@ -21,18 +11,13 @@ angular.module('starter.controllers')
       $scope.cards.push(createNewCard(match));
 
       $timeout(function() {
-        selectFirst('.partner-card').removeClass('moving-in');
-
-        $scope.foldedCard = new OriDomi('.partner-card', oridomiConfig);
-
-        $scope.foldedCard.stairs(0, 'top');
-
+        selectFirst('.profile-card').removeClass('moving-in');
         registerEventHandler();
-      }, 500);
+      }, 400);
     });
 
   $scope.changeCard = function() {
-    selectFirst('.partner-card').addClass('moving-out');
+    selectFirst('.profile-card').addClass('moving-out');
     $timeout($scope.addCard, 100);
   };
 
@@ -43,36 +28,23 @@ angular.module('starter.controllers')
         previousId = match.hashedId;
         $scope.cards.push(createNewCard(match));
         $timeout(function() {
+          // timeout for moving out animation
           $scope.cards.splice(0, 1);
 
           $timeout(function() {
-            $scope.foldedCard = new OriDomi('.partner-card.moving-in', oridomiConfig);
-
-            $scope.foldedCard.stairs(0, 'top');
-            selectFirst('.partner-card').removeClass('moving-in');
-
+            // timeout for moving in animation
+            selectFirst('.profile-card').removeClass('moving-in');
             registerEventHandler();
           }, 200);
-        }, 500);
+        }, 200);
       });
   };
 
-  $ionicGesture.on('dragend', function(e){
-    var st = window.getComputedStyle((document.getElementsByClassName("oridomi-panel"))[8], null);
+  $ionicGesture.on('dragend', function(e) {
+    var draggedDistance = $ionicScrollDelegate.getScrollPosition().top;
 
-    var tr = st.getPropertyValue("-webkit-transform") ||
-             st.getPropertyValue("-moz-transform") ||
-             st.getPropertyValue("-ms-transform") ||
-             st.getPropertyValue("-o-transform") ||
-             st.getPropertyValue("transform") ||
-             "Either no transform set, or browser doesn't do getComputedStyle";
-
-    var foldingIndex = (tr.split(','))[5];
-
-    if (foldingIndex <= 0) {
+    if (draggedDistance >= 200) {
       $scope.changeCard();
-    } else {
-      $scope.foldedCard.stairs(0, 'top');
     }
   }, $element);
 
@@ -87,32 +59,11 @@ angular.module('starter.controllers')
   });
 
   $scope.openQuestionModal = function() {
-    console.log($scope.cards[0]);
     $scope.modal.show();
   };
 
   $scope.closeQuestionModal = function() {
     $scope.modal.hide();
-  };
-
-  $scope.selectedAnswer = [];
-
-  $scope.updateQuestionAnswer = function(choice, index) {
-    $scope.cards[0].questions[index].answer = false;
-    $scope.selectedAnswer[index] = 0;
-    if (choice === 1) {
-      $scope.selectedAnswer[index] = 1
-      $scope.cards[0].questions[index].answer = true;
-    }
-  };
-
-  $scope.submitQuestionAnswer = function() {
-    if ($scope.selectedAnswer.length !== 5) {
-      console.log('Error, fill in all answers first.');
-    } else {
-      backend.sendALetter($scope.cards[0].hashedId, $scope.cards[0].questions);
-      $scope.closeQuestionModal();
-    }
   };
 
   /**
@@ -123,10 +74,9 @@ angular.module('starter.controllers')
       hashedId: match.hashedId,
       name: match.firstName,
       age: match.age,
-      location: match.location,
+      location: Math.floor(match.distance) + 'km',
       bio: match.bio,
       profile_pic: match.pictureMed,
-      distance: match.distance,
       questions: match.questions
     };
   }
@@ -136,10 +86,6 @@ angular.module('starter.controllers')
   }
 
   function registerEventHandler() {
-    selectFirst('.button-flip').on('touch', function(e) {
-      selectFirst('.flipper-container').toggleClass('hover');
-    });
-
     selectFirst('.button-reject').on('touch', function(e) {
       $scope.changeCard();
     });

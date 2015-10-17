@@ -1,10 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ngResource', 'starter.services', 'starter.directives', 'facebook', 'ngCordova', 'angularMoment'])
+angular.module('letterbox', ['ionic', 'letterbox.controllers', 'ngResource', 'letterbox.services', 'letterbox.directives', 'facebook', 'ngCordova', 'angularMoment'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -24,85 +18,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngResource', 'starte
 
 .config(function(FacebookProvider) {
   FacebookProvider.init('1674828996062928');
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-  .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'OnboardingCtrl'
-  })
-
-  .state('onboarding', {
-    url: '/onboarding/:onboardStep',
-    templateUrl: function ($stateParams){
-      return '/templates/onboard' + $stateParams.onboardStep + '.html';
-    },
-    controller: 'OnboardingCtrl'
-  })
-
-  .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
-
-  .state('app.home', {
-    url: '/home',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/home.html',
-        controller: 'HomeCtrl'
-      }
-    }
-  })
-
-  .state('app.chats', {
-    url: '/chats',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/chats.html',
-        controller: 'ChatsCtrl'
-      }
-    }
-  })
-
-  .state('app.chat', {
-    url: '/chats/:chatId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/chat.html',
-        controller: 'ChatCtrl',
-      }
-    }
-  })
-
-  .state('app.notifications', {
-    url: '/notifications',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/notifications.html',
-        controller: 'NotificationsCtrl'
-      }
-    }
-  })
-
-  .state('app.settings', {
-    url: '/settings',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/settings.html',
-        controller: 'SettingsCtrl'
-      }
-    }
-  })
-  ;
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
 });
 
-angular.module('starter.services', []);
+angular.module('letterbox.services', []);
+

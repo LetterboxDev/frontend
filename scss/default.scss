@@ -1,0 +1,33 @@
+$nav-bar-height: 50px;
+$ios-status-bar-height: 20px;
+$ios-side-menu-title-height: 120px;
+
+ion-content {
+  background-color: $colourBackground;
+}
+
+// View container styles
+.view-container {
+  .scroll-content.has-header {
+    top: $nav-bar-height;
+  }
+}
+
+// List item styles which can be extended by any list
+.list-item-heading {
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: $colourPrimaryText;
+}
+.list-item-message {
+  font-size: 13px;
+}
+.list-item-meta {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 12px;
+  color: $colourSecondaryText;
+}
+

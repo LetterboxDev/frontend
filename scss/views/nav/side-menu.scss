@@ -1,0 +1,82 @@
+// Left side menu styles
+.left-side-menu {
+  $header-bar-height: 120px;
+  background-color: $colourSideMenu;
+
+  .bar.bar-stable {
+    height: $header-bar-height;
+    border: none;
+    background-color: $colourSideMenu;
+    background-image: none;
+
+    padding: 20px 40px;
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    justify-content: center;
+    -webkit-justify-content: center; /* Safari */
+
+    .greeting {
+      position: relative;
+      @include uppercase-bold-font();
+      color: $colourPrimary;
+      font-size: 18px;
+      line-height: 1.1em;
+      word-wrap: break-word;
+      white-space: normal;
+      text-align: left;
+      max-width: 100%;
+      max-height: 0.6 * $header-bar-height;
+    }
+  }
+
+  .scroll-content.has-header {
+    top: $header-bar-height;
+    background-color: $colourSideMenu;
+
+    .item {
+      border: none;
+      .item-content {
+        color: white;
+        padding-left: 40px;
+        @include uppercase-bold-font();
+        font-size: 14px;
+        letter-spacing: 2px;
+        .icon {
+          vertical-align: text-top;
+          margin-right: 20px;
+          font-size: 20px;
+        }
+      }
+    }
+
+    .item-inactive {
+      .item-content {
+        background-color: $colourSideMenu;
+      }
+    }
+
+    .item-active {
+      .item-content {
+        background-color: $colourSideMenuItem;
+      }
+    }
+  }
+}
+
+// For iOS
+.platform-ios {
+  .left-side-menu {
+    .bar.bar-stable {
+      height: $ios-side-menu-title-height !important;
+      .title {
+        margin-top: 15% !important;
+      }
+    }
+    .scroll-content.has-header {
+      top: $ios-side-menu-title-height;
+    }
+  }
+}
+

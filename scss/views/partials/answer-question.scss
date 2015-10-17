@@ -1,0 +1,13 @@
+.answer-question {
+  padding: 10px;
+  .answer {
+    text-align: center;
+    &.selected {
+      color: $colourPrimary;
+    }
+  }
+  .button {
+    width: 100%;
+  }
+}
+
