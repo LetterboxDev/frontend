@@ -8,7 +8,7 @@ angular.module('starter.services')
       questionsAnswers.push({
         option0: question.WyrQuestion.option0,
         option1: question.WyrQuestion.option1,
-        answer: question.WyrQuestion.answer
+        answer: question.answer
       });
     }
     var message = 'answered your questions. Click here to see ' + (letter.UserAccount.gender === 'male' ? 'his' : 'her') + ' responses.';
@@ -18,6 +18,8 @@ angular.module('starter.services')
       createdAt: letter.createdAt,
       from: letter.UserAccount.firstName,
       fromGender: letter.UserAccount.gender,
+      age: (new Date).getYear() - new Date(letter.UserAccount.birthday).getYear(),
+      bio: letter.UserAccount.bio,
       profilePicThumb: letter.UserAccount.pictureThumb,
       profilePicMed: letter.UserAccount.pictureMed,
       questionsAnswers: questionsAnswers,
