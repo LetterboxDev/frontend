@@ -8,7 +8,7 @@
             <p class="message-content">{{message.content}}</p>
           </div>
           <div class="message-meta">
-            <div class="message-timestamp">{{message.timestamp}}</div>
+            <span am-time-ago="message.timestamp" class="message-timestamp"></span>
           </div>
         </div>
         <div ng-if="message.isOwner" class="sent-msg">
@@ -17,7 +17,7 @@
             <p class="message-content">{{message.content}}</p>
           </div>
           <div class="message-meta">
-            <div class="message-timestamp">{{message.timestamp}}</div>
+            <span am-time-ago="message.timestamp" class="message-timestamp"></span>
           </div>
         </div>
       </ion-item>

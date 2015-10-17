@@ -7,7 +7,7 @@ angular.module('starter.services')
     return {
       isOwner: message.sender === window.localStorage.getItem('hashedId'),
       content: message.content,
-      timestamp: message.timeSent
+      timestamp: new Date(message.timeSent)
     };
   };
 
