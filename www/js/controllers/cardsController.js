@@ -14,7 +14,7 @@ angular.module('letterbox.controllers')
       $timeout(function() {
         selectFirst('.partner-card').removeClass('moving-in');
         registerEventHandler();
-      }, 500);
+      }, 400);
     });
 
   $scope.changeCard = function() {
@@ -29,10 +29,15 @@ angular.module('letterbox.controllers')
         previousId = match.hashedId;
         $scope.cards.push(createNewCard(match));
         $timeout(function() {
+          // timeout for moving out animation
           $scope.cards.splice(0, 1);
-          selectFirst('.partner-card').removeClass('moving-in');
-          registerEventHandler();
-        }, 500);
+
+          $timeout(function() {
+            // timeout for moving in animation
+            selectFirst('.partner-card').removeClass('moving-in');
+            registerEventHandler();
+          }, 200);
+        }, 200);
       });
   };
 
@@ -93,10 +98,6 @@ angular.module('letterbox.controllers')
   }
 
   function registerEventHandler() {
-    selectFirst('.button-flip').on('touch', function(e) {
-      selectFirst('.flipper-container').toggleClass('hover');
-    });
-
     selectFirst('.button-reject').on('touch', function(e) {
       $scope.changeCard();
     });
