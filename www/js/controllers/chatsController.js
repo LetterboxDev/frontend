@@ -8,7 +8,7 @@ angular.module('starter.controllers')
     for (var i = 0; i < rooms.length; i++) {
       var room = rooms[i];
       var newChat = {
-        hash: room.hash,
+        id: room.hash,
         from: room.userName,
         profile_pic: room.thumbnail,
         last_message: "I'm hungry",
