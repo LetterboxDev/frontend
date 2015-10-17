@@ -20,7 +20,6 @@ angular.module('starter.controllers')
   });
 
   $scope.selectNotification = function(notification) {
-    console.log(notification);
     notification.isRead = true;
     $scope.selectedLetter = notification;
     $scope.modal.show();
