@@ -31,8 +31,7 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
     });
   });
   eventbus.registerListener('roomMessage', function(data) {
-    console.log(data);
-    alert('Message received: ' + JSON.stringify(data));
+    // save to db
   });
   eventbus.registerListener('letterReceived', function(data) {
     $ionicPopup.confirm({
