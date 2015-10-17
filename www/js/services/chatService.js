@@ -36,7 +36,6 @@ angular.module('starter.services')
         messages.sort(function(a, b) {
           return a.timestamp - b.timestamp;
         });
-        console.log(messages);
         dfd.resolve(messages);
       });
     } else {
