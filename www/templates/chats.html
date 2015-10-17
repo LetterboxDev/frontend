@@ -1,12 +1,4 @@
 <ion-view view-title="Chats">
-  <ion-nav-buttons side="right">
-    <button class="button button-small button-icon button-clear ion-ios-bell" data-ng-click="goNotifications()">
-    </button>
-    <div class="notification-bubble" data-ng-show="numberOfNotifications > 0" data-ng-click="goNotifications()">
-      {{numberOfNotifications}}
-    </div>
-  </ion-nav-buttons>
-
   <ion-content>
     <ion-list class="chats-list">
       <ion-item ng-repeat="chat in chats" href="#/app/chats/{{chat.id}}" class="item item-avatar">

@@ -1,9 +1,4 @@
 <ion-view view-title="Letterbox">
-  <ion-nav-buttons side="right">
-    <button class="button button-small button-icon button-clear ion-chatbubbles" ng-click="goChat()">
-    </button>
-  </ion-nav-buttons>
-
   <ion-content scroll="false">
     <div ng-controller="CardsCtrl">
       <div class="partner-cards">
@@ -42,9 +37,7 @@
                 <div class="back-container">
                   <div class="item item-image">
                     <img ng-src="{{ card.profile_pic }}" />
-                    <ul>
-                      <li>{{ card.name }}</li>
-                    </ul>
+                    <div class="name">{{ card.name }}</div>
                   </div>
                   <div class="item item-body">
                     <p>{{ card.bio }}</p>
