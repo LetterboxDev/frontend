@@ -29,9 +29,13 @@ angular.module('starter.services')
     }
   };
 
+  SocketService.isConnected = function() {
+    return IOContainer.isInitialized && IOContainer.socketio.connected;
+  }
+
   SocketService.sendMessage = function(roomHash, message) {
     var deferred = $q.defer();
-    if (IOContainer.isInitialized && IOContainer.socketio.connected) {
+    if (SocketService.isConnected()) {
       var message = {
         roomHash: roomHash,
         message: message
