@@ -1,0 +1,42 @@
+.onboard1-page {
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  align-items: center;
+  -webkit-align-items: center; /* Safari */
+  justify-content: center;
+  -webkit-justify-content: center; /* Safari */
+
+  .gender, .gender-preference {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    margin: 30px 0;
+  }
+
+  h2 {
+    @include uppercase-bold-font();
+    color: $colourPrimaryText;
+    font-size: 18px;
+  }
+
+  .gender-option {
+    background-color: white;
+    border-color: $colourBorder;
+    min-width: 30vw;
+    min-height: 12vh;
+    &:before {
+      font-size: 8vh;
+    }
+    &.selected {
+      background-color: $colourPositive;
+    }
+  }
+
+  .btn-complete {
+    width: 100%;
+  }
+}
+

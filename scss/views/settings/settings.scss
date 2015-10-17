@@ -1,0 +1,9 @@
+.settings-list {
+  .setting-description {
+    @extend .list-item-heading;
+    font-size: 14px;
+    white-space: normal;
+    line-height: 1.4em;
+  }
+}
+

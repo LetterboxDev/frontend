@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('letterbox')
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

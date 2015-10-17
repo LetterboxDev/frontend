@@ -1,0 +1,14 @@
+.notifications-list {
+  .notification-from {
+    @extend .list-item-heading;
+  }
+  .notification-message {
+    @extend .list-item-message;
+    white-space: normal;
+    line-height: 1.4em;
+  }
+  .notification-timestamp {
+    @extend .list-item-meta;
+  }
+}
+

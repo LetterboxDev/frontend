@@ -1,4 +1,4 @@
-angular.module('starter.services')
+angular.module('letterbox.services')
 .service('backend', function($resource, $http) {
   var backend = {};
   var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
