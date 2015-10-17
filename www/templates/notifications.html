@@ -1,7 +1,7 @@
 <ion-view view-title="Notifications">
   <ion-content>
     <ion-list class="notifications-list">
-      <ion-item ng-repeat="notification in notifications" href="#/app/notifications/{{notification.id}}" class="item item-avatar">
+      <ion-item ng-repeat="notification in notifications" class="item item-avatar" ng-click="selectNotification(notification)">
         <img class="notification-profile-pic" src="{{notification.profilePicThumb}}">
         <h2 class="notification-from">{{notification.from}}</h2>
         <p class="notification-message">{{notification.message}}</p>
