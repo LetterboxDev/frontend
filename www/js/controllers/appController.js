@@ -12,6 +12,8 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
   // Eventbus for loose coupling of components
   // Initialize DbService when logged in
   eventbus.registerListener('loginCompleted', DbService.init);
+  // Initialize DbService when logged in
+  eventbus.registerListener('loginCompleted', RoomsService.updateRooms);
   // Initialize socketio when logged in
   eventbus.registerListener('loginCompleted', socket.init);
   // Update user location when logged in
@@ -29,8 +31,7 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
     });
   });
   eventbus.registerListener('roomMessage', function(data) {
-    console.log(data);
-    alert('Message received: ' + JSON.stringify(data));
+    // save to db
   });
   eventbus.registerListener('letterReceived', function(data) {
     $ionicPopup.confirm({

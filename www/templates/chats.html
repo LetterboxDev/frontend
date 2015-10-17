@@ -5,7 +5,7 @@
         <img class="chat-profile-pic" ng-src="{{ chat.profile_pic }}">
         <h2 class="chat-from">{{chat.from}}</h2>
         <p class="chat-last-message">{{chat.last_message}}</p>
-        <span class="chat-last-activity">{{chat.last_activity}}</span>
+        <span am-time-ago="chat.last_activity" class="chat-last-activity"></span>
       </ion-item>
     </ion-list>
   </ion-content>

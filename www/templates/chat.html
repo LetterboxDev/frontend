@@ -2,34 +2,35 @@
   <ion-content>
     <ion-list class="messages-list">
       <ion-item ng-repeat="message in messages" class="item">
-        <div ng-if="message.received == true" class="received-msg">
+        <div ng-if="!message.isOwner" class="received-msg">
           <div class="message-data">
             <h2 class="message-from">{{recipient}}</h2>
-            <p class="message-content">{{message.content}}</p>  
+            <p class="message-content">{{message.content}}</p>
           </div>
           <div class="message-meta">
-            <div class="message-timestamp">{{message.timestamp}}</div>
+            <span am-time-ago="message.timestamp" class="message-timestamp"></span>
           </div>
         </div>
-        <div ng-if="message.received != true" class="sent-msg">
+        <div ng-if="message.isOwner" class="sent-msg">
           <div class="message-data">
             <h2 class="message-from">You</h2>
             <p class="message-content">{{message.content}}</p>
           </div>
           <div class="message-meta">
-            <div class="message-timestamp">{{message.timestamp}}</div>
+            <span am-time-ago="message.timestamp" class="message-timestamp"></span>
           </div>
         </div>
       </ion-item>
     </ion-list>
   </ion-content>
   <div class="list enter-message-bar">
-    <div class="item item-input-inset">
-      <label class="item-input-wrapper">
-        <input type="text" placeholder="Message">
-      </label>
-      <a class="button button-small icon ion-paper-airplane">
-      </a>
-    </div>
+      <form ng-submit="sendMessage()">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input ng-model="data.message" type="text" placeholder="Message">
+          </label>
+          <button type="submit" class="button button-small icon ion-paper-airplane"></button>
+        </div>
+      </form>
   </div>
 </ion-view>

@@ -3,8 +3,15 @@ angular.module('letterbox.services')
   var Eventbus = {};
   var listeners = {};
 
+  Eventbus.deregisterAllListeners = function(event) {
+    console.log('deregistered listener: ' + event);
+    if (listeners[event] instanceof Array) {
+      listeners[event] = [];
+    }
+  };
+
   Eventbus.registerListener = function(event, listener) {
-    console.log('registered listener');
+    console.log('registered listener: ' + event);
     if (listeners[event] instanceof Array) {
       listeners[event].push(listener);
     } else {
@@ -13,7 +20,7 @@ angular.module('letterbox.services')
   };
 
   Eventbus.call = function(event, argument) {
-    console.log('called listener');
+    console.log('called listener: ' + event);
     if (listeners[event] instanceof Array) {
       for (var i = 0; i < listeners[event].length; i++) {
         listeners[event][i](argument);
