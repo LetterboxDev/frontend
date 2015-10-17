@@ -2,35 +2,34 @@ angular.module('starter.controllers')
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $ionicModal, $element, $timeout, backend) {
   var previousId = '';
+  var oridomiConfig = {
+    hPanels: 5,
+    ripple:  true,
+    shading: false,
+    perspective: 600,
+    speed: 400,
+    maxAngle: 60,
+    gapNudge: 0
+  };
+
   $scope.cards = [];
 
-  // Initial card load - loads two cards
-  // for (var i=0; i<2; i++) {
-    backend.getMatch(1000)
-      .$promise
-      .then(function(match) {
-        previousId = match.hashedId;
-        $scope.cards.push(createNewCard(match));
+  backend.getMatch(1000)
+    .$promise
+    .then(function(match) {
+      previousId = match.hashedId;
+      $scope.cards.push(createNewCard(match));
 
-        $timeout(function() {
-          selectFirst('.partner-card').removeClass('moving-in');
+      $timeout(function() {
+        selectFirst('.partner-card').removeClass('moving-in');
 
-          $scope.foldedCard = new OriDomi('.partner-card', {
-            hPanels: 5,
-            ripple:  true,
-            shading: false,
-            perspective: 600,
-            speed: 400,
-            maxAngle: 60,
-            gapNudge: 0
-          });
+        $scope.foldedCard = new OriDomi('.partner-card', oridomiConfig);
 
-          $scope.foldedCard.stairs(0, 'top');
+        $scope.foldedCard.stairs(0, 'top');
 
-          registerEventHandler();
-        }, 500);
-      });
-  // }
+        registerEventHandler();
+      }, 500);
+    });
 
   $scope.changeCard = function() {
     selectFirst('.partner-card').addClass('moving-out');
@@ -47,15 +46,7 @@ angular.module('starter.controllers')
           $scope.cards.splice(0, 1);
 
           $timeout(function() {
-            $scope.foldedCard = new OriDomi('.partner-card.moving-in', {
-              hPanels: 5,
-              ripple:  true,
-              shading: false,
-              perspective: 600,
-              speed: 400,
-              maxAngle: 60,
-              gapNudge: 0
-            });
+            $scope.foldedCard = new OriDomi('.partner-card.moving-in', oridomiConfig);
 
             $scope.foldedCard.stairs(0, 'top');
             selectFirst('.partner-card').removeClass('moving-in');
@@ -67,9 +58,7 @@ angular.module('starter.controllers')
   };
 
   $ionicGesture.on('dragend', function(e){
-    var el = (document.getElementsByClassName("oridomi-panel"))[8];
-
-    var st = window.getComputedStyle(el, null);
+    var st = window.getComputedStyle((document.getElementsByClassName("oridomi-panel"))[8], null);
 
     var tr = st.getPropertyValue("-webkit-transform") ||
              st.getPropertyValue("-moz-transform") ||
@@ -79,8 +68,6 @@ angular.module('starter.controllers')
              "Either no transform set, or browser doesn't do getComputedStyle";
 
     var foldingIndex = (tr.split(','))[5];
-
-    console.log(foldingIndex);
 
     if (foldingIndex <= 0) {
       $scope.changeCard();

@@ -418,6 +418,10 @@ $ios-side-menu-title-height: 120px;
   }
   &.moving-out {
     top: 10px;
+    position: absolute;
+    width: 100vw;
+    height: 710px;
+    z-index: 100;
     -webkit-animation: card-move-out 0.4s linear forwards;
   }
   &.moving-in {
@@ -467,12 +471,14 @@ $ios-side-menu-title-height: 120px;
 
     .card-button {
       $size: 45px;
+      $text-offset: 20px;
       cursor: pointer;
       width: $size;
       height: $size;
       border: 1px solid;
       border-radius: 50%;
       margin: 0px 10px;
+      padding-top: -5px;
       font-size: 13px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
@@ -486,7 +492,8 @@ $ios-side-menu-title-height: 120px;
       -webkit-justify-content: center; /* Safari */
 
       .button-detail {
-        width: $size;
+        width: $size + $text-offset;
+        margin-left: -($text-offset / 2);
         text-align: center;
         @include uppercase-bold-font();
         position: fixed;
@@ -509,6 +516,7 @@ $ios-side-menu-title-height: 120px;
       width: $size;
       height: $size;
       .button-detail {
+        margin-left: 0;
         margin-top: 28px;
         width: $size;
       }
