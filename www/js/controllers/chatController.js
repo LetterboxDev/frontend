@@ -9,11 +9,14 @@ angular.module('starter.controllers')
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
     if (message.RoomHash === $scope.roomHash) {
+      var isOwner = message.sender === window.localStorage.getItem('hashedId');
       $scope.messages.push({
-        isOwner: message.sender === window.localStorage.getItem('hashedId'),
+        isOwner: isOwner,
         content: message.content,
         timestamp: message.timeSent
       });
+      $scope.$apply();
+      $ionicScrollDelegate.scrollBottom(true);
     }
   });
 
@@ -31,7 +34,6 @@ angular.module('starter.controllers')
   $scope.sendMessage = function() {
     var content = $scope.data.message;
     socket.sendMessage($scope.roomHash, content);
-    $ionicScrollDelegate.scrollBottom(true);
     $scope.data.message = '';
   };
 });
