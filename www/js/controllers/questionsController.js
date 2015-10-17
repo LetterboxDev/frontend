@@ -1,4 +1,4 @@
-angular.module('starter.controllers')
+angular.module('letterbox.controllers')
 
 .controller('QuestionsCtrl', function($scope, backend) {
   $scope.closeQuestionModal = function() {

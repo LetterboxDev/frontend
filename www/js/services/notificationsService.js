@@ -1,4 +1,4 @@
-angular.module('starter.services')
+angular.module('letterbox.services')
 
 .service('NotificationsService', function($q, backend) {
   function convertLetterToNotif(letter) {

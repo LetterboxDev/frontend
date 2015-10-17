@@ -1,4 +1,4 @@
-angular.module('starter.controllers')
+angular.module('letterbox.controllers')
 
 .controller('OnboardingCtrl', function($scope, $state, $timeout, Facebook, $cordovaOauth, backend, eventbus) {
 
@@ -84,7 +84,7 @@ angular.module('starter.controllers')
       console.log("Couldn't retrive questions");
     });
   }
-  
+
   $scope.getNewQn = function(question) {
     var qnIds = $scope.questions.map(function(qn){ return qn.id });
     backend.getOneRandomQuestion(qnIds).$promise.then(function(res){
@@ -109,8 +109,8 @@ angular.module('starter.controllers')
         return;
       }
     }
-    
-    var questions = $scope.questions.map(function(qn){ 
+
+    var questions = $scope.questions.map(function(qn){
       return { id: qn.id, answer: qn.answer }
     });
 
