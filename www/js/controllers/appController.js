@@ -18,8 +18,14 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
   eventbus.registerListener('loginCompleted', LocationService.updateLocation);
 
   eventbus.registerListener('roomCreated', function(data) {
-    console.log(data);
-    alert('Room created: ' + JSON.stringify(data));
+    $ionicPopup.confirm({
+      title: data.approverName + ' just started a chat with you!',
+      template: 'Start chatting?'
+    }).then(function(res) {
+      if (res) {
+        // Go to chat $state.go('');
+      }
+    });
   });
   eventbus.registerListener('roomMessage', function(data) {
     console.log(data);
@@ -27,13 +33,13 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
   });
   eventbus.registerListener('letterReceived', function(data) {
     $ionicPopup.confirm({
-     title: 'New Letter Received!',
-     template: 'Proceed to notifications?'
-   }).then(function(res) {
-    if (res) {
-      $state.go('app.notifications');
-    }
-   });
+      title: 'New Letter Received!',
+      template: 'Proceed to notifications?'
+    }).then(function(res) {
+      if (res) {
+        $state.go('app.notifications');
+      }
+    });
   });
   if (window.localStorage.getItem('token')) {
     eventbus.call('loginCompleted');
