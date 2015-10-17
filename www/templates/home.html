@@ -41,7 +41,7 @@
                   </div>
                   <div class="item item-body">
                     <p>{{ card.bio }}</p>
-                    <h3>Mutual Friends</h3>
+                    <h3>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</h3>
                     <h3>Likes</h3>
                   </div>
                   <div class="item item-footer card-buttons">

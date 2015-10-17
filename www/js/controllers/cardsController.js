@@ -77,7 +77,8 @@ angular.module('letterbox.controllers')
       location: Math.floor(match.distance) + 'km',
       bio: match.bio,
       profile_pic: match.pictureMed,
-      questions: match.questions
+      questions: match.questions,
+      mutual_friends_count: match.mutualFriends.summary.total_count
     };
   }
 
