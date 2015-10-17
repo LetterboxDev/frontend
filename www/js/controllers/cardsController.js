@@ -11,13 +11,13 @@ angular.module('letterbox.controllers')
       $scope.cards.push(createNewCard(match));
 
       $timeout(function() {
-        selectFirst('.partner-card').removeClass('moving-in');
+        selectFirst('.profile-card').removeClass('moving-in');
         registerEventHandler();
       }, 400);
     });
 
   $scope.changeCard = function() {
-    selectFirst('.partner-card').addClass('moving-out');
+    selectFirst('.profile-card').addClass('moving-out');
     $timeout($scope.addCard, 100);
   };
 
@@ -33,7 +33,7 @@ angular.module('letterbox.controllers')
 
           $timeout(function() {
             // timeout for moving in animation
-            selectFirst('.partner-card').removeClass('moving-in');
+            selectFirst('.profile-card').removeClass('moving-in');
             registerEventHandler();
           }, 200);
         }, 200);
