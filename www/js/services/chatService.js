@@ -1,6 +1,6 @@
 angular.module('starter.services')
 
-.service('ChatService', function($q) {
+.service('ChatService', function($q, RoomsService) {
   return {
     getRecipientName: function(chatId) {
       var dfd = $q.defer();
