@@ -1,0 +1,199 @@
+.partner-cards {
+  position: fixed;
+}
+
+.partner-card {
+  background-color: $colourBackground;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-transform: scale(1,1);
+  -webkit-animation-fill-mode: forwards;
+  .image {
+    overflow: hidden;
+    img {
+      width: 100%;
+      border-radius: 0px 0px 4px 4px;
+    }
+  }
+  .button {
+    border: none;
+  }
+  &.pop-in-start {
+    -webkit-transform: scale(0,0);
+  }
+  &.pop-in {
+    -webkit-animation: scale(0,0);
+  }
+  &.moving-out {
+    top: 10px;
+    position: absolute;
+    width: 100vw;
+    height: 710px;
+    z-index: 100;
+    -webkit-animation: card-move-out 0.4s linear forwards;
+  }
+  &.moving-in {
+    -webkit-animation: card-move-in 0.4s linear forwards;
+  }
+  .card-image {
+    position: relative;
+  }
+  .item-header {
+    width: 100%;
+    z-index: 5;
+    position: absolute;
+    bottom: 0;
+    opacity: 0.9;
+    border: none;
+    .name {
+      @include uppercase-bold-font();
+    }
+    .location {
+      float: right;
+      font-size: 12px;
+      color: $colourSecondaryText;
+    }
+  }
+  .item-body {
+    p {
+      font-size: 12px;
+      max-width: 240px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin-top: 0;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .card-buttons {
+    border: 0;
+    padding: 3vh 5vh 7vh;
+
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    justify-content: center;
+    -webkit-justify-content: center; /* Safari */
+
+    .card-button {
+      $size: 45px;
+      $text-offset: 20px;
+      cursor: pointer;
+      width: $size;
+      height: $size;
+      border: 1px solid;
+      border-radius: 50%;
+      margin: 0px 10px;
+      padding-top: -5px;
+      font-size: 13px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+      display: flex;
+      display: -webkit-flex; /* Safari */
+      flex-flow: column nowrap;
+      -webkit-flex-flow: column nowrap; /* Safari */
+      align-items: center;
+      -webkit-align-items: center; /* Safari */
+      justify-content: center;
+      -webkit-justify-content: center; /* Safari */
+
+      .button-detail {
+        width: $size + $text-offset;
+        margin-left: -($text-offset / 2);
+        text-align: center;
+        @include uppercase-bold-font();
+        position: fixed;
+        margin-top: 20px;
+        font-size: 9px;
+        color: lighten($colourSubtitle, 8%);
+      }
+    }
+
+    .button-reject {
+      color: $colourPrimary;
+      border-color: lighten($colourPrimary, 15%);
+    }
+
+    .button-profile, .button-back {
+      $size: 65px;
+      color: $colourSecondaryText;
+      border-color: lighten($colourSecondaryText, 15%);
+      font-size: 25px;
+      width: $size;
+      height: $size;
+      .button-detail {
+        margin-left: 0;
+        margin-top: 28px;
+        width: $size;
+      }
+    }
+
+    .button-answer {
+      color: $colourPositive;
+      border-color: lighten($colourPositive, 15%);
+    }
+
+  }
+
+  // For card flip
+  .flipper-container {
+    -webkit-perspective: 1000;
+    &.hover {
+      .flipper {
+        -webkit-transform: rotateY(180deg);
+      }
+    }
+    .flipper {
+      position: relative;
+      -webkit-transition: 0.6s;
+      -webkit-transform-style: preserve-3d;
+    }
+    .front,
+    .back {
+      -webkit-backface-visibility: hidden;
+    }
+    .front {
+      z-index: 2;
+      -webkit-transform: rotateY(0deg);
+    }
+    .back {
+      height: 100%;
+      position: absolute;
+      top: -3%; // This is a hack
+      -webkit-transform: rotateY(180deg);
+      .back-container {
+        height: 100%;
+        position: relative;
+      }
+      .item-image {
+        padding: 20px;
+        img {
+          width: 20%;
+          border-radius: 50%;
+        }
+        .name {
+          padding-top: 10px;
+          @include uppercase-bold-font();
+        }
+      }
+      .item-body {
+        p {
+          max-width: 100%;
+          font-size: 14px;
+          overflow: visible;
+          white-space: normal;
+          text-overflow: visible;
+        }
+      }
+      .item-footer {
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+      }
+    }
+  }
+}
+

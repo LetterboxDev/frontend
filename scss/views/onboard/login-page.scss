@@ -1,0 +1,28 @@
+.login-page {
+  background-color: $colourPrimary;
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  align-items: center;
+  -webkit-align-items: center; /* Safari */
+  justify-content: center;
+  -webkit-justify-content: center; /* Safari */
+
+  .branding {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+
+    img {
+      width: 60vh;
+      max-width: 90vw;
+    }
+  }
+
+  .btn-login {
+    width: 100%;
+  }
+}
+

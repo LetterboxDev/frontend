@@ -1,0 +1,82 @@
+// Default mixins
+@mixin uppercase-bold-font() {
+  font-weight: bold;
+  font-family: "Montserrat";
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+// Profile card mixins
+@keyframes card-move-out {
+  100% {
+    transform: translateY(-600px);
+  }
+}
+
+@keyframes card-move-in {
+  0% {
+    transform: scale(0, 0);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+// Chat messages mixins
+@mixin message($sent-or-received) {
+  padding: 10px 15px;
+  background-color: white;
+  max-width: 70vw;
+  border-radius: 5px;
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  flex-flow: row nowrap;
+  -webkit-flex-flow: row nowrap; /* Safari */
+
+  @if $sent-or-received == sent {
+    align-self: flex-end;
+    -webkit-align-self: flex-end;
+  }
+
+  &:after {
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: 10px;
+    @if $sent-or-received == sent {
+      right: -10px;
+      margin-left: 15px;
+      border-left-color: white;
+    } @else if $sent-or-received == received {
+      left: -10px;
+      margin-right: 15px;
+      border-right-color: white;
+    }
+  }
+
+  .message-data {
+    .message-from {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      color: $colourSecondaryText;
+    }
+    .message-content {
+      color: $colourPrimaryText;
+    }
+  }
+  .message-meta {
+    padding-left: 15px;
+    align-self: flex-end;
+    -webkit-align-self: flex-end;
+    .message-timestamp {
+      color: $colourSubtitle;
+      font-size: 12px;
+    }
+  }
+}

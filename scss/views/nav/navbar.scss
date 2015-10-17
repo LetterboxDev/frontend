@@ -1,0 +1,52 @@
+// Navbar styles
+.nav-bar-block {
+  .bar-header {
+    background-color: $colourPrimary;
+    height: $nav-bar-height !important;
+  }
+
+  .bar.bar-stable {
+    .title, .button {
+      color: white;
+    }
+    .title {
+      top: 3px;
+      @include uppercase-bold-font();
+      font-size: 17px;
+    }
+    .button.button-icon.button-clear, .icon {
+      &:before {
+        font-size: 22px;
+      }
+
+      max-height: $nav-bar-height;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    .notification-bubble {
+      border-radius: 40px; // make it circle
+      width: 18px;
+      height: 18px;
+      background-color: $colourPositive;
+      text-align: center;
+      color: white;
+      font-size: 10px;
+      padding-bottom: 2px;
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      z-index: 1;
+      cursor: pointer;
+    }
+  }
+}
+
+// For iOS
+.platform-ios {
+  .nav-bar-block {
+    .bar-header {
+      height: $nav-bar-height + $ios-status-bar-height !important;
+    }
+  }
+}
+
