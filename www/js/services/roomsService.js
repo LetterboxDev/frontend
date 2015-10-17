@@ -14,6 +14,17 @@ angular.module('starter.services')
     return null;
   };
 
+  RoomsService.getLatestRoomInfo = function(hash) {
+    var deferred = $q.defer();
+    if (!window.cordova && !DbService.isInitialized()) {
+      backend.getSingleRoom(hash).$promise
+      .then(function(room) {
+        deferred.resolve(room);
+      });
+    }
+    return deferred.promise;
+  };
+
   RoomsService.updateRooms = function() {
     if (!window.cordova && !DbService.isInitialized()) {
       backend.getRooms().$promise.then(function(rooms) {
