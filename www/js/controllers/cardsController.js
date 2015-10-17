@@ -78,7 +78,7 @@ angular.module('letterbox.controllers')
       bio: match.bio,
       profile_pic: match.pictureMed,
       questions: match.questions,
-      mutual_friends_count: match.mutualFriends.summary.total_count
+      mutual_friends_count: (typeof match.mutualFriends === 'undefined') ? 'unknown' : match.mutualFriends.summary.total_count
     };
   }
 
