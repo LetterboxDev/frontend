@@ -1,27 +1,24 @@
 angular.module('starter.controllers')
 
-.controller('ChatsCtrl', function($scope, $state, backend) {
+.controller('ChatsCtrl', function($scope, $state, RoomsService, eventbus) {
   $scope.chats = [];
 
-  backend.getRooms().$promise.then(function(res) {
-    res.forEach(function(chat) {
-      var partnerId = (chat.user1 === window.localStorage.getItem('hashedId')) ? chat.user2 : chat.user1;
-      backend.getOtherUser(partnerId).$promise.then(function(res) {
-        var newChat = {
-          hash: chat.hash,
-          from: res.firstName,
-          profile_pic: res.pictureThumb,
-          last_message: "I'm hungry",
-          last_activity: "1h"
-        };
-        $scope.chats.push(newChat);
-      }, function(err) {
-
-      });
-
-    });
-  }, function(err) {
-
-  });
+  function updateRooms(rooms) {
+    var temp = [];
+    for (var i = 0; i < rooms.length; i++) {
+      var room = rooms[i];
+      var newChat = {
+        hash: room.hash,
+        from: room.userName,
+        profile_pic: room.thumbnail,
+        last_message: "I'm hungry",
+        last_activity: "1h"
+      };
+      temp.push(newChat);
+    }
+    $scope.chats = temp;
+  }
+  RoomsService.getRooms().then(updateRooms, function(err) {});
+  eventbus.registerListener('roomsUpdated', updateRooms);
 });
 

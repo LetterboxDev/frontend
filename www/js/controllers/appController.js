@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
 
-.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService) {
+.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService, DbService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -10,6 +10,8 @@ angular.module('starter.controllers', ['ionic.contrib.ui.cards'])
   //});
 
   // Eventbus for loose coupling of components
+  // Initialize DbService when logged in
+  eventbus.registerListener('loginCompleted', DbService.init);
   // Initialize socketio when logged in
   eventbus.registerListener('loginCompleted', socket.init);
   // Update user location when logged in

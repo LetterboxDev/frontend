@@ -18,6 +18,8 @@
 
 `cordova plugin add org.apache.cordova.geolocation`
 
+`cordova plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git`
+
 `cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git`
 
 `ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git`
