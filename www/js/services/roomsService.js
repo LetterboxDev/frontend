@@ -12,7 +12,7 @@ angular.module('starter.services')
       if (roomsCache[i].hash === hash) return roomsCache[i];
     }
     return null;
-  }
+  };
 
   RoomsService.updateRooms = function() {
     if (!window.cordova && !DbService.isInitialized()) {

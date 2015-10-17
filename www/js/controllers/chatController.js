@@ -9,12 +9,7 @@ angular.module('starter.controllers')
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
     if (message.RoomHash === $scope.roomHash) {
-      var isOwner = message.sender === window.localStorage.getItem('hashedId');
-      $scope.messages.push({
-        isOwner: isOwner,
-        content: message.content,
-        timestamp: message.timeSent
-      });
+      $scope.messages.push(ChatService.formatMessage(message));
       $scope.$apply();
       $ionicScrollDelegate.scrollBottom(true);
     }
