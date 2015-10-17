@@ -1,4 +1,4 @@
-angular.module('starter.controllers')
+angular.module('letterbox.controllers')
 
 .controller('ChatCtrl', function($scope, recipient, messages) {
   $scope.recipient = recipient;

@@ -1,4 +1,4 @@
-angular.module('starter.controllers')
+angular.module('letterbox.controllers')
 
 .controller('CardCtrl', function($scope, $ionicSwipeCardDelegate) {
   $scope.goAway = function() {

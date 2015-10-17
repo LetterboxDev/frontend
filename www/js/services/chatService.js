@@ -1,4 +1,4 @@
-angular.module('starter.services')
+angular.module('letterbox.services')
 
 .service('ChatService', function($q) {
   return {

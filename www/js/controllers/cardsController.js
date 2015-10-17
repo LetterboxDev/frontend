@@ -1,4 +1,4 @@
-angular.module('starter.controllers')
+angular.module('letterbox.controllers')
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $ionicModal, $element, $timeout, backend) {
   var previousId = '';

@@ -1,4 +1,4 @@
-angular.module('starter.services')
+angular.module('letterbox.services')
 
 .service('DbService', function($q, $window, socket, backend, eventbus) {
   var db = {isInitialized: false};
