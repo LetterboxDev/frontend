@@ -140,6 +140,12 @@ angular.module('starter.services')
       params: {
         letterbox_token: '@token'
       }
+    },
+    rejectLetter: {
+      method: 'DELETE',
+      params: {
+        letterbox_token: '@token'
+      }
     }
   });
 
@@ -244,7 +250,7 @@ angular.module('starter.services')
     handler.token = token;
     handler.letterId = letterHash;
     return handler.$readLetter(successPromise, errorPromise);
-  }
+  };
 
   backend.approveLetter = function(letterHash, successPromise, errorPromise) {
     var token = getToken();
@@ -252,7 +258,15 @@ angular.module('starter.services')
     handler.token = token;
     handler.letterId = letterHash;
     return handler.$approveLetter(successPromise, errorPromise);
-  }
+  };
+
+  backend.rejectLetter = function(letterHash, successPromise, errorPromise) {
+    var token = getToken();
+    handler = new singleLetterHandler();
+    handler.token = token;
+    handler.letterId = letterHash;
+    return handler.$rejectLetter(successPromise, errorPromise);
+  };
 
   return backend;
 });
