@@ -87,32 +87,11 @@ angular.module('starter.controllers')
   });
 
   $scope.openQuestionModal = function() {
-    console.log($scope.cards[0]);
     $scope.modal.show();
   };
 
   $scope.closeQuestionModal = function() {
     $scope.modal.hide();
-  };
-
-  $scope.selectedAnswer = [];
-
-  $scope.updateQuestionAnswer = function(choice, index) {
-    $scope.cards[0].questions[index].answer = false;
-    $scope.selectedAnswer[index] = 0;
-    if (choice === 1) {
-      $scope.selectedAnswer[index] = 1
-      $scope.cards[0].questions[index].answer = true;
-    }
-  };
-
-  $scope.submitQuestionAnswer = function() {
-    if ($scope.selectedAnswer.length !== 5) {
-      console.log('Error, fill in all answers first.');
-    } else {
-      backend.sendALetter($scope.cards[0].hashedId, $scope.cards[0].questions);
-      $scope.closeQuestionModal();
-    }
   };
 
   /**
@@ -123,10 +102,9 @@ angular.module('starter.controllers')
       hashedId: match.hashedId,
       name: match.firstName,
       age: match.age,
-      location: match.location,
+      location: Math.floor(match.distance) + 'km',
       bio: match.bio,
       profile_pic: match.pictureMed,
-      distance: match.distance,
       questions: match.questions
     };
   }
