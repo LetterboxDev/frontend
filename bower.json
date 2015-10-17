@@ -14,7 +14,6 @@
     "ionic-ion-swipe-cards": "*",
     "angular-facebook": "~0.2.3",
     "angular-resource": "~1.4.7",
-    "oridomi": "~1.1.5",
     "angular-moment": "~0.10.3"
   }
 }
