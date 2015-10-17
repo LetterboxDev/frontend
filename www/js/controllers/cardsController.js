@@ -1,8 +1,7 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $ionicGesture, $ionicModal, $element, $timeout, backend) {
+.controller('CardsCtrl', function($scope, $ionicScrollDelegate, $ionicGesture, $ionicModal, $element, $timeout, backend) {
   var previousId = '';
-
   $scope.cards = [];
 
   backend.getMatch(1000)
@@ -41,24 +40,13 @@ angular.module('letterbox.controllers')
       });
   };
 
-  // $ionicGesture.on('dragend', function(e){
-  //   var st = window.getComputedStyle((document.getElementsByClassName("oridomi-panel"))[8], null);
+  $ionicGesture.on('dragend', function(e) {
+    var draggedDistance = $ionicScrollDelegate.getScrollPosition().top;
 
-  //   var tr = st.getPropertyValue("-webkit-transform") ||
-  //            st.getPropertyValue("-moz-transform") ||
-  //            st.getPropertyValue("-ms-transform") ||
-  //            st.getPropertyValue("-o-transform") ||
-  //            st.getPropertyValue("transform") ||
-  //            "Either no transform set, or browser doesn't do getComputedStyle";
-
-  //   var foldingIndex = (tr.split(','))[5];
-
-  //   if (foldingIndex <= 0) {
-  //     $scope.changeCard();
-  //   } else {
-  //     $scope.foldedCard.stairs(0, 'top');
-  //   }
-  // }, $element);
+    if (draggedDistance >= 200) {
+      $scope.changeCard();
+    }
+  }, $element);
 
   /**
    * Modal Logic
