@@ -16,6 +16,7 @@ angular.module('starter.services')
   var questionsPath = '/questions';
   var oneQuestionPath = '/question';
   var roomsPath = '/rooms';
+  var oneRoomPath = '/room/:roomId';
   var roomMessagePath = '/rooms/:roomId';
   var lettersPath = '/letters';
   var singleLetterPath = '/letters/:letterId';
@@ -99,6 +100,12 @@ angular.module('starter.services')
     get: {
       method: 'GET',
       isArray: true
+    }
+  });
+
+  var singleRoomGetter = $resource(URL.concat(oneRoomPath), {roomId: '@roomId'}, {
+    get: {
+      method: 'GET'
     }
   });
 
@@ -220,10 +227,15 @@ angular.module('starter.services')
     return roomsGetter.get({letterbox_token: token});
   };
 
+  backend.getSingleRoom = function(roomHash) {
+    var token = getToken();
+    return singleRoomGetter.get({letterbox_token: token, roomId: roomHash})
+  };
+
   backend.getRoomMessages = function(roomHash, since) {
     var token = getToken();
-    return roomMessageGetter.get({roomId: roomHash, since: since});
-  }
+    return roomMessageGetter.get({letterbox_token: token, roomId: roomHash, since: since});
+  };
 
   backend.getOtherUser = function(userId) {
     var token = getToken();
