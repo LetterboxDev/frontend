@@ -89,7 +89,7 @@ angular.module('starter.services')
     return deferred.promise;
   }
 
-  function updateRoomsInDb() {
+  DbService.updateRooms = function() {
     backend.getRooms().$promise.then(function(rooms) {
       rooms.forEach(function(room) {
         DbService.addRoom(room.hash, room.userId, room.userName, room.thumbnail, room.profilePicture).then(function(success) {
@@ -97,13 +97,13 @@ angular.module('starter.services')
         });
       });
     });
-  }
+  };
 
   DbService.getRooms = function() {
     var deferred = $q.defer();
     checkInit(deferred);
     if (socket.isConnected()) {// Is connected to Internet and backend is awake
-      updateRoomsInDb();
+      DbService.updateRooms();
     }
     getRoomsFromDb().then(deferred.resolve);
     return deferred.promise;
