@@ -40,6 +40,7 @@ angular.module('letterbox.controllers')
     $scope.chats.sort(function(a, b) {
       return b.last_activity.getTime() - a.last_activity.getTime();
     });
+    $scope.$apply();
   });
 });
 
