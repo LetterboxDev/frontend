@@ -17,6 +17,12 @@ angular.module('letterbox.services')
       IOContainer.socketio = io.connect(URL, {
         'query': 'token=' + token
       });
+      IOContainer.socketio.on('connect', function() {
+        eventbus.call('socketConnected');
+      });
+      IOContainer.socketio.on('disconnect', function() {
+        eventbus.call('socketDisconnected');
+      });
       IOContainer.socketio.on('roomCreated', function(data) {
         eventbus.call('roomCreated', data);
       });
