@@ -8,6 +8,16 @@ angular.module('letterbox.services')
         deferred.resolve(profile);
       });
       return deferred.promise;
+    },
+
+    getNewQuestion: function(qnIds) {
+      var deferred = $q.defer();
+      backend.getOneRandomQuestion(qnIds).$promise.then(function(qn){
+        deferred.resolve(qn);
+      }, function(err){
+        deferred.resolve(null);
+      });
+      return deferred.promise;
     }
   }
 });
