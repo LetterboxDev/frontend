@@ -18,6 +18,26 @@ angular.module('letterbox.services')
         deferred.resolve(null);
       });
       return deferred.promise;
+    },
+
+    updateBio: function(bio) {
+      var deferred = $q.defer();
+      backend.updateUserBio(bio, function(res){
+        deferred.resolve(res);
+      }, function(err){
+        deferred.resolve(null);
+      });
+      return deferred.promise;
+    },
+
+    updateQuestions: function(questions) {
+      var deferred = $q.defer();
+      backend.setQuestionsAndAnswers(questions, function(res){
+        deferred.resolve(res);
+      }, function(err){
+        deferred.resolve(null);
+      });
+      return deferred.promise;
     }
   }
 });

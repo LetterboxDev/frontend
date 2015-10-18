@@ -2,7 +2,6 @@ angular.module('letterbox.controllers')
 
 .controller('ProfileCtrl', function($scope, profile, backend, ProfileService, eventbus) {
   $scope.profile = profile;
-  console.log(profile);
 
   $scope.getNewQn = function(oldQn) {
     var qnIds = $scope.profile.questions.map(function(qn){ return qn.id });
@@ -23,6 +22,34 @@ angular.module('letterbox.controllers')
   }
 
   $scope.updateProfile = function() {
-    
+    if (isBioValid()) {
+      ProfileService.updateBio($scope.profile.bio);
+    } else {
+      console.log('Enter a bio');
+    }
+
+    if (hasAnsweredAllQuestions()) {
+      var questions = $scope.profile.questions.map(function(qn){
+        return { id: qn.id, answer: qn.answer }
+      });
+
+      ProfileService.updateQuestions(questions);
+    } else {
+      console.log("Answer all questions");
+    }
   }
+
+  function isBioValid() {
+    return $scope.profile.bio.length > 0;
+  }
+
+  function hasAnsweredAllQuestions() {
+    for (var i = 0; i < 5; i++) {
+      if (typeof $scope.profile.questions[i].answer === 'undefined') {
+        return false;
+      }
+    }
+    return true;
+  }
+
 });
