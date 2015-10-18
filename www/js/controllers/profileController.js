@@ -1,7 +1,11 @@
 angular.module('letterbox.controllers')
 
-.controller('ProfileCtrl', function($scope, profile, ProfileService, $ionicPopup) {
+.controller('ProfileCtrl', function($scope, $state, $ionicHistory, $ionicPopup, profile, ProfileService) {
   $scope.profile = profile;
+
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
 
   $scope.getNewQn = function(oldQn) {
     var qnIds = $scope.profile.questions.map(function(qn){ return qn.id });
@@ -41,7 +45,9 @@ angular.module('letterbox.controllers')
     }
 
     if (errors.length > 0) {
-      showAlert(errors.join(" & "));
+      showError(errors.join(" & "));
+    } else {
+      showSuccess();
     }
   }
 
@@ -58,14 +64,26 @@ angular.module('letterbox.controllers')
     return true;
   }
 
-  function showAlert(title) {
+  function showError(title) {
     $ionicPopup.alert({
       title: title,
-      cssClass: "profile-update-error",
+      cssClass: "profile-alert",
       okType: "button-stable"
     }).then(function(res) {
     });  
   }
-  
 
+  function showSuccess() {
+    $ionicPopup.confirm({
+      title: "Your profile has been updated!",
+      cssClass: "profile-alert",
+      okType: "button-positive",
+      okText: "Home"
+    }).then(function(res) {
+      if (res) {
+        $state.go('app.home');
+      }
+    });      
+  }
+  
 });
