@@ -24,13 +24,14 @@
     </ion-list>
   </ion-content>
   <div class="list enter-message-bar">
-      <form ng-submit="sendMessage()">
-        <div class="item item-input-inset">
-          <label class="item-input-wrapper">
-            <input ng-model="data.message" type="text" placeholder="Message">
-          </label>
-          <button type="submit" class="button button-small icon ion-paper-airplane"></button>
-        </div>
-      </form>
+    <form ng-submit="sendMessage()">
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <textarea msd-elastic ng-model="data.message" type="text" placeholder="Message" maxlength="2000">
+          </textarea>
+        </label>
+        <button type="submit" class="button button-small icon ion-paper-airplane"></button>
+      </div>
+    </form>
   </div>
 </ion-view>

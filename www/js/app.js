@@ -1,4 +1,4 @@
-angular.module('letterbox', ['ionic', 'letterbox.controllers', 'ngResource', 'letterbox.services', 'letterbox.directives', 'facebook', 'ngCordova', 'angularMoment'])
+angular.module('letterbox', ['ionic', 'letterbox.controllers', 'ngResource', 'letterbox.services', 'letterbox.directives', 'facebook', 'ngCordova', 'angularMoment', 'monospaced.elastic'])
 
 .run(function($ionicPlatform, $rootScope) {
   $rootScope.$on("$stateChangeError", console.log.bind(console));
