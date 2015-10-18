@@ -1,7 +1,32 @@
 angular.module('letterbox.services')
 
-.service('ChatService', function($q, RoomsService, DbService, backend) {
+.service('ChatService', function($q, RoomsService, DbService, backend, eventbus) {
   var ChatService = {};
+
+  function insertMessageIntoDb(message) {
+    DbService.addMessage(message.RoomHash, message.sender, message.content, message.timeSent);
+  };
+
+  ChatService.init = function() {
+    if (window.cordova && DbService.isInitialized()) {
+      eventbus.registerListener('roomMessage', function(roomMessage) {
+        insertMessageIntoDb(roomMessage.message);
+      });
+    }
+  };
+
+  ChatService.sync = function() {
+    if (window.cordova && DbService.isInitialized()) {
+      DbService.getLatestTimeSent().then(function(latestTime) {
+        backend.getMessages(latestTime).$promise
+        .then(function(messages) {
+          messages.forEach(function(message) {
+            insertMessageIntoDb(message);
+          });
+        });
+      });
+    }
+  };
 
   ChatService.formatMessage = function(message) {
     return {
@@ -26,7 +51,7 @@ angular.module('letterbox.services')
 
   ChatService.getMessagesFromBackend = function(chatId) {
     var dfd = $q.defer();
-    if (!window.cordova) {
+    if (!window.cordova || !DbService.isInitialized()) {
       backend.getRoomMessages(chatId).$promise
       .then(function(rawMessages) {
         var messages = [];
@@ -39,7 +64,17 @@ angular.module('letterbox.services')
         dfd.resolve(messages);
       });
     } else {
-
+      DbService.getRoomMessages(chatId)
+      .then(function(rawMessages) {
+        var messages = [];
+        for (var i = 0; i < rawMessages.length; i++) {
+          messages.push(ChatService.formatMessage(rawMessages[i]));
+        }
+        messages.sort(function(a, b) {
+          return a.timestamp - b.timestamp;
+        });
+        dfd.resolve(messages);
+      });
     }
     return dfd.promise;
   };

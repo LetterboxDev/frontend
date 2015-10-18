@@ -15,6 +15,7 @@ angular.module('letterbox.services')
   var matchesPath = '/matches';
   var questionsPath = '/questions';
   var oneQuestionPath = '/question';
+  var messagesPath = '/messages';
   var roomsPath = '/rooms';
   var oneRoomPath = '/room/:roomId';
   var roomMessagePath = '/rooms/:roomId';
@@ -99,6 +100,13 @@ angular.module('letterbox.services')
   var singleQuestionGetter = $resource(URL.concat(oneQuestionPath), {}, {
     get: {
       method: 'GET'
+    }
+  });
+
+  var messagesGetter = $resource(URL.concat(messagesPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
     }
   });
 
@@ -231,6 +239,11 @@ angular.module('letterbox.services')
     handler.token = token;
     handler.questions = questions;
     return handler.$updateQuestions(successPromise, errorPromise);
+  };
+
+  backend.getMessages = function(since) {
+    var token = getToken();
+    return messagesGetter.get({letterbox_token: token, since: since});
   };
 
   backend.getRooms = function() {

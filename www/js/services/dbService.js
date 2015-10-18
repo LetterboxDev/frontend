@@ -15,24 +15,25 @@ angular.module('letterbox.services')
   DbService.init = function() {
     if (window.cordova) {
       document.addEventListener("deviceready", function() {
-        db.sqlite = $window.sqlitePlugin.openDatabase({name: 'letterbox.db'});
+        db.sqlite = $window.sqlitePlugin.openDatabase({name: 'letterbox.db', createFromLocation: 1});
         db.sqlite.transaction(function(tx) {
-          tx.executeSql('CREATE TABLE IF NOT EXISTS rooms (hash CHAR(32) PRIMARY KEY, userId CHAR(32) NOT NULL, userName VARCHAR(256) NOT NULL, thumbnail TEXT NOT NULL, profilePicture TEXT NOT NULL)');
-          tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent INT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, PRIMARY KEY (roomHash, sender, timeSent))');
+          tx.executeSql('CREATE TABLE IF NOT EXISTS rooms (hash CHAR(32) PRIMARY KEY, userId CHAR(32) NOT NULL, userName VARCHAR(256) NOT NULL, thumbnail TEXT NOT NULL, profilePicture TEXT NOT NULL, createdAt DATETIME NOT NULL)');
+          tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent BIGINT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, PRIMARY KEY (roomHash, sender, timeSent))');
           db.isInitialized = true;
+          eventbus.call('dbInitialized');
         });
       }, false);
     }
   };
 
-  DbService.addRoom = function(roomHash, userHash, userFirstName, thumbnailPic, mediumPic) {
+  DbService.addRoom = function(roomHash, userHash, userFirstName, thumbnailPic, mediumPic, createdAt) {
     var deferred = $q.defer();
     checkInit(deferred);
 
     db.sqlite.transaction(function(tx) {
       tx.executeSql("SELECT COUNT(*) AS cnt FROM rooms WHERE hash=?", [roomHash], function(tx, res) {
         if (!res.rows.item(0).cnt) {
-          tx.executeSql("INSERT INTO rooms VALUES (?,?,?,?,?)", [roomHash, userHash, userFirstName, thumbnailPic, mediumPic], function(tx, res) {
+          tx.executeSql("INSERT INTO rooms VALUES (?,?,?,?,?,?)", [roomHash, userHash, userFirstName, thumbnailPic, mediumPic, createdAt], function(tx, res) {
             deferred.resolve(res);
           });
         } else {
@@ -50,8 +51,16 @@ angular.module('letterbox.services')
     checkInit(deferred);
 
     db.sqlite.transaction(function(tx) {
-      tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent) VALUES (?,?,?,?)", [roomHash, sender, content, timeSent], function(tx, res) {
-        deferred.resolve(res);
+      tx.executeSql("SELECT COUNT(*) AS cnt FROM messages WHERE roomHash=? AND sender=? AND content=? AND timeSent=?", [roomHash, sender, content, timeSent], function(tx, res) {
+        if (!res.rows.item(0).cnt) {
+          tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent) VALUES (?,?,?,?)", [roomHash, sender, content, timeSent], function(tx, res) {
+            deferred.resolve(res);
+          });
+        } else {
+          deferred.reject({
+            error: 'message already exists'
+          });
+        }
       });
     });
     return deferred.promise;
@@ -63,6 +72,41 @@ angular.module('letterbox.services')
     db.sqlite.transaction(function(tx) {
       tx.executeSql("UPDATE messages SET isRead=1 WHERE roomHash=? AND timeSent<=? ORDER BY timeSent DESC", [roomHash, timeSent], function(tx, res) {
         deferred.resolve(res);
+      });
+    });
+    return deferred.promise;
+  };
+
+  DbService.getSingleRoom = function(roomHash) {
+    var deferred = $q.defer();
+    checkInit(deferred);
+    db.sqlite.transaction(function(tx) {
+      tx.executeSql("SELECT * FROM rooms WHERE hash=?", [roomHash], function(tx, res) {
+        if (res.rows.length > 0) {
+          var row = res.rows.item(0);
+          var room = {
+            hash: row.hash,
+            userId: row.userId,
+            userName: row.userName,
+            thumbnail: row.thumbnail,
+            profilePicture: row.profilePicture,
+            createdAt: row.createdAt,
+            latestMessage: {}
+          };
+          tx.executeSql("SELECT * FROM messages WHERE roomHash=? ORDER BY timeSent DESC LIMIT 1", [roomHash], function(tx, res) {
+            if (res.rows.length > 0) {
+              var row = res.rows.item(0);
+              room.latestMessage.sender = row.sender;
+              room.latestMessage.content = row.content;
+              room.latestMessage.timeSent = row.timeSent;
+            }
+            deferred.resolve(room);
+          });
+        } else {
+          deferred.reject({
+            error: 'room does not exist'
+          });
+        }
       });
     });
     return deferred.promise;
@@ -80,7 +124,8 @@ angular.module('letterbox.services')
             userId: row.userId,
             userName: row.userName,
             thumbnail: row.thumbnail,
-            profilePicture: row.profilePicture
+            profilePicture: row.profilePicture,
+            createdAt: row.createdAt
           });
         }
         deferred.resolve(rooms);
@@ -92,7 +137,7 @@ angular.module('letterbox.services')
   DbService.updateRooms = function() {
     backend.getRooms().$promise.then(function(rooms) {
       rooms.forEach(function(room) {
-        DbService.addRoom(room.hash, room.userId, room.userName, room.thumbnail, room.profilePicture).then(function(success) {
+        DbService.addRoom(room.hash, room.userId, room.userName, room.thumbnail, room.profilePicture, room.createdAt).then(function(success) {
           eventbus.call('roomsUpdated', rooms);
         });
       });
@@ -113,8 +158,18 @@ angular.module('letterbox.services')
     var deferred = $q.defer();
     checkInit(deferred);
     db.sqlite.transaction(function(tx) {
-      tx.executeSql("SELECT * FROM messages WHERE roomHash=? ORDER BY timeSent DESC", [roomHash], function(tx, res) {
-        deferred.resolve(res);
+      tx.executeSql("SELECT * FROM messages WHERE roomHash=? ORDER BY timeSent ASC", [roomHash], function(tx, res) {
+        var messages = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          var row = res.rows.item(i);
+          messages.push({
+            RoomHash: row.roomHash,
+            content: row.content,
+            timeSent: row.timeSent,
+            sender: row.sender
+          });
+        }
+        deferred.resolve(messages);
       });
     });
     return deferred.promise;
@@ -130,6 +185,21 @@ angular.module('letterbox.services')
     });
     return deferred.promise;
   }
+
+  DbService.getLatestTimeSent = function() {
+    var deferred = $q.defer();
+    checkInit(deferred);
+    db.sqlite.transaction(function(tx) {
+      tx.executeSql("SELECT MAX(timeSent) as maxtime FROM messages", [], function(tx, res) {
+        if (res.rows.length > 0) {
+          deferred.resolve(res.rows.item(0).maxtime);
+        } else {
+          deferred.resolve(0);
+        }
+      });
+    });
+    return deferred.promise;
+  };
 
   DbService.getLastestMessage = function(roomHash) {
     var deferred = $q.defer();
