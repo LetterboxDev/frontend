@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('ResponseCtrl', function($scope, $state, $stateParams, backend, NotificationsService, eventbus) {
+.controller('ResponseCtrl', function($scope, $state, $stateParams, $ionicHistory, backend, NotificationsService, eventbus) {
 
   function getNotification() {
     NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
@@ -9,6 +9,10 @@ angular.module('letterbox.controllers')
   }
 
   getNotification();
+
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
 
   $scope.rejectLetter = function(letter) {
     // rejects the letter and refresh notifs
