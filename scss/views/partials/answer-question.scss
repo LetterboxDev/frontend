@@ -43,11 +43,16 @@
       }
 
       &.selected {
-        background-color: $colourPositive;
         color: white;
         font-weight: bold;
       }
-    }
 
+      &.option0.selected {
+        background-color: #FF5467;
+      }
+      &.option1.selected {
+        background-color: #0488CC;
+      }
+    }
   }
 }

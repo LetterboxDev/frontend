@@ -7,10 +7,10 @@
     <div class="questions">
       <div ng-repeat="question in questions" class="question" >
         <button class="btn-randomise button button-small button-dark icon ion-shuffle" ng-click='getNewQn(question)'></button>
-        <div class="option" ng-class="question.answer == 0 ? 'selected' : ''" ng-click="selectOption(question, 0)">
+        <div class="option option0" ng-class="question.answer == 0 ? 'selected' : ''" ng-click="selectOption(question, 0)">
           {{question.option0}}
         </div>
-        <div class="option" ng-class="question.answer == 1 ? 'selected' : ''" ng-click="selectOption(question, 1)">
+        <div class="option option1" ng-class="question.answer == 1 ? 'selected' : ''" ng-click="selectOption(question, 1)">
           {{question.option1}}
         </div>
       </div>
