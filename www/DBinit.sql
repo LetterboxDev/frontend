@@ -3,7 +3,8 @@ CREATE TABLE rooms (
   userId CHAR(32) NOT NULL,
   userName VARCHAR(256) NOT NULL,
   thumbnail TEXT NOT NULL,
-  profilePicture TEXT NOT NULL
+  profilePicture TEXT NOT NULL,
+  createdAt DATETIME NOT NULL
 );
 
 CREATE TABLE messages (
