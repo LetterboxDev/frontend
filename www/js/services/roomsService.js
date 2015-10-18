@@ -16,7 +16,7 @@ angular.module('letterbox.services')
 
   RoomsService.getLatestRoomInfo = function(hash) {
     var deferred = $q.defer();
-    if (!window.cordova && !DbService.isInitialized()) {
+    if (!window.cordova || !DbService.isInitialized()) {
       backend.getSingleRoom(hash).$promise
       .then(function(room) {
         deferred.resolve(room);
@@ -26,7 +26,7 @@ angular.module('letterbox.services')
   };
 
   RoomsService.updateRooms = function() {
-    if (!window.cordova && !DbService.isInitialized()) {
+    if (!window.cordova || !DbService.isInitialized()) {
       backend.getRooms().$promise.then(function(rooms) {
         var res = [];
         rooms.forEach(function(room) {
