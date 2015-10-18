@@ -2,13 +2,14 @@
   .small-profile-pic {
     float: left;
     margin-right: 20px;
+    margin-bottom: 20px;
   }
 
   .bio {
     textarea {
       background-color: $colourBackground;
-      width: 80%;
-      max-width: 80%;
+      width: 75%;
+      max-width: 75%;
       padding: 8px;
     }
   }
