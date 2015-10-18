@@ -87,11 +87,11 @@ angular.module('letterbox.controllers')
   }
 
   function registerEventHandler() {
-    selectFirst('.button-reject').on('touch', function(e) {
+    selectFirst('.button-negative').on('touch', function(e) {
       $scope.changeCard();
     });
 
-    selectFirst('.button-answer').on('touch', function(e) {
+    selectFirst('.button-positive').on('touch', function(e) {
       $scope.openQuestionModal();
     });
   }
