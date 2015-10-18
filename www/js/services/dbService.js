@@ -15,7 +15,7 @@ angular.module('letterbox.services')
   DbService.init = function() {
     if (window.cordova) {
       document.addEventListener("deviceready", function() {
-        db.sqlite = $window.sqlitePlugin.openDatabase({name: 'letterbox.db'});
+        db.sqlite = $window.sqlitePlugin.openDatabase({name: 'letterbox.db', createFromLocation: 1});
         db.sqlite.transaction(function(tx) {
           tx.executeSql('CREATE TABLE IF NOT EXISTS rooms (hash CHAR(32) PRIMARY KEY, userId CHAR(32) NOT NULL, userName VARCHAR(256) NOT NULL, thumbnail TEXT NOT NULL, profilePicture TEXT NOT NULL)');
           tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent BIGINT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, PRIMARY KEY (roomHash, sender, timeSent))');
