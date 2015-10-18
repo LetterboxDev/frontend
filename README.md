@@ -16,7 +16,7 @@
 
 `bower install`
 
-`cordova plugin add org.apache.cordova.geolocation`
+`cordova plugin add cordova-plugin-geolocation`
 
 `cordova plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git`
 
