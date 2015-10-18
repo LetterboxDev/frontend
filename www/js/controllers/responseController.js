@@ -18,6 +18,7 @@ angular.module('letterbox.controllers')
     // rejects the letter and refresh notifs
     backend.rejectLetter(letter.id, function() {
       eventbus.call('letterReceived'); //TODO this triggers an unrelated prompt
+      $state.go('app.notifications');
     });
   };
 
