@@ -40,5 +40,15 @@
   bottom: 0;
   width: 100%;
   z-index: 999;
+  .item-input-wrapper {
+    padding: 8px 10px;
+
+    textarea {
+      max-height: 40vh;
+      width: 100%;
+      background: none;
+      resize: none;
+    }
+  }
 }
 

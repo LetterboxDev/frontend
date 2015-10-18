@@ -25,14 +25,14 @@
 
 // Chat messages mixins
 @mixin message($sent-or-received) {
-  padding: 10px 15px;
+  padding: 10px 8px 5px 15px;
   background-color: white;
   max-width: 70vw;
   border-radius: 5px;
   display: flex;
   display: -webkit-flex; /* Safari */
-  flex-flow: row nowrap;
-  -webkit-flex-flow: row nowrap; /* Safari */
+  flex-flow: column nowrap;
+  -webkit-flex-flow: column nowrap; /* Safari */
 
   @if $sent-or-received == sent {
     align-self: flex-end;
@@ -67,16 +67,16 @@
       color: $colourSecondaryText;
     }
     .message-content {
+      white-space: normal;
       color: $colourPrimaryText;
     }
   }
   .message-meta {
-    padding-left: 15px;
     align-self: flex-end;
     -webkit-align-self: flex-end;
     .message-timestamp {
       color: $colourSubtitle;
-      font-size: 12px;
+      font-size: 10px;
     }
   }
 }
