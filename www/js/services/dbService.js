@@ -20,6 +20,7 @@ angular.module('letterbox.services')
           tx.executeSql('CREATE TABLE IF NOT EXISTS rooms (hash CHAR(32) PRIMARY KEY, userId CHAR(32) NOT NULL, userName VARCHAR(256) NOT NULL, thumbnail TEXT NOT NULL, profilePicture TEXT NOT NULL, createdAt DATETIME NOT NULL)');
           tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent BIGINT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, PRIMARY KEY (roomHash, sender, timeSent))');
           db.isInitialized = true;
+          eventbus.call('dbInitialized');
         });
       }, false);
     }
@@ -84,7 +85,7 @@ angular.module('letterbox.services')
         if (res.rows.length > 0) {
           var row = res.rows.item(0);
           var room = {
-            hash: row.roomHash,
+            hash: row.hash,
             userId: row.userId,
             userName: row.userName,
             thumbnail: row.thumbnail,
@@ -189,9 +190,9 @@ angular.module('letterbox.services')
     var deferred = $q.defer();
     checkInit(deferred);
     db.sqlite.transaction(function(tx) {
-      tx.executeSql("SELECT timeSent FROM messages ORDER BY timeSent DESC LIMIT 1", [roomHash], function(tx, res) {
+      tx.executeSql("SELECT MAX(timeSent) as maxtime FROM messages", [], function(tx, res) {
         if (res.rows.length > 0) {
-          deferred.resolve(res.rows.item(0).timeSent);
+          deferred.resolve(res.rows.item(0).maxtime);
         } else {
           deferred.resolve(0);
         }
