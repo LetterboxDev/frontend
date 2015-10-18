@@ -125,7 +125,7 @@
   // For card flip
   .flipper-container {
     -webkit-perspective: 1000;
-    &.hover {
+    &.flipped {
       .flipper {
         -webkit-transform: rotateY(180deg);
       }
