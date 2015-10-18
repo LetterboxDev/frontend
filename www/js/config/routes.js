@@ -73,6 +73,16 @@ angular.module('letterbox')
     }
   })
 
+  .state('app.response', {
+    url: '/responses/:responseId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/response.html',
+        controller: 'ResponseCtrl'
+      }
+    }
+  })
+
   .state('app.settings', {
     url: '/settings',
     views: {

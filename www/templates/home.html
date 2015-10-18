@@ -6,27 +6,25 @@
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
-                <div class="card-image">
-                  <div class="item item-image">
-                    <img ng-src="{{ card.profile_pic }}" alt="Image" />
-                  </div>
-                  <div class="item item-header">
+                <div class="large-profile-pic-header">
+                  <img ng-src="{{ card.profile_pic }}" alt="Image" />
+                  <div class="item profile-pic-overlay">
                     <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
                   </div>
                 </div>
-                <div class="item item-body">
+                <div class="item card-content">
                   <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
                 </div>
-                <div class="item item-footer card-buttons">
-                  <div class="card-button button-reject">
+                <div class="item card-buttons">
+                  <div class="card-button button-negative">
                     <i class="icon ion-close"></i>
                     <div class="button-detail">skip</div>
                   </div>
-                  <div class="button-flip card-button button-profile">
+                  <div class="card-button button-flip">
                     <i class="icon ion-person"></i>
                     <div class="button-detail">profile</div>
                   </div>
-                  <div class="card-button button-answer">
+                  <div class="card-button button-positive">
                     <i class="icon ion-edit"></i>
                     <div class="button-detail">answer</div>
                   </div>
@@ -35,17 +33,26 @@
 
               <div class="card back" ng-controller="CardCtrl">
                 <div class="back-container">
-                  <div class="item item-image">
+                  <div class="small-profile-pic-header">
                     <img ng-src="{{ card.profile_pic }}" />
-                    <div class="name">{{ card.name }}</div>
+                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span>
                   </div>
-                  <div class="item item-body">
-                    <p>{{ card.bio }}</p>
-                    <h3>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</h3>
-                    <h3>Likes</h3>
+                  <div class="item card-content">
+                    <div class="section">
+                      <h3>bio</h3>
+                      <p>{{ card.bio }}</p>  
+                    </div>
+                    <div class="section">
+                      <h3>mutual friends</h3>
+                      <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
+                    </div>
+                    <div class="section">
+                      <h3>Likes</h3>  
+                    </div>
+                    
                   </div>
-                  <div class="item item-footer card-buttons">
-                    <div class="card-button button-flip button-back">
+                  <div class="item card-buttons">
+                    <div class="card-button button-flip">
                       <i class="icon ion-ios-undo"></i>
                       <div class="button-detail">back</div>
                     </div>
