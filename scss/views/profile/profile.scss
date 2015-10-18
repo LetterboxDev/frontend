@@ -1,8 +1,16 @@
 .my-profile {
-  .card-content textarea {
-    background-color: $colourBackground;
-    width: 100%;
-    padding: 8px;
+  .small-profile-pic {
+    float: left;
+    margin-right: 20px;
+  }
+
+  .bio {
+    textarea {
+      background-color: $colourBackground;
+      width: 80%;
+      max-width: 80%;
+      padding: 8px;
+    }
   }
 
   .questions {

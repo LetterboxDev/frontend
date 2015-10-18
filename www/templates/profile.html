@@ -1,17 +1,16 @@
-<ion-view view-title="Profile">
+<ion-view view-title="{{ profile.firstName }}, {{ profile.age }}">
   <ion-content>
     <div class="profile-card moving-in">
       <div class="flipper-container" flip-card>
         <div class="flipper">
           <div class="my-profile card front">
-            <div class="small-profile-pic-header">
-              <img ng-src="{{ profile.pictureMed }}" alt="Image" />
-              <span class="name">{{ profile.firstName }}</span><span class="age">, {{ profile.age }}</span>
-            </div>
             <div class="item card-content">
               <div class="section">
-                <h3>bio</h3>
-                <textarea placeholder="Add a short bio" rows="3" ng-model="profile.bio" ng-change="onEnterText()"></textarea>
+                <img class="small-profile-pic" ng-src="{{ profile.pictureMed }}" alt="Image" />
+                <div class="bio">
+                  <h3>bio</h3>
+                  <textarea placeholder="Add a short bio" rows="3" ng-model="profile.bio" ng-change="onEnterText()"></textarea>  
+                </div>
               </div>
               <div class="section">
                 <h3>questions</h3>
