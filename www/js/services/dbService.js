@@ -18,7 +18,7 @@ angular.module('letterbox.services')
         db.sqlite = $window.sqlitePlugin.openDatabase({name: 'letterbox.db'});
         db.sqlite.transaction(function(tx) {
           tx.executeSql('CREATE TABLE IF NOT EXISTS rooms (hash CHAR(32) PRIMARY KEY, userId CHAR(32) NOT NULL, userName VARCHAR(256) NOT NULL, thumbnail TEXT NOT NULL, profilePicture TEXT NOT NULL)');
-          tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent INT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, PRIMARY KEY (roomHash, sender, timeSent))');
+          tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent BIGINT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, PRIMARY KEY (roomHash, sender, timeSent))');
           db.isInitialized = true;
         });
       }, false);
@@ -50,8 +50,16 @@ angular.module('letterbox.services')
     checkInit(deferred);
 
     db.sqlite.transaction(function(tx) {
-      tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent) VALUES (?,?,?,?)", [roomHash, sender, content, timeSent], function(tx, res) {
-        deferred.resolve(res);
+      tx.executeSql("SELECT COUNT(*) AS cnt FROM messages WHERE roomHash=? AND sender=? AND content=? AND timeSent=?", [roomHash, sender, content, timeSent], function(tx, res) {
+        if (!res.rows.item(0).cnt) {
+          tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent) VALUES (?,?,?,?)", [roomHash, sender, content, timeSent], function(tx, res) {
+            deferred.resolve(res);
+          });
+        } else {
+          deferred.reject({
+            error: 'message already exists'
+          });
+        }
       });
     });
     return deferred.promise;
@@ -113,8 +121,18 @@ angular.module('letterbox.services')
     var deferred = $q.defer();
     checkInit(deferred);
     db.sqlite.transaction(function(tx) {
-      tx.executeSql("SELECT * FROM messages WHERE roomHash=? ORDER BY timeSent DESC", [roomHash], function(tx, res) {
-        deferred.resolve(res);
+      tx.executeSql("SELECT * FROM messages WHERE roomHash=? ORDER BY timeSent ASC", [roomHash], function(tx, res) {
+        var messages = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          var row = res.rows.item(i);
+          messages.push({
+            RoomHash: row.roomHash,
+            content: row.content,
+            timeSent: row.timeSent,
+            sender: row.sender
+          });
+        }
+        deferred.resolve(messages);
       });
     });
     return deferred.promise;
@@ -130,6 +148,21 @@ angular.module('letterbox.services')
     });
     return deferred.promise;
   }
+
+  DbService.getLatestTimeSent = function() {
+    var deferred = $q.defer();
+    checkInit(deferred);
+    db.sqlite.transaction(function(tx) {
+      tx.executeSql("SELECT timeSent FROM messages ORDER BY timeSent DESC LIMIT 1", [roomHash], function(tx, res) {
+        if (res.rows.length > 0) {
+          deferred.resolve(res.rows.item(0).timeSent);
+        } else {
+          deferred.resolve(0);
+        }
+      });
+    });
+    return deferred.promise;
+  };
 
   DbService.getLastestMessage = function(roomHash) {
     var deferred = $q.defer();
