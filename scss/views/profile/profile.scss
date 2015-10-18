@@ -21,3 +21,16 @@
     }
   }
 }
+
+.profile-update-error {
+  .popup {
+    padding: 15px;
+  }
+  .popup-title {
+    @include uppercase-bold-font();
+    color: $colourPrimaryText;
+  }
+  .popup-body {
+    padding: 15px;
+  }
+}

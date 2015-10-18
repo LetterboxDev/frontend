@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('ProfileCtrl', function($scope, profile, backend, ProfileService, eventbus) {
+.controller('ProfileCtrl', function($scope, profile, ProfileService, $ionicPopup) {
   $scope.profile = profile;
 
   $scope.getNewQn = function(oldQn) {
@@ -22,10 +22,12 @@ angular.module('letterbox.controllers')
   }
 
   $scope.updateProfile = function() {
+    var errors = [];
+
     if (isBioValid()) {
       ProfileService.updateBio($scope.profile.bio);
     } else {
-      console.log('Enter a bio');
+      errors.push("Please enter a bio");
     }
 
     if (hasAnsweredAllQuestions()) {
@@ -35,7 +37,11 @@ angular.module('letterbox.controllers')
 
       ProfileService.updateQuestions(questions);
     } else {
-      console.log("Answer all questions");
+      errors.push("Please answer all questions");
+    }
+
+    if (errors.length > 0) {
+      showAlert(errors.join(" & "));
     }
   }
 
@@ -51,5 +57,15 @@ angular.module('letterbox.controllers')
     }
     return true;
   }
+
+  function showAlert(title) {
+    $ionicPopup.alert({
+      title: title,
+      cssClass: "profile-update-error",
+      okType: "button-stable"
+    }).then(function(res) {
+    });  
+  }
+  
 
 });
