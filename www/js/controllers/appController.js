@@ -18,8 +18,11 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
   eventbus.registerListener('loginCompleted', socket.init);
   // Update user location when logged in
   eventbus.registerListener('loginCompleted', LocationService.updateLocation);
-  // Initialize ChatService when logged in
-  eventbus.registerListener('loginCompleted', ChatService.init);
+
+  // Initialize ChatService when db initialized
+  eventbus.registerListener('dbInitialized', ChatService.init);
+  // Sync database with backend whenever socket is reconnected
+  eventbus.registerListener('dbInitialized', ChatService.sync);
 
   // Sync database with backend whenever socket is reconnected
   eventbus.registerListener('socketConnected', ChatService.sync);
