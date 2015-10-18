@@ -165,6 +165,21 @@
 
   }
 
+  .questions {
+    .question {
+      .option {
+        white-space: normal;
+        flex: 1;
+        cursor: auto;
+      }
+      .option0.selected {
+        background-color: #FF5467;
+      }
+      .option1.selected {
+        background-color: #0488CC;
+      }
+    }
+  }
   // For card flip
   .flipper-container {
     -webkit-perspective: 1000;

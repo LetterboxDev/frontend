@@ -13,12 +13,12 @@
               <div class="item card-content">
                 <div class="section">
                   <h3>responses</h3>
-                  <div class="question-choice" ng-repeat="question in response.questionsAnswers">
-                    <div class="row">
-                      <div class="answer answer-left col" ng-class="{ 'selected' : !question.answer}">
+                  <div class="questions">
+                    <div class="question" ng-repeat="question in response.questionsAnswers">
+                      <div class="option option0" ng-class="{ 'selected' : !question.answer}">
                         {{ question.option0 }}
                       </div>
-                      <div class="answer answer-right col" ng-class="{ 'selected' : question.answer}">
+                      <div class="option option1" ng-class="{ 'selected' : question.answer}">
                         {{ question.option1 }}
                       </div>
                     </div>
