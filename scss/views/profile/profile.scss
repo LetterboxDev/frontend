@@ -1,0 +1,23 @@
+.my-profile {
+  .card-content textarea {
+    background-color: $colourBackground;
+    width: 100%;
+    padding: 8px;
+  }
+
+  .questions {
+    .question {
+      .option {
+        white-space: normal;
+        flex: 1;
+        cursor: pointer;
+      }
+      .option0.selected {
+        background-color: #FF5467;
+      }
+      .option1.selected {
+        background-color: #0488CC;
+      }
+    }
+  }
+}

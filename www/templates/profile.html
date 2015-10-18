@@ -1,41 +1,37 @@
 <ion-view view-title="Profile">
   <ion-content>
-    <div class="profile-cards">
-      <div class="profile-card moving-in">
-        <div class="flipper-container" flip-card>
-          <div class="flipper">
-            <div class="card front">
-              <div class="small-profile-pic-header">
-                <img ng-src="{{ profile.pictureMed }}" alt="Image" />
-                <span class="name">{{ profile.firstName }}</span><span class="age">, {{ profile.age }}</span>
+    <div class="profile-card moving-in">
+      <div class="flipper-container" flip-card>
+        <div class="flipper">
+          <div class="my-profile card front">
+            <div class="small-profile-pic-header">
+              <img ng-src="{{ profile.pictureMed }}" alt="Image" />
+              <span class="name">{{ profile.firstName }}</span><span class="age">, {{ profile.age }}</span>
+            </div>
+            <div class="item card-content">
+              <div class="section">
+                <h3>bio</h3>
+                <textarea placeholder="Add a short bio" rows="3" ng-model="profile.bio" ng-change="onEnterText()"></textarea>
               </div>
-              <div class="item card-content">
-                <div class="section">
-                  <h3>bio</h3>
-                  <p>{{ profile.bio }}</p>  
-                </div>
-                <div class="section">
-                  <h3>questions</h3>
-                  <div class="questions">
-                    <div class="question" ng-repeat="question in profile.questions">
-                      <div class="option option0" ng-class="{ 'selected' : !question.answer}">
-                        {{ question.option0 }}
-                      </div>
-                      <div class="option option1" ng-class="{ 'selected' : question.answer}">
-                        {{ question.option1 }}
-                      </div>
+              <div class="section">
+                <h3>questions</h3>
+                <div class="questions">
+                  <div class="question" ng-repeat="question in profile.questions">
+                    <button class="btn-randomise button button-small button-dark icon ion-shuffle" ng-click='getNewQn(question)'></button>
+                    <div class="option option0" ng-class="question.answer == 0 ? 'selected' : ''" ng-click="selectOption(question, 0)">
+                      {{question.option0}}
+                    </div>
+                    <div class="option option1" ng-class="question.answer == 1 ? 'selected' : ''" ng-click="selectOption(question, 1)">
+                      {{question.option1}}
                     </div>
                   </div>
                 </div>
-                <div class="section">
-                  <h3>Likes</h3>  
-                </div>
               </div>
-              <div class="item card-buttons">
-                <div class="card-button button-positive" ng-click="updateProfile()">
-                  <i class="icon ion-checkmark"></i>
-                  <div class="button-detail">update</div>
-                </div>
+            </div>
+            <div class="item card-buttons">
+              <div class="card-button button-positive" ng-click="updateProfile()">
+                <i class="icon ion-checkmark"></i>
+                <div class="button-detail">update</div>
               </div>
             </div>
           </div>
