@@ -1,5 +1,5 @@
 angular.module('letterbox.controllers')
 
-.controller('ProfileCtrl', function($scope, $state, $timeout, Facebook, $cordovaOauth, backend, eventbus) {
-
+.controller('ProfileCtrl', function($scope, profile, backend, eventbus) {
+  $scope.profile = profile;
 });

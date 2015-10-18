@@ -90,6 +90,11 @@ angular.module('letterbox')
         templateUrl: 'templates/profile.html',
         controller: 'ProfileCtrl'
       }
+    },
+    resolve: {
+      profile: function(ProfileService) {
+        return ProfileService.getProfile();
+      }
     }
   })
 
