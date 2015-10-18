@@ -31,8 +31,8 @@
   border-radius: 5px;
   display: flex;
   display: -webkit-flex; /* Safari */
-  flex-flow: column nowrap;
-  -webkit-flex-flow: column nowrap; /* Safari */
+  flex-flow: row wrap;
+  -webkit-flex-flow: row wrap; /* Safari */
 
   @if $sent-or-received == sent {
     align-self: flex-end;
@@ -61,7 +61,7 @@
 
   .message-data {
     .message-from {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: bold;
       letter-spacing: 0.5px;
       color: $colourSecondaryText;
@@ -72,9 +72,13 @@
     }
   }
   .message-meta {
+    margin-left: 10px;
+    flex-grow: 1;
     align-self: flex-end;
     -webkit-align-self: flex-end;
+    
     .message-timestamp {
+      text-align: right;
       color: $colourSubtitle;
       font-size: 10px;
     }
