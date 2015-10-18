@@ -33,7 +33,7 @@
     -webkit-animation: card-move-out 0.2s linear forwards;
   }
   &.moving-in {
-    -webkit-animation: card-move-in 0.4s linear forwards;
+    -webkit-animation: card-move-in 0.4s ease forwards;
   }
   .card-image {
     position: relative;
