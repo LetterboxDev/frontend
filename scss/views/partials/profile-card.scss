@@ -142,6 +142,28 @@
     position: absolute;
     bottom: 0;
   }
+
+  .small-profile-pic-header {
+    padding: 20px;
+    display: inline-block;
+    img {
+      width: 15%;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+    .name, .age {
+      color: $colourPrimaryText;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 16px;
+    }
+    .name {
+      margin-left: 15px;
+      @include uppercase-bold-font();
+    }
+
+  }
+
   // For card flip
   .flipper-container {
     -webkit-perspective: 1000;
@@ -172,32 +194,7 @@
         height: 100%;
         position: relative;
       }
-      .item-image {
-        padding: 20px;
-        img {
-          width: 20%;
-          border-radius: 50%;
-        }
-        .name {
-          padding-top: 10px;
-          @include uppercase-bold-font();
-        }
-      }
-      .item-body {
-        p {
-          max-width: 100%;
-          font-size: 14px;
-          overflow: visible;
-          white-space: normal;
-          text-overflow: visible;
-        }
-      }
-      .item-footer {
-        width: 100%;
-        text-align: center;
-        position: absolute;
-        bottom: 0;
-      }
+      
     }
   }
 }
