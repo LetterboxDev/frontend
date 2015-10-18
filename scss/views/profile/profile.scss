@@ -1,0 +1,45 @@
+.my-profile {
+  .small-profile-pic {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+
+  .bio {
+    textarea {
+      background-color: $colourBackground;
+      width: 75%;
+      max-width: 75%;
+      padding: 8px;
+    }
+  }
+
+  .questions {
+    .question {
+      .option {
+        white-space: normal;
+        flex: 1;
+        cursor: pointer;
+      }
+      .option0.selected {
+        background-color: #FF5467;
+      }
+      .option1.selected {
+        background-color: #0488CC;
+      }
+    }
+  }
+}
+
+.profile-alert {
+  .popup {
+    padding: 15px;
+  }
+  .popup-title {
+    @include uppercase-bold-font();
+    color: $colourPrimaryText;
+  }
+  .popup-body {
+    padding: 15px;
+  }
+}

@@ -151,11 +151,6 @@
   .small-profile-pic-header {
     padding: 20px;
     display: inline-block;
-    img {
-      width: 15%;
-      border-radius: 50%;
-      vertical-align: middle;
-    }
     .name, .age {
       color: $colourPrimaryText;
       display: inline-block;
@@ -166,7 +161,12 @@
       margin-left: 15px;
       @include uppercase-bold-font();
     }
+  }
 
+  .small-profile-pic {
+    width: 15%;
+    border-radius: 50%;
+    vertical-align: middle;
   }
 
   .questions {

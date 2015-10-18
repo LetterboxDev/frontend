@@ -83,6 +83,21 @@ angular.module('letterbox')
     }
   })
 
+  .state('app.profile', {
+    url: '/profile',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/profile.html',
+        controller: 'ProfileCtrl'
+      }
+    },
+    resolve: {
+      profile: function(ProfileService) {
+        return ProfileService.getProfile();
+      }
+    }
+  })
+
   .state('app.settings', {
     url: '/settings',
     views: {
