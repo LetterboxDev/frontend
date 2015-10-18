@@ -21,6 +21,11 @@ angular.module('letterbox.services')
       .then(function(room) {
         deferred.resolve(room);
       });
+    } else {
+      DbService.getSingleRoom(hash)
+      .then(function(room) {
+        deferred.resolve(room);
+      })
     }
     return deferred.promise;
   };
