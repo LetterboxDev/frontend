@@ -110,7 +110,7 @@
       }
     }
 
-    .button-reject {
+    .button-negative {
       color: $colourPrimary;
       border-color: lighten($colourPrimary, 15%);
     }
@@ -129,13 +129,19 @@
       }
     }
 
-    .button-answer {
+    .button-positive {
       color: $colourPositive;
       border-color: lighten($colourPositive, 15%);
     }
 
   }
 
+  .back .card-buttons {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+  }
   // For card flip
   .flipper-container {
     -webkit-perspective: 1000;
