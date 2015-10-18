@@ -27,8 +27,8 @@
     -webkit-justify-content: center;
 
     .option {
-      flex-grow: 2;
-      max-width: 40vw;
+      flex: 1;
+      max-width: 50%;
       background-color: white;
       border: 1px solid $colourBorder;
       border-radius: 2px;
