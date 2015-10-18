@@ -50,6 +50,12 @@ angular.module('letterbox.services')
     }
   });
 
+  var userSelfGetter = $resource(URL.concat(userSelfPath), {}, {
+    get: {
+      method: 'GET'
+    }
+  });
+
   var updateUserLocation = $resource(URL.concat(updateLocationPath), {}, {
     updateLocation: {
       method: 'PUT',
@@ -174,6 +180,11 @@ angular.module('letterbox.services')
   backend.getMatches = function(maxDistance, limit, previousId) {
     var token = getToken();
     return matchesGetter.get({letterbox_token: token, maxDistance: maxDistance, limit: limit, previousId: previousId});
+  }
+
+  backend.getUserSelf = function() {
+    var token = getToken();
+    return userSelfGetter.get({letterbox_token: token});
   }
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
