@@ -40,7 +40,20 @@
       }
     }
   }
-  .item-body {
+  
+  .card-content {
+    padding: 20px;
+    .section {
+      padding: 12px 0;
+      h3 {
+        margin-bottom: 5px;
+        @include uppercase-bold-font();
+        color: $colourSubtitle;
+        letter-spacing: 2px;
+        font-size: 11px;
+      }
+    }
+
     p {
       font-size: 12px;
       max-width: 240px;
