@@ -6,11 +6,9 @@
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
-                <div class="card-image">
-                  <div class="item item-image">
-                    <img ng-src="{{ card.profile_pic }}" alt="Image" />
-                  </div>
-                  <div class="item item-header">
+                <div class="large-profile-pic-header">
+                  <img ng-src="{{ card.profile_pic }}" alt="Image" />
+                  <div class="item profile-pic-overlay">
                     <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
                   </div>
                 </div>
