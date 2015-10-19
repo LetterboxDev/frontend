@@ -22,7 +22,12 @@
   }
 
   .btn-login {
+    border-radius: 10px;
     width: 100%;
+
+    i {
+      margin-right: 10px;
+    }
   }
 }
 
