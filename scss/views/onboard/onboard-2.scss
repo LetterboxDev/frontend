@@ -27,6 +27,10 @@
     margin-top: 60px;
     text-align: center;
 
+    &>div {
+      display: table;
+    }
+
     h2 {
       @include uppercase-bold-font();
       color: $colourPrimaryText;
@@ -35,6 +39,10 @@
 
     .option {
       margin: 0px !important;
+      height: 100px;
+      display: table-cell;
+      vertical-align: middle;
+      width: 50%;
     }
 
     .option0 {
