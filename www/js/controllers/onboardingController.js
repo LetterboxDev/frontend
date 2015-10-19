@@ -39,7 +39,8 @@ angular.module('letterbox.controllers')
   $scope.beginOnboarding = function() {
     if (window.localStorage.getItem('token') &&
         window.localStorage.getItem('isRegistered') === 'false') {
-      $state.go('onboarding', {onboardStep: 1});
+      // skip the gender selection
+      $state.go('onboarding', {onboardStep: 2});
     } else {
       $state.go('app.home');
     }
@@ -48,31 +49,31 @@ angular.module('letterbox.controllers')
 
   // Onboarding step 1 logic
 
-  $scope.selectGender = function(gender) {
-    if (gender === 'male' || gender === 'female') {
-      $scope.gender = gender;
-      window.localStorage.setItem('gender', gender);
-    }
-  }
+  // $scope.selectGender = function(gender) {
+  //   if (gender === 'male' || gender === 'female') {
+  //     $scope.gender = gender;
+  //     window.localStorage.setItem('gender', gender);
+  //   }
+  // }
 
-  $scope.selectGenderPref = function(gender) {
-    if (gender === 'male' || gender === 'female') {
-      $scope.genderPref = gender;
-      window.localStorage.setItem('genderPref', gender);
-    }
-  }
+  // $scope.selectGenderPref = function(gender) {
+  //   if (gender === 'male' || gender === 'female') {
+  //     $scope.genderPref = gender;
+  //     window.localStorage.setItem('genderPref', gender);
+  //   }
+  // }
 
-  $scope.completeOnboardingStep1 = function() {
-    var gender = window.localStorage.getItem('gender');
-    var genderPref = window.localStorage.getItem('genderPref')
-    if (gender && genderPref) {
-      backend.updateGender(gender, genderPref, function(res){
-        $state.go('onboarding', {onboardStep: 2});
-      });
-    } else {
-      // TODO handle error
-    }
-  };
+  // $scope.completeOnboardingStep1 = function() {
+  //   var gender = window.localStorage.getItem('gender');
+  //   var genderPref = window.localStorage.getItem('genderPref')
+  //   if (gender && genderPref) {
+  //     backend.updateGender(gender, genderPref, function(res){
+  //       $state.go('onboarding', {onboardStep: 2});
+  //     });
+  //   } else {
+  //     // TODO handle error
+  //   }
+  // };
 
 
   // Onboarding step 2 logic
