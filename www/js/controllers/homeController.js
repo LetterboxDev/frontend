@@ -2,7 +2,10 @@ angular.module('letterbox.controllers')
 
 
 .controller('HomeCtrl', function($scope, $state, NotificationsService) {
-  $scope.numberOfNotifications = NotificationsService.getNumberOfNotifications();
+  NotificationsService.getNumberOfNotifications()
+    .then(function(numberOfNotifications) {
+      $scope.numberOfNotifications = numberOfNotifications;
+    });
 
   $scope.goNotifications = function() {
     $state.go('app.notifications');
