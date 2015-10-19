@@ -31,3 +31,73 @@ ion-content {
   color: $colourSecondaryText;
 }
 
+// this is the common style for question card, we have multiple copies of this previously, just move to default.scss for common use
+.questions {
+  margin: 20px 0;
+  .question {
+    margin: 10px 0;
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    flex-flow: row nowrap;
+    -webkit-flex-flow: row nowrap; /* Safari */
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+
+    .shuffle {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .btn-randomise {
+      margin-right: 10px;
+      height: 100%;
+      // use min-height
+      height: 0px;
+    }
+
+    .option {
+      flex: 1;
+      max-width: 50%;
+      background-color: white;
+      border: 1px solid $colourBorder;
+      border-radius: 2px;
+      padding: 10px;
+      font-size: 13px;
+      line-height: 1.25em;
+      color: $colourPrimaryText;
+      cursor: pointer;
+      margin: 0px !important;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      -webkit-align-items: center;
+
+      &.selected {
+        color: white;
+        font-weight: bold;
+      }
+
+      &.option0.selected {
+        background-color: $colourOption0;
+        border: 1px solid $colourOption0;
+      }
+      &.option1.selected {
+        background-color: $colourOption1;
+        border: 1px solid $colourOption1;
+      }
+    }
+
+    .option0 {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .option1 {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: 0px;
+    }
+  }
+}
