@@ -16,6 +16,8 @@
   .btn-randomise {
     margin-right: 10px;
     height: 100%;
+    // use min-height
+    height: 0px;
   }
   .question {
     margin: 10px 0;
