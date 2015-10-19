@@ -4,8 +4,10 @@ angular.module('letterbox.controllers')
 .controller('HomeCtrl', function($scope, $state, $ionicHistory, NotificationsService) {
   $scope.numberOfNotifications = 0;
 
-  $ionicHistory.nextViewOptions({
-    disableBack: true
+  $scope.$on('$ionicView.enter', function() {
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
   });
 
   NotificationsService.getNumberOfNotifications()
