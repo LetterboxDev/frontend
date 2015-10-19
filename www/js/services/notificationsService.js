@@ -50,7 +50,7 @@ angular.module('letterbox.services')
       .then(function(letters) {
         var count = 0;
         letters.forEach(function(letter) {
-          if (letter.isRead) count++;
+          if (!letter.isRead) count++;
         });
         deferred.resolve(count);
       });
@@ -58,11 +58,11 @@ angular.module('letterbox.services')
     },
 
     getNotificationFromId: function(id) {
-      var deferred = $q.defer();  
+      var deferred = $q.defer();
       var found = false;
       if (currentNotifications.length === 0) {
         this.getNotificationsList().then(function(notifications) {
-          var deferred = $q.defer();  
+          var deferred = $q.defer();
           currentNotifications.forEach(function(notif) {
             if (notif.id === id) {
               found = true;
@@ -71,11 +71,11 @@ angular.module('letterbox.services')
           });
 
           if (!found) {
-            deferred.resolve({});  
-          } 
+            deferred.resolve({});
+          }
           return deferred.promise;
         });
-      } 
+      }
       else {
         currentNotifications.forEach(function(notif) {
           if (notif.id === id) {
@@ -85,10 +85,10 @@ angular.module('letterbox.services')
         });
 
         if (!found) {
-          deferred.resolve(null);  
+          deferred.resolve(null);
         }
 
-        return deferred.promise;        
+        return deferred.promise;
       }
     }
   };

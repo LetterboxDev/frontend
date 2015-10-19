@@ -25,7 +25,7 @@ angular.module('letterbox.controllers')
     backend.markLetterAsRead(notification.id);
     $state.go('app.response', {responseId: notification.id});
   };
-  
+
   // $scope.closeLetterModal = function() {
   //   $scope.modal.hide();
   // };

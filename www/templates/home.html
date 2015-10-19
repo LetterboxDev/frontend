@@ -1,4 +1,11 @@
 <ion-view view-title="Letterbox">
+  <ion-nav-buttons side="right">
+    <button class="button button-small button-icon button-clear ion-ios-bell" data-ng-click="goNotifications()">
+    </button>
+    <div class="notification-bubble" data-ng-show="numberOfNotifications > 0" data-ng-click="goNotifications()">
+      {{ numberOfNotifications }}
+    </div>
+  </ion-nav-buttons>
   <ion-content>
     <div ng-controller="CardsCtrl">
       <div class="profile-cards">
@@ -40,16 +47,16 @@
                   <div class="item card-content">
                     <div class="section">
                       <h3>bio</h3>
-                      <p>{{ card.bio }}</p>  
+                      <p>{{ card.bio }}</p>
                     </div>
                     <div class="section">
                       <h3>mutual friends</h3>
                       <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
                     </div>
                     <div class="section">
-                      <h3>Likes</h3>  
+                      <h3>Likes</h3>
                     </div>
-                    
+
                   </div>
                   <div class="item card-buttons">
                     <div class="card-button button-flip">
