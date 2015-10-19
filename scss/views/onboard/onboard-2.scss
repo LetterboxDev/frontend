@@ -27,38 +27,10 @@
     margin-top: 60px;
     text-align: center;
 
-    &>div {
-      display: table;
-    }
-
     h2 {
       @include uppercase-bold-font();
       color: $colourPrimaryText;
       font-size: 18px;
-    }
-
-    .shuffle {
-      display: table-cell;
-      vertical-align: middle;
-    }
-
-    .option {
-      margin: 0px !important;
-      height: 100px;
-      display: table-cell;
-      vertical-align: middle;
-      width: 50%;
-    }
-
-    .option0 {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    .option1 {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-left: 0px;
     }
   }
 
