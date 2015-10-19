@@ -23,6 +23,32 @@
     }
   }
 
+  .questions {
+    margin-top: 60px;
+    text-align: center;
+
+    h2 {
+      @include uppercase-bold-font();
+      color: $colourPrimaryText;
+      font-size: 18px;
+    }
+
+    .option {
+      margin: 0px !important;
+    }
+
+    .option0 {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .option1 {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: 0px;
+    }
+  }
+
   .btn-complete {
     width: 100%;
   }

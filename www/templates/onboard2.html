@@ -5,6 +5,7 @@
       <h3>People will answer these 5 questions</h3>
     </div>
     <div class="questions">
+      <h2>Would you rather...</h2>
       <div ng-repeat="question in questions" class="question" >
         <button class="btn-randomise button button-small button-dark icon ion-shuffle" ng-click='getNewQn(question)'></button>
         <div class="option option0" ng-class="question.answer == 0 ? 'selected' : ''" ng-click="selectOption(question, 0)">
