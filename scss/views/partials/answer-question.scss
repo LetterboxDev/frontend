@@ -27,6 +27,13 @@
     -webkit-flex-flow: row nowrap; /* Safari */
     justify-content: center;
     -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+
+    .shuffle {
+      display: table-cell;
+      vertical-align: middle;
+    }
 
     .option {
       flex: 1;
@@ -39,10 +46,11 @@
       line-height: 1.25em;
       color: $colourPrimaryText;
       cursor: pointer;
-
-      &:last-child {
-        margin-left: 5px;
-      }
+      margin: 0px !important;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      -webkit-align-items: center;
 
       &.selected {
         color: white;
@@ -57,6 +65,17 @@
         background-color: $colourOption1;
         border: 1px solid $colourOption1;
       }
+    }
+
+    .option0 {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .option1 {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: 0px;
     }
   }
 }
