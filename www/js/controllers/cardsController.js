@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicModal, $element, $timeout, backend) {
+.controller('CardsCtrl', function($scope, $element, $timeout, backend) {
   var previousId = '';
   $scope.cards = [];
 
@@ -41,24 +41,6 @@ angular.module('letterbox.controllers')
   };
 
   /**
-   * Modal Logic
-   */
-  $ionicModal.fromTemplateUrl('templates/question-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  $scope.openQuestionModal = function() {
-    $scope.modal.show();
-  };
-
-  $scope.closeQuestionModal = function() {
-    $scope.modal.hide();
-  };
-
-  /**
    * Helper functions
    */
   function createNewCard(match) {
@@ -84,7 +66,6 @@ angular.module('letterbox.controllers')
     });
 
     selectFirst('.button-positive').on('touch', function(e) {
-      $scope.openQuestionModal();
     });
   }
 });
