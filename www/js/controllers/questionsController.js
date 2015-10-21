@@ -2,6 +2,7 @@ angular.module('letterbox.controllers')
 
 .controller('QuestionsCtrl', function($scope, backend) {
   $scope.closeQuestionModal = function() {
+    $scope.selectedAnswer = [];
     $scope.$parent.modal.hide();
   };
 
@@ -21,6 +22,7 @@ angular.module('letterbox.controllers')
       console.log('Error, fill in all answers first.');
     } else {
       backend.sendALetter($scope.cards[0].hashedId, $scope.cards[0].questions);
+      $scope.selectedAnswer = [];
       $scope.closeQuestionModal();
     }
   };
