@@ -1,0 +1,19 @@
+.letter {
+  padding: 10px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  h3 {
+    text-align: center;
+  }
+  .row {
+    height: 100%;
+  }
+  .left {
+    background-color: $colourOption0;
+  }
+  .right {
+    background-color: $colourOption1;
+  }
+}
+

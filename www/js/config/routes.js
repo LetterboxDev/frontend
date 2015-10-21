@@ -34,6 +34,16 @@ angular.module('letterbox')
     }
   })
 
+  .state('app.letter', {
+    url: '/question',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/letter.html',
+        controller: 'LetterCtrl'
+      }
+    }
+  })
+
   .state('app.chats', {
     url: '/chats',
     views: {
