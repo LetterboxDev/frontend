@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicScrollDelegate, $ionicGesture, $ionicModal, $element, $timeout, backend) {
+.controller('CardsCtrl', function($scope, $ionicModal, $element, $timeout, backend) {
   var previousId = '';
   $scope.cards = [];
 
@@ -39,14 +39,6 @@ angular.module('letterbox.controllers')
         }, 200);
       });
   };
-
-  $ionicGesture.on('dragend', function(e) {
-    var draggedDistance = $ionicScrollDelegate.getScrollPosition().top;
-
-    if (draggedDistance >= 200) {
-      $scope.changeCard();
-    }
-  }, $element);
 
   /**
    * Modal Logic
