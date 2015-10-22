@@ -5,24 +5,23 @@ angular.module('letterbox.controllers')
   var questions = targetUser.questions;
   var curr = 0;
   var max = questions.length - 1;
+  var selected = new Array(5);
 
   $scope.userName = targetUser.name;
   $scope.currentQuestion = targetUser.questions[0];
 
   $scope.nextQuestion = function() {
-    if (curr < max) {
-      curr++;
-      resetClass();
-      $scope.currentQuestion = targetUser.questions[curr];
-    }
+    if (curr >= max) return;
+    if (selected[curr] == undefined) selected[curr] = $scope.selectedTab;
+    curr++;
+    updateQuestionView(curr, questions, selected);
   };
 
   $scope.prevQuestion = function() {
-    if (curr > 0) {
-      curr--;
-      resetClass();
-      $scope.currentQuestion = targetUser.questions[curr];
-    }
+    if (curr <= 0) return;
+    if (selected[curr] == undefined) selected[curr] = $scope.selectedTab;
+    curr--;
+    updateQuestionView(curr, questions, selected);
   };
 
   $scope.closeLetter = function() {
@@ -43,6 +42,12 @@ angular.module('letterbox.controllers')
   // Removes active class from .left and .right
   function resetClass() {
     $scope.selectedTab = undefined;
+  }
+
+  function updateQuestionView(curr, questions, selected) {
+    resetClass();
+    $scope.currentQuestion = questions[curr];
+    $scope.selectedTab = selected[curr];
   }
 });
 
