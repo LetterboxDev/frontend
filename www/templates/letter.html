@@ -2,13 +2,30 @@
   <ion-content scroll="false">
     <div class="letter-wrapper">
       <div class="letter" ng-controller="LetterCtrl">
-        <h3>Would you rather...</h3>
-        <div class="row answer-row">
-          <div class="left col">
-            <p>{{ currentQuestion.option0 }}</p>
+        <div class="card profile-card">
+          <i class="icon ion-close close-letter"></i>
+          <h3>Would you rather...</h3>
+          <div class="row answer-row">
+            <div ng-class="{'active' : selectedTab === 0}" ng-click="selectedTab = 0" class="left col">
+              <p>{{ currentQuestion.option0 }}</p>
+            </div>
+            <div ng-class="{'active' : selectedTab === 1}" ng-click="selectedTab = 1" class="right col">
+              <p>{{ currentQuestion.option1 }}</p>
+            </div>
           </div>
-          <div class="right col">
-            <p>{{ currentQuestion.option1 }}</p>
+          <div class="card-buttons">
+            <div class="card-button button-positive">
+              <i class="icon ion-chevron-left"></i>
+              <div class="button-detail">previous</div>
+            </div>
+            <div class="card-button button-flip">
+              <i class="icon ion-person"></i>
+              <div class="button-detail">profile</div>
+            </div>
+            <div class="card-button button-positive">
+              <i class="icon ion-chevron-right"></i>
+              <div class="button-detail">next</div>
+            </div>
           </div>
         </div>
       </div>
