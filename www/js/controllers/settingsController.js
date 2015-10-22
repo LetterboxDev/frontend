@@ -1,9 +1,11 @@
 angular.module('letterbox.controllers')
 
 .controller('SettingsCtrl', function($scope) {
-  $scope.data = {
-    minCorrect: (window.localStorage.getItem('minCorrect') == null ? 3 : window.localStorage.getItem('minCorrect')),
-    distanceRadius: (window.localStorage.getItem('distanceRadius') == null ? 50 : window.localStorage.getItem('distanceRadius')) //in km
+  var minCorrect = window.localStorage.getItem('minCorrect');
+  var distanceRadius = window.localStorage.getItem('distanceRadius');
+  $scope.preference = {
+    minCorrect: (minCorrect == null ? 3 : minCorrect),
+    distanceRadius: (distanceRadius == null ? 50 : distanceRadius) //in km
   }
 
   $scope.onChangeMinCorrect = function() {
