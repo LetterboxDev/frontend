@@ -8,7 +8,8 @@ angular.module('letterbox.controllers')
   function getCard() {
     if (window.localStorage.getItem('token') && $scope.cards.length === 0 && !$scope.isLoading) {
       $scope.isLoading = true;
-      backend.getMatch(1000)
+      var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
+      backend.getMatch(distance)
         .$promise
         .then(function(match) {
           previousId = match.hashedId;
@@ -34,7 +35,8 @@ angular.module('letterbox.controllers')
   };
 
   $scope.addCard = function() {
-    backend.getMatch(1000, previousId)
+    var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
+    backend.getMatch(distance, previousId)
       .$promise
       .then(function(match) {
         previousId = match.hashedId;
