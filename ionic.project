@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "Letterbox",
   "app_id": "f664f09e",
   "gulpStartupTasks": [
     "sass",
