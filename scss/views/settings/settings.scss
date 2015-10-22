@@ -9,5 +9,13 @@
   .inline-checkbox {
     border: none;
   }
+
+  .item-gender {
+    padding-bottom: 0px; // padding already set by inline item
+
+    i {
+      font-size: 35px;
+    }
+  }
 }
 
