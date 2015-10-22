@@ -5,21 +5,26 @@ angular.module('letterbox.controllers')
   var questions = targetUser.questions;
   var curr = 0;
   var max = questions.length - 1;
-  var selected = new Array(5);
+  var selected = [-1, -1, -1, -1, -1];
 
   $scope.userName = targetUser.name;
   $scope.currentQuestion = targetUser.questions[0];
 
   $scope.nextQuestion = function() {
-    if (curr >= max) return;
-    if (selected[curr] == undefined) selected[curr] = $scope.selectedTab;
+    if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
+    if (curr === max && selected.length === 5 && selected.indexOf(-1) === -1) {
+      updateQuestionAnswers(questions, selected);
+      backend.sendALetter(targetUser.hashedId, questions);
+      $state.go('app.home');
+      return;
+    }
     curr++;
     updateQuestionView(curr, questions, selected);
   };
 
   $scope.prevQuestion = function() {
     if (curr <= 0) return;
-    if (selected[curr] == undefined) selected[curr] = $scope.selectedTab;
+    if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
     curr--;
     updateQuestionView(curr, questions, selected);
   };
@@ -31,23 +36,28 @@ angular.module('letterbox.controllers')
     $state.go('app.home');
   };
 
-  $scope.submitQuestionAnswer = function() {
-    backend.sendALetter($scope.cards[0].hashedId, $scope.cards[0].questions);
-  };
-
   /**
    * Helper functions
    */
 
   // Removes active class from .left and .right
   function resetClass() {
-    $scope.selectedTab = undefined;
+    $scope.selectedTab = -1;
   }
 
   function updateQuestionView(curr, questions, selected) {
     resetClass();
     $scope.currentQuestion = questions[curr];
     $scope.selectedTab = selected[curr];
+  }
+
+  function updateQuestionAnswers(questions, answers) {
+    questions.forEach(function(question, index) {
+      question.answer = false;
+      if (answers[index] === 1) {
+        question.answer = true;
+      }
+    });
   }
 });
 
