@@ -1,8 +1,15 @@
-angular.module('letterbox', ['ionic', 'letterbox.controllers', 'ngResource', 'letterbox.services', 'letterbox.directives', 'facebook', 'ngCordova', 'angularMoment', 'monospaced.elastic', 'ionic.ion.imageCacheFactory'])
+angular.module('letterbox', ['ionic','ionic.service.core', 'letterbox.controllers', 'ngResource', 'letterbox.services', 'letterbox.directives', 'facebook', 'ngCordova', 'angularMoment', 'monospaced.elastic', 'ionic.ion.imageCacheFactory'])
 
-.run(function($ionicPlatform, $rootScope) {
+.run(function($ionicPlatform, $rootScope, eventbus) {
   $rootScope.$on("$stateChangeError", console.log.bind(console));
   $ionicPlatform.ready(function() {
+    if (window.cordova) {
+      var push = new Ionic.Push();
+      push.register(function(token) {
+        window.localStorage.setItem('pushToken', token.token);
+        eventbus.call('pushTokenSet');
+      });
+    }
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {

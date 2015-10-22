@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
 
-.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService, DbService, RoomsService, ChatService) {
+.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService, DbService, RoomsService, ChatService, PushService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -18,6 +18,7 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
   eventbus.registerListener('loginCompleted', socket.init);
   // Update user location when logged in
   eventbus.registerListener('loginCompleted', LocationService.updateLocation);
+  eventbus.registerListener('loginCompleted', PushService.updatePushToken);
 
   // Initialize ChatService when db initialized
   eventbus.registerListener('dbInitialized', ChatService.init);
@@ -26,6 +27,8 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
 
   // Sync database with backend whenever socket is reconnected
   eventbus.registerListener('socketConnected', ChatService.sync);
+
+  eventbus.registerListener('pushTokenSet', PushService.updatePushToken);
 
   eventbus.registerListener('roomCreated', function(data) {
     RoomsService.updateRooms();
