@@ -6,6 +6,15 @@
       </ion-toggle>
       <ion-item class="item">
         <h2 class="setting-description">
+          Gender preference
+        </h2>
+        <div class="row">
+          <ion-checkbox class="col inline-checkbox" ng-model="preference.preferFemale" ng-checked="preference.preferFemale" ng-change="onChangePreferFemale()">&nbsp;</ion-checkbox>
+          <ion-checkbox class="col inline-checkbox" ng-model="preference.preferMale" ng-checked="preference.preferMale" ng-change="onChangePreferMale()">&nbsp;</ion-checkbox>
+        </div>
+      </ion-item>
+      <ion-item class="item">
+        <h2 class="setting-description">
           Maximum distance: <span>{{ preference.distanceRadius }}km</span>
         </h2>
         <div class="range">
