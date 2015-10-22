@@ -1,18 +1,18 @@
 angular.module('letterbox.controllers')
 
 .controller('SettingsCtrl', function($scope) {
-  var minCorrect = window.localStorage.getItem('minCorrect');
+  var perfectMatch = window.localStorage.getItem('perfectMatch');
   var distanceRadius = window.localStorage.getItem('distanceRadius');
   $scope.preference = {
-    minCorrect: (minCorrect == null ? 3 : minCorrect),
+    perfectMatch: (perfectMatch == null ? false : perfectMatch),
     distanceRadius: (distanceRadius == null ? 50 : distanceRadius) //in km
   }
 
-  $scope.onChangeMinCorrect = function() {
-    window.localStorage.setItem('minCorrect', $scope.data.minCorrect);
+  $scope.onChangePerfectMatch = function() {
+    window.localStorage.setItem('perfectMatch', $scope.preference.perfectMatch);
   }
 
   $scope.onChangeDistanceRadius = function() {
-    window.localStorage.setItem('distanceRadius', $scope.data.distanceRadius);
+    window.localStorage.setItem('distanceRadius', $scope.preference.distanceRadius);
   }
 });

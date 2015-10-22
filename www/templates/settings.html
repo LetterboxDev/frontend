@@ -2,15 +2,14 @@
   <ion-content>
     <ion-list class="settings-list">
       <ion-item class="item">
-        <h2 class="setting-description">Minimum number of correct answers to be alerted of matches: <span>{{ preference.minCorrect }}</span></h2>
-        <div class="range">
-          0
-          <input type="range" name="minCorrect" min="0" max="5" ng-model="preference.minCorrect" ng-change="onChangeMinCorrect()">
-          5
-        </div>
+        <ion-toggle ng-model="preference.perfectMatch" ng-checked="preference.perfectMatch" ng-change="onChangePerfectMatch()" toggle-class="toggle-calm">
+          Only see perfect match
+        </ion-toggle>
       </ion-item>
       <ion-item class="item">
-        <h2 class="setting-description">Maximum distance: <span>{{ preference.distanceRadius }}km</span></h2>
+        <h2 class="setting-description">
+          Maximum distance: <span>{{ preference.distanceRadius }}km</span>
+        </h2>
         <div class="range">
           1
           <input type="range" name="distanceRadius" min="1" max="100" ng-model="preference.distanceRadius" ng-change="onChangeDistanceRadius()">
