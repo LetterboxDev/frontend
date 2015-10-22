@@ -8,6 +8,7 @@ angular.module('letterbox.services')
   var renewPath = '/auth/renew'
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:userId';
+  var pushTokenPath = '/user/pushtoken';
   var updateLocationPath = '/user/location';
   var updateBioPath = '/user/bio';
   var updateGenderPath = '/user/gender';
@@ -54,6 +55,15 @@ angular.module('letterbox.services')
   var userSelfGetter = $resource(URL.concat(userSelfPath), {}, {
     get: {
       method: 'GET'
+    }
+  });
+
+  var pushTokenUpdater = $resource(URL.concat(pushTokenPath), {}, {
+    updatePushToken: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
     }
   });
 
@@ -188,12 +198,20 @@ angular.module('letterbox.services')
   backend.getMatches = function(maxDistance, limit, previousId) {
     var token = getToken();
     return matchesGetter.get({letterbox_token: token, maxDistance: maxDistance, limit: limit, previousId: previousId});
-  }
+  };
 
   backend.getUserSelf = function() {
     var token = getToken();
     return userSelfGetter.get({letterbox_token: token});
-  }
+  };
+
+  backend.updatePushToken = function(pushtoken) {
+    var token = getToken();
+    updater = new pushTokenUpdater();
+    updater.token = token;
+    updater.pushToken = pushtoken;
+    return updater.$updatePushToken();
+  };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
     var token = getToken();
