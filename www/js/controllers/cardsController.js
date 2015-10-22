@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ionicHistory, eventbus, backend, letterService) {
+.controller('CardsCtrl', function($scope, $state, $element, $timeout, eventbus, backend, letterService) {
   var previousId = '';
   $scope.cards = [];
 
@@ -74,9 +74,6 @@ angular.module('letterbox.controllers')
 
     // Goes to composing a new letter
     selectFirst('.button-positive').on('touch', function(e) {
-      $ionicHistory.nextViewOptions({
-        disableAnimate: true
-      });
       letterService.setTargetUserCard($scope.cards[0]);
       $state.go('app.letter');
     });
