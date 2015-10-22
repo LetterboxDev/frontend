@@ -4,7 +4,7 @@ angular.module('letterbox.controllers')
   var perfectMatch = window.localStorage.getItem('perfectMatch');
   var distanceRadius = window.localStorage.getItem('distanceRadius');
   $scope.preference = {
-    perfectMatch: (perfectMatch == null ? false : perfectMatch),
+    perfectMatch: (perfectMatch === 'true' ? true : false),
     distanceRadius: (distanceRadius == null ? 50 : distanceRadius) //in km
   }
 
