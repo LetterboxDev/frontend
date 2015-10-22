@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ionicHistory, backend, letterService) {
+.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ionicHistory, eventbus, backend, letterService) {
   var previousId = '';
   $scope.cards = [];
 
