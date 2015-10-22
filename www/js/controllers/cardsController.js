@@ -4,17 +4,24 @@ angular.module('letterbox.controllers')
   var previousId = '';
   $scope.cards = [];
 
-  backend.getMatch(1000)
-    .$promise
-    .then(function(match) {
-      previousId = match.hashedId;
-      $scope.cards.push(createNewCard(match));
+  function getCard() {
+    if (window.localStorage.getItem('token') && $scope.cards.length === 0) {
+      backend.getMatch(1000)
+        .$promise
+        .then(function(match) {
+          previousId = match.hashedId;
+          $scope.cards.push(createNewCard(match));
 
-      $timeout(function() {
-        selectFirst('.profile-card').removeClass('moving-in');
-        registerEventHandler();
-      }, 400);
-    });
+          $timeout(function() {
+            selectFirst('.profile-card').removeClass('moving-in');
+            registerEventHandler();
+          }, 400);
+        });
+    }
+  }
+
+  eventbus.registerListener("enterHome", getCard);
+  getCard();
 
   $scope.changeCard = function() {
     selectFirst('.profile-card').addClass('moving-out');

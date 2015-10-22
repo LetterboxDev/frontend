@@ -4,7 +4,6 @@
       <div class="profile-card moving-in">
         <div class="flipper-container" flip-card>
           <div class="flipper">
-
             <div class="card front">
               <div class="small-profile-pic-header">
                 <img class="small-profile-pic" ng-src="{{ response.profilePicMed }}" alt="Image" />
@@ -50,17 +49,17 @@
                 <div class="item card-content">
                   <div class="section">
                     <h3>bio</h3>
-                    <p>{{ (response.bio.length > 0) ? response.bio : '&nbsp;' }}</p> 
+                    <p>{{ (response.bio.length > 0) ? response.bio : '&nbsp;' }}</p>
                   </div>
                   <div class="section">
                     <h3>mutual friends</h3>
                     <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
                   </div>
                   <div class="section">
-                    <h3>Likes</h3>  
+                    <h3>Likes</h3>
                   </div>
                 </div>
-      
+
                 <div class="item card-buttons">
                   <div class="card-button button-negative" ng-click="rejectLetter(response)">
                     <i class="icon ion-close"></i>
@@ -78,7 +77,7 @@
               </div>
             </div>
 
-            
+
           </div>
         </div>
       </div>
