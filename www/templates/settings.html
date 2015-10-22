@@ -9,8 +9,17 @@
           Gender preference
         </h2>
         <div class="row">
-          <ion-checkbox class="col inline-checkbox" ng-model="preference.preferFemale" ng-checked="preference.preferFemale" ng-change="onChangePreferFemale()">&nbsp;</ion-checkbox>
-          <ion-checkbox class="col inline-checkbox" ng-model="preference.preferMale" ng-checked="preference.preferMale" ng-change="onChangePreferMale()">&nbsp;</ion-checkbox>
+          <div class="col">
+            <ion-checkbox class="inline-checkbox" ng-model="preference.preferFemale" ng-checked="preference.preferFemale" ng-change="onChangePreferFemale()">
+              <i class="icon ion-woman"></i>
+            </ion-checkbox>
+          </div>
+
+          <div class="col">
+            <ion-checkbox class="inline-checkbox" ng-model="preference.preferMale" ng-checked="preference.preferMale" ng-change="onChangePreferMale()">
+              <i class="icon ion-man"></i>
+            </ion-checkbox>
+          </div>
         </div>
       </ion-item>
       <ion-item class="item">
