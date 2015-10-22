@@ -1,0 +1,50 @@
+.letter-wrapper {
+  height: 100%;
+  display: table;
+}
+.letter {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.25;
+  i {
+    float: right;
+  }
+  h3 {
+    text-align: center;
+  }
+  .card {
+    background-color: white;
+    padding: 15px 15px 0 15px;
+  }
+  .answer-row {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .left,
+  .right {
+    padding: 15px;
+    border-radius: 5px;
+    &.active {
+      color: white;
+    }
+  }
+  .left {
+    margin-right: 2px;
+    border: 1px solid $colourOption0;
+    color: $colourOption0;
+  }
+  .right {
+    margin-left: 2px;
+    border: 1px solid $colourOption1;
+    color: $colourOption1;
+  }
+  .left.active {
+    background-color: $colourOption0;
+  }
+  .right.active {
+    background-color: $colourOption1;
+  }
+}
+
