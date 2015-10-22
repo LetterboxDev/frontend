@@ -4,7 +4,8 @@ angular.module('letterbox.controllers')
   var targetUser = letterService.targetUserCard;
 
   $scope.userName = targetUser.name;
-  $scope.questions = targetUser.questions;
+
+  $scope.currentQuestion = targetUser.questions[0];
 
   $scope.submitQuestionAnswer = function() {
     backend.sendALetter($scope.cards[0].hashedId, $scope.cards[0].questions);

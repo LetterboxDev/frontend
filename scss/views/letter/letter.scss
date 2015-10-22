@@ -1,13 +1,18 @@
+.letter-wrapper {
+  height: 100%;
+  display: table;
+}
 .letter {
+  display: table-cell;
+  vertical-align: middle;
   padding: 10px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  align-items: center;
+  color: white;
+  font-size: 25px;
+  line-height: 1.25;
   h3 {
     text-align: center;
   }
   .row {
-    height: 100%;
   }
   .left {
     background-color: $colourOption0;
