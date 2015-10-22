@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicModal, $element, $timeout, $ImageCacheFactory, backend, eventbus) {
+.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ImageCacheFactory, eventbus, backend, letterService) {
   var previousId = '';
   $scope.cards = [];
   $scope.isLoading = false;
@@ -69,27 +69,9 @@ angular.module('letterbox.controllers')
                 $scope.isLoading = false;
               });
         }, function(err) {
-          // TODO Show error message (no match, not connected, etc.) 
+          // TODO Show error message (no match, not connected, etc.)
         });
     }
-  };
-
-  /**
-   * Modal Logic
-   */
-  $ionicModal.fromTemplateUrl('templates/question-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  $scope.openQuestionModal = function() {
-    $scope.modal.show();
-  };
-
-  $scope.closeQuestionModal = function() {
-    $scope.modal.hide();
   };
 
   /**
@@ -117,8 +99,10 @@ angular.module('letterbox.controllers')
       $scope.changeCard();
     });
 
+    // Goes to composing a new letter
     selectFirst('.button-positive').on('touch', function(e) {
-      $scope.openQuestionModal();
+      letterService.setTargetUserCard($scope.cards[0]);
+      $state.go('app.letter');
     });
   }
 });
