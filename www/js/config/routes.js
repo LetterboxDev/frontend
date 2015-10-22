@@ -35,7 +35,7 @@ angular.module('letterbox')
   })
 
   .state('app.letter', {
-    url: '/question',
+    url: '/letter',
     views: {
       'menuContent': {
         templateUrl: 'templates/letter.html',
