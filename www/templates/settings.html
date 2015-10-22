@@ -1,11 +1,9 @@
 <ion-view view-title="Settings">
   <ion-content>
     <ion-list class="settings-list">
-      <ion-item class="item">
-        <ion-toggle ng-model="preference.perfectMatch" ng-checked="preference.perfectMatch" ng-change="onChangePerfectMatch()" toggle-class="toggle-calm">
-          Only see perfect match
-        </ion-toggle>
-      </ion-item>
+      <ion-toggle ng-model="preference.perfectMatch" ng-checked="preference.perfectMatch" ng-change="onChangePerfectMatch()" toggle-class="toggle-calm">
+        Only see perfect match
+      </ion-toggle>
       <ion-item class="item">
         <h2 class="setting-description">
           Maximum distance: <span>{{ preference.distanceRadius }}km</span>
