@@ -3,9 +3,11 @@ angular.module('letterbox.controllers')
 .controller('CardsCtrl', function($scope, $ionicModal, $element, $timeout, backend, eventbus) {
   var previousId = '';
   $scope.cards = [];
+  $scope.isLoading = false;
 
   function getCard() {
-    if (window.localStorage.getItem('token') && $scope.cards.length === 0) {
+    if (window.localStorage.getItem('token') && $scope.cards.length === 0 && !$scope.isLoading) {
+      $scope.isLoading = true;
       backend.getMatch(1000)
         .$promise
         .then(function(match) {
@@ -16,6 +18,9 @@ angular.module('letterbox.controllers')
             selectFirst('.profile-card').removeClass('moving-in');
             registerEventHandler();
           }, 400);
+          $scope.isLoading = false;
+        }, function(err) {
+          // TODO Show error message (no match, not connected, etc.)
         });
     }
   }
