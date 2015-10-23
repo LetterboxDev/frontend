@@ -6,14 +6,15 @@ ion-content {
   background-color: $colourBackground;
 }
 
-.loading-container .loading {
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  background-color: rgba(0,0,0,0.8);
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-.spinner svg {
+.loading-container .loading {
+  background: none;
+}
+
+.spinner-ripple svg {
   width: 100px;
   height: 100px;
   stroke: white;
