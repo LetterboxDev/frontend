@@ -7,15 +7,20 @@ angular.module('letterbox.controllers')
   });
 
   var targetUser = letterService.targetUserCard;
+
   var questions = targetUser.questions;
-  var curr = 0;
-  var max = questions.length - 1;
-  var selected = [-1, -1, -1, -1, -1];
+  if (!questions) {
+    $state.go('app.home');
+  } else {
+    var curr = 0;
+    var max = questions.length - 1;
+    var selected = [-1, -1, -1, -1, -1];
 
-  $scope.card = letterService.targetUserCard;
+    $scope.card = letterService.targetUserCard;
 
-  $scope.userName = targetUser.name;
-  $scope.currentQuestion = targetUser.questions[0];
+    $scope.userName = targetUser.name;
+    $scope.currentQuestion = targetUser.questions[0];
+  }
 
   $scope.nextQuestion = function() {
     if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
