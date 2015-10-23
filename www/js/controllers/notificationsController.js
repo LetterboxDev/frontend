@@ -9,6 +9,7 @@ angular.module('letterbox.controllers')
     });
   }
 
+  eventbus.registerListener('letterReceived', refreshNotifications);
   $scope.$on("$ionicView.enter", function(scopes, states) {
     refreshNotifications();
   });
