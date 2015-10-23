@@ -18,16 +18,3 @@
     padding: 1vh 1vw 5vh;
   }
 }
-
-.profile-alert {
-  .popup {
-    padding: 15px;
-  }
-  .popup-title {
-    @include uppercase-bold-font();
-    color: $colourPrimaryText;
-  }
-  .popup-body {
-    padding: 15px;
-  }
-}
