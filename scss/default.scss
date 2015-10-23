@@ -28,6 +28,33 @@ ion-content {
   fill: $colourPreloader;
 }
 
+// Feedback for loading and empty pages
+.feedback {
+  height: 100vh;
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  flex-flow: column nowrap;
+  -webkit-flex-flow: column nowrap; /* Safari */
+  align-items: center;
+  -webkit-align-items: center; /* Safari */
+  justify-content: center;
+  -webkit-justify-content: center; /* Safari */
+
+  h2 {
+    @include uppercase-bold-font();
+    letter-spacing: 3px;
+    font-size: 12px;
+    color: $colourPreloader;
+    margin: 0;
+  }
+
+  ion-spinner.spinner-dots svg {
+    fill: $colourPreloader;
+    width: 50px;
+    height: 50px;
+  }
+}
+
 // View container styles
 .view-container {
   .scroll-content.has-header {
