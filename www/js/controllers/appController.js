@@ -1,7 +1,7 @@
 angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
 
 .controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService, DbService, RoomsService, ChatService) {
-
+  $scope.username = window.localStorage.getItem('firstName') ? window.localStorage.getItem('firstName') : '';
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -18,6 +18,10 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
   eventbus.registerListener('loginCompleted', socket.init);
   // Update user location when logged in
   eventbus.registerListener('loginCompleted', LocationService.updateLocation);
+  // Update $scope.username on login completed
+  eventbus.registerListener('loginCompleted', function() {
+    $scope.username = window.localStorage.getItem('firstName');
+  });
 
   // Initialize ChatService when db initialized
   eventbus.registerListener('dbInitialized', ChatService.init);
@@ -64,7 +68,5 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
   $scope.currentPage = function() {
     return $location.path().split('/')[2];
   };
-
-  $scope.username = window.localStorage.getItem('firstName');
 });
 
