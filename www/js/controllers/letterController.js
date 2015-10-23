@@ -16,6 +16,7 @@ angular.module('letterbox.controllers')
   $scope.currentQuestion = targetUser.questions[0];
 
   $scope.nextQuestion = function() {
+    if (curr === max) return;
     if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
     if (curr === max && selected.length === 5 && selected.indexOf(-1) === -1) {
       updateQuestionAnswers(questions, selected);
