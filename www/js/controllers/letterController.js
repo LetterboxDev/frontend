@@ -16,13 +16,15 @@ angular.module('letterbox.controllers')
   $scope.currentQuestion = targetUser.questions[0];
 
   $scope.nextQuestion = function() {
-    if (curr === max) return;
     if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
+
     if (curr === max && selected.length === 5 && selected.indexOf(-1) === -1) {
       updateQuestionAnswers(questions, selected);
       backend.sendALetter(targetUser.hashedId, questions);
       $scope.closeLetter();
       eventbus.call('closeLetter');
+      return;
+    } else if (curr === max) {
       return;
     }
     curr++;
