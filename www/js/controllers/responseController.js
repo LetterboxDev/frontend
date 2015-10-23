@@ -17,7 +17,6 @@ angular.module('letterbox.controllers')
   $scope.rejectLetter = function(letter) {
     // rejects the letter and refresh notifs
     backend.rejectLetter(letter.id, function() {
-      eventbus.call('letterReceived'); //TODO this triggers an unrelated prompt
       $state.go('app.notifications');
     });
   };
@@ -25,7 +24,6 @@ angular.module('letterbox.controllers')
   $scope.approveLetter = function(letter) {
     // approves letter, opens a chat and refresh notifs
     backend.approveLetter(letter.id, function(room) {
-      eventbus.call('letterReceived'); //TODO this triggers an unrelated prompt
       $state.go('app.chat', {chatId: room.hash});
     });
   };
