@@ -2,6 +2,15 @@
   position: fixed;
 }
 
+.card { // override ionic's card settings
+  padding-top: 0;
+  border-radius: 10px;
+  margin: 12px 10px;
+  &.back {
+    margin: 20px 10px; // shift the card down as a result of rotation
+  }
+}
+
 .profile-card {
   background-color: $colourBackground;
   position: relative;
