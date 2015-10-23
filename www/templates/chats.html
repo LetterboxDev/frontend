@@ -1,12 +1,17 @@
 <ion-view view-title="Chats">
   <ion-content>
-    <ion-list class="chats-list">
-      <ion-item ng-repeat="chat in chats" href="#/app/chats/{{chat.id}}" class="item item-avatar">
-        <img class="chat-profile-pic" ng-src="{{ chat.profile_pic }}">
-        <h2 class="chat-from">{{chat.from}}</h2>
-        <p class="chat-last-message">{{chat.last_message}}</p>
-        <span am-time-ago="chat.last_activity" class="chat-last-activity"></span>
-      </ion-item>
-    </ion-list>
+    <div class="feedback" ng-if="chats.length === 0">
+      <h2>No chats yet!</h2>
+    </div>
+    <div ng-if="chats.length > 0">
+      <ion-list class="chats-list">
+        <ion-item ng-repeat="chat in chats" href="#/app/chats/{{chat.id}}" class="item item-avatar">
+          <img class="chat-profile-pic" ng-src="{{ chat.profile_pic }}">
+          <h2 class="chat-from">{{chat.from}}</h2>
+          <p class="chat-last-message">{{chat.last_message}}</p>
+          <span am-time-ago="chat.last_activity" class="chat-last-activity"></span>
+        </ion-item>
+      </ion-list>
+    </div>
   </ion-content>
 </ion-view>

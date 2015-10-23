@@ -23,14 +23,12 @@
     }
   }
 
-  .questions {
-    margin-top: 60px;
-    text-align: center;
-
-    h2 {
+  .bio {
+    margin: 20px 0;
+    .counter {
       @include uppercase-bold-font();
-      color: $colourPrimaryText;
-      font-size: 18px;
+      color: $colourSubtitle;
+      font-size: 11px;
     }
   }
 

@@ -1,7 +1,12 @@
 angular.module('letterbox.controllers')
 
-.controller('ProfileCtrl', function($scope, $state, $ionicHistory, $ionicPopup, profile, ProfileService) {
-  $scope.profile = profile;
+.controller('ProfileCtrl', function($scope, $state, $ionicHistory, $ionicPopup, ProfileService) {
+  $scope.profile = {};
+  $scope.$on("$ionicView.enter", function(scopes, states) {
+    ProfileService.getProfile().then(function(profile) {
+      $scope.profile = profile;
+    })
+  });
 
   $ionicHistory.nextViewOptions({
     disableBack: true
@@ -67,7 +72,7 @@ angular.module('letterbox.controllers')
   function showError(title) {
     $ionicPopup.alert({
       title: title,
-      cssClass: "profile-alert",
+      cssClass: "popup-alert",
       okType: "button-stable"
     }).then(function(res) {
     });  
@@ -76,7 +81,7 @@ angular.module('letterbox.controllers')
   function showSuccess() {
     $ionicPopup.confirm({
       title: "Your profile has been updated!",
-      cssClass: "profile-alert",
+      cssClass: "popup-alert",
       okType: "button-positive",
       okText: "Home"
     }).then(function(res) {

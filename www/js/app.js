@@ -2,6 +2,7 @@ angular.module('letterbox', ['ionic','ionic.service.core', 'letterbox.controller
 
 .run(function($ionicPlatform, $rootScope, eventbus) {
   $rootScope.$on("$stateChangeError", console.log.bind(console));
+
   $ionicPlatform.ready(function() {
     if (window.cordova) {
       var push = new Ionic.Push();
@@ -17,7 +18,9 @@ angular.module('letterbox', ['ionic','ionic.service.core', 'letterbox.controller
       cordova.plugins.Keyboard.disableScroll(true);
 
     }
-    if (window.StatusBar) {
+    if (window.StatusBar && window.cordova.platformId == 'android') {
+      window.StatusBar.backgroundColorByHexString('#C84A3F');
+    } else if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }

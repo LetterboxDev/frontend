@@ -2,6 +2,15 @@
   position: fixed;
 }
 
+.card { // override ionic's card settings
+  padding-top: 0;
+  border-radius: 10px;
+  margin: 12px 10px;
+  &.back {
+    margin: 20px 10px; // shift the card down as a result of rotation
+  }
+}
+
 .profile-card {
   background-color: $colourBackground;
   position: relative;
@@ -10,16 +19,17 @@
   -webkit-animation-fill-mode: forwards;
   max-width: 500px;
   min-width: 280px;
+  width: 100vw;
   
   &.moving-out {
     top: 10px;
     position: absolute;
     height: 710px;
     z-index: 100;
-    -webkit-animation: card-move-out 0.2s linear forwards;
+    -webkit-animation: card-move-out 0.3s linear forwards;
   }
   &.moving-in {
-    -webkit-animation: card-move-in 0.4s ease forwards;
+    -webkit-animation: card-move-in 0.3s ease forwards;
   }
 
   .large-profile-pic-header{
@@ -64,7 +74,6 @@
 
     p {
       font-size: 13px;
-      max-width: 240px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;

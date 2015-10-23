@@ -13,17 +13,8 @@
       padding: 8px;
     }
   }
-}
 
-.profile-alert {
-  .popup {
-    padding: 15px;
-  }
-  .popup-title {
-    @include uppercase-bold-font();
-    color: $colourPrimaryText;
-  }
-  .popup-body {
-    padding: 15px;
+  .card-buttons {
+    padding: 0 1vw 7vh;
   }
 }

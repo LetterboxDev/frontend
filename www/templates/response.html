@@ -1,6 +1,6 @@
 <ion-view view-title="Response">
   <ion-content>
-    <div class="profile-cards">
+    <div class="response-cards">
       <div class="profile-card moving-in">
         <div class="flipper-container" flip-card>
           <div class="flipper">
@@ -34,7 +34,7 @@
                   <div class="button-detail">profile</div>
                 </div>
                 <div class="card-button button-positive" ng-click="approveLetter(response)">
-                  <i class="icon ion-edit"></i>
+                  <i class="icon ion-chatbubbles"></i>
                   <div class="button-detail">start chat</div>
                 </div>
               </div>
@@ -43,7 +43,7 @@
             <div class="card back">
               <div class="back-container">
                 <div class="small-profile-pic-header">
-                  <img ng-src="{{ response.profilePicMed }}" alt="Image" />
+                  <img class="small-profile-pic" ng-src="{{ response.profilePicMed }}" alt="Image" />
                   <span class="name">{{ response.from }}</span><span class="age">, {{ response.age }}</span>
                 </div>
                 <div class="item card-content">
@@ -76,8 +76,6 @@
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>

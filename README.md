@@ -18,6 +18,10 @@
 
 `cordova plugin add cordova-plugin-geolocation`
 
+`cordova plugin add ionic-plugin-keyboard`
+
+`cordova plugin add cordova-plugin-statusbar`
+
 `cordova plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git`
 
 `cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git`

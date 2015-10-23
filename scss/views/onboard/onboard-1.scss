@@ -1,37 +1,36 @@
 .onboard1-page {
-  display: flex;
-  display: -webkit-flex; /* Safari */
-  align-items: center;
-  -webkit-align-items: center; /* Safari */
-  justify-content: center;
-  -webkit-justify-content: center; /* Safari */
+  padding: 30px 20px;
 
-  .gender, .gender-preference {
+  .header {
     display: flex;
     display: -webkit-flex; /* Safari */
-    flex-flow: column nowrap;
-    -webkit-flex-flow: column nowrap; /* Safari */
+    flex-direction: column;
+    -webkit-flex-direction: column; /* Safari */
     align-items: center;
     -webkit-align-items: center; /* Safari */
-    margin: 30px 0;
-  }
-
-  h2 {
-    @include uppercase-bold-font();
-    color: $colourPrimaryText;
-    font-size: 18px;
-  }
-
-  .gender-option {
-    background-color: white;
-    border-color: $colourBorder;
-    min-width: 30vw;
-    min-height: 12vh;
-    &:before {
-      font-size: 8vh;
+    text-align: center;
+    h2 {
+      @include uppercase-bold-font();
+      color: $colourPrimaryText;
+      font-size: 18px;
+      max-width: 70vw;
     }
-    &.selected {
-      background-color: $colourPositive;
+    h3 {
+      margin: 0;
+      color: $colourSecondaryText;
+      font-size: 15px;
+      max-width: 80vw;
+    }
+  }
+
+  .questions {
+    margin-top: 30px;
+    text-align: center;
+
+    h2 {
+      @include uppercase-bold-font();
+      color: $colourPrimaryText;
+      font-size: 18px;
     }
   }
 

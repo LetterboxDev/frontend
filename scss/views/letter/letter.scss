@@ -11,7 +11,7 @@
   i {
     float: right;
   }
-  h3 {
+  .front h3 {
     text-align: center;
   }
   .card {
@@ -24,7 +24,13 @@
   }
   .left,
   .right {
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
     padding: 15px;
+    margin: 5vh 0px;
+    height: 20vh;
+    min-height: 80px;
     border-radius: 5px;
     &.active {
       color: white;
@@ -46,5 +52,9 @@
   .right.active {
     background-color: $colourOption1;
   }
-}
 
+  .card-button.disabled {
+    color: $colourDisabled;
+    border-color: $colourDisabled;
+  }
+}

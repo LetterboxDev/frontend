@@ -1,32 +1,51 @@
 angular.module('letterbox.controllers')
 
-.controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService) {
-  var targetUser = letterService.targetUserCard;
-  var questions = targetUser.questions;
-  var curr = 0;
-  var max = questions.length - 1;
-  var selected = [-1, -1, -1, -1, -1];
+.controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService, eventbus) {
+  // Makes sure that cache is cleared after every time user submits/closes letter
+  $scope.$on("$ionicView.afterLeave", function () {
+    $ionicHistory.clearCache();
+  });
 
-  $scope.userName = targetUser.name;
-  $scope.currentQuestion = targetUser.questions[0];
+  var targetUser = letterService.targetUserCard;
+
+  var questions = targetUser.questions;
+  if (!questions) {
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
+
+    $state.go('app.home');
+  } else {
+    var selected = [-1, -1, -1, -1, -1];
+
+    $scope.curr = 0;
+    $scope.max = questions.length - 1;
+    $scope.card = letterService.targetUserCard;
+    $scope.userName = targetUser.name;
+    $scope.currentQuestion = targetUser.questions[0];
+  }
 
   $scope.nextQuestion = function() {
-    if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
-    if (curr === max && selected.length === 5 && selected.indexOf(-1) === -1) {
+    if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
+
+    if ($scope.curr === $scope.max && selected.length === 5 && selected.indexOf(-1) === -1) {
       updateQuestionAnswers(questions, selected);
       backend.sendALetter(targetUser.hashedId, questions);
-      $state.go('app.home');
+      $scope.closeLetter();
+      eventbus.call('closeLetter');
+      return;
+    } else if ($scope.curr === $scope.max) {
       return;
     }
-    curr++;
-    updateQuestionView(curr, questions, selected);
+    $scope.curr++;
+    updateQuestionView($scope.curr, questions, selected);
   };
 
   $scope.prevQuestion = function() {
-    if (curr <= 0) return;
-    if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
-    curr--;
-    updateQuestionView(curr, questions, selected);
+    if ($scope.curr <= 0) return;
+    if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
+    $scope.curr--;
+    updateQuestionView($scope.curr, questions, selected);
   };
 
   $scope.closeLetter = function() {

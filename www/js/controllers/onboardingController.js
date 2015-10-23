@@ -1,10 +1,17 @@
 angular.module('letterbox.controllers')
 
-.controller('OnboardingCtrl', function($scope, $state, $timeout, Facebook, $cordovaOauth, backend, eventbus) {
+.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, backend, eventbus) {
 
+  $scope.showLoading = function() {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="ripple"></ion-spinner>'
+    });
+  };
+  $scope.hideLoading = function(){
+    $ionicLoading.hide();
+  };
 
   // Login logic
-
   $scope.authenticateToken = function(fbToken) {
     $scope.testing = 'fb_token: ' + fbToken;
     backend.auth(fbToken).$promise.then(function(success) {
@@ -13,6 +20,7 @@ angular.module('letterbox.controllers')
       window.localStorage.setItem('hashedId', success.user.hashedId);
       window.localStorage.setItem('isRegistered', success.user.isRegistered);
       eventbus.call('loginCompleted');
+      $scope.hideLoading();
       $scope.beginOnboarding();
     }, function(error) {
       // error something went wrong
@@ -21,6 +29,7 @@ angular.module('letterbox.controllers')
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
+    $scope.showLoading();
     if (!window.cordova) {
       Facebook.login(function(response) {
         if (response.status === 'connected') {
@@ -39,8 +48,7 @@ angular.module('letterbox.controllers')
   $scope.beginOnboarding = function() {
     if (window.localStorage.getItem('token') &&
         window.localStorage.getItem('isRegistered') === 'false') {
-      // skip the gender selection
-      $state.go('onboarding', {onboardStep: 2});
+      $state.go('onboarding', {onboardStep: 1});
     } else {
       $state.go('app.home');
     }
@@ -48,35 +56,6 @@ angular.module('letterbox.controllers')
 
 
   // Onboarding step 1 logic
-
-  // $scope.selectGender = function(gender) {
-  //   if (gender === 'male' || gender === 'female') {
-  //     $scope.gender = gender;
-  //     window.localStorage.setItem('gender', gender);
-  //   }
-  // }
-
-  // $scope.selectGenderPref = function(gender) {
-  //   if (gender === 'male' || gender === 'female') {
-  //     $scope.genderPref = gender;
-  //     window.localStorage.setItem('genderPref', gender);
-  //   }
-  // }
-
-  // $scope.completeOnboardingStep1 = function() {
-  //   var gender = window.localStorage.getItem('gender');
-  //   var genderPref = window.localStorage.getItem('genderPref')
-  //   if (gender && genderPref) {
-  //     backend.updateGender(gender, genderPref, function(res){
-  //       $state.go('onboarding', {onboardStep: 2});
-  //     });
-  //   } else {
-  //     // TODO handle error
-  //   }
-  // };
-
-
-  // Onboarding step 2 logic
 
   $scope.getRandomQuestions = function() {
     backend.getRandomQuestions().$promise.then(function(res){
@@ -102,11 +81,10 @@ angular.module('letterbox.controllers')
     $scope.questions[index] = question;
   }
 
-  $scope.completeOnboardingStep2 = function() {
+  $scope.completeOnboardingStep1 = function() {
     for (var i = 0; i < 5; i++) {
       if (typeof $scope.questions[i].answer === 'undefined') {
-        //TODO handle error
-        console.log('Answer all questions');
+        showError("Please answer all your questions");
         return;
       }
     }
@@ -116,14 +94,14 @@ angular.module('letterbox.controllers')
     });
 
     backend.setQuestionsAndAnswers(questions, function(res){
-      $state.go('onboarding', {onboardStep: 3});
+      $state.go('onboarding', {onboardStep: 2});
     }, function(err){
       console.log("Couldn't save question and answers");
     });
   }
 
 
-  // Onboarding step 3 logic
+  // Onboarding step 2 logic
   $scope.data = {
     bio: ""
   }
@@ -132,13 +110,15 @@ angular.module('letterbox.controllers')
     // console.log($scope.data.bio);
   }
 
-  $scope.completeOnboardingStep3 = function() {
+  $scope.completeOnboardingStep2 = function() {
     if ($scope.data.bio.length > 0) {
       backend.updateUserBio($scope.data.bio, function(res){
         $scope.completeOnboarding();
       }, function(err){
         console.log("Couldn't save bio");
       });
+    } else {
+      showError("Please add a short bio");
     }
   }
 
@@ -147,6 +127,14 @@ angular.module('letterbox.controllers')
     $state.go('app.home');
   }
 
+  function showError(title) {
+    $ionicPopup.alert({
+      title: title,
+      cssClass: "popup-alert",
+      okType: "button-stable"
+    }).then(function(res) {
+    });  
+  }
 
   var init = function() {
     if (window.localStorage.getItem('token') && !$scope.questions) {

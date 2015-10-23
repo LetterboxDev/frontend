@@ -1,17 +1,21 @@
 <ion-view>
   <ion-content class="onboard1-page">
-    <div class="gender">
-      <h2>I am</h2>
-      <div class="gender-choices">
-        <button class="gender-option button button-large icon ion-woman" ng-class="gender == 'female' ? 'selected' : ''" ng-click="selectGender('female')"></button>
-        <button class="gender-option button button-large icon ion-man" ng-class="gender == 'male' ? 'selected' : ''" ng-click="selectGender('male')"></button>
-      </div>
+    <div class="header">
+      <h2>Setup your letterbox</h2>
+      <h3>Choose 5 questions for your profile for others to answer</h3>
     </div>
-    <div class="gender-preference">
-      <h2>Looking for</h2>
-      <div class="preference-choices">
-        <button class="gender-option button button-large icon ion-woman" ng-class="genderPref == 'female' ? 'selected' : ''" ng-click="selectGenderPref('female')"></button>
-        <button class="gender-option button button-large icon ion-man" ng-class="genderPref == 'male' ? 'selected' : ''" ng-click="selectGenderPref('male')"></button>
+    <div class="questions">
+      <h2>Would you rather...</h2>
+      <div ng-repeat="question in questions" class="question" >
+        <div class="shuffle">
+          <button class="btn-randomise button button-small button-dark icon ion-shuffle" ng-click='getNewQn(question)'></button>
+        </div>
+        <div class="option option0" ng-class="question.answer == 0 ? 'selected' : ''" ng-click="selectOption(question, 0)">
+          {{question.option0}}
+        </div>
+        <div class="option option1" ng-class="question.answer == 1 ? 'selected' : ''" ng-click="selectOption(question, 1)">
+          {{question.option1}}
+        </div>
       </div>
     </div>
     <button class="btn-complete button button-light" ng-click="completeOnboardingStep1()">Next</button>
