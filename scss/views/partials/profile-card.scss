@@ -19,6 +19,7 @@
   -webkit-animation-fill-mode: forwards;
   max-width: 500px;
   min-width: 280px;
+  width: 100vw;
   
   &.moving-out {
     top: 10px;
