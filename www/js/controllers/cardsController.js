@@ -5,34 +5,6 @@ angular.module('letterbox.controllers')
   $scope.cards = [];
   $scope.isLoading = false;
 
-  function getCard() {
-    if (window.localStorage.getItem('token') && $scope.cards.length === 0 && !$scope.isLoading) {
-      $scope.isLoading = true;
-      var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
-      backend.getMatch(distance)
-        .$promise
-        .then(function(match) {
-          $ImageCacheFactory.Cache([
-              match.pictureMed
-            ]).then(function() {
-              previousId = match.hashedId;
-              $scope.cards.push(createNewCard(match));
-
-              $timeout(function() {
-                selectFirst('.profile-card').removeClass('moving-in');
-                registerEventHandler();
-              }, 400);
-              $scope.isLoading = false;
-            }, function() {
-              // Failed to load image
-              $scope.isLoading = false;
-            });
-        }, function(err) {
-          // TODO Show error message (no match, not connected, etc.)
-        });
-    }
-  }
-
   eventbus.registerListener("enterHome", getCard);
   getCard();
 
@@ -77,6 +49,34 @@ angular.module('letterbox.controllers')
   /**
    * Helper functions
    */
+  function getCard() {
+    if (window.localStorage.getItem('token') && $scope.cards.length === 0 && !$scope.isLoading) {
+      $scope.isLoading = true;
+      var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
+      backend.getMatch(distance)
+        .$promise
+        .then(function(match) {
+          $ImageCacheFactory.Cache([
+              match.pictureMed
+            ]).then(function() {
+              previousId = match.hashedId;
+              $scope.cards.push(createNewCard(match));
+
+              $timeout(function() {
+                selectFirst('.profile-card').removeClass('moving-in');
+                registerEventHandler();
+              }, 400);
+              $scope.isLoading = false;
+            }, function() {
+              // Failed to load image
+              $scope.isLoading = false;
+            });
+        }, function(err) {
+          // TODO Show error message (no match, not connected, etc.)
+        });
+    }
+  }
+
   function createNewCard(match) {
     return {
       hashedId: match.hashedId,
