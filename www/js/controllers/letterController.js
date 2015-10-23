@@ -1,21 +1,32 @@
 angular.module('letterbox.controllers')
 
-.controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService) {
+.controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService, eventbus) {
+  // Makes sure that cache is cleared after every time user submits/closes letter
+  $scope.$on("$ionicView.afterLeave", function () {
+    $ionicHistory.clearCache();
+  });
+
   var targetUser = letterService.targetUserCard;
   var questions = targetUser.questions;
   var curr = 0;
   var max = questions.length - 1;
   var selected = [-1, -1, -1, -1, -1];
 
+  $scope.card = letterService.targetUserCard;
+
   $scope.userName = targetUser.name;
   $scope.currentQuestion = targetUser.questions[0];
 
   $scope.nextQuestion = function() {
     if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
+
     if (curr === max && selected.length === 5 && selected.indexOf(-1) === -1) {
       updateQuestionAnswers(questions, selected);
       backend.sendALetter(targetUser.hashedId, questions);
-      $state.go('app.home');
+      $scope.closeLetter();
+      eventbus.call('closeLetter');
+      return;
+    } else if (curr === max) {
       return;
     }
     curr++;

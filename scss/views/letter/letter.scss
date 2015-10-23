@@ -11,7 +11,7 @@
   i {
     float: right;
   }
-  h3 {
+  .front h3 {
     text-align: center;
   }
   .card {
@@ -24,7 +24,11 @@
   }
   .left,
   .right {
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
     padding: 15px;
+    height: 35vh;
     border-radius: 5px;
     &.active {
       color: white;
