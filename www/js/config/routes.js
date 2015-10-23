@@ -12,7 +12,7 @@ angular.module('letterbox')
   .state('onboarding', {
     url: '/onboarding/:onboardStep',
     templateUrl: function ($stateParams){
-      return '/templates/onboard' + $stateParams.onboardStep + '.html';
+      return 'templates/onboard' + $stateParams.onboardStep + '.html';
     },
     controller: 'OnboardingCtrl'
   })
