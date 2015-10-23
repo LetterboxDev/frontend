@@ -12,6 +12,8 @@ angular.module('letterbox.controllers')
   var max = questions.length - 1;
   var selected = [-1, -1, -1, -1, -1];
 
+  $scope.card = letterService.targetUserCard;
+
   $scope.userName = targetUser.name;
   $scope.currentQuestion = targetUser.questions[0];
 
