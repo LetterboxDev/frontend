@@ -2,6 +2,7 @@ angular.module('letterbox', ['ionic', 'letterbox.controllers', 'ngResource', 'le
 
 .run(function($ionicPlatform, $rootScope) {
   $rootScope.$on("$stateChangeError", console.log.bind(console));
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -10,7 +11,9 @@ angular.module('letterbox', ['ionic', 'letterbox.controllers', 'ngResource', 'le
       cordova.plugins.Keyboard.disableScroll(true);
 
     }
-    if (window.StatusBar) {
+    if (window.StatusBar && window.cordova.platformId == 'android') {
+      window.StatusBar.backgroundColorByHexString('#993333');
+    } else if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
