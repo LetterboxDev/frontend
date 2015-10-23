@@ -2,10 +2,13 @@ angular.module('letterbox.controllers')
 
 .controller('NotificationsCtrl', function($scope, $state, $ionicModal, NotificationsService, eventbus, backend) {
   $scope.notifications = [];
+  $scope.isLoading = false;
 
   function refreshNotifications() {
+    $scope.isLoading = true;
     NotificationsService.getNotificationsList().then(function(notifications) {
       $scope.notifications = notifications;
+      $scope.isLoading = false;
     });
   }
 
