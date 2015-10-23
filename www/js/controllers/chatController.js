@@ -26,6 +26,13 @@ angular.module('letterbox.controllers')
     });
   });
 
+  $scope.onKeyPress = function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      $scope.sendMessage();
+    }
+  };
+
   $scope.sendMessage = function() {
     var content = $scope.data.message;
     socket.sendMessage($scope.roomHash, content);
