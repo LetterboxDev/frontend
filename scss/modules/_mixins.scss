@@ -60,6 +60,11 @@
   }
 
   .message-data {
+    @if $sent-or-received == sent {
+      margin-right: 0;
+    } @else if $sent-or-received == received {
+      margin-right: 10px;
+    }
     .message-from {
       font-size: 12px;
       font-weight: bold;
@@ -72,7 +77,11 @@
     }
   }
   .message-meta {
-    margin-left: 10px;
+    @if $sent-or-received == sent {
+      margin-left: 10px;
+    } @else if $sent-or-received == received {
+      margin-left: 0;
+    }
     flex-grow: 1;
     align-self: flex-end;
     -webkit-align-self: flex-end;
