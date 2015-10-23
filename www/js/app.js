@@ -5,7 +5,14 @@ angular.module('letterbox', ['ionic','ionic.service.core', 'letterbox.controller
 
   $ionicPlatform.ready(function() {
     if (window.cordova) {
-      var push = new Ionic.Push();
+      var push = new Ionic.Push({
+        "pluginConfig": {
+          "android": {
+            "icon": "notification",
+            "iconColor": "#fa5c4f"
+          }
+        }
+      });
       push.register(function(token) {
         window.localStorage.setItem('pushToken', token.token);
         eventbus.call('pushTokenSet');
