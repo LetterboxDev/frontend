@@ -17,7 +17,7 @@
                   </div>
                 </div>
                 <div class="card-buttons">
-                  <div class="card-button button-positive button-prev" ng-click="prevQuestion()">
+                  <div class="card-button button-positive button-prev" ng-class="{'disabled': curr === 0}" ng-click="prevQuestion()">
                     <i class="icon ion-chevron-left"></i>
                     <div class="button-detail">previous</div>
                   </div>
@@ -25,7 +25,7 @@
                     <i class="icon ion-person"></i>
                     <div class="button-detail">profile</div>
                   </div>
-                  <div class="card-button button-positive button-next" ng-click="nextQuestion()">
+                  <div class="card-button button-positive button-next" ng-class="{'disabled': curr === max}" ng-click="nextQuestion()">
                     <i class="icon ion-chevron-right"></i>
                     <div class="button-detail">next</div>
                   </div>

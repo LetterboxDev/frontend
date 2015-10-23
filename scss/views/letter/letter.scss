@@ -52,4 +52,9 @@
   .right.active {
     background-color: $colourOption1;
   }
+
+  .card-button.disabled {
+    color: $colourDisabled;
+    border-color: $colourDisabled;
+  }
 }

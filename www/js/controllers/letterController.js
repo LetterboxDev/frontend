@@ -16,37 +16,36 @@ angular.module('letterbox.controllers')
 
     $state.go('app.home');
   } else {
-    var curr = 0;
-    var max = questions.length - 1;
     var selected = [-1, -1, -1, -1, -1];
 
+    $scope.curr = 0;
+    $scope.max = questions.length - 1;
     $scope.card = letterService.targetUserCard;
-
     $scope.userName = targetUser.name;
     $scope.currentQuestion = targetUser.questions[0];
   }
 
   $scope.nextQuestion = function() {
-    if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
+    if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
 
-    if (curr === max && selected.length === 5 && selected.indexOf(-1) === -1) {
+    if ($scope.curr === $scope.max && selected.length === 5 && selected.indexOf(-1) === -1) {
       updateQuestionAnswers(questions, selected);
       backend.sendALetter(targetUser.hashedId, questions);
       $scope.closeLetter();
       eventbus.call('closeLetter');
       return;
-    } else if (curr === max) {
+    } else if ($scope.curr === $scope.max) {
       return;
     }
-    curr++;
-    updateQuestionView(curr, questions, selected);
+    $scope.curr++;
+    updateQuestionView($scope.curr, questions, selected);
   };
 
   $scope.prevQuestion = function() {
-    if (curr <= 0) return;
-    if (selected[curr] === -1) selected[curr] = $scope.selectedTab;
-    curr--;
-    updateQuestionView(curr, questions, selected);
+    if ($scope.curr <= 0) return;
+    if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
+    $scope.curr--;
+    updateQuestionView($scope.curr, questions, selected);
   };
 
   $scope.closeLetter = function() {
