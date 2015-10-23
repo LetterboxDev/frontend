@@ -24,9 +24,9 @@ angular.module('letterbox.controllers')
 
   $scope.approveLetter = function(letter) {
     // approves letter, opens a chat and refresh notifs
-    backend.approveLetter(letter.id, function() {
+    backend.approveLetter(letter.id, function(room) {
       eventbus.call('letterReceived'); //TODO this triggers an unrelated prompt
-      $state.go('app.chat', {chatId: letter.id});
+      $state.go('app.chat', {chatId: room.hash});
     });
   };
 });
