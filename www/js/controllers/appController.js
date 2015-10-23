@@ -35,7 +35,8 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
     RoomsService.updateRooms();
     $ionicPopup.confirm({
       title: data.approverName + ' just started a chat with you!',
-      template: 'Start chatting?'
+      template: 'Start chatting?',
+      cssClass: "popup-alert"
     }).then(function(res) {
       if (res) {
         $state.go('app.chat', {chatId: data.room.hash});
@@ -48,7 +49,8 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
   eventbus.registerListener('letterReceived', function(data) {
     $ionicPopup.confirm({
       title: 'New Letter Received!',
-      template: 'Proceed to notifications?'
+      template: 'Proceed to notifications?',
+      cssClass: "popup-alert"
     }).then(function(res) {
       if (res) {
         $state.go('app.notifications');
