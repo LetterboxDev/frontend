@@ -1,23 +1,15 @@
 <ion-view>
   <ion-content class="onboard2-page">
     <div class="header">
-      <h2>Choose 5 questions for your profile</h2>
-      <h3>People will answer these 5 questions</h3>
+      <h2>Add a short bio</h2>
+      <h3>It will be shown on your profile</h3>
     </div>
-    <div class="questions">
-      <h2>Would you rather...</h2>
-      <div ng-repeat="question in questions" class="question" >
-        <div class="shuffle">
-          <button class="btn-randomise button button-small button-dark icon ion-shuffle" ng-click='getNewQn(question)'></button>
-        </div>
-        <div class="option option0" ng-class="question.answer == 0 ? 'selected' : ''" ng-click="selectOption(question, 0)">
-          {{question.option0}}
-        </div>
-        <div class="option option1" ng-class="question.answer == 1 ? 'selected' : ''" ng-click="selectOption(question, 1)">
-          {{question.option1}}
-        </div>
-      </div>
+    <div class="bio">
+      <span class="counter">{{data.bio.length}} characters</span>
+      <label class="item item-input">
+        <textarea placeholder="Bio" rows="10" ng-model="data.bio" ng-change="onEnterText()"></textarea>
+      </label>
     </div>
-    <button class="btn-complete button button-light" ng-click="completeOnboardingStep2()">Next</button>
+    <button class="btn-complete button button-light" ng-click="completeOnboardingStep2()">Complete onboarding</button>
   </ion-content>
 </ion-view>
