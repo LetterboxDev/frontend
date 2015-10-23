@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('OnboardingCtrl', function($scope, $state, $timeout, Facebook, $cordovaOauth, backend, eventbus) {
+.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, Facebook, $cordovaOauth, backend, eventbus) {
 
 
   // Login logic
@@ -75,8 +75,7 @@ angular.module('letterbox.controllers')
   $scope.completeOnboardingStep1 = function() {
     for (var i = 0; i < 5; i++) {
       if (typeof $scope.questions[i].answer === 'undefined') {
-        //TODO handle error
-        console.log('Answer all questions');
+        showError("Please answer all your questions");
         return;
       }
     }
@@ -109,6 +108,8 @@ angular.module('letterbox.controllers')
       }, function(err){
         console.log("Couldn't save bio");
       });
+    } else {
+      showError("Please add a short bio");
     }
   }
 
@@ -117,6 +118,14 @@ angular.module('letterbox.controllers')
     $state.go('app.home');
   }
 
+  function showError(title) {
+    $ionicPopup.alert({
+      title: title,
+      cssClass: "popup-alert",
+      okType: "button-stable"
+    }).then(function(res) {
+    });  
+  }
 
   var init = function() {
     if (window.localStorage.getItem('token') && !$scope.questions) {

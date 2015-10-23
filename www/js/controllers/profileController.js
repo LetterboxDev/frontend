@@ -67,7 +67,7 @@ angular.module('letterbox.controllers')
   function showError(title) {
     $ionicPopup.alert({
       title: title,
-      cssClass: "profile-alert",
+      cssClass: "popup-alert",
       okType: "button-stable"
     }).then(function(res) {
     });  
@@ -76,7 +76,7 @@ angular.module('letterbox.controllers')
   function showSuccess() {
     $ionicPopup.confirm({
       title: "Your profile has been updated!",
-      cssClass: "profile-alert",
+      cssClass: "popup-alert",
       okType: "button-positive",
       okText: "Home"
     }).then(function(res) {
