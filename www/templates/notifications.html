@@ -1,7 +1,7 @@
 <ion-view view-title="Notifications">
-  <ion-content>
-    <div ng-if="isLoading">
-      <p>Loading notifications</p>
+  <ion-content class="notifications-page">
+    <div class="feedback" ng-if="isLoading">
+      <h2>Loading notifications</h2>
       <ion-spinner icon="dots"></ion-spinner>
     </div>
     <div ng-if="!isLoading">
@@ -15,8 +15,8 @@
           </ion-item>
         </ion-list>
       </div>
-      <div ng-if="notifications.length === 0">
-        <p>No notifications!</p>
+      <div class="feedback" ng-if="notifications.length === 0" >
+        <h2>No notifications!</h2>
       </div>
     </div>
   </ion-content>
