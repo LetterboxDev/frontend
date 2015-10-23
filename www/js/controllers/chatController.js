@@ -2,6 +2,7 @@ angular.module('letterbox.controllers')
 
 .controller('ChatCtrl', function($scope, $stateParams, $ionicScrollDelegate, ChatService, RoomsService, eventbus, socket) {
   $scope.recipient = '';
+  $scope.data = {message: ''};
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
@@ -50,7 +51,9 @@ angular.module('letterbox.controllers')
 
   $scope.sendMessage = function() {
     var content = $scope.data.message;
-    socket.sendMessage($scope.roomHash, content);
-    $scope.data.message = '';
+    if (content && content.length !== 0) {
+      socket.sendMessage($scope.roomHash, content);
+      $scope.data.message = '';
+    }
   };
 });
