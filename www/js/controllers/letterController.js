@@ -10,6 +10,10 @@ angular.module('letterbox.controllers')
 
   var questions = targetUser.questions;
   if (!questions) {
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
+
     $state.go('app.home');
   } else {
     var curr = 0;
