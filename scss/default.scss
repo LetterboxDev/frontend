@@ -48,10 +48,11 @@ ion-content {
     margin: 0;
   }
 
-  ion-spinner.spinner-dots svg {
+  ion-spinner.spinner svg {
     fill: $colourPreloader;
-    width: 50px;
-    height: 50px;
+    stroke: $colourPreloader;
+    width: 40px;
+    height: 40px;
   }
 }
 

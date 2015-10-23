@@ -7,7 +7,7 @@ angular.module('letterbox.controllers')
 
   $scope.showLoading = function() {
     $ionicLoading.show({
-      template: '<ion-spinner icon="dots"></ion-spinner>',
+      template: '<div class="feedback"><ion-spinner icon="dots"></ion-spinner></div>',
       noBackdrop: true
     });
   };
