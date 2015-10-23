@@ -15,6 +15,14 @@ angular.module('letterbox.controllers')
     }
   });
 
+  var onKeyboardHide = function() {
+    $ionicScrollDelegate.scrollBottom(true);
+  };
+
+  var onKeyboardShow = function() {
+    $ionicScrollDelegate.scrollBottom(false);
+  };
+
   $scope.$on("$ionicView.enter", function(scopes, states) {
     $scope.messages = [];
     ChatService.getRecipientName($scope.roomHash).then(function(recipient) {
@@ -24,6 +32,13 @@ angular.module('letterbox.controllers')
       $scope.messages = messages;
       $ionicScrollDelegate.scrollBottom(false);
     });
+    window.addEventListener('native.keyboardhide', onKeyboardHide, false);
+    window.addEventListener('native.keyboardshow', onKeyboardShow, false);
+  });
+
+  $scope.$on("$ionicView.leave", function(scopes, states) {
+    window.removeEventListener('native.keyboardhide', onKeyboardHide, false);
+    window.removeEventListener('native.keyboardshow', onKeyboardShow, false);
   });
 
   $scope.onKeyPress = function(event) {
