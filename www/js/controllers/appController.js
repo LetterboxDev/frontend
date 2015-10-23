@@ -34,7 +34,7 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
       template: 'Start chatting?'
     }).then(function(res) {
       if (res) {
-        // Go to chat $state.go('');
+        $state.go('app.chat', {chatId: data.room.hash});
       }
     });
   });
