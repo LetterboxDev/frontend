@@ -5,7 +5,8 @@ angular.module('letterbox.controllers')
   $scope.cards = [];
   $scope.isLoading = false;
 
-  eventbus.registerListener("enterHome", getCard);
+  eventbus.registerListener('enterHome', getCard);
+  eventbus.registerListener('closeLetter', removeTopCard);
   getCard();
 
   $scope.changeCard = function() {
@@ -75,6 +76,10 @@ angular.module('letterbox.controllers')
           // TODO Show error message (no match, not connected, etc.)
         });
     }
+  }
+
+  function removeTopCard() {
+    $scope.cards.shift();
   }
 
   function createNewCard(match) {

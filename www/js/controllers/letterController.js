@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService) {
+.controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService, eventbus) {
   var targetUser = letterService.targetUserCard;
   var questions = targetUser.questions;
   var curr = 0;
@@ -15,7 +15,8 @@ angular.module('letterbox.controllers')
     if (curr === max && selected.length === 5 && selected.indexOf(-1) === -1) {
       updateQuestionAnswers(questions, selected);
       backend.sendALetter(targetUser.hashedId, questions);
-      $state.go('app.home');
+      $scope.closeLetter();
+      eventbus.call('closeLetter');
       return;
     }
     curr++;
