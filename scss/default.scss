@@ -69,10 +69,12 @@ ion-content {
       color: $colourPrimaryText;
       cursor: pointer;
       margin: 0px !important;
-      height: 100px;
+      height: 85px;
       display: flex;
       align-items: center;
       -webkit-align-items: center;
+      justify-content: center;
+      -webkit-justify-content: center;
 
       &.selected {
         color: white;
