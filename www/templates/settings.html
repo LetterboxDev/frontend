@@ -1,13 +1,15 @@
 <ion-view view-title="Settings">
   <ion-content>
     <ion-list class="settings-list">
-      <ion-toggle ng-model="preference.perfectMatch" ng-checked="preference.perfectMatch" ng-change="onChangePerfectMatch()" toggle-class="toggle-calm">
-        <h2 class="setting-description">Only see perfect match</h2>
+      <ion-toggle ng-model="preference.perfectMatch" ng-checked="preference.perfectMatch" ng-change="onChangePerfectMatch()" toggle-class="toggle-positive">
+        <h2 class="setting-header">Perfect match</h2>
+        <p class="setting-description">Receive letters only from people who have answered all your questions correctly.</p>
       </ion-toggle>
       <ion-item class="item item-gender">
-        <h2 class="setting-description">
+        <h2 class="setting-header">
           Gender preference
         </h2>
+
         <div class="row">
           <div class="col">
             <ion-checkbox class="inline-checkbox" ng-model="preference.preferFemale" ng-checked="preference.preferFemale" ng-change="onChangePreferFemale()">
@@ -23,9 +25,10 @@
         </div>
       </ion-item>
       <ion-item class="item">
-        <h2 class="setting-description">
+        <h2 class="setting-header">
           Maximum distance: <span>{{ preference.distanceRadius }}km</span>
         </h2>
+        <p class="setting-description">See the letterbox of people within this radius.</p>
         <div class="range">
           1
           <input type="range" name="distanceRadius" min="1" max="100" ng-model="preference.distanceRadius" ng-change="onChangeDistanceRadius()">

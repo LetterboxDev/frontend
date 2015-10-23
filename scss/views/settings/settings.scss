@@ -1,9 +1,16 @@
 .settings-list {
-  .setting-description {
+  .setting-header {
     @extend .list-item-heading;
     font-size: 14px;
     white-space: normal;
     line-height: 1.4em;
+  }
+
+  .setting-description {
+    @extend .list-item-message;
+    max-width: 80vw;
+    
+    white-space: normal;
   }
 
   .inline-checkbox {
