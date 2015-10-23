@@ -1,6 +1,11 @@
 angular.module('letterbox.controllers')
 
 .controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService, eventbus) {
+  // Makes sure that cache is cleared after every time user submits/closes letter
+  $scope.$on("$ionicView.afterLeave", function () {
+    $ionicHistory.clearCache();
+  });
+
   var targetUser = letterService.targetUserCard;
   var questions = targetUser.questions;
   var curr = 0;
