@@ -1,10 +1,17 @@
 angular.module('letterbox.controllers')
 
-.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, Facebook, $cordovaOauth, backend, eventbus) {
+.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, backend, eventbus) {
 
+  $scope.showLoading = function() {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="ripple"></ion-spinner>'
+    });
+  };
+  $scope.hideLoading = function(){
+    $ionicLoading.hide();
+  };
 
   // Login logic
-
   $scope.authenticateToken = function(fbToken) {
     $scope.testing = 'fb_token: ' + fbToken;
     backend.auth(fbToken).$promise.then(function(success) {
@@ -13,6 +20,7 @@ angular.module('letterbox.controllers')
       window.localStorage.setItem('hashedId', success.user.hashedId);
       window.localStorage.setItem('isRegistered', success.user.isRegistered);
       eventbus.call('loginCompleted');
+      $scope.hideLoading();
       $scope.beginOnboarding();
     }, function(error) {
       // error something went wrong
@@ -21,6 +29,7 @@ angular.module('letterbox.controllers')
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
+    $scope.showLoading();
     if (!window.cordova) {
       Facebook.login(function(response) {
         if (response.status === 'connected') {

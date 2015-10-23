@@ -6,6 +6,23 @@ ion-content {
   background-color: $colourBackground;
 }
 
+.loading-container .loading {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.spinner svg {
+  width: 100px;
+  height: 100px;
+  stroke: white;
+
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
 // View container styles
 .view-container {
   .scroll-content.has-header {
