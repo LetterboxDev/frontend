@@ -9,6 +9,9 @@
   <ion-content scroll="false">
     <div ng-controller="CardsCtrl">
       <div class="profile-cards">
+        <div ng-if="cards.length === 0" class="feedback">
+          <h2>You have no more matches available now!</h2>
+        </div>
         <div class="profile-card moving-in" ng-repeat="card in cards">
           <div class="flipper-container" flip-card>
             <div class="flipper">
