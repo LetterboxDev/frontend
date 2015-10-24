@@ -237,13 +237,15 @@ angular.module('letterbox.services')
   DbService.clearAll = function() {
     var deferred = $q.defer();
     checkInit(deferred);
-    db.sqlite.transaction(function(tx) {
-      tx.executeSql("DELETE FROM messages", [], function(tx, res) {
-        tx.executeSql("DELETE FROM rooms", [], function(tx, res) {
-          deferred.resolve(messages);          
+    if (DbService.isInitialized()) {
+      db.sqlite.transaction(function(tx) {
+        tx.executeSql("DELETE FROM messages", [], function(tx, res) {
+          tx.executeSql("DELETE FROM rooms", [], function(tx, res) {
+            deferred.resolve(messages);          
+          });
         });
       });
-    });
+    }
     return deferred.promise;
   }
 

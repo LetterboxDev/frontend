@@ -3,12 +3,12 @@ angular.module('letterbox.services')
 .service('AuthService', function($q, backend, DbService) {
   var AuthService = {};
 
-  function saveDetails = function(res) {
+  function saveDetails(res) {
     window.localStorage.setItem('token', res.letterbox_token);
     window.localStorage.setItem('firstName', res.user.firstName);
     window.localStorage.setItem('hashedId', res.user.hashedId);
     window.localStorage.setItem('isRegistered', res.user.isRegistered);
-  };
+  }
 
   AuthService.authToken = function(fbToken) {
     var deferred = $q.defer();
@@ -48,9 +48,13 @@ angular.module('letterbox.services')
     window.localStorage.setItem('hashedId', '');
     window.localStorage.setItem('isRegistered', '');
 
-    DbService.clearAll().then(function() {
+    if (DbService.isInitialized()) {
+      DbService.clearAll().then(function() {
+        deferred.resolve();
+      });
+    } else {
       deferred.resolve();
-    });
+    }
 
     return deferred.promise;
   };
