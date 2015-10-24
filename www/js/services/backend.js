@@ -212,13 +212,11 @@ angular.module('letterbox.services')
     return bioUpdater.$updateBio(successPromise, errorPromise);
   };
 
-  // Gender:           'male' or 'female'
   // GenderPreference: 'male' or 'female'
-  backend.updateGender = function(gender, genderPreference, successPromise) {
+  backend.updateGenderPreference = function(genderPreference, successPromise) {
     var token = getToken();
     genderUpdater = new updateGender();
     genderUpdater.token = token;
-    genderUpdater.gender = gender;
     genderUpdater.genderPreference = genderPreference;
     return genderUpdater.$updateGender(successPromise);
   };
