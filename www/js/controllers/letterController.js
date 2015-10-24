@@ -23,9 +23,11 @@ angular.module('letterbox.controllers')
     $scope.card = letterService.targetUserCard;
     $scope.userName = targetUser.name;
     $scope.currentQuestion = targetUser.questions[0];
+    $scope.warning = '';
   }
 
   $scope.nextQuestion = function() {
+    $scope.warning = '';
     if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
 
     if ($scope.curr === $scope.max && selected.length === 5 && selected.indexOf(-1) === -1) {
@@ -35,6 +37,7 @@ angular.module('letterbox.controllers')
       eventbus.call('closeLetter');
       return;
     } else if ($scope.curr === $scope.max) {
+      $scope.warning = 'Please complete all answers.';
       return;
     }
     $scope.curr++;
@@ -42,6 +45,7 @@ angular.module('letterbox.controllers')
   };
 
   $scope.prevQuestion = function() {
+    $scope.warning = '';
     if ($scope.curr <= 0) return;
     if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
     $scope.curr--;

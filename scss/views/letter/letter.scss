@@ -14,12 +14,20 @@
   .front h3 {
     text-align: center;
   }
+  .warning {
+    color: $colourPrimary;
+    text-align: center;
+    margin: 0;
+  }
+  .warning:empty:before {
+    content: '\200b';
+  }
   .card {
     background-color: white;
     padding: 15px 15px 0 15px;
   }
   .answer-row {
-    padding-top: 30px;
+    padding-top: 15px;
     padding-bottom: 30px;
   }
   .left,
