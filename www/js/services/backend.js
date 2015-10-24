@@ -10,7 +10,7 @@ angular.module('letterbox.services')
   var otherUserPath = '/user/id/:userId';
   var updateLocationPath = '/user/location';
   var updateBioPath = '/user/bio';
-  var updateGenderPath = '/user/gender';
+  var updateGenderPreferencePath = '/user/genderPreference';
   var matchPath = '/match';
   var matchesPath = '/matches';
   var questionsPath = '/questions';
@@ -75,8 +75,8 @@ angular.module('letterbox.services')
     }
   });
 
-  var updateGender = $resource(URL.concat(updateGenderPath), {}, {
-    updateGender: {
+  var updateGenderPreference = $resource(URL.concat(updateGenderPreferencePath), {}, {
+    updateGenderPreference: {
       method: 'PUT',
       params: {
         letterbox_token: '@token'
@@ -215,10 +215,10 @@ angular.module('letterbox.services')
   // GenderPreference: 'male' or 'female'
   backend.updateGenderPreference = function(genderPreference, successPromise) {
     var token = getToken();
-    genderUpdater = new updateGender();
-    genderUpdater.token = token;
-    genderUpdater.genderPreference = genderPreference;
-    return genderUpdater.$updateGender(successPromise);
+    genderPreferenceUpdater = new updateGenderPreference();
+    genderPreferenceUpdater.token = token;
+    genderPreferenceUpdater.genderPreference = genderPreference;
+    return genderPreferenceUpdater.$updateGenderPreference(successPromise);
   };
 
   backend.getRandomQuestions = function() {
