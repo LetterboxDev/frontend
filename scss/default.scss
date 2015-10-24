@@ -6,14 +6,15 @@ ion-content {
   background-color: $colourBackground;
 }
 
-.loading-container .loading {
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  background-color: rgba(0,0,0,0.8);
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-.spinner svg {
+.loading-container .loading {
+  background: none;
+}
+
+.spinner-ripple svg {
   width: 100px;
   height: 100px;
   stroke: white;
@@ -21,6 +22,38 @@ ion-content {
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.spinner-dots svg {
+  fill: $colourPreloader;
+}
+
+// Feedback for loading and empty pages
+.feedback {
+  height: 90vh;
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  flex-flow: column nowrap;
+  -webkit-flex-flow: column nowrap; /* Safari */
+  align-items: center;
+  -webkit-align-items: center; /* Safari */
+  justify-content: center;
+  -webkit-justify-content: center; /* Safari */
+
+  h2 {
+    @include uppercase-bold-font();
+    letter-spacing: 3px;
+    font-size: 12px;
+    color: $colourPreloader;
+    margin: 0;
+  }
+
+  ion-spinner.spinner svg {
+    fill: $colourPreloader;
+    stroke: $colourPreloader;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 // View container styles

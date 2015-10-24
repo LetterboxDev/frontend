@@ -12,7 +12,7 @@ angular.module('letterbox', ['ionic', 'letterbox.controllers', 'ngResource', 'le
 
     }
     if (window.StatusBar && window.cordova.platformId == 'android') {
-      window.StatusBar.backgroundColorByHexString('#AA3333');
+      window.StatusBar.backgroundColorByHexString('#C84A3F');
     } else if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();

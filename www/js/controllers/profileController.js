@@ -1,7 +1,15 @@
 angular.module('letterbox.controllers')
 
-.controller('ProfileCtrl', function($scope, $state, $ionicHistory, $ionicPopup, profile, ProfileService) {
-  $scope.profile = profile;
+.controller('ProfileCtrl', function($scope, $state, $ionicHistory, $ionicPopup, ProfileService) {
+  $scope.profile = {};
+  $scope.isLoading = true;
+
+  $scope.$on("$ionicView.enter", function(scopes, states) {
+    ProfileService.getProfile().then(function(profile) {
+      $scope.profile = profile;
+      $scope.isLoading = false;
+    })
+  });
 
   $ionicHistory.nextViewOptions({
     disableBack: true
