@@ -61,7 +61,10 @@ angular.module('letterbox.controllers')
 
   $scope.selectTab = function(tab) {
     $scope.selectedTab = tab;
-    $scope.nextQuestion();
+
+    if ($scope.curr < $scope.max) {
+      $scope.nextQuestion();
+    }
   }
 
   /**
