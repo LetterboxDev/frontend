@@ -1,4 +1,4 @@
-# Letterbox Frontend
+# Letterbox Frontend [![Build Status](https://travis-ci.org/LetterboxDev/frontend.svg?branch=production)](https://travis-ci.org/LetterboxDev/frontend)
 
 ## Stack
 
