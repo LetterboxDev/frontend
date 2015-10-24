@@ -8,6 +8,7 @@ angular.module('letterbox.services')
     window.localStorage.setItem('firstName', res.user.firstName);
     window.localStorage.setItem('hashedId', res.user.hashedId);
     window.localStorage.setItem('isRegistered', res.user.isRegistered);
+    window.localStorage.setItem('genderPreference', res.user.genderPreference);
   }
 
   AuthService.authToken = function(fbToken) {
@@ -33,7 +34,7 @@ angular.module('letterbox.services')
       deferred.resolve();
     }, function(err) {
       AuthService.logout().then(function() {
-        deferred.reject();        
+        deferred.reject();
       });
     });
 
