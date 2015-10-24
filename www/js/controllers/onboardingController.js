@@ -34,9 +34,9 @@ angular.module('letterbox.controllers')
         if (response.status === 'connected') {
           $scope.authenticateToken(response.authResponse.accessToken);
         }
-      }, {scope: 'public_profile,user_birthday,user_education_history,user_work_history', return_scopes: true});
+      }, {scope: 'public_profile,user_birthday,user_photos', return_scopes: true});
     } else {
-      $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_education_history','user_work_history']).then(function(res) {
+      $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_photos']).then(function(res) {
         $scope.authenticateToken(res.access_token);
       }, function(err) {
         // inform of error
