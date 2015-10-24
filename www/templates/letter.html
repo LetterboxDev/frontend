@@ -27,7 +27,7 @@
                     <div class="button-detail">profile</div>
                   </div>
                   <div class="card-button button-positive button-next" ng-click="nextQuestion()">
-                    <i class="icon ion-chevron-right"></i>
+                    <i class="icon" ng-class="(curr === max) ? 'ion-ios-paperplane': 'ion-chevron-right'"></i>
                     <div class="button-detail">
                       {{ curr === max ? 'send' : 'next' }}
                     </div>
