@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
 
-.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService, DbService, RoomsService, ChatService) {
+.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, eventbus, socket, LocationService, DbService, RoomsService, ChatService, AuthService) {
   $scope.username = window.localStorage.getItem('firstName') ? window.localStorage.getItem('firstName') : '';
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -57,14 +57,39 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
       }
     });
   });
-  if (window.localStorage.getItem('token')) {
-    eventbus.call('loginCompleted');
-  }
+  
+  $scope.showLoading = function() {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="ripple"></ion-spinner>'
+    });
+  };
 
-  if (!window.localStorage.getItem('token')) {
+  $scope.hideLoading = function(){
+    $ionicLoading.hide();
+  };
+
+  $scope.showLoading();
+  if (window.localStorage.getItem('token')) {
+    AuthService.renewToken()
+    .then(function() {
+      $scope.hideLoading();
+      eventbus.call('loginCompleted');
+      if (window.localStorage.getItem('isRegistered') === 'false') {
+        $state.go('onboarding', {onboardStep: 1});        
+      }
+    }, function() {
+      $scope.hideLoading();
+      var alertPopup = $ionicPopup.alert({
+        title: 'Authentication Error!',
+        template: 'Please log in again'
+      });
+      alertPopup.then(function(res) {
+        $state.go('login');
+      });
+    });
+  } else {
+    $scope.hideLoading();
     $state.go('login');
-  } else if (window.localStorage.getItem('isRegistered') === 'false') {
-    $state.go('onboarding', {onboardStep: 1});
   }
 
   $scope.currentPage = function() {
