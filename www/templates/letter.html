@@ -10,10 +10,10 @@
                 <h3>Would you rather...</h3>
                 <p class="warning">{{ warning }}</p>
                 <div class="row answer-row">
-                  <div ng-class="{'active' : selectedTab === 0}" ng-click="selectedTab = 0" class="left col">
+                  <div ng-class="{'active' : selectedTab === 0}" ng-click="selectTab(0)" class="left col">
                     <p>{{ currentQuestion.option0 }}</p>
                   </div>
-                  <div ng-class="{'active' : selectedTab === 1}" ng-click="selectedTab = 1" class="right col">
+                  <div ng-class="{'active' : selectedTab === 1}" ng-click="selectTab(1)" class="right col">
                     <p>{{ currentQuestion.option1 }}</p>
                   </div>
                 </div>

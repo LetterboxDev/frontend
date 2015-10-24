@@ -59,6 +59,11 @@ angular.module('letterbox.controllers')
     $state.go('app.home');
   };
 
+  $scope.selectTab = function(tab) {
+    $scope.selectedTab = tab;
+    $scope.nextQuestion();
+  }
+
   /**
    * Helper functions
    */
