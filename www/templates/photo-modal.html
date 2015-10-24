@@ -9,9 +9,17 @@
       <ion-spinner icon="lines"></ion-spinner>
     </div>
     <div ng-if="!isLoadingPhotos">
-      <div class="row responsive-sm">
-        <div ng-repeat="photo in profilePhotos" class="col col-33">
-          <img src="{{photo.picture}}" ng-click="updateProfilePhoto(photo.id)">
+      <div ng-repeat="photo in profilePhotos">
+        <div ng-if="$index%3==0" class="row">
+          <div class="col col-33">
+            <img src="{{profilePhotos[$index].picture}}" ng-click="updateProfilePhoto(profilePhotos[$index].id)">
+          </div>
+          <div class="col col-33">
+            <img src="{{profilePhotos[$index+1].picture}}" ng-click="updateProfilePhoto(profilePhotos[$index+1].id)">
+          </div>
+          <div class="col col-33">
+            <img src="{{profilePhotos[$index+2].picture}}" ng-click="updateProfilePhoto(profilePhotos[$index+2].id)">
+          </div>
         </div>
       </div>
     </div>
