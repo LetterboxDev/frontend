@@ -11,6 +11,7 @@ angular.module('letterbox.services')
   var updateLocationPath = '/user/location';
   var updateBioPath = '/user/bio';
   var updateGenderPath = '/user/gender';
+  var userPhotoPath = '/user/photo';
   var matchPath = '/match';
   var matchesPath = '/matches';
   var questionsPath = '/questions';
@@ -48,6 +49,19 @@ angular.module('letterbox.services')
     get: {
       method: 'GET',
       isArray: true
+    }
+  });
+
+  var userPhotoHandler = $resource(URL.concat(userPhotoPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    },
+    setPhoto: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
     }
   });
 
@@ -202,6 +216,19 @@ angular.module('letterbox.services')
     locationUpdater.latitude = latitude;
     locationUpdater.longitude = longitude;
     return locationUpdater.$updateLocation(successPromise);
+  };
+
+  backend.getProfilePhotos = function() {
+    var token = getToken();
+    return userPhotoHandler.get({letterbox_token: token});
+  }
+
+  backend.setProfilePhoto = function(pictureId, successPromise, errorPromise) {
+    var token = getToken();
+    handler = new userPhotoHandler();
+    handler.token = token;
+    handler.id = pictureId;
+    return handler.$setPhoto(successPromise, errorPromise);
   };
 
   backend.updateUserBio = function(bio, successPromise, errorPromise) {
