@@ -38,6 +38,26 @@ angular.module('letterbox.services')
         deferred.resolve(null);
       });
       return deferred.promise;
+    },
+
+    getProfilePictures: function() {
+      var deferred = $q.defer();
+      backend.getProfilePhotos().$promise.then(function(photos) {
+        var pictures = [];
+        photos.forEach(function(photo) {
+          pictures.push(photo);
+        });
+        deferred.resolve(pictures);
+      }, function(err) {
+        deferred.reject(err);
+      });
+      return deferred.promise;
+    },
+
+    updateProfilePicture: function(pictureId) {
+      var deferred = $q.defer();
+      backend.setProfilePhoto(pictureId, deferred.resolve, deferred.reject);
+      return deferred.promise;
     }
   }
 });
