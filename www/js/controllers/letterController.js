@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService, eventbus) {
+.controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService, eventbus, $timeout) {
   // Makes sure that cache is cleared after every time user submits/closes letter
   $scope.$on("$ionicView.afterLeave", function () {
     $ionicHistory.clearCache();
@@ -63,9 +63,11 @@ angular.module('letterbox.controllers')
     $scope.selectedTab = tab;
 
     if ($scope.curr < $scope.max) {
-      $scope.nextQuestion();
+      $timeout(function() {
+        $scope.nextQuestion();
+      }, 200);
     }
-  }
+  };
 
   /**
    * Helper functions
