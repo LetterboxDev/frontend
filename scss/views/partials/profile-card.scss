@@ -1,5 +1,9 @@
 .profile-cards {
   position: fixed;
+  .feedback {
+    padding: 10px;
+    text-align: center
+  }
 }
 
 .card { // override ionic's card settings
@@ -20,7 +24,7 @@
   max-width: 500px;
   min-width: 280px;
   width: 100vw;
-  
+
   &.moving-out {
     top: 10px;
     position: absolute;
@@ -54,7 +58,7 @@
       }
     }
   }
-  
+
   .card-content {
     padding: 10px 20px;
     .section {
@@ -220,7 +224,7 @@
         height: 100%;
         position: relative;
       }
-      
+
     }
   }
 }
