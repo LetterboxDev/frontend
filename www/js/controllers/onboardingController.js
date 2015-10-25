@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, AuthService, backend, eventbus) {
+.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, $ionicHistory, AuthService, backend, eventbus) {
 
   $scope.showLoading = function() {
     $ionicLoading.show({
@@ -135,11 +135,10 @@ angular.module('letterbox.controllers')
   }
 
   var init = function() {
+    $ionicHistory.clearHistory();
     if (AuthService.isLoggedIn() && !$scope.questions) {
       $scope.getRandomQuestions();
     }
-    $scope.gender = window.localStorage.getItem('gender');
-    $scope.genderPref = window.localStorage.getItem('genderPref');
   }
 
   init();
