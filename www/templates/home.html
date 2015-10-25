@@ -8,16 +8,21 @@
   </ion-nav-buttons>
   <ion-content scroll="false">
     <div ng-controller="CardsCtrl">
-      <div class="profile-cards">
-        <div ng-if="cards.length === 0" class="feedback">
-          <h2>You have no more matches available now!</h2>
-        </div>
+      <div ng-if="cards.length === 0" class="feedback">
+        <h2>No letterboxes nearby</h2>
+        <p>Try again later or increase your distance radius</p>
+      </div>
+      <div ng-if="isLoading" class="feedback">
+        <ion-spinner icon="dots"></ion-spinner>
+      </div>
+      <div ng-if="!isLoading" class="profile-cards">
         <div class="profile-card moving-in" ng-repeat="card in cards">
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
                 <div class="large-profile-pic-header">
-                  <img ng-src="{{ card.profile_pic }}" alt="Image" />
+                  <div class="large-profile-pic" style="background-image: url({{ card.profile_pic }})">
+                  </div>
                   <div class="item profile-pic-overlay">
                     <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
                   </div>
@@ -44,7 +49,8 @@
               <div class="card back" ng-controller="CardCtrl">
                 <div class="back-container">
                   <div class="small-profile-pic-header">
-                    <img class="small-profile-pic" ng-src="{{ card.profile_pic }}" />
+                    <div class="small-profile-pic" style="background-image: url({{ card.profile_pic }})">
+                    </div>
                     <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span>
                   </div>
                   <div class="item card-content">

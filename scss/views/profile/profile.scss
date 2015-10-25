@@ -1,20 +1,28 @@
 .my-profile {
   .small-profile-pic {
+    cursor: pointer;
     float: left;
-    margin-right: 20px;
+    margin-right: 24px;
     margin-bottom: 20px;
   }
 
   .bio {
     textarea {
       background-color: $colourBackground;
-      width: 75%;
-      max-width: 75%;
+      width: 52vw;
+      max-width: 70%;
       padding: 8px;
     }
   }
 
   .card-buttons {
     padding: 0 1vw 7vh;
+  }
+
+}
+
+.profile-modal {
+  img {
+    cursor: pointer;
   }
 }

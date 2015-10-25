@@ -1,19 +1,8 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ImageCacheFactory, $ionicLoading, eventbus, backend, letterService) {
-  var previousId = '';
+.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ImageCacheFactory, eventbus, backend, letterService, MatchService) {
   $scope.cards = [];
   $scope.isLoading = false;
-
-  $scope.showLoading = function() {
-    $ionicLoading.show({
-      template: '<div class="feedback"><ion-spinner icon="dots"></ion-spinner></div>',
-      noBackdrop: true
-    });
-  };
-  $scope.hideLoading = function(){
-    $ionicLoading.hide();
-  };
 
   eventbus.registerListener('enterHome', getCard);
   eventbus.registerListener('closeLetter', removeTopCard);
@@ -25,38 +14,26 @@ angular.module('letterbox.controllers')
   };
 
   $scope.addCard = function() {
-    var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
     if (!$scope.isLoading) {
       $scope.isLoading = true;
-      $scope.showLoading();
-      backend.getMatch(distance, previousId)
-        .$promise
-        .then(function(match) {
-          $ImageCacheFactory.Cache([
-                match.pictureMed
-              ]).then(function() {
-                previousId = match.hashedId;
+      MatchService.getMatch()
+      .then(function(match) {
+        $scope.cards.push(createNewCard(match));
+        $timeout(function() {
+          // timeout for moving out animation
+          $scope.cards.splice(0, 1);
 
-                $scope.cards.push(createNewCard(match));
-                $timeout(function() {
-                  // timeout for moving out animation
-                  $scope.cards.splice(0, 1);
-
-                  $timeout(function() {
-                    // timeout for moving in animation
-                    selectFirst('.profile-card').removeClass('moving-in');
-                    registerEventHandler();
-                  }, 200);
-                  $scope.isLoading = false;
-                  $scope.hideLoading();
-                }, 200);
-              }, function() {
-                $scope.isLoading = false;
-                $scope.hideLoading();
-              });
-        }, function(err) {
-          // TODO Show error message (no match, not connected, etc.)
-        });
+          $timeout(function() {
+            // timeout for moving in animation
+            selectFirst('.profile-card').removeClass('moving-in');
+            registerEventHandler();
+          }, 200);
+          $scope.isLoading = false;
+        }, 200);
+      }, function(err) {
+        $scope.isLoading = false;
+        // TODO Show error message (no match, not connected, etc.)
+      });
     }
   };
 
@@ -66,31 +43,19 @@ angular.module('letterbox.controllers')
   function getCard() {
     if (window.localStorage.getItem('token') && $scope.cards.length === 0 && !$scope.isLoading) {
       $scope.isLoading = true;
-      $scope.showLoading();
-      var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
-      backend.getMatch(distance)
-        .$promise
-        .then(function(match) {
-          $ImageCacheFactory.Cache([
-              match.pictureMed
-            ]).then(function() {
-              previousId = match.hashedId;
-              $scope.cards.push(createNewCard(match));
+      MatchService.getMatch()
+      .then(function(match) {
+        $scope.cards.push(createNewCard(match));
 
-              $timeout(function() {
-                selectFirst('.profile-card').removeClass('moving-in');
-                registerEventHandler();
-              }, 400);
-              $scope.isLoading = false;
-              $scope.hideLoading();
-            }, function() {
-              // Failed to load image
-              $scope.isLoading = false;
-              $scope.hideLoading();
-            });
-        }, function(err) {
-          // TODO Show error message (no match, not connected, etc.)
-        });
+        $timeout(function() {
+          selectFirst('.profile-card').removeClass('moving-in');
+          registerEventHandler();
+        }, 400);
+        $scope.isLoading = false;
+      }, function(err) {
+        $scope.isLoading = false;
+        // TODO Show error message (no match, not connected, etc.)
+      });
     }
   }
 

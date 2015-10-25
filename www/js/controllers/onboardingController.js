@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, backend, eventbus) {
+.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, $ionicHistory, AuthService, backend, eventbus) {
 
   $scope.showLoading = function() {
     $ionicLoading.show({
@@ -13,17 +13,16 @@ angular.module('letterbox.controllers')
 
   // Login logic
   $scope.authenticateToken = function(fbToken) {
-    $scope.testing = 'fb_token: ' + fbToken;
-    backend.auth(fbToken).$promise.then(function(success) {
-      window.localStorage.setItem('token', success.letterbox_token);
-      window.localStorage.setItem('firstName', success.user.firstName);
-      window.localStorage.setItem('hashedId', success.user.hashedId);
-      window.localStorage.setItem('isRegistered', success.user.isRegistered);
+    AuthService.authToken(fbToken).then(function(success) {
       eventbus.call('loginCompleted');
       $scope.hideLoading();
       $scope.beginOnboarding();
-    }, function(error) {
-      // error something went wrong
+    }, function(err) {
+      $scope.hideLoading();
+      var alertPopup = $ionicPopup.alert({
+        title: 'An error occurred!',
+        template: 'Please try again later'
+      });
     });
   };
 
@@ -35,9 +34,9 @@ angular.module('letterbox.controllers')
         if (response.status === 'connected') {
           $scope.authenticateToken(response.authResponse.accessToken);
         }
-      }, {scope: 'public_profile,user_birthday,user_education_history,user_work_history', return_scopes: true});
+      }, {scope: 'public_profile,user_birthday,user_photos', return_scopes: true});
     } else {
-      $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_education_history','user_work_history']).then(function(res) {
+      $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_photos']).then(function(res) {
         $scope.authenticateToken(res.access_token);
       }, function(err) {
         // inform of error
@@ -46,8 +45,7 @@ angular.module('letterbox.controllers')
   };
 
   $scope.beginOnboarding = function() {
-    if (window.localStorage.getItem('token') &&
-        window.localStorage.getItem('isRegistered') === 'false') {
+    if (!AuthService.isRegistered()) {
       $state.go('onboarding', {onboardStep: 1});
     } else {
       $state.go('app.home');
@@ -137,11 +135,10 @@ angular.module('letterbox.controllers')
   }
 
   var init = function() {
-    if (window.localStorage.getItem('token') && !$scope.questions) {
+    $ionicHistory.clearHistory();
+    if (AuthService.isLoggedIn() && !$scope.questions) {
       $scope.getRandomQuestions();
     }
-    $scope.gender = window.localStorage.getItem('gender');
-    $scope.genderPref = window.localStorage.getItem('genderPref');
   }
 
   init();

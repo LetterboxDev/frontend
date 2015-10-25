@@ -1,5 +1,5 @@
 angular.module('letterbox.services')
-.service('backend', function($resource, $http) {
+.service('backend', function($q, $resource, $http) {
   var backend = {};
   var URL = 'https://getletterbox.com';
   // var URL = 'http://localhost:8080';
@@ -8,9 +8,11 @@ angular.module('letterbox.services')
   var renewPath = '/auth/renew'
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:userId';
+  var pushTokenPath = '/user/pushtoken';
   var updateLocationPath = '/user/location';
   var updateBioPath = '/user/bio';
-  var updateGenderPath = '/user/gender';
+  var userPhotoPath = '/user/photo';
+  var updateGenderPreferencePath = '/user/genderPreference';
   var matchPath = '/match';
   var matchesPath = '/matches';
   var questionsPath = '/questions';
@@ -51,9 +53,37 @@ angular.module('letterbox.services')
     }
   });
 
+  var userPhotoHandler = $resource(URL.concat(userPhotoPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    },
+    setPhoto: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
   var userSelfGetter = $resource(URL.concat(userSelfPath), {}, {
     get: {
       method: 'GET'
+    }
+  });
+
+  var pushTokenUpdater = $resource(URL.concat(pushTokenPath), {}, {
+    updatePushToken: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    },
+    clearPushToken: {
+      method: 'DELETE',
+      params: {
+        letterbox_token: '@token'
+      }
     }
   });
 
@@ -75,8 +105,8 @@ angular.module('letterbox.services')
     }
   });
 
-  var updateGender = $resource(URL.concat(updateGenderPath), {}, {
-    updateGender: {
+  var updateGenderPreference = $resource(URL.concat(updateGenderPreferencePath), {}, {
+    updateGenderPreference: {
       method: 'PUT',
       params: {
         letterbox_token: '@token'
@@ -188,12 +218,29 @@ angular.module('letterbox.services')
   backend.getMatches = function(maxDistance, limit, previousId) {
     var token = getToken();
     return matchesGetter.get({letterbox_token: token, maxDistance: maxDistance, limit: limit, previousId: previousId});
-  }
+  };
 
   backend.getUserSelf = function() {
     var token = getToken();
     return userSelfGetter.get({letterbox_token: token});
-  }
+  };
+
+  backend.updatePushToken = function(pushtoken) {
+    var token = getToken();
+    updater = new pushTokenUpdater();
+    updater.token = token;
+    updater.pushToken = pushtoken;
+    return updater.$updatePushToken();
+  };
+
+  backend.clearPushToken = function() {
+    var deferred = $q.defer();
+    var token = getToken();
+    updater = new pushTokenUpdater();
+    updater.token = token;
+    updater.$clearPushToken(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
     var token = getToken();
@@ -204,6 +251,19 @@ angular.module('letterbox.services')
     return locationUpdater.$updateLocation(successPromise);
   };
 
+  backend.getProfilePhotos = function() {
+    var token = getToken();
+    return userPhotoHandler.get({letterbox_token: token});
+  }
+
+  backend.setProfilePhoto = function(pictureId, successPromise, errorPromise) {
+    var token = getToken();
+    handler = new userPhotoHandler();
+    handler.token = token;
+    handler.id = pictureId;
+    return handler.$setPhoto(successPromise, errorPromise);
+  };
+
   backend.updateUserBio = function(bio, successPromise, errorPromise) {
     var token = getToken();
     var bioUpdater = new updateUserBio();
@@ -212,15 +272,13 @@ angular.module('letterbox.services')
     return bioUpdater.$updateBio(successPromise, errorPromise);
   };
 
-  // Gender:           'male' or 'female'
   // GenderPreference: 'male' or 'female'
-  backend.updateGender = function(gender, genderPreference, successPromise) {
+  backend.updateGenderPreference = function(genderPreference, successPromise) {
     var token = getToken();
-    genderUpdater = new updateGender();
-    genderUpdater.token = token;
-    genderUpdater.gender = gender;
-    genderUpdater.genderPreference = genderPreference;
-    return genderUpdater.$updateGender(successPromise);
+    genderPreferenceUpdater = new updateGenderPreference();
+    genderPreferenceUpdater.token = token;
+    genderPreferenceUpdater.genderPreference = genderPreference;
+    return genderPreferenceUpdater.$updateGenderPreference(successPromise);
   };
 
   backend.getRandomQuestions = function() {

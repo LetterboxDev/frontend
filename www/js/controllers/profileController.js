@@ -1,8 +1,10 @@
 angular.module('letterbox.controllers')
 
-.controller('ProfileCtrl', function($scope, $state, $ionicHistory, $ionicPopup, ProfileService) {
+.controller('ProfileCtrl', function($scope, $state, $ionicHistory, $ionicPopup, $ionicLoading, $ionicModal, ProfileService) {
   $scope.profile = {};
   $scope.isLoading = true;
+  $scope.profilePhotos = [];
+  $scope.isLoadingPhotos = false;
 
   $scope.$on("$ionicView.enter", function(scopes, states) {
     ProfileService.getProfile().then(function(profile) {
@@ -11,9 +13,55 @@ angular.module('letterbox.controllers')
     })
   });
 
+  $ionicModal.fromTemplateUrl('templates/photo-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
   $ionicHistory.nextViewOptions({
     disableBack: true
   });
+
+  $scope.showLoading = function() {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="ripple"></ion-spinner>'
+    });
+  };
+
+  $scope.hideLoading = function(){
+    $ionicLoading.hide();
+  };
+
+  $scope.openProfilePhotoModal = function() {
+    $scope.isLoadingPhotos = true;
+    $scope.modal.show();
+    ProfileService.getProfilePictures()
+    .then(function(photos) {
+      $scope.profilePhotos = photos;
+      $scope.isLoadingPhotos = false;
+    }, function(err) {
+      $scope.isLoadingPhotos = false;
+    });
+  };
+
+  $scope.updateProfilePhoto = function(id) {
+    $scope.hideProfilePhotoModal();
+    $scope.showLoading();
+    ProfileService.updateProfilePicture(id)
+    .then(function(success) {
+      $scope.profile.pictureMed = success.pictureMed;
+      $scope.profile.pictureThumb = success.pictureThumb;
+      $scope.hideLoading();
+    }, function(err) {
+      $scope.hideLoading();
+    });
+  };  
+
+  $scope.hideProfilePhotoModal = function() {
+    $scope.modal.hide();
+  };
 
   $scope.getNewQn = function(oldQn) {
     var qnIds = $scope.profile.questions.map(function(qn){ return qn.id });
