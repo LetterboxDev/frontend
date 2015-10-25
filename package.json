@@ -21,7 +21,8 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
-    "cordova-plugin-geolocation"
+    "cordova-plugin-geolocation",
+    "phonegap-plugin-push"
   ],
   "cordovaPlatforms": [
     "ios",

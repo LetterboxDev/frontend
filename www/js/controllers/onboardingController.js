@@ -45,8 +45,7 @@ angular.module('letterbox.controllers')
   };
 
   $scope.beginOnboarding = function() {
-    if (window.localStorage.getItem('token') &&
-        window.localStorage.getItem('isRegistered') === 'false') {
+    if (!AuthService.isRegistered()) {
       $state.go('onboarding', {onboardStep: 1});
     } else {
       $state.go('app.home');
@@ -136,7 +135,7 @@ angular.module('letterbox.controllers')
   }
 
   var init = function() {
-    if (window.localStorage.getItem('token') && !$scope.questions) {
+    if (AuthService.isLoggedIn() && !$scope.questions) {
       $scope.getRandomQuestions();
     }
     $scope.gender = window.localStorage.getItem('gender');

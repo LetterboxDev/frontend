@@ -2,7 +2,8 @@
   "name": "HelloIonic",
   "private": "true",
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.1.0"
+    "ionic": "driftyco/ionic-bower#1.1.0",
+    "ionic-platform-web-client": "~0.2.1"
   },
   "resolutions": {
     "angular": "~1.4.7",
