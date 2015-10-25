@@ -41,6 +41,14 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
+  AuthService.isLoggedIn = function() {
+    return typeof window.localStorage.getItem('token') !== 'undefined' && window.localStorage.getItem('token').length > 0;
+  };
+
+  AuthService.isRegistered = function() {
+    return AuthService.isLoggedIn() && window.localStorage.getItem('isRegistered') === 'true';
+  };
+
   AuthService.logout = function() {
     var deferred = $q.defer();
 
