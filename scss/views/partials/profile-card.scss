@@ -38,9 +38,20 @@
 
   .large-profile-pic-header{
     position: relative;
-    img {
-      width: 100%;
+
+    .large-profile-pic {
+      width: 100vw;
+      height: 100vw;
+      min-width: 300px;
+      min-height: 300px;
+      max-width: 480px;
+      max-height: 480px;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
+    // img {
+    //   width: 100%;
+    // }
     .profile-pic-overlay {
       width: 100%;
       z-index: 5;

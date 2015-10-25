@@ -21,7 +21,8 @@
             <div class="flipper">
               <div class="card front">
                 <div class="large-profile-pic-header">
-                  <img ng-src="{{ card.profile_pic }}" alt="Image" />
+                  <div class="large-profile-pic" style="background-image: url({{ card.profile_pic }})">
+                  </div>
                   <div class="item profile-pic-overlay">
                     <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
                   </div>
