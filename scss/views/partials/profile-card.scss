@@ -189,6 +189,8 @@
   }
 
   .small-profile-pic {
+    display: inline-block;
+    vertical-align: middle;
     width: 15vw;
     height: 15vw;
     min-width: 48px;
