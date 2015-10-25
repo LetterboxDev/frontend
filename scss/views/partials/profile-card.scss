@@ -11,7 +11,7 @@
   border-radius: 10px;
   margin: 12px 10px;
   &.back {
-    margin: 20px 10px; // shift the card down as a result of rotation
+    top-margin: 20px; // shift the card down as a result of rotation
   }
 }
 
@@ -232,6 +232,7 @@
     }
     .back {
       height: 100%;
+      width: 95%; // Another hack
       position: absolute;
       top: -3%; // This is a hack
       -webkit-transform: rotateY(180deg);
