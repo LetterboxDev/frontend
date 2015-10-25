@@ -1,6 +1,6 @@
 angular.module('letterbox.services')
 .service('socket', function(eventbus, $q) {
-  var URL = 'https://getletterbox.com';
+  var URL = 'http://getletterbox.com';
   // var URL = 'http://localhost:8080';
 
   var IOContainer = {
