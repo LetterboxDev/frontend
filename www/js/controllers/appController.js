@@ -84,7 +84,8 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
       $scope.hideLoading();
       var alertPopup = $ionicPopup.alert({
         title: 'Authentication Error!',
-        template: 'Please log in again'
+        template: 'Please log in again',
+        cssClass: "popup-alert"
       });
       alertPopup.then(function(res) {
         $state.go('login');
