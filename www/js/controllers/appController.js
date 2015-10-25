@@ -18,7 +18,7 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
   eventbus.registerListener('loginCompleted', socket.init);
   // Update user location when logged in
   eventbus.registerListener('loginCompleted', LocationService.updateLocation);
-  
+
   eventbus.registerListener('loginCompleted', PushService.updatePushToken);
 
   // Update $scope.username on login completed
@@ -60,7 +60,7 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
       }
     });
   });
-  
+
   $scope.showLoading = function() {
     $ionicLoading.show({
       template: '<ion-spinner icon="ripple"></ion-spinner>'
