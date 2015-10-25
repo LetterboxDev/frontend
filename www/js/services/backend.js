@@ -1,5 +1,5 @@
 angular.module('letterbox.services')
-.service('backend', function($resource, $http) {
+.service('backend', function($q, $resource, $http) {
   var backend = {};
   var URL = 'https://getletterbox.com';
   // var URL = 'http://localhost:8080';
@@ -75,6 +75,12 @@ angular.module('letterbox.services')
   var pushTokenUpdater = $resource(URL.concat(pushTokenPath), {}, {
     updatePushToken: {
       method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    },
+    clearPushToken: {
+      method: 'DELETE',
       params: {
         letterbox_token: '@token'
       }
@@ -225,6 +231,15 @@ angular.module('letterbox.services')
     updater.token = token;
     updater.pushToken = pushtoken;
     return updater.$updatePushToken();
+  };
+
+  backend.clearPushToken = function() {
+    var deferred = $q.defer();
+    var token = getToken();
+    updater = new pushTokenUpdater();
+    updater.token = token;
+    updater.$clearPushToken(deferred.resolve, deferred.reject);
+    return deferred.promise;
   };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {

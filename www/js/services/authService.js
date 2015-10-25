@@ -1,6 +1,6 @@
 angular.module('letterbox.services')
 
-.service('AuthService', function($q, backend, DbService) {
+.service('AuthService', function($q, backend, eventbus, DbService) {
   var AuthService = {};
 
   function saveDetails(res) {
@@ -42,7 +42,7 @@ angular.module('letterbox.services')
   };
 
   AuthService.isLoggedIn = function() {
-    return typeof window.localStorage.getItem('token') !== 'undefined' && window.localStorage.getItem('token').length > 0;
+    return window.localStorage.getItem('token') !== null && window.localStorage.getItem('token').length > 0;
   };
 
   AuthService.isRegistered = function() {
@@ -52,18 +52,23 @@ angular.module('letterbox.services')
   AuthService.logout = function() {
     var deferred = $q.defer();
 
-    window.localStorage.setItem('token', '');
-    window.localStorage.setItem('firstName', '');
-    window.localStorage.setItem('hashedId', '');
-    window.localStorage.setItem('isRegistered', '');
+    backend.clearPushToken()
+    .then(function() {
+      window.localStorage.setItem('token', '');
+      window.localStorage.setItem('firstName', '');
+      window.localStorage.setItem('hashedId', '');
+      window.localStorage.setItem('isRegistered', '');
 
-    if (DbService.isInitialized()) {
-      DbService.clearAll().then(function() {
+      if (DbService.isInitialized()) {
+        DbService.clearAll().then(function() {
+          deferred.resolve();
+        });
+      } else {
         deferred.resolve();
-      });
-    } else {
-      deferred.resolve();
-    }
+      }
+    }, function() {
+      deferred.reject();
+    });
 
     return deferred.promise;
   };
