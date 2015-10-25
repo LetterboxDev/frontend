@@ -241,7 +241,7 @@ angular.module('letterbox.services')
       db.sqlite.transaction(function(tx) {
         tx.executeSql("DELETE FROM messages", [], function(tx, res) {
           tx.executeSql("DELETE FROM rooms", [], function(tx, res) {
-            deferred.resolve(messages);          
+            deferred.resolve();
           });
         });
       });

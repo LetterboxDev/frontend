@@ -1,5 +1,5 @@
 angular.module('letterbox.services')
-.service('backend', function($resource, $http) {
+.service('backend', function($q, $resource, $http) {
   var backend = {};
   var URL = 'https://getletterbox.com';
   // var URL = 'http://localhost:8080';
@@ -8,6 +8,7 @@ angular.module('letterbox.services')
   var renewPath = '/auth/renew'
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:userId';
+  var pushTokenPath = '/user/pushtoken';
   var updateLocationPath = '/user/location';
   var updateBioPath = '/user/bio';
   var userPhotoPath = '/user/photo';
@@ -68,6 +69,21 @@ angular.module('letterbox.services')
   var userSelfGetter = $resource(URL.concat(userSelfPath), {}, {
     get: {
       method: 'GET'
+    }
+  });
+
+  var pushTokenUpdater = $resource(URL.concat(pushTokenPath), {}, {
+    updatePushToken: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    },
+    clearPushToken: {
+      method: 'DELETE',
+      params: {
+        letterbox_token: '@token'
+      }
     }
   });
 
@@ -202,12 +218,29 @@ angular.module('letterbox.services')
   backend.getMatches = function(maxDistance, limit, previousId) {
     var token = getToken();
     return matchesGetter.get({letterbox_token: token, maxDistance: maxDistance, limit: limit, previousId: previousId});
-  }
+  };
 
   backend.getUserSelf = function() {
     var token = getToken();
     return userSelfGetter.get({letterbox_token: token});
-  }
+  };
+
+  backend.updatePushToken = function(pushtoken) {
+    var token = getToken();
+    updater = new pushTokenUpdater();
+    updater.token = token;
+    updater.pushToken = pushtoken;
+    return updater.$updatePushToken();
+  };
+
+  backend.clearPushToken = function() {
+    var deferred = $q.defer();
+    var token = getToken();
+    updater = new pushTokenUpdater();
+    updater.token = token;
+    updater.$clearPushToken(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
     var token = getToken();
