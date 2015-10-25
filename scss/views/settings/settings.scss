@@ -31,5 +31,33 @@
   .item-toggle .toggle {
     top: 20px;
   }
+
+  .settings-etc {
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+
+    h2 {
+      @include uppercase-bold-font();
+      color: $colourSecondaryText;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin: 0 0 5px;
+    }
+    
+    .settings-links {
+      list-style-type: none;
+      li {
+        display: inline;
+        margin: 0 5px;
+        cursor: pointer;
+        a {
+          color: $colourSecondaryText;
+          font-size: 11px;
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }
 
