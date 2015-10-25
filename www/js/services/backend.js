@@ -1,7 +1,7 @@
 angular.module('letterbox.services')
 .service('backend', function($q, $resource, $http) {
   var backend = {};
-  var URL = 'https://getletterbox.com';
+  var URL = 'http://getletterbox.com';
   // var URL = 'http://localhost:8080';
 
   var authPath = '/auth';
