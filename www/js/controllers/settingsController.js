@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('SettingsCtrl', function($scope, $state, backend, AuthService) {
+.controller('SettingsCtrl', function($scope, $state, $ionicPopup, backend, AuthService) {
   $scope.minAge = 18;
   $scope.maxAge = 80;
 
@@ -36,6 +36,16 @@ angular.module('letterbox.controllers')
   }
 
   $scope.logout = function() {
-    AuthService.logout().then(function(){$state.go('login')});
+    $ionicPopup.confirm({
+      title: "Are you sure you want to logout?",
+      cssClass: "popup-alert",
+      okType: "button-positive",
+      okText: "Logout",
+      cancelText: "No"
+    }).then(function(res) {
+      if (res) {
+        AuthService.logout().then(function(){$state.go('login')});
+      }
+    });
   }
 });
