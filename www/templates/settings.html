@@ -12,18 +12,12 @@
 
         <div class="row">
           <div class="col">
-<!--             <ion-checkbox class="inline-checkbox" ng-model="preference.preferFemale" ng-checked="preference.preferFemale" ng-change="onChangePreferFemale()">
-              <i class="icon ion-woman"></i>
-            </ion-checkbox> -->
             <ion-radio ng-model="preference.preferredGender" ng-value="'female'" ng-change="onChangePreferredGender()">
               <i class="icon ion-woman"></i>
             </ion-radio>
           </div>
 
           <div class="col">
-<!--             <ion-checkbox class="inline-checkbox" ng-model="preference.preferMale" ng-checked="preference.preferMale" ng-change="onChangePreferMale()">
-              <i class="icon ion-man"></i>
-            </ion-checkbox> -->
             <ion-radio ng-model="preference.preferredGender" ng-value="'male'" ng-change="onChangePreferredGender()">
               <i class="icon ion-man"></i>
             </ion-radio>
@@ -41,6 +35,12 @@
           100
         </div>
       </ion-item>
+      <div class="settings-etc">
+        <h2>Letterbox 0.1</h2>
+        <ul class="settings-links">
+          <li><a href="#/app/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>

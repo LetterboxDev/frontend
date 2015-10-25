@@ -1,19 +1,9 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ImageCacheFactory, $ionicLoading, eventbus, backend, letterService) {
+.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ImageCacheFactory, eventbus, backend, letterService) {
   var previousId = '';
   $scope.cards = [];
   $scope.isLoading = false;
-
-  $scope.showLoading = function() {
-    $ionicLoading.show({
-      template: '<div class="feedback"><ion-spinner icon="dots"></ion-spinner></div>',
-      noBackdrop: true
-    });
-  };
-  $scope.hideLoading = function(){
-    $ionicLoading.hide();
-  };
 
   eventbus.registerListener('enterHome', getCard);
   eventbus.registerListener('closeLetter', removeTopCard);
@@ -28,7 +18,6 @@ angular.module('letterbox.controllers')
     var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
     if (!$scope.isLoading) {
       $scope.isLoading = true;
-      $scope.showLoading();
       backend.getMatch(distance, previousId)
         .$promise
         .then(function(match) {
@@ -48,11 +37,9 @@ angular.module('letterbox.controllers')
                     registerEventHandler();
                   }, 200);
                   $scope.isLoading = false;
-                  $scope.hideLoading();
                 }, 200);
               }, function() {
                 $scope.isLoading = false;
-                $scope.hideLoading();
               });
         }, function(err) {
           // TODO Show error message (no match, not connected, etc.)
@@ -66,7 +53,6 @@ angular.module('letterbox.controllers')
   function getCard() {
     if (window.localStorage.getItem('token') && $scope.cards.length === 0 && !$scope.isLoading) {
       $scope.isLoading = true;
-      $scope.showLoading();
       var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
       backend.getMatch(distance)
         .$promise
@@ -82,11 +68,9 @@ angular.module('letterbox.controllers')
                 registerEventHandler();
               }, 400);
               $scope.isLoading = false;
-              $scope.hideLoading();
             }, function() {
               // Failed to load image
               $scope.isLoading = false;
-              $scope.hideLoading();
             });
         }, function(err) {
           // TODO Show error message (no match, not connected, etc.)

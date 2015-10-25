@@ -1,0 +1,21 @@
+.privacy-page {
+  li, .header, p {
+    color: $colourPrimaryText;
+    line-height: 1.6em;
+  }
+  ol {
+    list-style-type: decimal; 
+    list-style-position: inside; 
+    margin: 10px 0;
+    padding: 0 0 0 40px;
+  }
+  .header {
+    @include uppercase-bold-font();
+    margin-top: 30px;
+  }
+  .footer {
+    margin-top: 30px;
+    text-align: center;
+    color: $colourSecondaryText;
+  }
+}
