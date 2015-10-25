@@ -1,6 +1,9 @@
 <ion-view view-title="Settings">
   <ion-content>
     <ion-list class="settings-list">
+      <ion-item class="item item-divider">
+        Matching
+      </ion-item>
       <ion-toggle ng-model="preference.perfectMatch" ng-checked="preference.perfectMatch" ng-change="onChangePerfectMatch()" toggle-class="toggle-positive">
         <h2 class="setting-header">Perfect match</h2>
         <p class="setting-description">Receive letters only from people who have answered all your questions correctly.</p>
@@ -35,6 +38,7 @@
           100
         </div>
       </ion-item>
+
       <ion-item class="item">
         <h2 class="setting-header">
           Age range: <span>{{ preference.age.min }} ~ {{ preference.age.max }}</span>
@@ -48,6 +52,22 @@
           {{ maxAge }}
         </div>
       </ion-item>
+
+      <ion-item class="item item-divider">
+        Account
+      </ion-item>
+      <ion-item class="item item-button-right">
+        <h2 class="setting-header">
+          Logout
+        </h2>
+        <p class="setting-description">
+          Logs out from Letterbox and deletes all your chats.
+        </p>
+        <button class="button button-stable btn-logout" ng-click="logout()">
+          <i class="icon ion-heart-broken"></i>
+        </button>
+      </ion-item>
+
       <div class="settings-etc">
         <h2>Letterbox 0.1</h2>
         <ul class="settings-links">
