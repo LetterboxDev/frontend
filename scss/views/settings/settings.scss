@@ -12,6 +12,15 @@
     white-space: normal;
   }
 
+  .item-divider {
+    @include uppercase-bold-font();
+    padding-top: 20px;
+    padding-bottom: 5px;
+    letter-spacing: 2px;
+    color: $colourSecondaryText;
+    font-size: 10px;
+  }
+
   // .inline-checkbox {
   //   border: none;
   // }
@@ -28,7 +37,7 @@
     color: $colourPositive;
   }
 
-  .item-toggle .toggle {
+  .item-toggle .toggle, .btn-logout {
     top: 20px;
   }
 
@@ -44,7 +53,7 @@
       letter-spacing: 2px;
       margin: 0 0 5px;
     }
-    
+
     .settings-links {
       list-style-type: none;
       li {
@@ -55,6 +64,66 @@
           color: $colourSecondaryText;
           font-size: 11px;
           text-decoration: none;
+        }
+      }
+    }
+  }
+
+  // from angular-slider, customized
+  $height: 2px;
+  slider, [slider] {
+    display: inline-block;
+    position: relative;
+    height: $height;
+    width: 100%;
+    margin: 25px 18px 25px 5px;
+    vertical-align: middle;
+
+    div {
+      white-space: nowrap;
+      position: absolute;
+
+      &.bar {
+        width: 100%;
+        height: 100%;
+        border-radius: $height;
+        background: linear-gradient(to right, #ccc 0%, #ccc 100%);
+        overflow: hidden;
+        padding: 0px;
+        z-index: 1;
+
+        .selection {
+          width: 0%;
+          height: 100%;
+          background: $colourPositive;
+        }
+      }
+
+      &.handle {
+        cursor: pointer;
+        width: 27px;
+        height: 27px;
+        top: -13px;
+        z-index: 2;
+        border-radius: 100%;
+        background-color: white;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(0, 0, 0, 0.15);
+      }
+
+      &.bubble {
+        display: none !important;
+        cursor: default;
+        top: -22px;
+        padding: 1px 3px 1px 3px;
+        font-size: 0.7em;
+        font-family: sans-serif;
+
+        &.active {
+          display: inline-block;
+        }
+
+        &.limit {
+          color: #777;
         }
       }
     }
