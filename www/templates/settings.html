@@ -37,15 +37,15 @@
       </ion-item>
       <ion-item class="item">
         <h2 class="setting-header">
-          Age range: <span>{{ preference.minAge }} ~ {{ preference.maxAge }}</span>
+          Age range: <span>{{ preference.age.min }} ~ {{ preference.age.max }}</span>
         </h2>
         <p class="setting-description">See the letterbox of people within this age range.</p>
         <p class="setting-description">Want to date with teenagers? Try <b>Letterbox Jr.</b></p>
         <div class="range range-positive">
-          18
-          <!-- <input type="range" name="distanceRadius" min="1" max="100" ng-model="preference.distanceRadius" ng-change="onChangeDistanceRadius()"> -->
-          <slider floor="10" ceiling="60" ng-model-low="" ng-model-high="preference.distanceRadius"></slider>
-          80
+          {{ minAge }}
+          <slider floor="{{minAge}}" ceiling="{{maxAge}}" ng-model-low="preference.age.min" ng-model-high="preference.age.max">
+          </slider>
+          {{ maxAge }}
         </div>
       </ion-item>
       <div class="settings-etc">
