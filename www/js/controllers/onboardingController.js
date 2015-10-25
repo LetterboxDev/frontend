@@ -21,7 +21,8 @@ angular.module('letterbox.controllers')
       $scope.hideLoading();
       var alertPopup = $ionicPopup.alert({
         title: 'An error occurred!',
-        template: 'Please try again later'
+        template: 'Please try again later',
+        cssClass: "popup-alert"
       });
     });
   };
