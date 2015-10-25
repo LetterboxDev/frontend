@@ -1,6 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('SettingsCtrl', function($scope, backend) {
+.controller('SettingsCtrl', function($scope, $state, backend, AuthService) {
   var perfectMatch = window.localStorage.getItem('perfectMatch');
   var preferredGender = window.localStorage.getItem('preferredGender');
   var distanceRadius = window.localStorage.getItem('distanceRadius');
@@ -22,5 +22,9 @@ angular.module('letterbox.controllers')
 
   $scope.onChangeDistanceRadius = function() {
     window.localStorage.setItem('distanceRadius', $scope.preference.distanceRadius);
+  }
+
+  $scope.logout = function() {
+    AuthService.logout().then(function(){$state.go('login')});
   }
 });
