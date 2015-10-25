@@ -4,6 +4,9 @@ angular.module('letterbox', ['ionic', 'letterbox.controllers', 'ngResource', 'le
   $rootScope.$on("$stateChangeError", console.log.bind(console));
 
   $ionicPlatform.ready(function() {
+    if (typeof navigator.splashscreen != 'undefined') {
+      navigator.splashscreen.hide();
+    }
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
