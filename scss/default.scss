@@ -167,6 +167,7 @@ ion-content {
 .popup-alert {
   .popup {
     padding: 15px;
+    border-radius: 10px;
   }
   .popup-title {
     @include uppercase-bold-font();

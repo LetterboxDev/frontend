@@ -180,9 +180,15 @@
   }
 
   .small-profile-pic {
-    width: 15%;
+    width: 15vw;
+    height: 15vw;
+    min-width: 48px;
+    min-height: 48px;
+    max-width: 80px;
+    max-height: 80px;
     border-radius: 50%;
-    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .questions {

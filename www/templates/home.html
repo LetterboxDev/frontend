@@ -48,7 +48,8 @@
               <div class="card back" ng-controller="CardCtrl">
                 <div class="back-container">
                   <div class="small-profile-pic-header">
-                    <img class="small-profile-pic" ng-src="{{ card.profile_pic }}" />
+                    <div class="small-profile-pic" style="background-image: url({{ card.profile_pic }})">
+                    </div>
                     <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span>
                   </div>
                   <div class="item card-content">
