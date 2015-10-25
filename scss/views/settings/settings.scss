@@ -12,6 +12,15 @@
     white-space: normal;
   }
 
+  .item-divider {
+    @include uppercase-bold-font();
+    padding-top: 20px;
+    padding-bottom: 5px;
+    letter-spacing: 2px;
+    color: $colourSecondaryText;
+    font-size: 10px;
+  }
+
   // .inline-checkbox {
   //   border: none;
   // }
