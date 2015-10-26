@@ -49,6 +49,8 @@
     content: '\200b';
   }
   .current {
+    color: $colourSecondaryText;
+    font-weight: lighter;
     text-align: center;
   }
   .card {

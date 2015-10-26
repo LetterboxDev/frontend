@@ -59,6 +59,7 @@ angular.module('letterbox.services')
         window.localStorage.setItem('firstName', '');
         window.localStorage.setItem('hashedId', '');
         window.localStorage.setItem('isRegistered', '');
+        window.localStorage.setItem('genderPreference', '');
 
         socket.uninit();
 
