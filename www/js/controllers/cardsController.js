@@ -13,6 +13,11 @@ angular.module('letterbox.controllers')
     $timeout($scope.addCard, 100);
   };
 
+  $scope.openSendLetter = function(card) {
+    letterService.setTargetUserCard(card);
+    $state.go('app.letter');
+  };
+
   $scope.addCard = function() {
     if (!$scope.isLoading) {
       $scope.isLoading = true;
@@ -26,7 +31,6 @@ angular.module('letterbox.controllers')
           $timeout(function() {
             // timeout for moving in animation
             selectFirst('.profile-card').removeClass('moving-in');
-            registerEventHandler();
           }, 200);
         }, 200);
       }, function() {
@@ -49,7 +53,6 @@ angular.module('letterbox.controllers')
           $scope.cards.push(createNewCard(match));
           $timeout(function() {
             selectFirst('.profile-card').removeClass('moving-in');
-            registerEventHandler();
           }, 400);
         }
       }, function() {
@@ -77,18 +80,6 @@ angular.module('letterbox.controllers')
 
   function selectFirst(selector) {
     return angular.element($element[0].querySelectorAll(selector));
-  }
-
-  function registerEventHandler() {
-    selectFirst('.button-negative').on('touch', function(e) {
-      $scope.changeCard();
-    });
-
-    // Goes to composing a new letter
-    selectFirst('.button-positive').on('touch', function(e) {
-      letterService.setTargetUserCard($scope.cards[0]);
-      $state.go('app.letter');
-    });
   }
 });
 
