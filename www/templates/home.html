@@ -31,7 +31,7 @@
                   <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
                 </div>
                 <div class="item card-buttons">
-                  <div class="card-button button-negative">
+                  <div ng-click="changeCard()" class="card-button button-negative">
                     <i class="icon ion-close"></i>
                     <div class="button-detail">skip</div>
                   </div>
@@ -39,7 +39,7 @@
                     <i class="icon ion-person"></i>
                     <div class="button-detail">profile</div>
                   </div>
-                  <div class="card-button button-positive">
+                  <div ng-click="openSendLetter(card)" class="card-button button-positive">
                     <i class="icon ion-edit"></i>
                     <div class="button-detail">answer</div>
                   </div>
