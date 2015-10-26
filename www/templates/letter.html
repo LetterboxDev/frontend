@@ -9,6 +9,7 @@
                 <i class="icon ion-close close-letter" ng-click="closeLetter()"></i>
                 <h3>Would you rather...</h3>
                 <p class="warning">{{ warning }}</p>
+                <p class="current">Question {{ curr + 1 }} of 5</p>
                 <div class="row answer-row">
                   <div ng-class="{'active' : selectedTab === 0}" ng-click="selectTab(0)" class="left col">
                     <p>{{ currentQuestion.option0 }}</p>

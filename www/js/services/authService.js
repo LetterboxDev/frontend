@@ -1,6 +1,6 @@
 angular.module('letterbox.services')
 
-.service('AuthService', function($q, backend, eventbus, DbService) {
+.service('AuthService', function($q, $ionicHistory, backend, eventbus, DbService, socket) {
   var AuthService = {};
 
   function saveDetails(res) {
@@ -54,18 +54,22 @@ angular.module('letterbox.services')
 
     backend.clearPushToken()
     .then(function() {
-      window.localStorage.setItem('token', '');
-      window.localStorage.setItem('firstName', '');
-      window.localStorage.setItem('hashedId', '');
-      window.localStorage.setItem('isRegistered', '');
+      $ionicHistory.clearCache().then(function() {
+        window.localStorage.setItem('token', '');
+        window.localStorage.setItem('firstName', '');
+        window.localStorage.setItem('hashedId', '');
+        window.localStorage.setItem('isRegistered', '');
 
-      if (DbService.isInitialized()) {
-        DbService.clearAll().then(function() {
+        socket.uninit();
+
+        if (DbService.isInitialized()) {
+          DbService.clearAll().then(function() {
+            deferred.resolve();
+          });
+        } else {
           deferred.resolve();
-        });
-      } else {
-        deferred.resolve();
-      }
+        }
+      });
     }, function() {
       deferred.reject();
     });

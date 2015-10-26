@@ -33,6 +33,9 @@
   .warning:empty:before {
     content: '\200b';
   }
+  .current {
+    text-align: center;
+  }
   .card {
     background-color: white;
     padding: 15px 15px 0 15px;
