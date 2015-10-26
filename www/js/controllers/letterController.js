@@ -24,6 +24,7 @@ angular.module('letterbox.controllers')
     $scope.userName = targetUser.name;
     $scope.currentQuestion = targetUser.questions[0];
     $scope.warning = '';
+    $scope.tooltipShown = false;
   }
 
   $scope.nextQuestion = function() {
@@ -66,6 +67,21 @@ angular.module('letterbox.controllers')
       $timeout(function() {
         $scope.nextQuestion();
       }, 200);
+    }
+
+    if ($scope.curr === $scope.max && !$scope.tooltipShown) {
+      $('.button-next').qtip({
+        content: 'Send the letter!',
+        style: {
+          classes: 'qtip-tipsy'
+        },
+        show: {
+          when: false,
+          ready: true
+        },
+        hide: false
+      });
+      $scope.tooltipShown = true;
     }
   };
 
