@@ -18,21 +18,20 @@ angular.module('letterbox.controllers')
       $scope.isLoading = true;
       MatchService.getMatch()
       .then(function(match) {
+        $scope.isLoading = false;
         $scope.cards.push(createNewCard(match));
         $timeout(function() {
           // timeout for moving out animation
           $scope.cards.splice(0, 1);
-
           $timeout(function() {
             // timeout for moving in animation
             selectFirst('.profile-card').removeClass('moving-in');
             registerEventHandler();
           }, 200);
-          $scope.isLoading = false;
         }, 200);
-      }, function(err) {
+      }, function() {
         $scope.isLoading = false;
-        // TODO Show error message (no match, not connected, etc.)
+        $scope.cards.splice(0, 1);
       });
     }
   };
@@ -45,16 +44,16 @@ angular.module('letterbox.controllers')
       $scope.isLoading = true;
       MatchService.getMatch()
       .then(function(match) {
-        $scope.cards.push(createNewCard(match));
-
-        $timeout(function() {
-          selectFirst('.profile-card').removeClass('moving-in');
-          registerEventHandler();
-        }, 400);
         $scope.isLoading = false;
-      }, function(err) {
+        if (match) {
+          $scope.cards.push(createNewCard(match));
+          $timeout(function() {
+            selectFirst('.profile-card').removeClass('moving-in');
+            registerEventHandler();
+          }, 400);
+        }
+      }, function() {
         $scope.isLoading = false;
-        // TODO Show error message (no match, not connected, etc.)
       });
     }
   }

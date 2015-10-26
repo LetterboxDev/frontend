@@ -11,16 +11,20 @@ angular.module('letterbox.services')
       var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
       backend.getMatch(distance, MatchService.previousId).$promise
       .then(function(match) {
-        $ImageCacheFactory.Cache([
-          match.pictureMed
-        ]).then(function() {
-          MatchService.previousId = match.hashedId;
-          deferred.resolve(match);
-        }, function() {
+        if (match.code === 200) {
+          $ImageCacheFactory.Cache([
+            match.pictureMed
+          ]).then(function() {
+            MatchService.previousId = match.hashedId;
+            deferred.resolve(match);
+          }, function() {
+            deferred.reject();
+          });
+        } else {
           deferred.reject();
-        });
+        }
       }, function(err) {
-        deferred.reject(err);
+        deferred.reject();
       });
     } else {
       deferred.reject();
