@@ -23,7 +23,6 @@ angular.module('letterbox.controllers')
       $scope.isLoading = true;
       MatchService.getMatch()
       .then(function(match) {
-        $scope.isLoading = false;
         $scope.cards.push(createNewCard(match));
         $timeout(function() {
           // timeout for moving out animation
@@ -32,6 +31,7 @@ angular.module('letterbox.controllers')
             // timeout for moving in animation
             selectFirst('.profile-card').removeClass('moving-in');
           }, 200);
+          $scope.isLoading = false;
         }, 200);
       }, function() {
         $scope.isLoading = false;
