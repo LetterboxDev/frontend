@@ -9,6 +9,12 @@ angular.module('letterbox.services')
   };
   var SocketService = {};
 
+  SocketService.uninit = function() {
+    IOContainer.isInitialized = false;
+    IOContainer.socketio.disconnect();
+    IOContainer.socketio = null;
+  };
+
   SocketService.init = function() {
     console.log('Initializing Socket IO...');
     var token = window.localStorage.getItem('token');
@@ -37,7 +43,7 @@ angular.module('letterbox.services')
 
   SocketService.isConnected = function() {
     return IOContainer.isInitialized && IOContainer.socketio.connected;
-  }
+  };
 
   SocketService.sendMessage = function(roomHash, message) {
     var deferred = $q.defer();
