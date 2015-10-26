@@ -123,12 +123,12 @@ ion-content {
       border: 1px solid $colourBorder;
       border-radius: 2px;
       padding: 10px;
-      font-size: 13px;
-      line-height: 1.25em;
+      font-size: 12.5px;
+      line-height: 1.2em;
       color: $colourPrimaryText;
       cursor: pointer;
       margin: 0px !important;
-      height: 85px;
+      height: 90px;
       display: flex;
       align-items: center;
       -webkit-align-items: center;
@@ -141,13 +141,9 @@ ion-content {
         font-weight: bold;
       }
 
-      &.option0.selected {
-        background-color: $colourOption0;
-        border: 1px solid $colourOption0;
-      }
-      &.option1.selected {
-        background-color: $colourOption1;
-        border: 1px solid $colourOption1;
+      &.option0.selected, &.option1.selected {
+        background-color: $colourOption;
+        border: 1px solid $colourOption;
       }
     }
 
