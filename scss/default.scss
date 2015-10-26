@@ -169,10 +169,14 @@ ion-content {
     padding: 15px;
     border-radius: 10px;
   }
-  .popup-title {
-    @include uppercase-bold-font();
-    color: $colourPrimaryText;
-  }
+  .popup-head {
+    padding-bottom: 5px;
+    border: none;
+    .popup-title {
+      @include uppercase-bold-font();
+      color: $colourPrimaryText;
+    }
+  }  
   .popup-body {
     padding: 15px;
   }
