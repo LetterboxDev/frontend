@@ -32,6 +32,7 @@ angular.module('letterbox.controllers')
     if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
 
     if ($scope.curr === $scope.max && selected.length === 5 && selected.indexOf(-1) === -1) {
+      removeTooltip();
       updateQuestionAnswers(questions, selected);
       backend.sendALetter(targetUser.hashedId, questions);
       $scope.closeLetter();
@@ -46,6 +47,7 @@ angular.module('letterbox.controllers')
   };
 
   $scope.prevQuestion = function() {
+    removeTooltip();
     $scope.warning = '';
     if ($scope.curr <= 0) return;
     if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
@@ -107,6 +109,13 @@ angular.module('letterbox.controllers')
         question.answer = true;
       }
     });
+  }
+
+  function removeTooltip() {
+    if ($scope.tooltipShown) {
+        $('.button-next').qtip('destroy');
+        $scope.tooltipShown = false;
+    }
   }
 });
 
