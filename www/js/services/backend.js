@@ -209,9 +209,9 @@ angular.module('letterbox.services')
     return renewToken.get({letterbox_token: token});
   };
 
-  backend.getMatch = function(maxDistance, previousId) {
+  backend.getMatch = function(maxDistance, previousId, minAge, maxAge) {
     var token = getToken();
-    return matchGetter.get({letterbox_token: token, maxDistance: maxDistance, previousId: previousId});
+    return matchGetter.get({letterbox_token: token, maxDistance: maxDistance, previousId: previousId, minAge: minAge, maxAge: maxAge});
   };
 
   // limit is the max number of matches to return

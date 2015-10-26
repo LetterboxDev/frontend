@@ -9,18 +9,24 @@ angular.module('letterbox.services')
     var deferred = $q.defer();
     if (AuthService.isRegistered()) {
       var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
-      backend.getMatch(distance, MatchService.previousId).$promise
+      var minAge = window.localStorage.getItem('minAge') ? window.localStorage.getItem('minAge') : 18;
+      var maxAge = window.localStorage.getItem('maxAge') ? window.localStorage.getItem('maxAge') : 80;
+      backend.getMatch(distance, MatchService.previousId, minAge, maxAge).$promise
       .then(function(match) {
-        $ImageCacheFactory.Cache([
-          match.pictureMed
-        ]).then(function() {
-          MatchService.previousId = match.hashedId;
-          deferred.resolve(match);
-        }, function() {
+        if (match.code === 200) {
+          $ImageCacheFactory.Cache([
+            match.pictureMed
+          ]).then(function() {
+            MatchService.previousId = match.hashedId;
+            deferred.resolve(match);
+          }, function() {
+            deferred.reject();
+          });
+        } else {
           deferred.reject();
-        });
+        }
       }, function(err) {
-        deferred.reject(err);
+        deferred.reject();
       });
     } else {
       deferred.reject();

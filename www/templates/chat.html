@@ -1,5 +1,5 @@
 <ion-view view-title="{{recipient}}">
-  <ion-content>
+  <ion-content class="chat-view">
     <ion-list class="messages-list">
       <ion-item ng-repeat="message in messages" class="item">
         <div ng-if="!message.isOwner" class="received-msg">

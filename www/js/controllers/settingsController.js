@@ -19,9 +19,7 @@ angular.module('letterbox.controllers')
       max: maxAge === null ? $scope.maxAge : maxAge,
     }
   }
-
-  console.log($scope.preference);
-
+  
   $scope.onChangePerfectMatch = function() {
     window.localStorage.setItem('perfectMatch', $scope.preference.perfectMatch);
   }
@@ -33,6 +31,11 @@ angular.module('letterbox.controllers')
 
   $scope.onChangeDistanceRadius = function() {
     window.localStorage.setItem('distanceRadius', $scope.preference.distanceRadius);
+  }
+
+  $scope.onChangeAgeRange = function() {
+    window.localStorage.setItem('minAge', $scope.preference.age.min);
+    window.localStorage.setItem('maxAge', $scope.preference.age.max);
   }
 
   $scope.logout = function() {
