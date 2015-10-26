@@ -1,0 +1,23 @@
+<ion-view view-title="Notifications">
+  <ion-content>
+    <div class="feedback" ng-if="isLoading">
+      <h2>Loading notifications</h2>
+      <ion-spinner icon="dots"></ion-spinner>
+    </div>
+    <div ng-if="!isLoading">
+      <div ng-if="notifications.length > 0">
+        <ion-list class="notifications-list">
+          <ion-item ng-repeat="notification in notifications" class="item item-avatar" ng-click="selectNotification(notification)">
+            <img class="notification-profile-pic" ng-src="{{notification.profilePicThumb}}">
+            <h2 class="notification-from">{{notification.from}}</h2>
+            <p class="notification-message">{{notification.message}}</p>
+            <span am-time-ago="notification.createdAt" class="notification-timestamp"></span>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div class="feedback" ng-if="notifications.length === 0" >
+        <h2>No notifications!</h2>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

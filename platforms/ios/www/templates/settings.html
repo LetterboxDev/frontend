@@ -1,0 +1,75 @@
+<ion-view view-title="Settings">
+  <ion-content>
+    <ion-list class="settings-list">
+      <ion-item class="item item-divider">
+        Matching
+      </ion-item>
+      <ion-toggle ng-model="preference.perfectMatch" ng-checked="preference.perfectMatch" ng-change="onChangePerfectMatch()" toggle-class="toggle-positive">
+        <h2 class="setting-header">Perfect match</h2>
+        <p class="setting-description">Receive letters only from people who have answered all your questions correctly.</p>
+      </ion-toggle>
+      <ion-item class="item item-gender">
+        <h2 class="setting-header">
+          Gender preference
+        </h2>
+
+        <div class="row">
+          <div class="col">
+            <ion-radio ng-model="preference.preferredGender" ng-value="'female'" ng-change="onChangePreferredGender()">
+              <i class="icon ion-woman"></i>
+            </ion-radio>
+          </div>
+
+          <div class="col">
+            <ion-radio ng-model="preference.preferredGender" ng-value="'male'" ng-change="onChangePreferredGender()">
+              <i class="icon ion-man"></i>
+            </ion-radio>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="item">
+        <h2 class="setting-header">
+          Maximum distance: <span>{{ preference.distanceRadius }}km</span>
+        </h2>
+        <p class="setting-description">See the letterbox of people within this radius.</p>
+        <div class="range range-positive">
+          1
+          <input type="range" name="distanceRadius" min="1" max="100" ng-model="preference.distanceRadius" ng-change="onChangeDistanceRadius()">
+          100
+        </div>
+      </ion-item>
+
+      <ion-item class="item">
+        <h2 class="setting-header">
+          Age range: <span>{{ preference.age.min }} ~ {{ preference.age.max }}</span>
+        </h2>
+        <p class="setting-description">See the letterbox of people within this age range.</p>
+        <div class="range range-positive">
+          {{ minAge }}
+          <slider floor="{{ minAge }}" ceiling="{{ maxAge }}" ng-model-low="preference.age.min" ng-model-high="preference.age.max" change="onChangeAgeRange()">
+          </slider>
+          {{ maxAge }}
+        </div>
+      </ion-item>
+
+      <ion-item class="item item-divider">
+        Account
+      </ion-item>
+      <ion-item class="item item-button-right">
+        <h2 class="setting-header">
+          Logout
+        </h2>
+        <button class="button button-stable btn-logout" ng-click="logout()">
+          <i class="icon ion-heart-broken"></i>
+        </button>
+      </ion-item>
+
+      <div class="settings-etc">
+        <h2>Letterbox 0.1</h2>
+        <ul class="settings-links">
+          <li><a href="#/app/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

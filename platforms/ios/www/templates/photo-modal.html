@@ -1,0 +1,27 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Change profile picture</h1>
+    <button class="button button-clear" ng-click="hideProfilePhotoModal()">Close</button>
+  </ion-header-bar>
+  <ion-content class="profile-modal">
+    <div class="feedback" ng-if="isLoadingPhotos">
+      <h2>Loading profile pictures</h2>
+      <ion-spinner icon="lines"></ion-spinner>
+    </div>
+    <div ng-if="!isLoadingPhotos">
+      <div ng-repeat="photo in profilePhotos">
+        <div ng-if="$index%3==0" class="row">
+          <div class="col col-33">
+            <img src="{{profilePhotos[$index].picture}}" ng-click="updateProfilePhoto(profilePhotos[$index].id)">
+          </div>
+          <div class="col col-33">
+            <img src="{{profilePhotos[$index+1].picture}}" ng-click="updateProfilePhoto(profilePhotos[$index+1].id)">
+          </div>
+          <div class="col col-33">
+            <img src="{{profilePhotos[$index+2].picture}}" ng-click="updateProfilePhoto(profilePhotos[$index+2].id)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

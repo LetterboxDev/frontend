@@ -1,0 +1,77 @@
+<ion-view view-title="Send a Letter">
+  <ion-content scroll="false">
+    <div class="letter-wrapper">
+      <div class="letter" ng-controller="LetterCtrl">
+        <div class="profile-card">
+          <div class="flipper-container" flip-card>
+            <div class="flipper">
+              <div class="card front">
+                <div class="close-letter" ng-click="closeLetter()">
+                  <i class="icon ion-close"></i>
+                </div>
+                
+                <h3>Would you rather...</h3>
+                <p class="warning">{{ warning }}</p>
+                <p class="current">Question {{ curr + 1 }} of 5</p>
+                <div class="row answer-row">
+                  <div ng-class="{'active' : selectedTab === 0}" ng-click="selectTab(0)" class="left col">
+                    <p>{{ currentQuestion.option0 }}</p>
+                  </div>
+                  <div ng-class="{'active' : selectedTab === 1}" ng-click="selectTab(1)" class="right col">
+                    <p>{{ currentQuestion.option1 }}</p>
+                  </div>
+                </div>
+                <div class="card-buttons">
+                  <div class="card-button button-positive button-prev" ng-class="{'disabled': curr === 0}" ng-click="prevQuestion()">
+                    <i class="icon ion-chevron-left"></i>
+                    <div class="button-detail">previous</div>
+                  </div>
+                  <div class="card-button button-flip">
+                    <i class="icon ion-person"></i>
+                    <div class="button-detail">profile</div>
+                  </div>
+                  <div class="card-button button-positive button-next" ng-click="nextQuestion()">
+                    <i class="icon" ng-class="(curr === max) ? 'ion-ios-paperplane': 'ion-chevron-right'"></i>
+                    <div class="button-detail">
+                      {{ curr === max ? 'send' : 'next' }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card back">
+                <div class="back-container">
+                  <div class="small-profile-pic-header">
+                    <img class="small-profile-pic" ng-src="{{ card.profile_pic }}" />
+                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span>
+                  </div>
+                  <div class="item card-content">
+                    <div class="section">
+                      <h3>bio</h3>
+                      <p>{{ card.bio }}</p>
+                    </div>
+                    <div class="section">
+                      <h3>mutual friends</h3>
+                      <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
+                    </div>
+                    <div class="section">
+                      <h3>Likes</h3>
+                    </div>
+
+                  </div>
+                  <div class="item card-buttons">
+                    <div class="card-button button-flip">
+                      <i class="icon ion-ios-undo"></i>
+                      <div class="button-detail">back</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+

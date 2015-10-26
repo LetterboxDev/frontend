@@ -1,0 +1,85 @@
+<ion-view view-title="Letterbox">
+  <ion-nav-buttons side="right">
+    <button class="button button-small button-icon button-clear ion-ios-bell" data-ng-click="goNotifications()">
+    </button>
+    <div class="notification-bubble" data-ng-show="numberOfNotifications > 0" data-ng-click="goNotifications()">
+      {{ numberOfNotifications }}
+    </div>
+  </ion-nav-buttons>
+  <ion-content scroll="false">
+    <div ng-controller="CardsCtrl">
+      <div ng-if="cards.length === 0" class="feedback">
+        <h2>No letterboxes nearby</h2>
+        <p>Try again later or tweak your settings</p>
+      </div>
+      <div ng-if="isLoading" class="feedback">
+        <ion-spinner icon="dots"></ion-spinner>
+      </div>
+      <div ng-if="!isLoading" class="profile-cards">
+        <div class="profile-card moving-in" ng-repeat="card in cards">
+          <div class="flipper-container" flip-card>
+            <div class="flipper">
+              <div class="card front">
+                <div class="large-profile-pic-header">
+                  <div class="large-profile-pic" style="background-image: url({{ card.profile_pic }})">
+                  </div>
+                  <div class="item profile-pic-overlay">
+                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
+                  </div>
+                </div>
+                <div class="item card-content">
+                  <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
+                </div>
+                <div class="item card-buttons">
+                  <div ng-click="changeCard()" class="card-button button-negative">
+                    <i class="icon ion-close"></i>
+                    <div class="button-detail">skip</div>
+                  </div>
+                  <div class="card-button button-flip">
+                    <i class="icon ion-person"></i>
+                    <div class="button-detail">profile</div>
+                  </div>
+                  <div ng-click="openSendLetter(card)" class="card-button button-positive">
+                    <i class="icon ion-edit"></i>
+                    <div class="button-detail">answer</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card back" ng-controller="CardCtrl">
+                <div class="back-container">
+                  <div class="small-profile-pic-header">
+                    <div class="small-profile-pic" style="background-image: url({{ card.profile_pic }})">
+                    </div>
+                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span>
+                  </div>
+                  <div class="item card-content">
+                    <div class="section">
+                      <h3>bio</h3>
+                      <p>{{ card.bio }}</p>
+                    </div>
+                    <div class="section">
+                      <h3>mutual friends</h3>
+                      <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
+                    </div>
+                    <div class="section">
+                      <h3>Likes</h3>
+                    </div>
+
+                  </div>
+                  <div class="item card-buttons">
+                    <div class="card-button button-flip">
+                      <i class="icon ion-ios-undo"></i>
+                      <div class="button-detail">back</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+

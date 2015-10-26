@@ -1,0 +1,84 @@
+<ion-view view-title="Response">
+  <ion-content>
+    <div class="response-cards">
+      <div class="profile-card moving-in">
+        <div class="flipper-container" flip-card>
+          <div class="flipper">
+            <div class="card front">
+              <div class="small-profile-pic-header">
+                <img class="small-profile-pic" ng-src="{{ response.profilePicMed }}" alt="Image" />
+                <span class="name">{{ response.from }}</span><span class="age">, {{ response.age }}</span>
+              </div>
+              <div class="item card-content">
+                <div class="section">
+                  <h3>responses</h3>
+                  <div class="questions">
+                    <div class="question" ng-repeat="question in response.questionsAnswers">
+                      <div class="option option0" ng-class="{ 'selected' : !question.answer}">
+                        {{ question.option0 }}
+                      </div>
+                      <div class="option option1" ng-class="{ 'selected' : question.answer}">
+                        {{ question.option1 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item card-buttons">
+                <div class="card-button button-negative" ng-click="rejectLetter(response)">
+                  <i class="icon ion-close"></i>
+                  <div class="button-detail">reject</div>
+                </div>
+                <div class="button-flip card-button button-profile">
+                  <i class="icon ion-person"></i>
+                  <div class="button-detail">profile</div>
+                </div>
+                <div class="card-button button-positive" ng-click="approveLetter(response)">
+                  <i class="icon ion-chatbubbles"></i>
+                  <div class="button-detail">start chat</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card back">
+              <div class="back-container">
+                <div class="small-profile-pic-header">
+                  <img class="small-profile-pic" ng-src="{{ response.profilePicMed }}" alt="Image" />
+                  <span class="name">{{ response.from }}</span><span class="age">, {{ response.age }}</span>
+                </div>
+                <div class="item card-content">
+                  <div class="section">
+                    <h3>bio</h3>
+                    <p>{{ (response.bio.length > 0) ? response.bio : '&nbsp;' }}</p>
+                  </div>
+                  <div class="section">
+                    <h3>mutual friends</h3>
+                    <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
+                  </div>
+                  <div class="section">
+                    <h3>Likes</h3>
+                  </div>
+                </div>
+
+                <div class="item card-buttons">
+                  <div class="card-button button-negative" ng-click="rejectLetter(response)">
+                    <i class="icon ion-close"></i>
+                    <div class="button-detail">reject</div>
+                  </div>
+                  <div class="card-button button-flip button-back">
+                    <i class="icon ion-ios-undo"></i>
+                    <div class="button-detail">back</div>
+                  </div>
+                  <div class="card-button button-positive" ng-click="approveLetter(response)">
+                    <i class="icon ion-chatbubbles"></i>
+                    <div class="button-detail">start chat</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

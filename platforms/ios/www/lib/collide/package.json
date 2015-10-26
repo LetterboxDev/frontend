@@ -1,0 +1,14 @@
+{
+  "name": "collide",
+  "version": "0.0.4",
+  "main": "collide.js",
+  "scripts": {
+    "build": "mkdir -p dist && browserify src/index.js -s collide > dist/collide.js"
+  },
+  "dependencies": {
+    "events": "^1.0.1",
+    "promiscuous": "^0.6.0",
+    "node.extend": "^1.0.10",
+    "raf": "^2.0.1"
+  }
+}
