@@ -57,19 +57,16 @@
   }
   .left {
     margin-right: 2px;
-    border: 1px solid $colourOption0;
-    color: $colourOption0;
+    border: 1px solid $colourOption;
+    color: $colourOption;
   }
   .right {
     margin-left: 2px;
-    border: 1px solid $colourOption1;
-    color: $colourOption1;
+    border: 1px solid $colourOption;
+    color: $colourOption;
   }
-  .left.active {
-    background-color: $colourOption0;
-  }
-  .right.active {
-    background-color: $colourOption1;
+  .left.active, .right.active {
+    background-color: $colourOption;
   }
 
   .card-button.disabled {
