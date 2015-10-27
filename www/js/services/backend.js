@@ -9,6 +9,7 @@ angular.module('letterbox.services')
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:userId';
   var pushTokenPath = '/user/pushtoken';
+  var perfectMatchPath = '/user/perfectmatch';
   var updateLocationPath = '/user/location';
   var updateBioPath = '/user/bio';
   var userPhotoPath = '/user/photo';
@@ -81,6 +82,15 @@ angular.module('letterbox.services')
     },
     clearPushToken: {
       method: 'DELETE',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
+  var perfectMatchUpdater = $resource(URL.concat(perfectMatchPath), {}, {
+    updatePerfectMatch: {
+      method: 'PUT',
       params: {
         letterbox_token: '@token'
       }
@@ -240,6 +250,14 @@ angular.module('letterbox.services')
     updater.token = token;
     updater.$clearPushToken(deferred.resolve, deferred.reject);
     return deferred.promise;
+  };
+
+  backend.updatePerfectMatch = function(perfectMatch) {
+    var token = getToken();
+    updater = new perfectMatchUpdater();
+    updater.token = token;
+    updater.perfectMatch = perfectMatch;
+    return updater.$updatePerfectMatch();
   };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
