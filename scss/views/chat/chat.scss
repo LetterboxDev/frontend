@@ -10,6 +10,10 @@
   }
 }
 
+.chat-view {
+  background-color: darken($colourBackground, 4%);
+}
+
 .messages-list .list {
   padding: 20px 10px 70px;
 
@@ -49,6 +53,12 @@
       background: none;
       resize: none;
     }
+  }
+  .send {
+    background-color: white;
+    color: $colourPrimary;
+    margin-left: 2vw;
+    border: none;
   }
 }
 

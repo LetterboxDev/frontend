@@ -1,5 +1,5 @@
 <ion-view view-title="{{recipient}}">
-  <ion-content>
+  <ion-content class="chat-view">
     <ion-list class="messages-list">
       <ion-item ng-repeat="message in messages" class="item">
         <div ng-if="!message.isOwner" class="received-msg">
@@ -29,7 +29,7 @@
         <textarea msd-elastic ng-model="data.message" type="text" placeholder="Message" maxlength="2000" ng-keydown="onKeyPress($event)">
         </textarea>
       </label>
-      <button class="button button-small icon ion-paper-airplane" ng-click="sendMessage()"></button>
+      <button class="send" ng-click="sendMessage()">Send</button>
     </div>
   </div>
 </ion-view>

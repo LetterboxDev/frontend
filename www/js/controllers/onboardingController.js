@@ -1,7 +1,6 @@
 angular.module('letterbox.controllers')
 
-.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, AuthService, backend, eventbus) {
-
+.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, $ionicHistory, AuthService, backend, eventbus) {
   $scope.showLoading = function() {
     $ionicLoading.show({
       template: '<ion-spinner icon="ripple"></ion-spinner>'
@@ -21,7 +20,8 @@ angular.module('letterbox.controllers')
       $scope.hideLoading();
       var alertPopup = $ionicPopup.alert({
         title: 'An error occurred!',
-        template: 'Please try again later'
+        template: 'Please try again later',
+        cssClass: "popup-alert"
       });
     });
   };
@@ -45,8 +45,7 @@ angular.module('letterbox.controllers')
   };
 
   $scope.beginOnboarding = function() {
-    if (window.localStorage.getItem('token') &&
-        window.localStorage.getItem('isRegistered') === 'false') {
+    if (!AuthService.isRegistered()) {
       $state.go('onboarding', {onboardStep: 1});
     } else {
       $state.go('app.home');
@@ -132,15 +131,14 @@ angular.module('letterbox.controllers')
       cssClass: "popup-alert",
       okType: "button-stable"
     }).then(function(res) {
-    });  
+    });
   }
 
   var init = function() {
-    if (window.localStorage.getItem('token') && !$scope.questions) {
+    $ionicHistory.clearHistory();
+    if (AuthService.isLoggedIn() && !$scope.questions) {
       $scope.getRandomQuestions();
     }
-    $scope.gender = window.localStorage.getItem('gender');
-    $scope.genderPref = window.localStorage.getItem('genderPref');
   }
 
   init();

@@ -1,6 +1,6 @@
 angular.module('letterbox.services')
 
-.service('AuthService', function($q, backend, DbService) {
+.service('AuthService', function($q, $ionicHistory, backend, eventbus, DbService, socket) {
   var AuthService = {};
 
   function saveDetails(res) {
@@ -41,21 +41,39 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
+  AuthService.isLoggedIn = function() {
+    return window.localStorage.getItem('token') !== null && window.localStorage.getItem('token').length > 0;
+  };
+
+  AuthService.isRegistered = function() {
+    return AuthService.isLoggedIn() && window.localStorage.getItem('isRegistered') === 'true';
+  };
+
   AuthService.logout = function() {
     var deferred = $q.defer();
 
-    window.localStorage.setItem('token', '');
-    window.localStorage.setItem('firstName', '');
-    window.localStorage.setItem('hashedId', '');
-    window.localStorage.setItem('isRegistered', '');
+    backend.clearPushToken()
+    .then(function() {
+      $ionicHistory.clearCache().then(function() {
+        window.localStorage.setItem('token', '');
+        window.localStorage.setItem('firstName', '');
+        window.localStorage.setItem('hashedId', '');
+        window.localStorage.setItem('isRegistered', '');
+        window.localStorage.setItem('genderPreference', '');
 
-    if (DbService.isInitialized()) {
-      DbService.clearAll().then(function() {
-        deferred.resolve();
+        socket.uninit();
+
+        if (DbService.isInitialized()) {
+          DbService.clearAll().then(function() {
+            deferred.resolve();
+          });
+        } else {
+          deferred.resolve();
+        }
       });
-    } else {
-      deferred.resolve();
-    }
+    }, function() {
+      deferred.reject();
+    });
 
     return deferred.promise;
   };

@@ -11,7 +11,7 @@
   border-radius: 10px;
   margin: 12px 10px;
   &.back {
-    margin: 20px 10px; // shift the card down as a result of rotation
+    top-margin: 20px; // shift the card down as a result of rotation
   }
 }
 
@@ -41,9 +41,18 @@
 
   .large-profile-pic-header{
     position: relative;
-    img {
-      width: 100%;
+
+    .large-profile-pic {
+      width: 100vw;
+      height: 100vw;
+      min-width: 300px;
+      min-height: 300px;
+      max-width: 480px;
+      max-height: 480px;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
+
     .profile-pic-overlay {
       width: 100%;
       z-index: 5;
@@ -183,9 +192,17 @@
   }
 
   .small-profile-pic {
-    width: 15%;
-    border-radius: 50%;
+    display: inline-block;
     vertical-align: middle;
+    width: 15vw;
+    height: 15vw;
+    min-width: 48px;
+    min-height: 48px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .questions {
@@ -220,6 +237,7 @@
     }
     .back {
       height: 100%;
+      width: 95%; // Another hack
       position: absolute;
       top: -3%; // This is a hack
       -webkit-transform: rotateY(180deg);

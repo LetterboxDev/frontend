@@ -1,13 +1,14 @@
 angular.module('letterbox.services')
-.service('backend', function($resource, $http) {
+.service('backend', function($q, $resource, $http) {
   var backend = {};
-  var URL = 'https://getletterbox.com';
+  var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
   // var URL = 'http://localhost:8080';
 
   var authPath = '/auth';
   var renewPath = '/auth/renew'
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:userId';
+  var pushTokenPath = '/user/pushtoken';
   var updateLocationPath = '/user/location';
   var updateBioPath = '/user/bio';
   var userPhotoPath = '/user/photo';
@@ -68,6 +69,21 @@ angular.module('letterbox.services')
   var userSelfGetter = $resource(URL.concat(userSelfPath), {}, {
     get: {
       method: 'GET'
+    }
+  });
+
+  var pushTokenUpdater = $resource(URL.concat(pushTokenPath), {}, {
+    updatePushToken: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    },
+    clearPushToken: {
+      method: 'DELETE',
+      params: {
+        letterbox_token: '@token'
+      }
     }
   });
 
@@ -193,21 +209,38 @@ angular.module('letterbox.services')
     return renewToken.get({letterbox_token: token});
   };
 
-  backend.getMatch = function(maxDistance, previousId) {
+  backend.getMatch = function(maxDistance, previousId, minAge, maxAge) {
     var token = getToken();
-    return matchGetter.get({letterbox_token: token, maxDistance: maxDistance, previousId: previousId});
+    return matchGetter.get({letterbox_token: token, maxDistance: maxDistance, previousId: previousId, minAge: minAge, maxAge: maxAge});
   };
 
   // limit is the max number of matches to return
   backend.getMatches = function(maxDistance, limit, previousId) {
     var token = getToken();
     return matchesGetter.get({letterbox_token: token, maxDistance: maxDistance, limit: limit, previousId: previousId});
-  }
+  };
 
   backend.getUserSelf = function() {
     var token = getToken();
     return userSelfGetter.get({letterbox_token: token});
-  }
+  };
+
+  backend.updatePushToken = function(pushtoken) {
+    var token = getToken();
+    updater = new pushTokenUpdater();
+    updater.token = token;
+    updater.pushToken = pushtoken;
+    return updater.$updatePushToken();
+  };
+
+  backend.clearPushToken = function() {
+    var deferred = $q.defer();
+    var token = getToken();
+    updater = new pushTokenUpdater();
+    updater.token = token;
+    updater.$clearPushToken(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
     var token = getToken();

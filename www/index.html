@@ -13,14 +13,22 @@
     <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
 
+    <link href="lib/qtip2/jquery.qtip.css" rel="stylesheet">
+
     <!-- socketio -->
     <script src="js/socket.io.js"></script>
 
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/qtip2/jquery.qtip.min.js"></script>
+
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="cordova.js"></script>
+    <script src="js/ng-cordova.min.js"></script>
+    <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
+    <!-- <script src="cordova.js"></script> -->
+
     <script src="lib/angular-resource/angular-resource.min.js"></script>
     <script src="lib/angular-facebook/lib/angular-facebook.js"></script>
-    <script src="js/ng-cordova.min.js"></script>
     <script src="js/lib/ionic.ion.imagecachefactory.js"></script>
 
     <!-- Main app javascript -->
@@ -32,7 +40,9 @@
     <script src="js/services/eventbus.js"></script>
     <script src="js/services/backend.js"></script>
     <script src="js/services/authService.js"></script>
+    <script src="js/services/matchService.js"></script>
     <script src="js/services/LocationService.js"></script>
+    <script src="js/services/pushService.js"></script>
     <script src="js/services/roomsService.js"></script>
     <script src="js/services/dbService.js"></script>
     <script src="js/services/chatService.js"></script>
@@ -66,6 +76,9 @@
     <script src="lib/angular-moment/angular-moment.min.js"></script>
     <script src="lib/angular-elastic/elastic.js"></script>
     <script src="lib/angular-slider/slider.js"></script>
+
+    <!-- Patches -->
+    <script src="js/patches/angular-ios9-uiwebview.patch.js"></script>
 
   </head>
 

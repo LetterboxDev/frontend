@@ -1,6 +1,6 @@
 angular.module('letterbox.services')
 .service('socket', function(eventbus, $q) {
-  var URL = 'https://getletterbox.com';
+  var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
   // var URL = 'http://localhost:8080';
 
   var IOContainer = {
@@ -8,6 +8,12 @@ angular.module('letterbox.services')
     socketio: null
   };
   var SocketService = {};
+
+  SocketService.uninit = function() {
+    IOContainer.isInitialized = false;
+    IOContainer.socketio.disconnect();
+    IOContainer.socketio = null;
+  };
 
   SocketService.init = function() {
     console.log('Initializing Socket IO...');
@@ -37,7 +43,7 @@ angular.module('letterbox.services')
 
   SocketService.isConnected = function() {
     return IOContainer.isInitialized && IOContainer.socketio.connected;
-  }
+  };
 
   SocketService.sendMessage = function(roomHash, message) {
     var deferred = $q.defer();

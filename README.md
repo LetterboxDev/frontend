@@ -22,9 +22,15 @@
 
 `cordova plugin add cordova-plugin-statusbar`
 
+`ionic add ionic-platform-web-client`
+
+`ionic plugin add phonegap-plugin-push`
+
 `cordova plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git`
 
 `cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git`
+
+`cordova plugin add https://github.com/apache/cordova-plugin-splashscreen.git`
 
 `ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git`
 

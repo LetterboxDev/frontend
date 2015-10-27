@@ -10,7 +10,8 @@
           <div class="my-profile card front">
             <div class="item card-content">
               <div class="section">
-                <img class="small-profile-pic" ng-src="{{ profile.pictureMed }}" alt="Image" ng-click="openProfilePhotoModal()" />
+                <div class="small-profile-pic" style="background-image: url({{ profile.pictureMed }})" ng-click="openProfilePhotoModal()">
+                </div>
                 <div class="bio">
                   <h3>bio</h3>
                   <textarea placeholder="Add a short bio" rows="3" ng-model="profile.bio" ng-change="onEnterText()"></textarea>  

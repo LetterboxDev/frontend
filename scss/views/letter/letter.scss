@@ -1,22 +1,44 @@
 .letter-wrapper {
   height: 100%;
-  display: table;
 }
 .letter {
-  display: table-cell;
-  vertical-align: middle;
   font-size: 16px;
   font-weight: bold;
-  line-height: 1.25;
-  i {
+  // line-height: 1.25;
+  .close-letter {
+    cursor: pointer;
     float: right;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    i {
+      color: $colourSecondaryText;
+    }
+  }
+  i {
 
     &.ion-ios-paperplane {
       font-size: 150%;
     }
+
+    &.ion-chevron-left, &.ion-chevron-right {
+      margin-top: 2px;
+    }
+
+    &.ion-chevron-right {
+      margin-left: 2px;
+    }
   }
   .front h3 {
+    clear: both;
     text-align: center;
+    font-weight: bold;
+    color: $colourPrimaryText;
   }
   .warning {
     color: $colourPrimary;
@@ -25,6 +47,11 @@
   }
   .warning:empty:before {
     content: '\200b';
+  }
+  .current {
+    color: $colourSecondaryText;
+    font-weight: lighter;
+    text-align: center;
   }
   .card {
     background-color: white;
@@ -41,7 +68,7 @@
     align-items: center;
     padding: 15px;
     margin: 5vh 0px;
-    height: 20vh;
+    height: 30vh;
     min-height: 80px;
     border-radius: 5px;
     &.active {
@@ -50,19 +77,16 @@
   }
   .left {
     margin-right: 2px;
-    border: 1px solid $colourOption0;
-    color: $colourOption0;
+    border: 1px solid $colourOption;
+    color: $colourOption;
   }
   .right {
     margin-left: 2px;
-    border: 1px solid $colourOption1;
-    color: $colourOption1;
+    border: 1px solid $colourOption;
+    color: $colourOption;
   }
-  .left.active {
-    background-color: $colourOption0;
-  }
-  .right.active {
-    background-color: $colourOption1;
+  .left.active, .right.active {
+    background-color: $colourOption;
   }
 
   .card-button.disabled {
