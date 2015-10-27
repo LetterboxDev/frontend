@@ -55,12 +55,5 @@ angular.module('letterbox.controllers')
       socket.sendMessage($scope.roomHash, content);
       $scope.data.message = '';
     }
-
-  // $timeout(function() {
-    var element = $window.document.getElementById('item-input-area');
-    if (element) {
-      element.focus();
-    }
-  // });
   };
 });
