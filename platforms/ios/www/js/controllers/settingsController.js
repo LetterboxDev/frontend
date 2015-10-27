@@ -25,7 +25,6 @@ angular.module('letterbox.controllers')
   }
 
   $scope.onChangePreferredGender = function() {
-    console.log('aa');
     window.localStorage.setItem('preferredGender', $scope.preference.preferredGender);
     backend.updateGenderPreference($scope.preference.preferredGender);
   }

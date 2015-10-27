@@ -7865,6 +7865,17 @@ ion-content {
 .popup-alert .popup-body {
   padding: 15px; }
 
+/**
+ * There is a problem with radio buttons on iOS9
+ * where Ionic's '~' combinator for radio button styles
+ * doesn't work. Changing it into a '+' combinator fixes it.
+ * n.b. might be fixed in later builds
+ */
+.item-radio input:checked + .item-content {
+  background: #f7f7f7; }
+.item-radio input:checked + .radio-icon {
+  visibility: visible; }
+
 /*********
  * Views *
  *********/
@@ -7966,7 +7977,7 @@ ion-content {
   top: 120px; }
 
 .profile-cards {
-  position: fixed; }
+  position: relative; }
   .profile-cards .feedback {
     padding: 10px;
     text-align: center; }
@@ -8467,6 +8478,7 @@ ion-content {
     padding: 8px 10px; }
     .enter-message-bar .item-input-wrapper textarea {
       max-height: 40vh;
+      height: 21px;
       width: 100%;
       background: none;
       resize: none; }
