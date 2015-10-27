@@ -177,3 +177,20 @@ ion-content {
     padding: 15px;
   }
 }
+
+/**
+ * There is a problem with radio buttons on iOS9
+ * where Ionic's '~' combinator for radio button styles
+ * doesn't work. Changing it into a '+' combinator fixes it.
+ * n.b. might be fixed in later builds
+ */
+.item-radio input {
+
+  &:checked + .item-content {
+    background: #f7f7f7;
+  }
+
+  &:checked + .radio-icon {
+    visibility: visible;
+  }
+}
