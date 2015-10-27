@@ -1,7 +1,6 @@
 angular.module('letterbox.controllers')
 
 .controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, $ionicHistory, AuthService, backend, eventbus) {
-
   $scope.showLoading = function() {
     $ionicLoading.show({
       template: '<ion-spinner icon="ripple"></ion-spinner>'
@@ -132,7 +131,7 @@ angular.module('letterbox.controllers')
       cssClass: "popup-alert",
       okType: "button-stable"
     }).then(function(res) {
-    });  
+    });
   }
 
   var init = function() {
