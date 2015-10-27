@@ -22,6 +22,7 @@ angular.module('letterbox.controllers')
   
   $scope.onChangePerfectMatch = function() {
     window.localStorage.setItem('perfectMatch', $scope.preference.perfectMatch);
+    backend.updatePerfectMatch($scope.preference.perfectMatch);
   }
 
   $scope.onChangePreferredGender = function() {
