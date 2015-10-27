@@ -6,7 +6,7 @@
       {{ numberOfNotifications }}
     </div>
   </ion-nav-buttons>
-  <ion-content scroll="false">
+  <ion-content scroll="true" has-bouncing="false">
     <div ng-controller="CardsCtrl">
       <div ng-if="cards.length === 0" class="feedback">
         <h2>No letterboxes nearby</h2>
