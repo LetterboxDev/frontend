@@ -115,6 +115,10 @@ angular.module('letterbox')
   ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
+  var defaultRoute = '/login';
+  if (window.localStorage.getItem('token')) {
+    defaultRoute = '/app/home';
+  }
+  $urlRouterProvider.otherwise(defaultRoute);
 });
 

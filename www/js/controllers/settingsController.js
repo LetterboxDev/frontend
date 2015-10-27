@@ -19,7 +19,7 @@ angular.module('letterbox.controllers')
       max: maxAge === null ? $scope.maxAge : maxAge,
     }
   }
-  
+
   $scope.onChangePerfectMatch = function() {
     window.localStorage.setItem('perfectMatch', $scope.preference.perfectMatch);
   }

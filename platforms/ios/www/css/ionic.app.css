@@ -8470,6 +8470,11 @@ ion-content {
       width: 100%;
       background: none;
       resize: none; }
+  .enter-message-bar .send {
+    background-color: white;
+    color: #fa5c4f;
+    margin-left: 2vw;
+    border: none; }
 
 .my-profile .small-profile-pic {
   cursor: pointer;
