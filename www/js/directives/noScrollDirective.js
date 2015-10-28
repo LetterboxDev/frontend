@@ -1,4 +1,4 @@
-angular.module('letterbox.directives', [])
+angular.module('letterbox.directives')
 
 .directive('noScroll', function($document) {
   return {

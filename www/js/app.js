@@ -1,4 +1,22 @@
-angular.module('letterbox', ['ionic','ionic.service.core', 'letterbox.controllers', 'ngResource', 'letterbox.services', 'letterbox.directives', 'facebook', 'ngCordova', 'angularMoment', 'ui.slider', 'monospaced.elastic', 'ionic.ion.imageCacheFactory', 'ngIOS9UIWebViewPatch'])
+// Initialize modules
+angular.module('letterbox.controllers', []);
+angular.module('letterbox.directives', []);
+angular.module('letterbox.services', []);
+
+angular.module('letterbox', ['ionic',
+                             'ionic.service.core',
+                             'letterbox.controllers',
+                             'letterbox.directives',
+                             'letterbox.services',
+                             'facebook',
+                             'angularMoment',
+                             'ui.slider',
+                             'monospaced.elastic',
+                             'ionic.ion.imageCacheFactory',
+                             'ngCordova',
+                             'ngResource',
+                             'ngIOS9UIWebViewPatch'
+                            ])
 
 .run(function($ionicPlatform, $rootScope, eventbus) {
   $rootScope.$on("$stateChangeError", console.log.bind(console));
@@ -40,6 +58,4 @@ angular.module('letterbox', ['ionic','ionic.service.core', 'letterbox.controller
 .config(function(FacebookProvider) {
   FacebookProvider.init('1674828996062928');
 });
-
-angular.module('letterbox.services', []);
 
