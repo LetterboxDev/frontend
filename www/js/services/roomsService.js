@@ -1,5 +1,10 @@
 angular.module('letterbox.services')
-.service('RoomsService', function($q, backend, DbService, eventbus) {
+
+.service('RoomsService', function($q,
+                                  backend,
+                                  DbService,
+                                  eventbus) {
+
   var RoomsService = {};
   var roomsCache = [];
 

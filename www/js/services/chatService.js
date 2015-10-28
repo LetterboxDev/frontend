@@ -1,6 +1,11 @@
 angular.module('letterbox.services')
 
-.service('ChatService', function($q, RoomsService, DbService, backend, eventbus) {
+.service('ChatService', function($q,
+                                 RoomsService,
+                                 DbService,
+                                 backend,
+                                 eventbus) {
+
   var ChatService = {};
 
   function insertMessageIntoDb(message) {

@@ -1,4 +1,5 @@
 angular.module('letterbox.services')
+
 .service('eventbus', function() {
   var Eventbus = {};
   var listeners = {};

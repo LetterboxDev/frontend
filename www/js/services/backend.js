@@ -1,5 +1,9 @@
 angular.module('letterbox.services')
-.service('backend', function($q, $resource, $http) {
+
+.service('backend', function($q,
+                             $resource,
+                             $http) {
+
   var backend = {};
   var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
   // var URL = 'http://localhost:8080';

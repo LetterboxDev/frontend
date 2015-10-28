@@ -1,6 +1,12 @@
 angular.module('letterbox.services')
 
-.service('AuthService', function($q, $ionicHistory, backend, eventbus, DbService, socket) {
+.service('AuthService', function($q,
+                                 $ionicHistory,
+                                 backend,
+                                 eventbus,
+                                 DbService,
+                                 socket) {
+
   var AuthService = {};
 
   function saveDetails(res) {
