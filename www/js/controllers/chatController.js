@@ -1,6 +1,14 @@
 angular.module('letterbox.controllers')
 
-.controller('ChatCtrl', function($scope, $stateParams, $ionicScrollDelegate, ChatService, RoomsService, eventbus, socket, $window) {
+.controller('ChatCtrl', function($scope,
+                                 $stateParams,
+                                 $ionicScrollDelegate,
+                                 $window,
+                                 ChatService,
+                                 RoomsService,
+                                 eventbus,
+                                 socket) {
+
   $scope.recipient = '';
   $scope.data = {message: ''};
 

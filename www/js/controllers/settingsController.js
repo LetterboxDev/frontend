@@ -1,6 +1,11 @@
 angular.module('letterbox.controllers')
 
-.controller('SettingsCtrl', function($scope, $state, $ionicPopup, backend, AuthService) {
+.controller('SettingsCtrl', function($scope,
+                                     $state,
+                                     $ionicPopup,
+                                     backend,
+                                     AuthService) {
+
   $scope.minAge = 18;
   $scope.maxAge = 80;
 
@@ -19,7 +24,7 @@ angular.module('letterbox.controllers')
       max: maxAge === null ? $scope.maxAge : maxAge,
     }
   }
-  
+
   $scope.onChangePerfectMatch = function() {
     window.localStorage.setItem('perfectMatch', $scope.preference.perfectMatch);
     backend.updatePerfectMatch($scope.preference.perfectMatch);

@@ -1,6 +1,19 @@
 angular.module('letterbox.controllers')
 
-.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, $ionicLoading, eventbus, socket, LocationService, DbService, RoomsService, ChatService, AuthService, PushService) {
+.controller('AppCtrl', function($scope,
+                                $state,
+                                $location,
+                                $ionicPopup,
+                                $ionicLoading,
+                                eventbus,
+                                socket,
+                                LocationService,
+                                DbService,
+                                RoomsService,
+                                ChatService,
+                                AuthService,
+                                PushService) {
+
   $scope.username = window.localStorage.getItem('firstName') ? window.localStorage.getItem('firstName') : '';
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.

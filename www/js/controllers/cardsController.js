@@ -1,6 +1,15 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ImageCacheFactory, eventbus, backend, letterService, MatchService) {
+.controller('CardsCtrl', function($scope,
+                                  $state,
+                                  $element,
+                                  $timeout,
+                                  $ImageCacheFactory,
+                                  eventbus,
+                                  backend,
+                                  letterService,
+                                  MatchService) {
+
   $scope.cards = [];
   $scope.isLoading = false;
 

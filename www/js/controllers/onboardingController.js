@@ -1,6 +1,17 @@
 angular.module('letterbox.controllers')
 
-.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, $ionicHistory, AuthService, backend, eventbus) {
+.controller('OnboardingCtrl', function($scope,
+                                       $state,
+                                       $timeout,
+                                       $ionicPopup,
+                                       $ionicLoading,
+                                       $cordovaOauth,
+                                       $ionicHistory,
+                                       Facebook,
+                                       AuthService,
+                                       backend,
+                                       eventbus) {
+
   $scope.showLoading = function() {
     $ionicLoading.show({
       template: '<ion-spinner icon="ripple"></ion-spinner>'

@@ -1,6 +1,11 @@
 angular.module('letterbox.controllers')
 
-.controller('HomeCtrl', function($scope, $state, $ionicHistory, NotificationsService, eventbus) {
+.controller('HomeCtrl', function($scope,
+                                 $state,
+                                 $ionicHistory,
+                                 NotificationsService,
+                                 eventbus) {
+
   $scope.numberOfNotifications = 0;
 
   eventbus.registerListener('letterReceived', function() {

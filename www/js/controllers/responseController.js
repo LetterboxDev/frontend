@@ -1,12 +1,12 @@
 angular.module('letterbox.controllers')
 
-.controller('ResponseCtrl', function($scope, $state, $stateParams, $ionicHistory, backend, NotificationsService, eventbus) {
-
-  function getNotification() {
-    NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
-      $scope.response = notification;
-    });
-  }
+.controller('ResponseCtrl', function($scope,
+                                     $state,
+                                     $stateParams,
+                                     $ionicHistory,
+                                     backend,
+                                     NotificationsService,
+                                     eventbus) {
 
   getNotification();
 
@@ -27,4 +27,11 @@ angular.module('letterbox.controllers')
       $state.go('app.chat', {chatId: room.hash});
     });
   };
+
+  function getNotification() {
+    NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
+      $scope.response = notification;
+    });
+  }
 });
+
