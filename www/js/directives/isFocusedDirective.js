@@ -1,4 +1,4 @@
-angular.module('letterbox.directives', [])
+angular.module('letterbox.directives')
 
 .directive("isFocused", function ($timeout) {
   return {
