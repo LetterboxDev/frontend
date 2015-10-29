@@ -3,6 +3,7 @@ angular.module('letterbox.controllers')
 .controller('ChatCtrl', function($scope,
                                  $stateParams,
                                  $ionicScrollDelegate,
+                                 $ionicModal,
                                  $window,
                                  ChatService,
                                  RoomsService,
@@ -64,4 +65,23 @@ angular.module('letterbox.controllers')
       $scope.data.message = '';
     }
   };
+
+  $ionicModal.fromTemplateUrl('templates/deal-share-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.openShareModal = function() {
+    $scope.modal.show();
+  };
+
+  $scope.closeShareModal = function() {
+    $scope.modal.hide();
+  };
+
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
 });
