@@ -31,6 +31,11 @@
           <i class="icon ion-ios-bell"></i>
           Notifications
         </ion-item>
+        <ion-item menu-close data-ng-class="{true: 'item-active', false: 'item-inactive'}[currentPage() === 'deals']" href="#/app/deals">
+          <i class="icon ion-ios-flame"></i>
+          Deals
+        </ion-item>
+
         <ion-item menu-close data-ng-class="{true: 'item-active', false: 'item-inactive'}[currentPage() === 'profile']" href="#/app/profile">
           <i class="icon ion-person"></i>
           Profile

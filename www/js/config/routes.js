@@ -83,6 +83,16 @@ angular.module('letterbox')
     }
   })
 
+  .state('app.deals', {
+    url: '/deals',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/deals.html',
+        controller: 'DealsCtrl'
+      }
+    }
+  })
+
   .state('app.response', {
     url: '/responses/:responseId',
     views: {
