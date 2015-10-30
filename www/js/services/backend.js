@@ -5,8 +5,8 @@ angular.module('letterbox.services')
                              $http) {
 
   var backend = {};
-  var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
-  // var URL = 'http://localhost:8080';
+  // var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
+  var URL = 'http://localhost:8080';
 
   var authPath = '/auth';
   var renewPath = '/auth/renew'
@@ -28,7 +28,7 @@ angular.module('letterbox.services')
   var roomMessagePath = '/rooms/:roomId';
   var lettersPath = '/letters';
   var singleLetterPath = '/letters/:letterId';
-  var otherLetterPath = 'letters/sender/:userId';
+  var otherLetterPath = '/letters/sender/:userId';
 
   function getToken() {
     return window.localStorage.getItem('token');
@@ -194,9 +194,10 @@ angular.module('letterbox.services')
     }
   });
 
-  var otherLetterHandler = $resource(URL.concat(otherLetterPath), {userId: '@userId'}, {
+  var otherLetterGetter = $resource(URL.concat(otherLetterPath), {}, {
     get: {
       method: 'GET',
+      isArray: true
     }
   });
 
@@ -360,7 +361,7 @@ angular.module('letterbox.services')
 
   backend.getLetterFromOtherUser = function(userId) {
     var token = getToken();
-    return otherLetterHandler.get({userId: userId, letterbox_token: token});
+    return otherLetterGetter.get({userId: userId, letterbox_token: token});
   };
 
   backend.sendALetter = function(recipient, questionsWithAnswers, successPromise, errorPromise) {
