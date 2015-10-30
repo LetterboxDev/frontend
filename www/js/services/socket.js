@@ -1,8 +1,8 @@
 angular.module('letterbox.services')
 
 .service('socket', function($q, eventbus) {
-  // var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
-  var URL = 'http://localhost:8080';
+  var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
+  // var URL = 'http://localhost:8080';
 
   var IOContainer = {
     isInitialized: false,
