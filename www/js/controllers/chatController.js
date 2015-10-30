@@ -4,6 +4,7 @@ angular.module('letterbox.controllers')
                                  $stateParams,
                                  $ionicScrollDelegate,
                                  $window,
+                                 $timeout,
                                  ChatService,
                                  RoomsService,
                                  eventbus,
@@ -14,6 +15,8 @@ angular.module('letterbox.controllers')
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
+
+  $scope.isTextareaFocus = false;
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
@@ -62,6 +65,7 @@ angular.module('letterbox.controllers')
     if (content && content.length !== 0) {
       socket.sendMessage($scope.roomHash, content);
       $scope.data.message = '';
+      $scope.isTextareaFocus = true;
     }
   };
 });

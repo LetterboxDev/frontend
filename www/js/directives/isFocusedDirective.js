@@ -5,7 +5,8 @@ angular.module('letterbox.directives')
     scope: { trigger: '@isFocused' },
     link: function(scope, element) {
       scope.$watch('trigger', function(value) {
-        if(value === "true") {
+        console.log(value);
+        if (value === "true") {
           $timeout(function() {
             element[0].focus();
 
@@ -14,7 +15,6 @@ angular.module('letterbox.directives')
             });
           });
         }
-
       });
     }
   };
