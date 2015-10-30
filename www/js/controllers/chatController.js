@@ -11,6 +11,7 @@ angular.module('letterbox.controllers')
                                  socket) {
 
   $scope.recipient = '';
+  $scope.recipientId = '';
   $scope.data = {message: ''};
 
   $scope.roomHash = $stateParams.chatId;
@@ -40,10 +41,16 @@ angular.module('letterbox.controllers')
     ChatService.getRecipientName($scope.roomHash).then(function(recipient) {
       $scope.recipient = recipient;
     });
+
+    ChatService.getRecipientHashedId($scope.roomHash).then(function(hashedId) {
+      $scope.recipientId = hashedId;
+    });
+
     ChatService.getMessagesFromBackend($scope.roomHash).then(function(messages) {
       $scope.messages = messages;
       $ionicScrollDelegate.scrollBottom(false);
     });
+
     window.addEventListener('native.keyboardhide', onKeyboardHide, false);
     window.addEventListener('native.keyboardshow', onKeyboardShow, false);
   });
