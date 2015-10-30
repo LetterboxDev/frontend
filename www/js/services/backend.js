@@ -27,6 +27,7 @@ angular.module('letterbox.services')
   var oneRoomPath = '/room/:roomId';
   var roomMessagePath = '/rooms/:roomId';
   var lettersPath = '/letters';
+  var allLettersPath = '/letters/all';
   var singleLetterPath = '/letters/:letterId';
   var otherLetterPath = '/letters/sender/:userId';
 
@@ -191,8 +192,15 @@ angular.module('letterbox.services')
       params: {
         letterbox_token: '@token'
       }
-    }
+    },
   });
+
+  var allLettersGetter = $resource(URL.concat(allLettersPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    }
+  }
 
   var otherLetterGetter = $resource(URL.concat(otherLetterPath), {}, {
     get: {
@@ -357,6 +365,11 @@ angular.module('letterbox.services')
   backend.getAllLetters = function() {
     var token = getToken();
     return lettersHandler.get({letterbox_token: token});
+  };
+
+  backend.getAllLettersRegardlessOfStatus = function() {
+    var token = getToken();
+    return allLettersGetter.get({letterbox_token: token});
   };
 
   backend.getLetterFromOtherUser = function(userId) {
