@@ -44,7 +44,6 @@ angular.module('letterbox.services')
   ChatService.getRecipientName = function(chatId) {
     var dfd = $q.defer();
     var room = RoomsService.getRoom(chatId);
-    console.log(room);
     if (room !== null) {
       dfd.resolve(room.userName);
     } else {
@@ -58,7 +57,6 @@ angular.module('letterbox.services')
   ChatService.getRecipientHashedId = function(chatId) {
     var dfd = $q.defer();
     var room = RoomsService.getRoom(chatId);
-    console.log(room);
     if (room !== null) {
       dfd.resolve(room.userId);
     } else {
