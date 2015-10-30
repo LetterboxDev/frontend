@@ -99,7 +99,7 @@ angular.module('letterbox.services')
         letters.forEach(function(notif) {
           if (notif.hash === id) {
             found = true;
-            deferred.resolve(notif);
+            deferred.resolve(convertLetterToNotif(notif));
           }
         });
 
