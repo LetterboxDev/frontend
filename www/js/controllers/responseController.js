@@ -31,6 +31,7 @@ angular.module('letterbox.controllers')
   function getNotification() {
     NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
       $scope.response = notification;
+      console.log(notification);
     });
   }
 });
