@@ -55,11 +55,18 @@
       resize: none;
     }
   }
-  .send {
+  .send,
+  .share {
     background-color: white;
     color: $colourPrimary;
-    margin-left: 2vw;
     border: none;
+  }
+  .send {
+    margin-left: 2vw;
+  }
+  .share {
+    font-size: 1.5em;
+    margin-right: 2vw;
   }
 }
 
