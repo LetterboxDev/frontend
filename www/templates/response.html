@@ -25,7 +25,7 @@
                 </div>
               </div>
               <div class="item card-buttons">
-                <div class="card-button button-negative" ng-click="rejectLetter(response)">
+                <div class="card-button button-negative" ng-click="rejectLetter(response)" ng-show="!isExistingChat">
                   <i class="icon ion-close"></i>
                   <div class="button-detail">reject</div>
                 </div>
@@ -33,7 +33,7 @@
                   <i class="icon ion-person"></i>
                   <div class="button-detail">profile</div>
                 </div>
-                <div class="card-button button-positive" ng-click="approveLetter(response)">
+                <div class="card-button button-positive" ng-click="approveLetter(response)" ng-show="!isExistingChat">
                   <i class="icon ion-chatbubbles"></i>
                   <div class="button-detail">start chat</div>
                 </div>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="item card-buttons">
-                  <div class="card-button button-negative" ng-click="rejectLetter(response)">
+                  <div class="card-button button-negative" ng-click="rejectLetter(response)" ng-show="!isExistingChat">
                     <i class="icon ion-close"></i>
                     <div class="button-detail">reject</div>
                   </div>
@@ -69,7 +69,7 @@
                     <i class="icon ion-ios-undo"></i>
                     <div class="button-detail">back</div>
                   </div>
-                  <div class="card-button button-positive" ng-click="approveLetter(response)">
+                  <div class="card-button button-positive" ng-click="approveLetter(response)" ng-show="!isExistingChat">
                     <i class="icon ion-chatbubbles"></i>
                     <div class="button-detail">start chat</div>
                   </div>

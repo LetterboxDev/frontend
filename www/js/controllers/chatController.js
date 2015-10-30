@@ -81,7 +81,7 @@ angular.module('letterbox.controllers')
   $scope.showProfile = function() {
     backend.getLetterFromOtherUser($scope.recipientId).$promise.then(function(res){
       var responseId = res[0].hash;
-      $state.go('app.response', {responseId: responseId});
+      $state.go('app.response', {responseId: responseId, isExistingChat: true});
     }, function(err){
       console.log("Couldn't retrive response Id");
     });
