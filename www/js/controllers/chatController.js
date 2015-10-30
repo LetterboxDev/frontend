@@ -5,6 +5,8 @@ angular.module('letterbox.controllers')
                                  $ionicScrollDelegate,
                                  $window,
                                  $timeout,
+                                 $state,
+                                 backend,
                                  ChatService,
                                  RoomsService,
                                  eventbus,
@@ -75,4 +77,14 @@ angular.module('letterbox.controllers')
       $scope.isTextareaFocus = true;
     }
   };
+
+  $scope.showProfile = function() {
+    backend.getLetterFromOtherUser($scope.recipientId).$promise.then(function(res){
+      var responseId = res[0].hash;
+      console.log(responseId);
+      $state.go('app.response', {responseId: responseId});
+    }, function(err){
+      console.log("Couldn't retrive response Id");
+    });
+  }
 });
