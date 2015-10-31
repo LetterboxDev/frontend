@@ -20,8 +20,6 @@ angular.module('letterbox.controllers')
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
 
-  $scope.isTextareaFocus = false;
-
   $ionicPopover.fromTemplateUrl('templates/chatpopover.html', {
     scope: $scope
   }).then(function(popover) {
@@ -81,7 +79,6 @@ angular.module('letterbox.controllers')
     if (content && content.length !== 0) {
       socket.sendMessage($scope.roomHash, content);
       $scope.data.message = '';
-      $scope.isTextareaFocus = true;
     }
   };
 
