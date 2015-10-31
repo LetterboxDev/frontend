@@ -3,7 +3,7 @@ angular.module('letterbox.directives')
 .directive('letterboxCard', function() {
   return {
     scope: {
-      data: '=data',
+      data: '=info',
       dismiss: '&onDismiss',
       proceed: '&onProceed'
     },

@@ -4,10 +4,12 @@
 
       <div class="card front">
         <div class="large-profile-pic-header">
-          <div class="large-profile-pic" style="background-image: url({{ ctrl.data.image_url }})">
+          <div class="large-profile-pic" style="background-image: url({{ ctrl.data.front.image_url }})">
           </div>
           <div class="item profile-pic-overlay">
             <span class="name">{{ ctrl.data.front.title }}</span>
+            <span class="age">, {{ card.data.age }}</span>
+            <span class="location">{{ card.data.location }}</span>
           </div>
         </div>
         <div class="item card-content">
