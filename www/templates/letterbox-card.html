@@ -1,50 +1,20 @@
-<div class="profile-card moving-in">
-  <div class="flipper-container" flip-card>
-    <div class="flipper">
+<div class="card" data-ng-class="ctrl.data.side">
 
-      <div class="card front">
+  <div ng-transclude>
+  </div>
 
-        <div ng-transclude>
-        </div>
-
-        <div class="item card-buttons">
-          <div ng-click="dismiss()" class="card-button button-negative">
-            <i class="icon ion-close"></i>
-            <div class="button-detail">{{ ctrl.data.front.dismissText }}</div>
-          </div>
-          <div class="card-button button-flip">
-            <i class="icon ion-person"></i>
-            <div class="button-detail">{{ ctrl.data.front.informationText }}</div>
-          </div>
-          <div ng-click="proceed()" class="card-button button-positive">
-            <i class="icon ion-edit"></i>
-            <div class="button-detail">{{ ctrl.data.front.proceedText }}</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card back">
-        <div class="back-container">
-
-          <div class="small-profile-pic-header">
-            <div class="small-profile-pic" style="background-image: url({{ ctrl.data.back.header.image_url }})">
-            </div>
-            <span class="name">{{ ctrl.data.back.header.title }}</span><span class="age">, {{ ctrl.data.back.header.age }}</span>
-          </div>
-
-          <div class="card-content">
-            <h1>{{ ctrl.data.back.content.title }}</h1>
-            <p>{{ ctrl.data.back.content.description }}</p>
-          </div>
-          <div class="item card-buttons">
-            <div class="card-button button-flip">
-              <i class="icon ion-ios-undo"></i>
-              <div class="button-detail">back</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+  <div class="item card-buttons">
+    <div ng-click="leftClick()" class="card-button button-negative" data-ng-hide="ctrl.data.hideLeftButton">
+      <i class="icon ion-close"></i>
+      <div class="button-detail">{{ ctrl.data.leftText }}</div>
+    </div>
+    <div class="card-button button-flip">
+      <i class="icon ion-person"></i>
+      <div class="button-detail">{{ ctrl.data.centerText }}</div>
+    </div>
+    <div ng-click="rightClick()" class="card-button button-positive" data-ng-hide="ctrl.data.hideRightButton">
+      <i class="icon ion-edit"></i>
+      <div class="button-detail">{{ ctrl.data.rightText }}</div>
     </div>
   </div>
 </div>

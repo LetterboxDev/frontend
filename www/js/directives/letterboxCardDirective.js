@@ -9,8 +9,9 @@ angular.module('letterbox.directives')
     controllerAs: 'ctrl',
     bindToController: {
       data: '=info',
-      dismiss: '&onDismiss',
-      proceed: '&onProceed'
+      leftClick: '&onLeftClick',
+      centerClick: '&onCenterClick',
+      rightClick: '&onRightClick'
     },
     replace: true,
     transclude: true,
