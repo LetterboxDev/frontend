@@ -76,7 +76,7 @@
             </div>
           </div>
         </div> -->
-        <letterbox-card data-info="{
+        <letterbox-card ng-repeat="card in cards" data-info="{
           front: {
             image_url: card.profile_pic,
             title: card.name,
@@ -88,7 +88,6 @@
             proceedText: 'answer',
           }
         }">
-
         </letterbox-card >
 
 
