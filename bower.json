@@ -17,6 +17,7 @@
     "angular-resource": "~1.4.7",
     "angular-slider": "~0.2.15",
     "collide": "~0.0.4",
+    "ionic-ion-imageCacheFactory": "andrewmcgivery/ionic-ion-imageCacheFactory#2fedef12fb039f6aaa5995981d4178cf0249b129",
     "jquery": "~2.1.4",
     "qtip2": "~2.2.1"
   }
