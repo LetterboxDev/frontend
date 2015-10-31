@@ -1,6 +1,12 @@
 angular.module('letterbox.services')
 
-.service('AuthService', function($q, $ionicHistory, backend, eventbus, DbService, socket) {
+.service('AuthService', function($q,
+                                 $ionicHistory,
+                                 backend,
+                                 eventbus,
+                                 DbService,
+                                 socket) {
+
   var AuthService = {};
 
   function saveDetails(res) {
@@ -9,6 +15,7 @@ angular.module('letterbox.services')
     window.localStorage.setItem('hashedId', res.user.hashedId);
     window.localStorage.setItem('isRegistered', res.user.isRegistered);
     window.localStorage.setItem('genderPreference', res.user.genderPreference);
+    window.localStorage.setItem('perfectMatch', res.user.perfectMatch);
   }
 
   AuthService.authToken = function(fbToken) {
@@ -60,6 +67,7 @@ angular.module('letterbox.services')
         window.localStorage.setItem('hashedId', '');
         window.localStorage.setItem('isRegistered', '');
         window.localStorage.setItem('genderPreference', '');
+        window.localStorage.setItem('perfectMatch', '');
 
         socket.uninit();
 

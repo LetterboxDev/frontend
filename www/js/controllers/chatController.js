@@ -1,11 +1,25 @@
 angular.module('letterbox.controllers')
 
-.controller('ChatCtrl', function($scope, $stateParams, $ionicScrollDelegate, ChatService, RoomsService, eventbus, socket) {
+.controller('ChatCtrl', function($scope,
+                                 $stateParams,
+                                 $ionicScrollDelegate,
+                                 $window,
+                                 $timeout,
+                                 $state,
+                                 backend,
+                                 ChatService,
+                                 RoomsService,
+                                 eventbus,
+                                 socket) {
+
   $scope.recipient = '';
+  $scope.recipientId = '';
   $scope.data = {message: ''};
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
+
+  $scope.isTextareaFocus = false;
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
@@ -29,10 +43,16 @@ angular.module('letterbox.controllers')
     ChatService.getRecipientName($scope.roomHash).then(function(recipient) {
       $scope.recipient = recipient;
     });
+
+    ChatService.getRecipientHashedId($scope.roomHash).then(function(hashedId) {
+      $scope.recipientId = hashedId;
+    });
+
     ChatService.getMessagesFromBackend($scope.roomHash).then(function(messages) {
       $scope.messages = messages;
       $ionicScrollDelegate.scrollBottom(false);
     });
+
     window.addEventListener('native.keyboardhide', onKeyboardHide, false);
     window.addEventListener('native.keyboardshow', onKeyboardShow, false);
   });
@@ -54,6 +74,16 @@ angular.module('letterbox.controllers')
     if (content && content.length !== 0) {
       socket.sendMessage($scope.roomHash, content);
       $scope.data.message = '';
+      $scope.isTextareaFocus = true;
     }
   };
+
+  $scope.showProfile = function() {
+    backend.getLetterFromOtherUser($scope.recipientId).$promise.then(function(res){
+      var responseId = res[0].hash;
+      $state.go('app.response', {responseId: responseId, isExistingChat: true});
+    }, function(err){
+      console.log("Couldn't retrive response Id");
+    });
+  }
 });

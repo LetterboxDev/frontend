@@ -1,6 +1,10 @@
 angular.module('letterbox.services')
 
-.service('MatchService', function($q, $ImageCacheFactory, backend, AuthService) {
+.service('MatchService', function($q,
+                                  $ImageCacheFactory,
+                                  backend,
+                                  AuthService) {
+
   var MatchService = this;
 
   MatchService.previousId = '';

@@ -17,7 +17,6 @@
     "angular-resource": "~1.4.7",
     "angular-slider": "~0.2.15",
     "collide": "~0.0.4",
-    "ionic-ion-swipe-cards": "*",
     "jquery": "~2.1.4",
     "qtip2": "~2.2.1"
   }

@@ -1,5 +1,9 @@
 angular.module('letterbox.services')
-.service('backend', function($q, $resource, $http) {
+
+.service('backend', function($q,
+                             $resource,
+                             $http) {
+
   var backend = {};
   var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
   // var URL = 'http://localhost:8080';
@@ -9,6 +13,7 @@ angular.module('letterbox.services')
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:userId';
   var pushTokenPath = '/user/pushtoken';
+  var perfectMatchPath = '/user/perfectmatch';
   var updateLocationPath = '/user/location';
   var updateBioPath = '/user/bio';
   var userPhotoPath = '/user/photo';
@@ -22,7 +27,9 @@ angular.module('letterbox.services')
   var oneRoomPath = '/room/:roomId';
   var roomMessagePath = '/rooms/:roomId';
   var lettersPath = '/letters';
+  var allLettersPath = '/letters/all';
   var singleLetterPath = '/letters/:letterId';
+  var otherLetterPath = '/letters/sender/:userId';
 
   function getToken() {
     return window.localStorage.getItem('token');
@@ -81,6 +88,15 @@ angular.module('letterbox.services')
     },
     clearPushToken: {
       method: 'DELETE',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
+  var perfectMatchUpdater = $resource(URL.concat(perfectMatchPath), {}, {
+    updatePerfectMatch: {
+      method: 'PUT',
       params: {
         letterbox_token: '@token'
       }
@@ -176,6 +192,20 @@ angular.module('letterbox.services')
       params: {
         letterbox_token: '@token'
       }
+    },
+  });
+
+  var allLettersGetter = $resource(URL.concat(allLettersPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    }
+  });
+
+  var otherLetterGetter = $resource(URL.concat(otherLetterPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
     }
   });
 
@@ -240,6 +270,14 @@ angular.module('letterbox.services')
     updater.token = token;
     updater.$clearPushToken(deferred.resolve, deferred.reject);
     return deferred.promise;
+  };
+
+  backend.updatePerfectMatch = function(perfectMatch) {
+    var token = getToken();
+    updater = new perfectMatchUpdater();
+    updater.token = token;
+    updater.perfectMatch = perfectMatch;
+    return updater.$updatePerfectMatch();
   };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
@@ -327,6 +365,16 @@ angular.module('letterbox.services')
   backend.getAllLetters = function() {
     var token = getToken();
     return lettersHandler.get({letterbox_token: token});
+  };
+
+  backend.getAllLettersRegardlessOfStatus = function() {
+    var token = getToken();
+    return allLettersGetter.get({letterbox_token: token});
+  };
+
+  backend.getLetterFromOtherUser = function(userId) {
+    var token = getToken();
+    return otherLetterGetter.get({userId: userId, letterbox_token: token});
   };
 
   backend.sendALetter = function(recipient, questionsWithAnswers, successPromise, errorPromise) {

@@ -1,6 +1,13 @@
 angular.module('letterbox.controllers')
 
-.controller('ProfileCtrl', function($scope, $state, $ionicHistory, $ionicPopup, $ionicLoading, $ionicModal, ProfileService) {
+.controller('ProfileCtrl', function($scope,
+                                    $state,
+                                    $ionicHistory,
+                                    $ionicPopup,
+                                    $ionicLoading,
+                                    $ionicModal,
+                                    ProfileService) {
+
   $scope.profile = {};
   $scope.isLoading = true;
   $scope.profilePhotos = [];
@@ -57,7 +64,7 @@ angular.module('letterbox.controllers')
     }, function(err) {
       $scope.hideLoading();
     });
-  };  
+  };
 
   $scope.hideProfilePhotoModal = function() {
     $scope.modal.hide();
@@ -126,7 +133,7 @@ angular.module('letterbox.controllers')
       cssClass: "popup-alert",
       okType: "button-stable"
     }).then(function(res) {
-    });  
+    });
   }
 
   function showSuccess() {
@@ -139,7 +146,7 @@ angular.module('letterbox.controllers')
       if (res) {
         $state.go('app.home');
       }
-    });      
+    });
   }
-  
+
 });

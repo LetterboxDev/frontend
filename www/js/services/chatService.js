@@ -1,6 +1,11 @@
 angular.module('letterbox.services')
 
-.service('ChatService', function($q, RoomsService, DbService, backend, eventbus) {
+.service('ChatService', function($q,
+                                 RoomsService,
+                                 DbService,
+                                 backend,
+                                 eventbus) {
+
   var ChatService = {};
 
   function insertMessageIntoDb(message) {
@@ -44,6 +49,19 @@ angular.module('letterbox.services')
     } else {
       backend.getSingleRoom(chatId).$promise.then(function(room) {
         dfd.resolve(room.userName);
+      });
+    }
+    return dfd.promise;
+  };
+
+  ChatService.getRecipientHashedId = function(chatId) {
+    var dfd = $q.defer();
+    var room = RoomsService.getRoom(chatId);
+    if (room !== null) {
+      dfd.resolve(room.userId);
+    } else {
+      backend.getSingleRoom(chatId).$promise.then(function(room) {
+        dfd.resolve(room.userId);
       });
     }
     return dfd.promise;
