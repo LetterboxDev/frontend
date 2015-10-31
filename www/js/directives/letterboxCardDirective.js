@@ -4,6 +4,8 @@ angular.module('letterbox.directives')
   return {
     scope: {
       data: '=data',
+      dismiss: '&onDismiss',
+      proceed: '&onProceed'
     },
     controller: function() {
 
