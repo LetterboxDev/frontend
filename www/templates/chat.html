@@ -1,6 +1,6 @@
 <ion-view view-title="{{recipient}}">
   <ion-nav-buttons side="right">
-    <button class="button button-small button-icon button-clear ion-person" data-ng-click="showProfile()">
+    <button class="button button-small button-icon button-clear ion-more" data-ng-click="showPopover($event)">
     </button>
   </ion-nav-buttons>
   <ion-content class="chat-view">
@@ -30,10 +30,9 @@
   <div class="list enter-message-bar" keyboard-attach="true">
     <div class="item item-input-inset">
       <label class="item-input-wrapper">
-        <textarea msd-elastic is-focused="{{isTextareaFocus}}" ng-model="data.message" type="text" placeholder="Message" maxlength="2000" ng-keydown="onKeyPress($event)">
+        <textarea msd-elastic ng-model="data.message" type="text" placeholder="Message" maxlength="2000" ng-keydown="onKeyPress($event)">
         </textarea>
       </label>
-      <button class="send" ng-click="sendMessage()">Send</button>
     </div>
   </div>
 </ion-view>

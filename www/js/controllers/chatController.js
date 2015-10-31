@@ -6,6 +6,7 @@ angular.module('letterbox.controllers')
                                  $window,
                                  $timeout,
                                  $state,
+                                 $ionicPopover,
                                  backend,
                                  ChatService,
                                  RoomsService,
@@ -19,7 +20,11 @@ angular.module('letterbox.controllers')
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
 
-  $scope.isTextareaFocus = false;
+  $ionicPopover.fromTemplateUrl('templates/chatpopover.html', {
+    scope: $scope
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
@@ -74,16 +79,32 @@ angular.module('letterbox.controllers')
     if (content && content.length !== 0) {
       socket.sendMessage($scope.roomHash, content);
       $scope.data.message = '';
-      $scope.isTextareaFocus = true;
     }
   };
 
-  $scope.showProfile = function() {
-    backend.getLetterFromOtherUser($scope.recipientId).$promise.then(function(res){
-      var responseId = res[0].hash;
-      $state.go('app.response', {responseId: responseId, isExistingChat: true});
-    }, function(err){
-      console.log("Couldn't retrive response Id");
+  $scope.showPopover = function($event) {
+    $scope.popover.show($event);
+  };
+
+  $scope.showOtherUserProfile = function() {
+    // TODO show other user profile
+    ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
+      // Handle going to profile here, This could also be done in profile page
+      console.log(user); // For you to see format of data
     });
-  }
+    $scope.closePopover();
+  };
+
+  $scope.showResponses = function() {
+    // TODO show responses to questions
+    RoomsService.getRoomLetter($scope.roomHash).then(function(letter) {
+      // Handle letter here, This could also be done in the responses page
+      console.log(letter); // For you to see format of data
+    });
+    $scope.closePopover();
+  };
+
+  $scope.closePopover = function() {
+    $scope.popover.hide();
+  };
 });

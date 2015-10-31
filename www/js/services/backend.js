@@ -27,9 +27,8 @@ angular.module('letterbox.services')
   var oneRoomPath = '/room/:roomId';
   var roomMessagePath = '/rooms/:roomId';
   var lettersPath = '/letters';
-  var allLettersPath = '/letters/all';
   var singleLetterPath = '/letters/:letterId';
-  var otherLetterPath = '/letters/sender/:userId';
+  var reportPath = '/report';
 
   function getToken() {
     return window.localStorage.getItem('token');
@@ -195,20 +194,6 @@ angular.module('letterbox.services')
     },
   });
 
-  var allLettersGetter = $resource(URL.concat(allLettersPath), {}, {
-    get: {
-      method: 'GET',
-      isArray: true
-    }
-  });
-
-  var otherLetterGetter = $resource(URL.concat(otherLetterPath), {}, {
-    get: {
-      method: 'GET',
-      isArray: true
-    }
-  });
-
   var singleLetterHandler = $resource(URL.concat(singleLetterPath), {letterId: '@letterId'}, {
     approveLetter: {
       method: 'POST',
@@ -224,6 +209,15 @@ angular.module('letterbox.services')
     },
     rejectLetter: {
       method: 'DELETE',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
+  var reportHandler = $resource(URL.concat(reportPath), {}, {
+    reportUser: {
+      method: 'POST',
       params: {
         letterbox_token: '@token'
       }
@@ -367,16 +361,6 @@ angular.module('letterbox.services')
     return lettersHandler.get({letterbox_token: token});
   };
 
-  backend.getAllLettersRegardlessOfStatus = function() {
-    var token = getToken();
-    return allLettersGetter.get({letterbox_token: token});
-  };
-
-  backend.getLetterFromOtherUser = function(userId) {
-    var token = getToken();
-    return otherLetterGetter.get({userId: userId, letterbox_token: token});
-  };
-
   backend.sendALetter = function(recipient, questionsWithAnswers, successPromise, errorPromise) {
     var token = getToken();
     handler = new lettersHandler();
@@ -408,6 +392,15 @@ angular.module('letterbox.services')
     handler.token = token;
     handler.letterId = letterHash;
     return handler.$rejectLetter(successPromise, errorPromise);
+  };
+
+  backend.reportUser = function(userId, reason, successPromise, errorPromise) {
+    var token = getToken();
+    handler = new reportHandler();
+    handler.token = token;
+    handler.userId = userId;
+    handler.reason = reason;
+    return handler.$reportUser(successPromise, errorPromise);
   };
 
   return backend;

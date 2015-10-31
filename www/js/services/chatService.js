@@ -67,6 +67,17 @@ angular.module('letterbox.services')
     return dfd.promise;
   };
 
+  ChatService.getRecipientUserData = function(chatId) {
+    var deferred = $q.defer();
+    ChatService.getRecipientHashedId(chatId).then(function(userId) {
+      backend.getOtherUser(userId).$promise
+      .then(function(user) {
+        deferred.resolve(user);
+      });
+    });
+    return deferred.promise;
+  };
+
   ChatService.getMessagesFromBackend = function(chatId) {
     var dfd = $q.defer();
     if (!window.cordova || !DbService.isInitialized()) {
