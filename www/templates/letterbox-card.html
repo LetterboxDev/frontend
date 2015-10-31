@@ -33,9 +33,16 @@
 
       <div class="card back">
         <div class="back-container">
+
+          <div class="small-profile-pic-header">
+            <div class="small-profile-pic" style="background-image: url({{ ctrl.data.back.header.image_url }})">
+            </div>
+            <span class="name">{{ ctrl.data.back.header.title }}</span><span class="age">, {{ ctrl.data.back.header.age }}</span>
+          </div>
+
           <div class="card-content">
-            <h1>{{ ctrl.data.back.title }}</h1>
-            <p>{{ ctrl.data.back.description }}</p>
+            <h1>{{ ctrl.data.back.content.title }}</h1>
+            <p>{{ ctrl.data.back.content.description }}</p>
           </div>
           <div class="item card-buttons">
             <div class="card-button button-flip">
