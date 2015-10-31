@@ -2,6 +2,7 @@
   "name": "Letterbox",
   "app_id": "eeb81c0f",
   "gulpStartupTasks": [
+    "js",
     "sass",
     "watch"
   ],
