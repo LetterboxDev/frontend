@@ -17,7 +17,6 @@
       </div>
       <div ng-if="!isLoading" class="profile-cards">
 
-
         <div class="profile-card moving-in" ng-repeat="card in cards">
           <div class="flipper-container" flip-card>
             <div class="flipper">
@@ -30,7 +29,9 @@
                   centerText: 'profile',
                   rightText: 'answer',
                   leftIcon: 'ion-close',
-                  rightIcon: 'ion-edit'
+                  rightIcon: 'ion-edit',
+                  leftIconStyle: 'button-negative',
+                  rightIconStyle: 'button-positive',
                 }">
 
                 <div class="large-profile-pic-header">
@@ -46,12 +47,13 @@
 
               </letterbox-card>
 
-              <letterbox-card data-info="{
-                side: 'back',
-                hideLeftButton: true,
-                centerText: 'back',
-                hideRightButton: true
-              }">
+              <letterbox-card
+                data-info="{
+                  side: 'back',
+                  hideLeftButton: true,
+                  centerText: 'back',
+                  hideRightButton: true
+                }">
 
                 <div class="back-container">
                   <div class="small-profile-pic-header">
