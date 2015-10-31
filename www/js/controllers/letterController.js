@@ -42,7 +42,7 @@ angular.module('letterbox.controllers')
       removeTooltip();
       updateQuestionAnswers(questions, selected);
       backend.sendALetter(targetUser.hashedId, questions);
-      $scope.closeLetter();
+      $ionicHistory.goBack();
       eventbus.call('closeLetter');
       return;
     } else if ($scope.curr === $scope.max) {
@@ -60,13 +60,6 @@ angular.module('letterbox.controllers')
     if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
     $scope.curr--;
     updateQuestionView($scope.curr, questions, selected);
-  };
-
-  $scope.closeLetter = function() {
-    $ionicHistory.nextViewOptions({
-      disableBack: true,
-    });
-    $state.go('app.home');
   };
 
   $scope.selectTab = function(tab) {

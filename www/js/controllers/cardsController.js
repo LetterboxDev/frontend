@@ -5,6 +5,7 @@ angular.module('letterbox.controllers')
                                   $element,
                                   $timeout,
                                   $ImageCacheFactory,
+                                  $ionicHistory,
                                   eventbus,
                                   backend,
                                   letterService,
@@ -23,6 +24,10 @@ angular.module('letterbox.controllers')
   };
 
   $scope.openSendLetter = function(card) {
+    $ionicHistory.nextViewOptions({
+      disableAnimate: false,
+      disableBack: false
+    });
     letterService.setTargetUserCard(card);
     $state.go('app.letter');
   };
