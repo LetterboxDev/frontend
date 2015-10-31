@@ -8,10 +8,10 @@ angular.module('letterbox.directives')
     }],
     controllerAs: 'ctrl',
     bindToController: {
-      data: '=info',
-      leftClick: '&onLeftClick',
-      centerClick: '&onCenterClick',
-      rightClick: '&onRightClick'
+      'data': '=info',
+      'leftClick': '&onLeftClick',
+      'centerClick': '&onCenterClick',
+      'rightClick': '&onRightClick'
     },
     replace: true,
     transclude: true,

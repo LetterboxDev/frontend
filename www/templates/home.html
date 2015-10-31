@@ -21,12 +21,15 @@
         <div class="profile-card moving-in" ng-repeat="card in cards">
           <div class="flipper-container" flip-card>
             <div class="flipper">
-              <letterbox-card data-info="{
+              <letterbox-card
+                on-left-click="changeCard()"
+                on-right-click="openSendLetter(card)"
+                data-info="{
                 side: 'front',
-                leftText: 'skip',
-                centerText: 'profile',
-                rightText: 'answer'
-              }">
+                  leftText: 'skip',
+                  centerText: 'profile',
+                  rightText: 'answer'
+                }">
 
                   <div class="large-profile-pic-header">
                     <div class="large-profile-pic" style="background-image: url({{ card.profile_pic }})">
