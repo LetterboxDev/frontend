@@ -28,6 +28,7 @@ angular.module('letterbox.services')
   var roomMessagePath = '/rooms/:roomId';
   var lettersPath = '/letters';
   var singleLetterPath = '/letters/:letterId';
+  var reportPath = '/report';
 
   function getToken() {
     return window.localStorage.getItem('token');
@@ -214,6 +215,15 @@ angular.module('letterbox.services')
     }
   });
 
+  var reportHandler = $resource(URL.concat(reportPath), {}, {
+    reportUser: {
+      method: 'POST',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
   backend.auth = function(fbToken) {
     return auth.get({fb_token: fbToken});
   };
@@ -382,6 +392,15 @@ angular.module('letterbox.services')
     handler.token = token;
     handler.letterId = letterHash;
     return handler.$rejectLetter(successPromise, errorPromise);
+  };
+
+  backend.reportUser = function(userId, reason, successPromise, errorPromise) {
+    var token = getToken();
+    handler = new reportHandler();
+    handler.token = token;
+    handler.userId = userId;
+    handler.reason = reason;
+    return handler.$reportUser(successPromise, errorPromise);
   };
 
   return backend;
