@@ -1,0 +1,49 @@
+<div class="profile-card moving-in">
+  <div class="flipper-container" flip-card>
+    <div class="flipper">
+
+      <div class="card front">
+        <div class="large-profile-pic-header">
+          <div class="large-profile-pic" style="background-image: url({{ ctrl.data.image_url }})">
+          </div>
+          <div class="item profile-pic-overlay">
+            <span class="name">{{ ctrl.data.front.title }}</span>
+          </div>
+        </div>
+        <div class="item card-content">
+          <p>{{ ctrl.data.front.description }}</p>
+        </div>
+        <div class="item card-buttons">
+          <div ng-click="dismiss()" class="card-button button-negative">
+            <i class="icon ion-close"></i>
+            <div class="button-detail">{{ ctrl.data.dismissText }}</div>
+          </div>
+          <div class="card-button button-flip">
+            <i class="icon ion-person"></i>
+            <div class="button-detail">{{ ctrl.data.informationText }}</div>
+          </div>
+          <div ng-click="proceed()" class="card-button button-positive">
+            <i class="icon ion-edit"></i>
+            <div class="button-detail">{{ ctrl.data.proceedText }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card back">
+        <div class="back-container">
+          <div class="card-content">
+            <h1>{{ ctrl.data.back.title }}</h1>
+            <p>{{ ctrl.data.back.description }}</p>
+          </div>
+          <div class="item card-buttons">
+            <div class="card-button button-flip">
+              <i class="icon ion-ios-undo"></i>
+              <div class="button-detail">back</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
