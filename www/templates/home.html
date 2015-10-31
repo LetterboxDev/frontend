@@ -25,52 +25,53 @@
                 on-left-click="changeCard()"
                 on-right-click="openSendLetter(card)"
                 data-info="{
-                side: 'front',
+                  side: 'front',
                   leftText: 'skip',
                   centerText: 'profile',
-                  rightText: 'answer'
+                  rightText: 'answer',
+                  leftIcon: 'ion-close',
+                  rightIcon: 'ion-edit'
                 }">
 
-                  <div class="large-profile-pic-header">
-                    <div class="large-profile-pic" style="background-image: url({{ card.profile_pic }})">
+                <div class="large-profile-pic-header">
+                  <div class="large-profile-pic" style="background-image: url({{ card.profile_pic }})">
+                  </div>
+                  <div class="item profile-pic-overlay">
+                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
+                  </div>
+                </div>
+                <div class="item card-content">
+                  <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
+                </div>
+
+              </letterbox-card>
+
+              <letterbox-card data-info="{
+                side: 'back',
+                hideLeftButton: true,
+                centerText: 'back',
+                hideRightButton: true
+              }">
+
+                <div class="back-container">
+                  <div class="small-profile-pic-header">
+                    <div class="small-profile-pic" style="background-image: url({{ card.profile_pic }})">
                     </div>
-                    <div class="item profile-pic-overlay">
-                      <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
-                    </div>
+                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span>
                   </div>
                   <div class="item card-content">
-                    <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
-                  </div>
-
-                </letterbox-card>
-
-                <letterbox-card data-info="{
-                  side: 'back',
-                  hideLeftButton: true,
-                  centerText: 'back',
-                  hideRightButton: true
-                }">
-
-                  <div class="back-container">
-                    <div class="small-profile-pic-header">
-                      <div class="small-profile-pic" style="background-image: url({{ card.profile_pic }})">
-                      </div>
-                      <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span>
+                    <div class="section">
+                      <h3>bio</h3>
+                      <p>{{ card.bio }}</p>
                     </div>
-                    <div class="item card-content">
-                      <div class="section">
-                        <h3>bio</h3>
-                        <p>{{ card.bio }}</p>
-                      </div>
-                      <div class="section">
-                        <h3>mutual friends</h3>
-                        <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
-                      </div>
+                    <div class="section">
+                      <h3>mutual friends</h3>
+                      <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
                     </div>
                   </div>
+                </div>
 
-                </letterbox-card>
-              </div>
+              </letterbox-card>
             </div>
           </div>
         </div>

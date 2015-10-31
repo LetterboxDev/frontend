@@ -5,7 +5,7 @@
 
   <div class="item card-buttons">
     <div ng-click="ctrl.leftClick()" class="card-button button-negative" data-ng-hide="ctrl.data.hideLeftButton">
-      <i class="icon ion-close"></i>
+      <i class="icon" data-ng-class="ctrl.data.leftIcon"></i>
       <div class="button-detail">{{ ctrl.data.leftText }}</div>
     </div>
     <div class="card-button button-flip">
@@ -13,7 +13,7 @@
       <div class="button-detail">{{ ctrl.data.centerText }}</div>
     </div>
     <div ng-click="ctrl.rightClick()" class="card-button button-positive" data-ng-hide="ctrl.data.hideRightButton">
-      <i class="icon ion-edit"></i>
+      <i class="icon" data-ng-class="ctrl.data.rightIcon"></i>
       <div class="button-detail">{{ ctrl.data.rightText }}</div>
     </div>
   </div>
