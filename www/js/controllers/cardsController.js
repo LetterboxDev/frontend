@@ -19,10 +19,6 @@ angular.module('letterbox.controllers')
   eventbus.registerListener('closeLetter', removeTopCard);
   getCard();
 
-  $scope.reportUser = function(userName, userId) {
-    ReportService.showReportPopup(userName, userId, $scope, $scope.changeCard);
-  };
-
   $scope.changeCard = function() {
     selectFirst('.profile-card').addClass('moving-out');
     $timeout($scope.addCard, 100);
