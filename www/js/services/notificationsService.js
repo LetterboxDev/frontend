@@ -57,57 +57,39 @@ angular.module('letterbox.services')
       return deferred.promise;
     },
 
-    // getNotificationFromId: function(id) {
-    //   var deferred = $q.defer();
-    //   var found = false;
-    //   if (currentNotifications.length === 0) {
-    //     this.getNotificationsList().then(function(notifications) {
-    //       var deferred = $q.defer();
-    //       currentNotifications.forEach(function(notif) {
-    //         if (notif.id === id) {
-    //           found = true;
-    //           deferred.resolve(notif);
-    //         }
-    //       });
-
-    //       if (!found) {
-    //         deferred.resolve({});
-    //       }
-    //       return deferred.promise;
-    //     });
-    //   }
-    //   else {
-    //     currentNotifications.forEach(function(notif) {
-    //       if (notif.id === id) {
-    //         found = true;
-    //         deferred.resolve(notif);
-    //       }
-    //     });
-
-    //     if (!found) {
-    //       deferred.resolve(null);
-    //     }
-
-    //     return deferred.promise;
-    //   }
-    // }
-
     getNotificationFromId: function(id) {
       var deferred = $q.defer();
       var found = false;
-      backend.getAllLettersRegardlessOfStatus().$promise.then(function(letters) {
-        letters.forEach(function(notif) {
-          if (notif.hash === id) {
+      if (currentNotifications.length === 0) {
+        this.getNotificationsList().then(function(notifications) {
+          var deferred = $q.defer();
+          currentNotifications.forEach(function(notif) {
+            if (notif.id === id) {
+              found = true;
+              deferred.resolve(notif);
+            }
+          });
+
+          if (!found) {
+            deferred.resolve({});
+          }
+          return deferred.promise;
+        });
+      }
+      else {
+        currentNotifications.forEach(function(notif) {
+          if (notif.id === id) {
             found = true;
-            deferred.resolve(convertLetterToNotif(notif));
+            deferred.resolve(notif);
           }
         });
 
         if (!found) {
-          deferred.resolve({});
+          deferred.resolve(null);
         }
-      });
-      return deferred.promise;
+
+        return deferred.promise;
+      }
     }
   };
 });
