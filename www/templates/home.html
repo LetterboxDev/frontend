@@ -16,7 +16,9 @@
         <ion-spinner icon="dots"></ion-spinner>
       </div>
       <div ng-if="!isLoading" class="profile-cards">
-        <div class="profile-card moving-in" ng-repeat="card in cards">
+
+
+        <!-- <div class="profile-card moving-in" ng-repeat="card in cards">
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
@@ -73,7 +75,23 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+        <letterbox-card data-info="{
+          front: {
+            image_url: card.profile_pic,
+            title: card.name,
+            age: card.age,
+            location: card.location,
+            description: (card.bio.length > 0) ? card.bio : '&nbsp;',
+            dismissText: 'skip',
+            informationText: 'profile',
+            proceedText: 'answer',
+          }
+        }">
+
+        </letterbox-card >
+
+
       </div>
     </div>
   </ion-content>
