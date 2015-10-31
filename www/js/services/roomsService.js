@@ -1,5 +1,10 @@
 angular.module('letterbox.services')
-.service('RoomsService', function($q, backend, DbService, eventbus) {
+
+.service('RoomsService', function($q,
+                                  backend,
+                                  DbService,
+                                  eventbus) {
+
   var RoomsService = {};
   var roomsCache = [];
 
@@ -44,6 +49,17 @@ angular.module('letterbox.services')
         eventbus.call('roomsUpdated', rooms);
       });
     }
+  };
+
+  RoomsService.getRoomLetter = function(hash) {
+    var deferred = $q.defer();
+    backend.getSingleRoom(hash).$promise
+    .then(function(room) {
+      deferred.resolve(room.letter);
+    }, function() {
+      deferred.reject();
+    });
+    return deferred.promise;
   };
 
   return RoomsService;

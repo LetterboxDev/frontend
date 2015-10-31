@@ -1,11 +1,16 @@
 angular.module('letterbox.controllers')
 
-.controller('SettingsCtrl', function($scope, $state, $ionicPopup, backend, AuthService) {
+.controller('SettingsCtrl', function($scope,
+                                     $state,
+                                     $ionicPopup,
+                                     backend,
+                                     AuthService) {
+
   $scope.minAge = 18;
   $scope.maxAge = 80;
 
   var perfectMatch = window.localStorage.getItem('perfectMatch');
-  var preferredGender = window.localStorage.getItem('preferredGender');
+  var preferredGender = window.localStorage.getItem('genderPreference');
   var distanceRadius = window.localStorage.getItem('distanceRadius');
   var minAge = window.localStorage.getItem('minAge');
   var maxAge = window.localStorage.getItem('maxAge');
@@ -19,13 +24,14 @@ angular.module('letterbox.controllers')
       max: maxAge === null ? $scope.maxAge : maxAge,
     }
   }
-  
+
   $scope.onChangePerfectMatch = function() {
     window.localStorage.setItem('perfectMatch', $scope.preference.perfectMatch);
+    backend.updatePerfectMatch($scope.preference.perfectMatch);
   }
 
   $scope.onChangePreferredGender = function() {
-    window.localStorage.setItem('preferredGender', $scope.preference.preferredGender);
+    window.localStorage.setItem('genderPreference', $scope.preference.preferredGender);
     backend.updateGenderPreference($scope.preference.preferredGender);
   }
 

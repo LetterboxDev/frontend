@@ -1,6 +1,16 @@
 angular.module('letterbox.controllers')
 
-.controller('CardsCtrl', function($scope, $state, $element, $timeout, $ImageCacheFactory, eventbus, backend, letterService, MatchService) {
+.controller('CardsCtrl', function($scope,
+                                  $state,
+                                  $element,
+                                  $timeout,
+                                  $ImageCacheFactory,
+                                  $ionicHistory,
+                                  eventbus,
+                                  backend,
+                                  letterService,
+                                  MatchService) {
+
   $scope.cards = [];
   $scope.isLoading = false;
 
@@ -14,6 +24,10 @@ angular.module('letterbox.controllers')
   };
 
   $scope.openSendLetter = function(card) {
+    $ionicHistory.nextViewOptions({
+      disableAnimate: false,
+      disableBack: false
+    });
     letterService.setTargetUserCard(card);
     $state.go('app.letter');
   };

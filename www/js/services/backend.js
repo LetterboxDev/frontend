@@ -1,5 +1,9 @@
 angular.module('letterbox.services')
-.service('backend', function($q, $resource, $http) {
+
+.service('backend', function($q,
+                             $resource,
+                             $http) {
+
   var backend = {};
   var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
   // var URL = 'http://localhost:8080';
@@ -9,6 +13,7 @@ angular.module('letterbox.services')
   var userSelfPath = '/user/self';
   var otherUserPath = '/user/id/:userId';
   var pushTokenPath = '/user/pushtoken';
+  var perfectMatchPath = '/user/perfectmatch';
   var updateLocationPath = '/user/location';
   var updateBioPath = '/user/bio';
   var userPhotoPath = '/user/photo';
@@ -23,6 +28,7 @@ angular.module('letterbox.services')
   var roomMessagePath = '/rooms/:roomId';
   var lettersPath = '/letters';
   var singleLetterPath = '/letters/:letterId';
+  var reportPath = '/report';
 
   function getToken() {
     return window.localStorage.getItem('token');
@@ -81,6 +87,15 @@ angular.module('letterbox.services')
     },
     clearPushToken: {
       method: 'DELETE',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
+  var perfectMatchUpdater = $resource(URL.concat(perfectMatchPath), {}, {
+    updatePerfectMatch: {
+      method: 'PUT',
       params: {
         letterbox_token: '@token'
       }
@@ -176,7 +191,7 @@ angular.module('letterbox.services')
       params: {
         letterbox_token: '@token'
       }
-    }
+    },
   });
 
   var singleLetterHandler = $resource(URL.concat(singleLetterPath), {letterId: '@letterId'}, {
@@ -194,6 +209,15 @@ angular.module('letterbox.services')
     },
     rejectLetter: {
       method: 'DELETE',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
+  var reportHandler = $resource(URL.concat(reportPath), {}, {
+    reportUser: {
+      method: 'POST',
       params: {
         letterbox_token: '@token'
       }
@@ -240,6 +264,14 @@ angular.module('letterbox.services')
     updater.token = token;
     updater.$clearPushToken(deferred.resolve, deferred.reject);
     return deferred.promise;
+  };
+
+  backend.updatePerfectMatch = function(perfectMatch) {
+    var token = getToken();
+    updater = new perfectMatchUpdater();
+    updater.token = token;
+    updater.perfectMatch = perfectMatch;
+    return updater.$updatePerfectMatch();
   };
 
   backend.updateUserLocation = function(latitude, longitude, successPromise) {
@@ -360,6 +392,15 @@ angular.module('letterbox.services')
     handler.token = token;
     handler.letterId = letterHash;
     return handler.$rejectLetter(successPromise, errorPromise);
+  };
+
+  backend.reportUser = function(userId, reason, successPromise, errorPromise) {
+    var token = getToken();
+    handler = new reportHandler();
+    handler.token = token;
+    handler.userId = userId;
+    handler.reason = reason;
+    return handler.$reportUser(successPromise, errorPromise);
   };
 
   return backend;

@@ -6,7 +6,7 @@
       {{ numberOfNotifications }}
     </div>
   </ion-nav-buttons>
-  <ion-content scroll="false">
+  <ion-content scroll="true" has-bouncing="false">
     <div ng-controller="CardsCtrl">
       <div ng-if="cards.length === 0" class="feedback">
         <h2>No letterboxes nearby</h2>
@@ -46,7 +46,7 @@
                 </div>
               </div>
 
-              <div class="card back" ng-controller="CardCtrl">
+              <div class="card back">
                 <div class="back-container">
                   <div class="small-profile-pic-header">
                     <div class="small-profile-pic" style="background-image: url({{ card.profile_pic }})">
@@ -62,10 +62,6 @@
                       <h3>mutual friends</h3>
                       <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
                     </div>
-                    <div class="section">
-                      <h3>Likes</h3>
-                    </div>
-
                   </div>
                   <div class="item card-buttons">
                     <div class="card-button button-flip">

@@ -6,10 +6,6 @@
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
-                <div class="close-letter" ng-click="closeLetter()">
-                  <i class="icon ion-close"></i>
-                </div>
-                
                 <h3>Would you rather...</h3>
                 <p class="warning">{{ warning }}</p>
                 <p class="current">Question {{ curr + 1 }} of 5</p>
@@ -54,10 +50,6 @@
                       <h3>mutual friends</h3>
                       <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
                     </div>
-                    <div class="section">
-                      <h3>Likes</h3>
-                    </div>
-
                   </div>
                   <div class="item card-buttons">
                     <div class="card-button button-flip">

@@ -84,7 +84,7 @@ angular.module('letterbox')
   })
 
   .state('app.response', {
-    url: '/responses/:responseId',
+    url: '/responses/:responseId:isExistingChat',
     views: {
       'menuContent': {
         templateUrl: 'templates/response.html',
