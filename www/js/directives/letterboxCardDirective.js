@@ -2,17 +2,18 @@ angular.module('letterbox.directives')
 
 .directive('letterboxCard', function() {
   return {
-    scope: {
+    scope: {},
+    controller: ['$scope', function($scope) {
+
+    }],
+    controllerAs: 'ctrl',
+    bindToController: {
       data: '=info',
       dismiss: '&onDismiss',
       proceed: '&onProceed'
     },
-    controller: function() {
-
-    },
-    controllerAs: 'ctrl',
-    bindToController: true,
     replace: true,
+    transclude: true,
     templateUrl: 'templates/letterbox-card.html'
   };
 });
