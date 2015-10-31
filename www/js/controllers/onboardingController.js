@@ -7,10 +7,20 @@ angular.module('letterbox.controllers')
                                        $ionicLoading,
                                        $cordovaOauth,
                                        $ionicHistory,
+                                       $cordovaInAppBrowser,
                                        Facebook,
                                        AuthService,
                                        backend,
                                        eventbus) {
+
+  $scope.openTermsOfService = function() {
+    var ref = $cordovaInAppBrowser.open('http://getletterbox.com/terms', '_blank', {
+      hardwareback: 'yes',
+      zoom: 'no',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'bottom'
+    });
+  };
 
   $scope.showLoading = function() {
     $ionicLoading.show({
