@@ -99,6 +99,16 @@
             }
           }
         }">
+          <div class="large-profile-pic-header">
+            <div class="large-profile-pic" style="background-image: url({{ card.profile_pic }})">
+            </div>
+            <div class="item profile-pic-overlay">
+              <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span><span class="location">{{ card.location }}</span>
+            </div>
+          </div>
+          <div class="item card-content">
+            <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
+          </div>
         </letterbox-card >
 
 

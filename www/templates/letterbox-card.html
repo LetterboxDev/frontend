@@ -3,18 +3,10 @@
     <div class="flipper">
 
       <div class="card front">
-        <div class="large-profile-pic-header">
-          <div class="large-profile-pic" style="background-image: url({{ ctrl.data.front.image_url }})">
-          </div>
-          <div class="item profile-pic-overlay">
-            <span class="name">{{ ctrl.data.front.title }}</span>
-            <span class="age">, {{ card.data.age }}</span>
-            <span class="location">{{ card.data.location }}</span>
-          </div>
+
+        <div ng-transclude>
         </div>
-        <div class="item card-content">
-          <p>{{ ctrl.data.front.description }}</p>
-        </div>
+
         <div class="item card-buttons">
           <div ng-click="dismiss()" class="card-button button-negative">
             <i class="icon ion-close"></i>
