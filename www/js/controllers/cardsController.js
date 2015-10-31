@@ -5,7 +5,7 @@ angular.module('letterbox.controllers')
                                   $element,
                                   $timeout,
                                   $ImageCacheFactory,
-                                  $ionicHistroy,
+                                  $ionicHistory,
                                   eventbus,
                                   backend,
                                   letterService,
