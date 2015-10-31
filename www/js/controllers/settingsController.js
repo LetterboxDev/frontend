@@ -3,6 +3,7 @@ angular.module('letterbox.controllers')
 .controller('SettingsCtrl', function($scope,
                                      $state,
                                      $ionicPopup,
+                                     $cordovaInAppBrowser,
                                      backend,
                                      AuthService) {
 
@@ -43,6 +44,15 @@ angular.module('letterbox.controllers')
     window.localStorage.setItem('minAge', $scope.preference.age.min);
     window.localStorage.setItem('maxAge', $scope.preference.age.max);
   }
+
+  $scope.openTermsOfService = function() {
+    var ref = $cordovaInAppBrowser.open('http://getletterbox.com/terms', '_blank', {
+      hardwareback: 'yes',
+      zoom: 'no',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'bottom'
+    });
+  };
 
   $scope.logout = function() {
     $ionicPopup.confirm({
