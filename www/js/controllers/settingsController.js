@@ -10,7 +10,7 @@ angular.module('letterbox.controllers')
   $scope.maxAge = 80;
 
   var perfectMatch = window.localStorage.getItem('perfectMatch');
-  var preferredGender = window.localStorage.getItem('preferredGender');
+  var preferredGender = window.localStorage.getItem('genderPreference');
   var distanceRadius = window.localStorage.getItem('distanceRadius');
   var minAge = window.localStorage.getItem('minAge');
   var maxAge = window.localStorage.getItem('maxAge');
@@ -31,7 +31,7 @@ angular.module('letterbox.controllers')
   }
 
   $scope.onChangePreferredGender = function() {
-    window.localStorage.setItem('preferredGender', $scope.preference.preferredGender);
+    window.localStorage.setItem('genderPreference', $scope.preference.preferredGender);
     backend.updateGenderPreference($scope.preference.preferredGender);
   }
 

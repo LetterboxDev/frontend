@@ -29,7 +29,6 @@ angular.module('letterbox.controllers')
   };
 
   function getNotification() {
-    console.log($stateParams);
     if ($stateParams.isExistingChat) {
       $scope.isExistingChat = $stateParams.isExistingChat;
     } else {
