@@ -62,6 +62,9 @@
                       <h3>mutual friends</h3>
                       <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
                     </div>
+                    <div class="section">
+                      <h3 ng-click="reportUser(card.name, card.hashedId)">Report user</h3>
+                    </div>
                   </div>
                   <div class="item card-buttons">
                     <div class="card-button button-flip">

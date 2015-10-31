@@ -9,7 +9,8 @@ angular.module('letterbox.controllers')
                                   eventbus,
                                   backend,
                                   letterService,
-                                  MatchService) {
+                                  MatchService,
+                                  ReportService) {
 
   $scope.cards = [];
   $scope.isLoading = false;
@@ -17,6 +18,10 @@ angular.module('letterbox.controllers')
   eventbus.registerListener('enterHome', getCard);
   eventbus.registerListener('closeLetter', removeTopCard);
   getCard();
+
+  $scope.reportUser = function(userName, userId) {
+    ReportService.showReportPopup(userName, userId, $scope, $scope.changeCard);
+  };
 
   $scope.changeCard = function() {
     selectFirst('.profile-card').addClass('moving-out');
