@@ -16,10 +16,24 @@
         <ion-spinner icon="dots"></ion-spinner>
       </div>
       <div ng-if="!isLoading" class="profile-cards">
+
         <div class="profile-card moving-in" ng-repeat="card in cards">
           <div class="flipper-container" flip-card>
             <div class="flipper">
-              <div class="card front">
+              <letterbox-card
+                on-left-click="changeCard()"
+                on-right-click="openSendLetter(card)"
+                data-info="{
+                  side: 'front',
+                  leftText: 'skip',
+                  centerText: 'profile',
+                  rightText: 'answer',
+                  leftIcon: 'ion-close',
+                  rightIcon: 'ion-edit',
+                  leftIconStyle: 'button-negative',
+                  rightIconStyle: 'button-positive',
+                }">
+
                 <div class="large-profile-pic-header">
                   <div class="large-profile-pic" style="background-image: url({{ card.profile_pic }})">
                   </div>
@@ -30,23 +44,17 @@
                 <div class="item card-content">
                   <p>{{ (card.bio.length > 0) ? card.bio : '&nbsp;' }}</p>
                 </div>
-                <div class="item card-buttons">
-                  <div ng-click="changeCard()" class="card-button button-negative">
-                    <i class="icon ion-close"></i>
-                    <div class="button-detail">skip</div>
-                  </div>
-                  <div class="card-button button-flip">
-                    <i class="icon ion-person"></i>
-                    <div class="button-detail">profile</div>
-                  </div>
-                  <div ng-click="openSendLetter(card)" class="card-button button-positive">
-                    <i class="icon ion-edit"></i>
-                    <div class="button-detail">answer</div>
-                  </div>
-                </div>
-              </div>
 
-              <div class="card back">
+              </letterbox-card>
+
+              <letterbox-card
+                data-info="{
+                  side: 'back',
+                  hideLeftButton: true,
+                  centerText: 'back',
+                  hideRightButton: true
+                }">
+
                 <div class="back-container">
                   <div class="small-profile-pic-header">
                     <div class="small-profile-pic" style="background-image: url({{ card.profile_pic }})">
@@ -66,17 +74,13 @@
                       <h3 ng-click="reportUser(card.name, card.hashedId)">Report user</h3>
                     </div>
                   </div>
-                  <div class="item card-buttons">
-                    <div class="card-button button-flip">
-                      <i class="icon ion-ios-undo"></i>
-                      <div class="button-detail">back</div>
-                    </div>
-                  </div>
                 </div>
-              </div>
+
+              </letterbox-card>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </ion-content>
