@@ -42,7 +42,7 @@ angular.module('letterbox.controllers')
       removeTooltip();
       updateQuestionAnswers(questions, selected);
       backend.sendALetter(targetUser.hashedId, questions);
-      $scope.closeLetter();
+      $ionicHistory.goBack();
       eventbus.call('closeLetter');
       return;
     } else if ($scope.curr === $scope.max) {
