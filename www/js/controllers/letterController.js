@@ -55,13 +55,6 @@ angular.module('letterbox.controllers')
     updateQuestionView($scope.curr, questions, selected);
   };
 
-  $scope.closeLetter = function() {
-    $ionicHistory.nextViewOptions({
-      disableBack: true,
-    });
-    $state.go('app.home');
-  };
-
   $scope.selectTab = function(tab) {
     $scope.selectedTab = tab;
 
