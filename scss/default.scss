@@ -178,8 +178,9 @@ ion-content {
   }
 
   .warning {
-    margin: 0;
+    margin: 5px 0 0;
     font-size: 11px;
+    line-height: 13px;
     text-align: center;
     color: darken($colourPrimary, 10%);
   }

@@ -28,9 +28,9 @@ angular.module('letterbox.services')
         text: 'Report',
         type: 'button-positive',
         onTap: function(e) {
-          if (!$scope.report.reason) {
+          if (!$scope.report.reason || $scope.report.reason.length <= 10) {
             e.preventDefault();
-            $scope.warning = "Please enter a reason.";
+            $scope.warning = "Please enter a reason at least 10 characters long.";
           } else {
             ReportService.reportUser(userId, $scope.report.reason)
             .then(function() {
