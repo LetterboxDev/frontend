@@ -35,7 +35,9 @@ angular.module('letterbox.services')
             ReportService.reportUser(userId, $scope.report.reason)
             .then(function() {
               $scope.report.reason = '';
-              callback();
+              if (typeof callback !== 'undefined') {
+                callback();
+              }
             });
           }
         }

@@ -32,6 +32,7 @@ angular.module('letterbox.controllers')
     $scope.currentQuestion = targetUser.questions[0];
     $scope.warning = '';
     $scope.tooltipShown = false;
+    $scope.selectedTab = -1;
   }
 
   $scope.nextQuestion = function() {

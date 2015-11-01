@@ -15,7 +15,7 @@
         <p>{{ (ctrl.data.mutual_friends_count > 0) ? ctrl.data.mutual_friends_count : 0 }} mutual friends</p>
       </div>
       <div class="section">
-        <button class="btn-report button button-outline button-assertive" ng-click="reportUser(ctrl.data.name, ctrl.data.hashedId)">
+        <button class="btn-report button button-outline button-assertive" ng-click="reportUser(ctrl.data.name, ctrl.data.hashedId, ctrl.callback)">
           Report user
         </button>
       </div>
