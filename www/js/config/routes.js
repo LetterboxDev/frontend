@@ -34,15 +34,6 @@ angular.module('letterbox')
     }
   })
 
-  .state('app.privacy', {
-    url: '/privacy',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/privacy.html',
-      }
-    }
-  })
-
   .state('app.letter', {
     url: '/letter',
     views: {
