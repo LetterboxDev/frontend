@@ -6,15 +6,11 @@
         <div class="flipper-container" flip-card>
           <div class="flipper">
             <div class="card front">
-              <div class="small-profile-pic-header">
-                <img class="small-profile-pic" ng-src="{{ response.profilePicMed }}" alt="Image" />
-                <span class="name">{{ response.from }}</span><span class="age">, {{ response.age }}</span>
-              </div>
               <div class="item card-content">
                 <div class="section">
                   <h3>responses</h3>
                   <div class="questions">
-                    <div class="question" ng-repeat="question in response.questionsAnswers">
+                    <div class="question" ng-repeat="question in letter.questions">
                       <div class="option option0" ng-class="{ 'selected' : !question.answer}">
                         {{ question.option0 }}
                       </div>
