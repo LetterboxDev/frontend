@@ -24,8 +24,6 @@
 
 `ionic add ionic-platform-web-client`
 
-`ionic plugin add phonegap-plugin-push`
-
 `cordova plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git`
 
 `cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git`
@@ -34,9 +32,29 @@
 
 `ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git`
 
+For building for iOS:
+
+`ionic plugin add phonegap-plugin-push`
+
 `cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="FACEBOOK_APP_ID" --variable APP_NAME="FACEBOOK_APP_NAME"`
 
-Follow the setup at https://github.com/Wizcorp/phonegap-facebook-plugin for the above plugin
+For building for Android:
+
+If you currently have the `phonegap-plugin-push` installed, run `cordova plugin rm phonegap-plugin-push` to remove this plugin, then run `ionic platform rm android` followed by `ionic platform add android` to clear any build cache.
+
+If you currently have the `phonegap-facebook-plugin` installed, run `cordova plugin rm phonegap-facebook-plugin` to remove this plugin, then run `ionic platform rm android` followed by `ionic platform add android` to clear any build cache.
+
+cd into `./plugins` and clone the following repos
+
+`https://github.com/Telerik-Verified-Plugins/PushNotification.git` into `./pushplugin`
+
+`https://github.com/Telerik-Verified-Plugins/PushNotification.git` into `./phonegap-facebook-plugin`
+
+Then cd back to the main directory
+
+`cordova -d plugin add ./plugins/pushplugin`
+
+`cordova -d plugin add ./plugins/phonegap-facebook-plugin --variable APP_ID="FACEBOOK_APP_ID" --variable APP_NAME="FACEBOOK_APP_NAME"`
 
 To start:
 `ionic serve`
