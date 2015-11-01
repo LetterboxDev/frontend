@@ -88,10 +88,7 @@ angular.module('letterbox.controllers')
   };
 
   $scope.showOtherUserProfile = function() {
-    // TODO show other user profile
     ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
-      // Handle going to profile here, This could also be done in profile page
-      console.log(user); // For you to see format of data
       UserProfileService.setCurrentProfile(user);
       $state.go('app.other-profile');
     });
