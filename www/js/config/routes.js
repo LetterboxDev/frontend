@@ -94,6 +94,26 @@ angular.module('letterbox')
     }
   })
 
+  .state('app.other-profile', {
+    url: '/other-profile',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/other-profile.html',
+        controller: 'OtherProfileCtrl'
+      }
+    }
+  })
+
+  .state('app.other-letter', {
+    url: '/other-letter',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/other-letter.html',
+        controller: 'OtherLetterCtrl'
+      }
+    }
+  })
+
   .state('app.settings', {
     url: '/settings',
     views: {

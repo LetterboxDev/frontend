@@ -10,6 +10,8 @@ angular.module('letterbox.controllers')
                                  backend,
                                  ChatService,
                                  RoomsService,
+                                 UserProfileService,
+                                 UserLetterService,
                                  eventbus,
                                  socket) {
 
@@ -87,19 +89,17 @@ angular.module('letterbox.controllers')
   };
 
   $scope.showOtherUserProfile = function() {
-    // TODO show other user profile
     ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
-      // Handle going to profile here, This could also be done in profile page
-      console.log(user); // For you to see format of data
+      UserProfileService.setCurrentProfile(user);
+      $state.go('app.other-profile');
     });
     $scope.closePopover();
   };
 
   $scope.showResponses = function() {
-    // TODO show responses to questions
     RoomsService.getRoomLetter($scope.roomHash).then(function(letter) {
-      // Handle letter here, This could also be done in the responses page
-      console.log(letter); // For you to see format of data
+      UserLetterService.setCurrentLetter(letter);
+      $state.go('app.other-letter');
     });
     $scope.closePopover();
   };
