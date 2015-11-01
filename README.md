@@ -32,7 +32,7 @@
 
 `ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git`
 
-For building for iOS:
+**For building for iOS:**
 
 `ionic plugin add phonegap-plugin-push`
 
@@ -42,7 +42,7 @@ For building for iOS:
 
 in XCode 7, set Project>Build Settings>All>Build Options>Enable Bitcode = NO
 
-For building for Android:
+**For building for Android:**
 
 If you currently have the `phonegap-plugin-push` installed, run `cordova plugin rm phonegap-plugin-push` to remove this plugin, then run `ionic platform rm android` followed by `ionic platform add android` to clear any build cache.
 
