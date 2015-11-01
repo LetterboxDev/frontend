@@ -6,9 +6,9 @@
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
-                <h3>I would rather...</h3>
-                <p class="warning">{{ warning }}</p>
+                <h3 class="header-title">I would rather...</h3>
                 <p class="current">Question {{ curr + 1 }} of 5</p>
+                <p class="warning">{{ warning }}</p>
                 <div class="row answer-row">
                   <div ng-class="{'active' : selectedTab === 0}" ng-click="selectTab(0)" class="left col">
                     <p>{{ currentQuestion.option0 }}</p>
