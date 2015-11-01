@@ -104,6 +104,16 @@ angular.module('letterbox')
     }
   })
 
+  .state('app.other-response', {
+    url: '/other-response',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/other-response.html',
+        controller: 'OtherResponseCtrl'
+      }
+    }
+  })
+
   .state('app.settings', {
     url: '/settings',
     views: {
