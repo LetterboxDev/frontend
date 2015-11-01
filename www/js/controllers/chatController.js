@@ -11,6 +11,7 @@ angular.module('letterbox.controllers')
                                  ChatService,
                                  RoomsService,
                                  UserProfileService,
+                                 UserResponseService,
                                  eventbus,
                                  socket) {
 
@@ -96,10 +97,10 @@ angular.module('letterbox.controllers')
   };
 
   $scope.showResponses = function() {
-    // TODO show responses to questions
     RoomsService.getRoomLetter($scope.roomHash).then(function(letter) {
-      // Handle letter here, This could also be done in the responses page
       console.log(letter); // For you to see format of data
+      UserResponseService.setCurrentResponse(letter);
+      $state.go('app.other-response');
     });
     $scope.closePopover();
   };
