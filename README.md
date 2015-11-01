@@ -32,13 +32,17 @@
 
 `ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git`
 
-For building for iOS:
+**For building for iOS:**
 
 `ionic plugin add phonegap-plugin-push`
 
-`cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="FACEBOOK_APP_ID" --variable APP_NAME="FACEBOOK_APP_NAME"`
+`git clone https://github.com/Wizcorp/phonegap-facebook-plugin.git`
 
-For building for Android:
+`cordova -d plugin add /path/to/cloned/phonegap-facebook-plugin --variable APP_ID="FACEBOOK_APP_ID" --variable APP_NAME="FACEBOOK_APP_NAME"`
+
+in XCode 7, set Project>Build Settings>All>Build Options>Enable Bitcode = NO
+
+**For building for Android:**
 
 If you currently have the `phonegap-plugin-push` installed, run `cordova plugin rm phonegap-plugin-push` to remove this plugin, then run `ionic platform rm android` followed by `ionic platform add android` to clear any build cache.
 
