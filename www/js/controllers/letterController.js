@@ -10,6 +10,7 @@ angular.module('letterbox.controllers')
 
   // Makes sure that cache is cleared after every time user submits/closes letter
   $scope.$on("$ionicView.afterLeave", function () {
+    $('.button-next').qtip('destroy');
     $ionicHistory.clearCache();
   });
 
