@@ -13,10 +13,14 @@ angular.module('letterbox.services')
     $scope.report = {
       reason: ''
     };
+
+    $scope.warning = '';
+
     return $ionicPopup.show({
-      template: '<textarea ng-model="report.reason">',
+      template: '<textarea ng-model="report.reason"></textarea><p class="warning">{{ warning }}</p>',
       title: 'Report ' + userName + '?',
       subTitle: 'Please enter a reason behind this report',
+      cssClass: 'popup-alert',
       scope: $scope,
       buttons: [{
         text: 'Cancel'
@@ -26,6 +30,7 @@ angular.module('letterbox.services')
         onTap: function(e) {
           if (!$scope.report.reason) {
             e.preventDefault();
+            $scope.warning = "Please enter a reason.";
           } else {
             ReportService.reportUser(userId, $scope.report.reason)
             .then(function() {

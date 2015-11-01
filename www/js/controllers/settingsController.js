@@ -45,8 +45,17 @@ angular.module('letterbox.controllers')
     window.localStorage.setItem('maxAge', $scope.preference.age.max);
   }
 
-  $scope.openTermsOfService = function() {
+  $scope.openTermsOfUse = function() {
     var ref = $cordovaInAppBrowser.open('http://getletterbox.com/terms', '_blank', {
+      hardwareback: 'yes',
+      zoom: 'no',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'bottom'
+    });
+  };
+
+  $scope.openPrivacyPolicy = function() {
+    var ref = $cordovaInAppBrowser.open('http://getletterbox.com/privacy', '_blank', {
       hardwareback: 'yes',
       zoom: 'no',
       closebuttoncaption: 'Close',

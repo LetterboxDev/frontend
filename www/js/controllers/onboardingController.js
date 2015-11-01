@@ -13,7 +13,7 @@ angular.module('letterbox.controllers')
                                        backend,
                                        eventbus) {
 
-  $scope.openTermsOfService = function() {
+  $scope.openTermsOfUse = function() {
     var ref = $cordovaInAppBrowser.open('http://getletterbox.com/terms', '_blank', {
       hardwareback: 'yes',
       zoom: 'no',

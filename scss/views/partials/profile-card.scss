@@ -83,6 +83,13 @@
         white-space: normal;
         max-width: none;
       }
+      .btn-report {
+        opacity: 0.5;
+        font-size: 10px;
+        min-height: 0;
+        line-height: 15px;
+        padding: 0 6px;
+      }
     }
 
     p {
