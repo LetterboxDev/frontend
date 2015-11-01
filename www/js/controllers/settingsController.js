@@ -54,6 +54,15 @@ angular.module('letterbox.controllers')
     });
   };
 
+  $scope.openPrivacyPolicy = function() {
+    var ref = $cordovaInAppBrowser.open('http://getletterbox.com/privacy', '_blank', {
+      hardwareback: 'yes',
+      zoom: 'no',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'bottom'
+    });
+  };
+
   $scope.logout = function() {
     $ionicPopup.confirm({
       title: "Are you sure you want to logout?",
