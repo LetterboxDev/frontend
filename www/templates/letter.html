@@ -1,4 +1,4 @@
-<ion-view view-title="Send a Letter">
+<ion-view view-title="To: {{ card.name }}">
   <ion-content scroll="false">
     <div class="letter-wrapper">
       <div class="letter" ng-controller="LetterCtrl">
@@ -6,7 +6,7 @@
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
-                <h3>Would you rather...</h3>
+                <h3>I would rather...</h3>
                 <p class="warning">{{ warning }}</p>
                 <p class="current">Question {{ curr + 1 }} of 5</p>
                 <div class="row answer-row">
