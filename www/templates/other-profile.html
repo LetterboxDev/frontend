@@ -1,4 +1,4 @@
-<ion-view view-title="{{ profile.firstName }}, {{ profile.age }}">
+<ion-view view-title="{{ user.firstName }}, {{ user.age }}">
   <ion-content>
     <div class="feedback" ng-if="isLoading">
       <h2>Loading profile</h2>
@@ -6,7 +6,7 @@
     </div>
     <div ng-if="!isLoading" class="profile-card moving-in">
 
-      <profile-card data-info="profile">
+      <profile-card data-info="user">
       </profile-card>
 
     </div>

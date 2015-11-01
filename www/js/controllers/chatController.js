@@ -10,6 +10,7 @@ angular.module('letterbox.controllers')
                                  backend,
                                  ChatService,
                                  RoomsService,
+                                 UserProfileService,
                                  eventbus,
                                  socket) {
 
@@ -91,7 +92,8 @@ angular.module('letterbox.controllers')
     ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
       // Handle going to profile here, This could also be done in profile page
       console.log(user); // For you to see format of data
-      $state.go('app.other-profile', {user: user});
+      UserProfileService.setCurrentProfile(user);
+      $state.go('app.other-profile');
     });
     $scope.closePopover();
   };
