@@ -36,7 +36,9 @@ For building for iOS:
 
 `ionic plugin add phonegap-plugin-push`
 
-`cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="FACEBOOK_APP_ID" --variable APP_NAME="FACEBOOK_APP_NAME"`
+`git clone https://github.com/Wizcorp/phonegap-facebook-plugin.git`
+
+`cordova -d plugin add /path/to/cloned/phonegap-facebook-plugin --variable APP_ID="FACEBOOK_APP_ID" --variable APP_NAME="FACEBOOK_APP_NAME"`
 
 For building for Android:
 
