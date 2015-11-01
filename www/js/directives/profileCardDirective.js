@@ -4,13 +4,14 @@ angular.module('letterbox.directives')
   return {
     scope: {},
     controller: ['$scope', 'ReportService', function($scope, ReportService) {
-      $scope.reportUser = function(userName, userId) {
-        ReportService.showReportPopup(userName, userId, $scope, $scope.changeCard);
+      $scope.reportUser = function(userName, userId, callback) {
+        ReportService.showReportPopup(userName, userId, $scope, callback);
       }.bind(this);
     }],
     controllerAs: 'ctrl',
     bindToController: {
       'data': '=info',
+      'changeCard': '&'
     },
     replace: true,
     transclude: true,
