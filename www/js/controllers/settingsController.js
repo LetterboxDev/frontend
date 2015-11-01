@@ -45,7 +45,7 @@ angular.module('letterbox.controllers')
     window.localStorage.setItem('maxAge', $scope.preference.age.max);
   }
 
-  $scope.openTermsOfService = function() {
+  $scope.openTermsOfUse = function() {
     var ref = $cordovaInAppBrowser.open('http://getletterbox.com/terms', '_blank', {
       hardwareback: 'yes',
       zoom: 'no',
