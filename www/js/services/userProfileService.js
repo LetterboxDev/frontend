@@ -1,6 +1,6 @@
 angular.module('letterbox.services')
 
-.service('UserProfileService', function($q, backend) {
+.service('UserProfileService', function($q) {
   var profile = {};
 
   var setCurrentProfile = function(newProfile) {
