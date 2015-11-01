@@ -8,6 +8,7 @@ angular.module('letterbox.controllers')
                                        $cordovaOauth,
                                        $ionicHistory,
                                        $cordovaInAppBrowser,
+                                       $cordovaFacebook,
                                        Facebook,
                                        AuthService,
                                        backend,
@@ -57,11 +58,19 @@ angular.module('letterbox.controllers')
         }
       }, {scope: 'public_profile,user_birthday,user_photos,user_friends', return_scopes: true});
     } else {
+      /*
       $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_photos','user_friends']).then(function(res) {
         $scope.authenticateToken(res.access_token);
       }, function(err) {
         // inform of error
-      });
+      });*/
+      $cordovaFacebook.login(["public_profile", "user_birthday", "user_photos", "user_friends"])
+      .then(function(res) {
+        $scope.authenticateToken(res.authResponse.accessToken);
+      }, function(err) {
+        alert('An error has occurred when trying to login with Facebook');
+        $scope.hideLoading();
+      })
     }
   };
 
