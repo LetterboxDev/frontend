@@ -176,6 +176,13 @@ ion-content {
   .popup-body {
     padding: 15px;
   }
+
+  .warning {
+    margin: 0;
+    font-size: 11px;
+    text-align: center;
+    color: darken($colourPrimary, 10%);
+  }
 }
 
 /**
