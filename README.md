@@ -43,6 +43,21 @@ To build iOS:
 
 `ionic build ios`
 
+- Configure TLS for ios9
+
+  - in the plist file, add
+  ```
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <!--Include to allow all connections (DANGER)-->
+    <key>NSAllowsArbitraryLoads</key>
+        <true/>
+  </dict>
+  ```
+
+- Fix header search path
+  - add `$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include` to BuildSettings->Header Search Paths
+
 To emulate iOS:
 
 `ionic emulate ios`

@@ -98,7 +98,6 @@ angular.module('letterbox.controllers')
 
   $scope.showResponses = function() {
     RoomsService.getRoomLetter($scope.roomHash).then(function(letter) {
-      console.log(letter); // For you to see format of data
       UserLetterService.setCurrentLetter(letter);
       $state.go('app.other-letter');
     });
