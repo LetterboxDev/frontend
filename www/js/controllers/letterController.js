@@ -46,7 +46,7 @@ angular.module('letterbox.controllers')
       eventbus.call('closeLetter');
       return;
     } else if ($scope.curr === $scope.max) {
-      $scope.warning = 'Please complete all answers.';
+      $scope.warning = 'Please answer all questions.';
       return;
     }
     $scope.curr++;
