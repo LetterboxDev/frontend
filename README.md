@@ -34,6 +34,10 @@
 
 `ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git`
 
+`cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="FACEBOOK_APP_ID" --variable APP_NAME="FACEBOOK_APP_NAME"`
+
+Follow the setup at https://github.com/Wizcorp/phonegap-facebook-plugin for the above plugin
+
 To start:
 `ionic serve`
 
