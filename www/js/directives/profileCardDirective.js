@@ -11,7 +11,7 @@ angular.module('letterbox.directives')
     controllerAs: 'ctrl',
     bindToController: {
       'data': '=info',
-      'changeCard': '&'
+      'callback': '&'
     },
     replace: true,
     transclude: true,
