@@ -104,12 +104,12 @@ angular.module('letterbox')
     }
   })
 
-  .state('app.other-response', {
-    url: '/other-response',
+  .state('app.other-letter', {
+    url: '/other-letter',
     views: {
       'menuContent': {
-        templateUrl: 'templates/other-response.html',
-        controller: 'OtherResponseCtrl'
+        templateUrl: 'templates/other-letter.html',
+        controller: 'OtherLetterCtrl'
       }
     }
   })
