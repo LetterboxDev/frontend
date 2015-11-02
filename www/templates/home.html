@@ -1,9 +1,9 @@
 <ion-view view-title="Letterbox">
-  <ion-nav-buttons side="right">
+   <ion-nav-buttons side="right">
     <button class="button button-small button-icon button-clear ion-ios-bell" data-ng-click="goNotifications()">
     </button>
     <div class="notification-bubble" data-ng-show="numberOfNotifications > 0" data-ng-click="goNotifications()">
-      {{ numberOfNotifications }}
+       {{ numberOfNotifications }}
     </div>
   </ion-nav-buttons>
   <ion-content scroll="true" has-bouncing="false">
@@ -46,35 +46,15 @@
                 </div>
               </div>
 
-              <div class="card back">
-                <div class="back-container">
-                  <div class="small-profile-pic-header">
-                    <div class="small-profile-pic" style="background-image: url({{ card.profile_pic }})">
-                    </div>
-                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span>
-                  </div>
-                  <div class="item card-content">
-                    <div class="section">
-                      <h3>bio</h3>
-                      <p>{{ card.bio }}</p>
-                    </div>
-                    <div class="section">
-                      <h3>mutual friends</h3>
-                      <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
-                    </div>
-                    <div class="section">
-                      <h3>Likes</h3>
-                    </div>
-
-                  </div>
-                  <div class="item card-buttons">
-                    <div class="card-button button-flip">
-                      <i class="icon ion-ios-undo"></i>
-                      <div class="button-detail">back</div>
-                    </div>
+              <profile-card data-info="card" callback="changeCard()">
+                <div class="item card-buttons">
+                  <div class="card-button button-flip">
+                    <i class="icon ion-ios-undo"></i>
+                    <div class="button-detail">back</div>
                   </div>
                 </div>
-              </div>
+              </profile-card>
+
             </div>
           </div>
         </div>
@@ -82,4 +62,3 @@
     </div>
   </ion-content>
 </ion-view>
-

@@ -134,7 +134,7 @@ ion-content {
       -webkit-align-items: center;
       justify-content: center;
       -webkit-justify-content: center;
-      text-align: center;
+      // text-align: center;
 
       &.selected {
         color: white;
@@ -162,7 +162,7 @@ ion-content {
 
 .popup-alert {
   .popup {
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
   }
   .popup-head {
@@ -175,6 +175,14 @@ ion-content {
   }
   .popup-body {
     padding: 15px;
+  }
+
+  .warning {
+    margin: 5px 0 0;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+    color: darken($colourPrimary, 10%);
   }
 }
 
@@ -193,4 +201,17 @@ ion-content {
   &:checked + .radio-icon {
     visibility: visible;
   }
+}
+
+ion-popover-view.fit {
+  height: auto !important;
+}
+
+ion-popover-view.fit ion-content {
+  position: relative !important;
+}
+
+.platform-ios ion-popover-view.fit {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
 }

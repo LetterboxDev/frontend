@@ -2,26 +2,20 @@
   height: 100%;
 }
 .letter {
-  font-size: 16px;
-  font-weight: bold;
-  // line-height: 1.25;
-  .close-letter {
-    cursor: pointer;
-    float: right;
-    height: 30px;
-    width: 30px;
-    display: flex;
-    display: -webkit-flex; /* Safari */
-    justify-content: center;
-    -webkit-justify-content: center;
-    align-items: center;
-    -webkit-align-items: center;
-    i {
-      color: $colourSecondaryText;
-    }
+  .card {
+    background-color: white;
+    padding: 0;
   }
-  i {
 
+  .front .header-title {
+    margin-top: 5vh;
+    clear: both;
+    text-align: center;
+    font-weight: bold;
+    color: $colourPrimaryText;
+  }
+
+  i {
     &.ion-ios-paperplane {
       font-size: 150%;
     }
@@ -34,59 +28,61 @@
       margin-left: 2px;
     }
   }
-  .front h3 {
-    clear: both;
-    text-align: center;
-    font-weight: bold;
-    color: $colourPrimaryText;
-  }
+
   .warning {
-    color: $colourPrimary;
+    color: darken($colourPrimary, 10%);
     text-align: center;
-    margin: 0;
+    margin: 10px 0 0 ;
+    font-size: 13px;
+    &:empty:before {
+      content: '\200b';
+    }
   }
-  .warning:empty:before {
-    content: '\200b';
-  }
+  
   .current {
-    color: $colourSecondaryText;
-    font-weight: lighter;
+    color: $colourSubtitle;
     text-align: center;
+    font-size: 12px;
   }
-  .card {
-    background-color: white;
-    padding: 15px 15px 0 15px;
-  }
+
   .answer-row {
-    padding-top: 15px;
-    padding-bottom: 30px;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding: 1vh 0;
+    margin: 2vh 0 3vh;
   }
+
   .left,
   .right {
     display: flex;
     -webkit-align-items: center;
     align-items: center;
-    padding: 15px;
-    margin: 5vh 0px;
-    height: 30vh;
+    font-weight: bold;
+    padding: 18px;
+    height: 40vh;
+    max-height: 300px;
     min-height: 80px;
-    border-radius: 5px;
+    // border-radius: 5px;
     &.active {
       color: white;
+      background-color: $colourOption;
+    }
+    p {
+      font-size: 16px;
     }
   }
   .left {
-    margin-right: 2px;
-    border: 1px solid $colourOption;
+    // margin-right: 2px;
+    border-top: 1px solid rgba($colourOption, 0.3);
+    border-bottom: 1px solid rgba($colourOption, 0.3);
     color: $colourOption;
   }
   .right {
-    margin-left: 2px;
-    border: 1px solid $colourOption;
+    // margin-left: 2px;
+    border-left: 1px solid rgba($colourOption, 0.3);
+    border-bottom: 1px solid rgba($colourOption, 0.3);
+    border-top: 1px solid rgba($colourOption, 0.3);
     color: $colourOption;
-  }
-  .left.active, .right.active {
-    background-color: $colourOption;
   }
 
   .card-button.disabled {

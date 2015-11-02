@@ -47,4 +47,3 @@ angular.module('letterbox.controllers')
     $scope.$apply();
   });
 });
-

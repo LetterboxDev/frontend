@@ -41,12 +41,15 @@
         color: white;
         padding-left: 40px;
         @include uppercase-bold-font();
-        font-size: 14px;
-        letter-spacing: 2px;
+        font-size: 12px;
+        letter-spacing: 3px;
         .icon {
-          vertical-align: text-top;
+          vertical-align: middle;
           margin-right: 20px;
-          font-size: 20px;
+          font-size: 16px;
+        }
+        span {
+          vertical-align: middle;
         }
       }
     }

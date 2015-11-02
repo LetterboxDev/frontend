@@ -10,75 +10,27 @@
     <meta name="apple-mobile-web-app-title" content="Letterbox">
     <title>Letterbox</title>
 
-    <!-- compiled css output -->
-    <link href="css/ionic.app.css" rel="stylesheet">
-
-    <link href="lib/qtip2/jquery.qtip.css" rel="stylesheet">
-
-    <!-- socketio -->
-    <script src="js/socket.io.js"></script>
-
-    <script src="lib/jquery/dist/jquery.min.js"></script>
-    <script src="lib/qtip2/jquery.qtip.min.js"></script>
-
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="js/ng-cordova.min.js"></script>
-    <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
-    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
     <!-- <script src="cordova.js"></script> -->
 
+    <!-- Bower dependencies -->
+    <link href="lib/qtip2/jquery.qtip.css" rel="stylesheet">
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/qtip2/jquery.qtip.min.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+    <script src="lib/socket.io-client/socket.io.js"></script>
+    <script src="lib/moment/moment.js"></script>
     <script src="lib/angular-resource/angular-resource.min.js"></script>
     <script src="lib/angular-facebook/lib/angular-facebook.js"></script>
-    <script src="js/lib/ionic.ion.imagecachefactory.js"></script>
-
-    <!-- Main app javascript -->
-    <script src="js/app.js"></script>
-    <script src="js/config/routes.js"></script>
-
-    <!-- Services -->
-    <script src="js/services/socket.js"></script>
-    <script src="js/services/eventbus.js"></script>
-    <script src="js/services/backend.js"></script>
-    <script src="js/services/authService.js"></script>
-    <script src="js/services/matchService.js"></script>
-    <script src="js/services/LocationService.js"></script>
-    <script src="js/services/pushService.js"></script>
-    <script src="js/services/roomsService.js"></script>
-    <script src="js/services/dbService.js"></script>
-    <script src="js/services/chatService.js"></script>
-    <script src="js/services/notificationsService.js"></script>
-    <script src="js/services/profileService.js"></script>
-    <script src="js/services/letterService.js"></script>
-
-    <!-- Controllers -->
-    <script src="js/controllers/appController.js"></script>
-    <script src="js/controllers/homeController.js"></script>
-    <script src="js/controllers/letterController.js"></script>
-    <script src="js/controllers/cardsController.js"></script>
-    <script src="js/controllers/chatsController.js"></script>
-    <script src="js/controllers/chatController.js"></script>
-    <script src="js/controllers/notificationsController.js"></script>
-    <script src="js/controllers/responseController.js"></script>
-    <script src="js/controllers/profileController.js"></script>
-    <script src="js/controllers/settingsController.js"></script>
-    <script src="js/controllers/onboardingController.js"></script>
-    <script src="js/controllers/dealsController.js"></script>
-
-    <!-- Directives -->
-    <script src="js/directives/noScrollDirective.js"></script>
-    <script src="js/directives/flipCardDirective.js"></script>
-    <script src="js/directives/isFocusedDirective.js"></script>
-    <script src="js/directives/dealCardDirective.js"></script>
-
-    <!-- Bower dependencies -->
-    <script src="lib/moment/moment.js"></script>
     <script src="lib/angular-moment/angular-moment.min.js"></script>
     <script src="lib/angular-elastic/elastic.js"></script>
     <script src="lib/angular-slider/slider.js"></script>
+    <script src="lib/ionic-ion-imageCacheFactory/ionic.ion.imagecachefactory.js"></script>
 
-    <!-- Patches -->
-    <script src="js/patches/angular-ios9-uiwebview.patch.js"></script>
-
+    <!-- Compiled CSS and Javascript -->
+    <link href="dist/ionic.app.min.css" rel="stylesheet">
+    <script src="dist/main.js"></script>
   </head>
 
   <body ng-app="letterbox">

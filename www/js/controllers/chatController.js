@@ -5,16 +5,29 @@ angular.module('letterbox.controllers')
                                  $ionicScrollDelegate,
                                  $ionicModal,
                                  $window,
+                                 $timeout,
+                                 $state,
+                                 $ionicPopover,
+                                 backend,
                                  ChatService,
                                  RoomsService,
+                                 UserProfileService,
+                                 UserLetterService,
                                  eventbus,
                                  socket) {
 
   $scope.recipient = '';
+  $scope.recipientId = '';
   $scope.data = {message: ''};
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
+
+  $ionicPopover.fromTemplateUrl('templates/chatpopover.html', {
+    scope: $scope
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
@@ -38,10 +51,16 @@ angular.module('letterbox.controllers')
     ChatService.getRecipientName($scope.roomHash).then(function(recipient) {
       $scope.recipient = recipient;
     });
+
+    ChatService.getRecipientHashedId($scope.roomHash).then(function(hashedId) {
+      $scope.recipientId = hashedId;
+    });
+
     ChatService.getMessagesFromBackend($scope.roomHash).then(function(messages) {
       $scope.messages = messages;
       $ionicScrollDelegate.scrollBottom(false);
     });
+
     window.addEventListener('native.keyboardhide', onKeyboardHide, false);
     window.addEventListener('native.keyboardshow', onKeyboardShow, false);
   });
@@ -84,4 +103,28 @@ angular.module('letterbox.controllers')
   $scope.$on('$destroy', function() {
     $scope.modal.remove();
   });
+
+  $scope.showPopover = function($event) {
+    $scope.popover.show($event);
+  };
+
+  $scope.showOtherUserProfile = function() {
+    ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
+      UserProfileService.setCurrentProfile(user);
+      $state.go('app.other-profile');
+    });
+    $scope.closePopover();
+  };
+
+  $scope.showResponses = function() {
+    RoomsService.getRoomLetter($scope.roomHash).then(function(letter) {
+      UserLetterService.setCurrentLetter(letter);
+      $state.go('app.other-letter');
+    });
+    $scope.closePopover();
+  };
+
+  $scope.closePopover = function() {
+    $scope.popover.hide();
+  };
 });

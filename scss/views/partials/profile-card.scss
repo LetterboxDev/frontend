@@ -69,7 +69,7 @@
   }
 
   .card-content {
-    padding: 10px 20px;
+    padding: 10px 16px;
     .section {
       padding: 12px 0 8px;
       h3 {
@@ -82,6 +82,13 @@
       p {
         white-space: normal;
         max-width: none;
+      }
+      .btn-report {
+        opacity: 0.5;
+        font-size: 10px;
+        min-height: 0;
+        line-height: 15px;
+        padding: 0 6px;
       }
     }
 
