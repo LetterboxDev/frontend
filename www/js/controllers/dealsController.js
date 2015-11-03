@@ -57,5 +57,9 @@ angular.module('letterbox.controllers')
       description: 'This is the best deal ever!'
     }
   ];
+
+  $scope.viewCategory = function(categoryTitle) {
+    console.log(categoryTitle);
+  }
 });
 
