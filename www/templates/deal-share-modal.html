@@ -7,10 +7,14 @@
   <ion-content>
     <div class="button-bar deal-share-seg-control">
       <a class="button" ng-class="{highlighted: viewingDeals==='own'}" ng-click="viewingDeals='own'">Own liked deals</a>
-      <a class="button" ng-class="{highlighted: viewingDeals==='user'}" ng-click="viewingDeals='user'">User's liked deals</a>
+      <a class="button" ng-class="{highlighted: viewingDeals==='user'}" ng-click="viewingDeals='user'">{{ recipient }}'s liked deals</a>
     </div>
 
-    <div class="row deal-share-deals">
+    <div class="feedback" ng-if="deals[viewingDeals].length === 0">
+      <h2>No liked deals yet!</h2>
+    </div>
+
+    <div class="row deal-share-deals" ng-if="deals[viewingDeals].length === 0">
       <div ng-repeat="deal in deals[viewingDeals]" class="col col-33">
         <div class="deal-share-deal" ng-click="viewDeal(deal.id)">
           <img class="deal-share-deal-image" ng-src="{{ deal.image }}">
