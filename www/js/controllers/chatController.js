@@ -200,4 +200,10 @@ angular.module('letterbox.controllers')
   $scope.closePopover = function() {
     $scope.popover.hide();
   };
+
+  $scope.viewDeal = function(dealId) {
+    // TODO: go to deal view
+    $state.go('app.home');
+    $scope.closeShareModal();
+  }
 });

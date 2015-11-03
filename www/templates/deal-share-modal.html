@@ -12,7 +12,7 @@
 
     <div class="row deal-share-deals">
       <div ng-repeat="deal in deals[viewingDeals]" class="col col-33">
-        <div class="deal-share-deal">
+        <div class="deal-share-deal" ng-click="viewDeal(deal.id)">
           <img class="deal-share-deal-image" ng-src="{{ deal.image }}">
           <div class="deal-share-deal-title">
             {{ deal.title }}
