@@ -1,7 +1,9 @@
 angular.module('letterbox.controllers')
 
 .controller('DealsCtrl', function($scope,
-                                  $state) {
+                                  $rootScope,
+                                  $state,
+                                  DealCategoryService) {
   $scope.deals = [
     {
       title: '1-for-1 at Carl\'s Jr',
@@ -39,5 +41,7 @@ angular.module('letterbox.controllers')
       description: 'This is the best deal ever!'
     }
   ];
+
+  $scope.currentCategory = DealCategoryService.currentCategory;
 });
 

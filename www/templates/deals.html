@@ -1,4 +1,4 @@
-<ion-view view-title="Deals">
+<ion-view view-title="{{ currentCategory }} Deals">
   <ion-content ng-controller="DealsCtrl">
     <deal-card ng-repeat="deal in deals"
                data-set="{ title: deal.title,

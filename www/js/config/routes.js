@@ -74,14 +74,25 @@ angular.module('letterbox')
     }
   })
 
-  .state('app.deals', {
-    url: '/deals',
+  .state('app.categories', {
+    url: '/categories',
     views: {
       'menuContent': {
         templateUrl: 'templates/categories.html',
         controller: 'CategoriesCtrl'
       }
     }
+  })
+
+  .state('app.deals', {
+    url: '/deals',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/deals.html',
+        controller: 'DealsCtrl'
+      }
+    },
+    cache: false
   })
 
   .state('app.response', {
