@@ -30,6 +30,12 @@ angular.module('letterbox.services')
   var singleLetterPath = '/letters/:letterId';
   var reportPath = '/report';
 
+  var dealCategoriesPath = '/deal/cat';
+  var dealsByCatPath = '/deal/cat/:dealCat';
+  var dealByIdPath = '/deal/id/:dealId';
+  var userLikedDealsPath = '/deal/user/:otherUserId';
+  var mutualLikedDealsPath = '/deal/mutual/:otherUserId';
+
   function getToken() {
     return window.localStorage.getItem('token');
   }
@@ -224,6 +230,46 @@ angular.module('letterbox.services')
     }
   });
 
+  var dealCategoriesHandler = $resource(URL.concat(dealCategoriesPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    }
+  });
+
+  var dealsByCatHandler = $resource(URL.concat(dealsByCatPath), {dealCat: '@dealCat'}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    }
+  });
+
+  var dealByIdHandler = $resource(URL.concat(dealByIdPath), {dealId: '@dealId'}, {
+    get: {
+      method: 'GET'
+    },
+    likeDeal: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
+  var userLikedDealsHandler = $resource(URL.concat(userLikedDealsPath), {otherUserId: '@otherUserId'}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    }
+  });
+
+  var mutualLikedDealsHandler = $resource(URL.concat(mutualLikedDealsPath), {}, {
+    get: {
+      method: 'GET',
+      isArray: true
+    }
+  });
+
   backend.auth = function(fbToken) {
     return auth.get({fb_token: fbToken});
   };
@@ -401,6 +447,45 @@ angular.module('letterbox.services')
     handler.userId = userId;
     handler.reason = reason;
     return handler.$reportUser(successPromise, errorPromise);
+  };
+
+  backend.getDealCategories = function() {
+    var deferred = $q.defer();
+    dealCategoriesHandler.get({letterbox_token: getToken()}).$promise.then(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
+
+  backend.getDealsByCat = function(category) {
+    var deferred = $q.defer();
+    dealsByCatHandler.get({letterbox_token: getToken(), dealCat: category}).$promise.then(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
+
+  backend.getDealById = function(dealId) {
+    var deferred = $q.defer();
+    dealByIdHandler.get({letterbox_token: getToken(), dealId: dealId}).$promise.then(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
+
+  backend.likeDeal = function(dealId) {
+    var deferred = $q.defer();
+    handler = new dealByIdHandler();
+    handler.token = getToken();
+    handler.dealId = dealId;
+    handler.$likeDeal(deferred.resolve, deferred.reject);
+    return deferred;
+  };
+
+  backend.getUserLikedDeals = function(userId) {
+    var deferred = $q.defer();
+    userLikedDealsHandler.get({letterbox_token: getToken(), otherUserId: userId}).$promise.then(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
+
+  backend.getMutualLikedDeals = function(userId) {
+    var deferred = $q.defer();
+    mutualLikedDealsHandler.get({letterbox_token: getToken(), otherUserId: userId}).$promise.then(deferred.resolve, deferred.reject);
+    return deferred.promise;
   };
 
   return backend;
