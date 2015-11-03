@@ -1,0 +1,15 @@
+.deal.profile-card  {
+  margin-bottom: 20px;
+  .favorite {
+    i {
+      margin-left: 3vw;
+    }
+    font-size: 15px;
+    color: $colourPrimary;
+    float: right;
+  }
+  .card-content {
+    height: 20vh;
+  }
+}
+
