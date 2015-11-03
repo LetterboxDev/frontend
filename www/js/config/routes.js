@@ -95,12 +95,12 @@ angular.module('letterbox')
     cache: false
   })
 
-  .state('app.favorite-deals', {
-    url: '/favorite-deals',
+  .state('app.liked-deals', {
+    url: '/liked-deals',
     views: {
       'menuContent': {
-        templateUrl: 'templates/favorite-deals.html',
-        controller: 'FavoriteDealsCtrl'
+        templateUrl: 'templates/liked-deals.html',
+        controller: 'LikedDealsCtrl'
       }
     }
   })

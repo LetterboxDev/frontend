@@ -1,43 +1,43 @@
 angular.module('letterbox.controllers')
 
-.controller('FavoriteDealsCtrl', function($scope,
+.controller('LikedDealsCtrl', function($scope,
                                           $rootScope,
                                           $state,
-                                          DealCategoryService) {
-  $scope.favoriteDeals = [
+                                          DealService) {
+  $scope.likedDeals = [
     {
       title: '1-for-1 at Carl\'s Jr',
-      image_url: 'http://lorempixel.com/250/250',
+      image: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
       title: '1-for-1 at Carl\'s Jr',
-      image_url: 'http://lorempixel.com/250/250',
+      image: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
       title: '1-for-1 at Carl\'s Jr',
-      image_url: 'http://lorempixel.com/250/250',
+      image: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
       title: '1-for-1 at Carl\'s Jr',
-      image_url: 'http://lorempixel.com/250/250',
+      image: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
       title: '1-for-1 at Carl\'s Jr',
-      image_url: 'http://lorempixel.com/250/250',
+      image: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
       title: '1-for-1 at Carl\'s Jr',
-      image_url: 'http://lorempixel.com/250/250',
+      image: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
       title: '1-for-1 at Carl\'s Jr',
-      image_url: 'http://lorempixel.com/250/250',
+      image: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     }
   ];

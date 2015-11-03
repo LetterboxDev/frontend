@@ -26,8 +26,8 @@ angular.module('letterbox.controllers')
     $state.go('app.deals');
   };
 
-  $scope.viewFavorite = function() {
-    $state.go('app.favorite-deals');
+  $scope.viewLiked = function() {
+    $state.go('app.liked-deals');
   };
 });
 
