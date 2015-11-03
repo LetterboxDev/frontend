@@ -10,6 +10,7 @@ angular.module('letterbox.controllers')
                                  $ionicPopover,
                                  backend,
                                  ChatService,
+                                 DealService,
                                  RoomsService,
                                  UserProfileService,
                                  UserLetterService,
@@ -98,6 +99,7 @@ angular.module('letterbox.controllers')
   });
 
   $scope.openShareModal = function() {
+    $scope.fetchLikedDeals();
     $scope.shareModal.show();
   };
 
@@ -137,5 +139,15 @@ angular.module('letterbox.controllers')
     // TODO: go to deal view
     $state.go('app.home');
     $scope.closeShareModal();
-  }
+  };
+
+  $scope.fetchLikedDeals = function() {
+    DealService.getOwnLikedDeals().then(function(deals) {
+      $scope.viewingDeals['own'] = deals;
+    });
+
+    DealService.getUserLikedDeals($scope.recipientId).then(function(deals) {
+      $scope.viewingDeals['user'] = deals;
+    });
+  };
 });
