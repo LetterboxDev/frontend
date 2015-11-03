@@ -13,5 +13,7 @@ CREATE TABLE messages (
   content TEXT NOT NULL,
   timeSent BIGINT NOT NULL,
   isRead BOOLEAN NOT NULL DEFAULT 0,
+  type VARCHAR(256) NOT NULL DEFAULT 'message',
+  DealId INTEGER,
   PRIMARY KEY (roomHash, sender, timeSent)
 );
