@@ -51,7 +51,27 @@ angular.module('letterbox.services')
     if (SocketService.isConnected()) {
       var message = {
         roomHash: roomHash,
-        message: message
+        message: message,
+        type: 'message'
+      };
+      IOContainer.socketio.emit('roomMessage', message);
+      deferred.resolve(message);
+    } else if (IOContainer.isInitialized && IOContainer.socketio.connected) {
+      deferred.reject({error: 'socketio not connected'});
+    } else {
+      deferred.reject({error: 'socketio not initialized'});
+    }
+    return deferred.promise;
+  };
+
+  SocketService.shareDeal = function(roomHash, message, dealId) {
+    var deferred = $q.defer();
+    if (SocketService.isConnected()) {
+      var message = {
+        roomHash: roomHash,
+        message: message,
+        type: 'share',
+        dealId: dealId
       };
       IOContainer.socketio.emit('roomMessage', message);
       deferred.resolve(message);
