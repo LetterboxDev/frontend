@@ -78,8 +78,8 @@ angular.module('letterbox')
     url: '/deals',
     views: {
       'menuContent': {
-        templateUrl: 'templates/deals.html',
-        controller: 'DealsCtrl'
+        templateUrl: 'templates/categories.html',
+        controller: 'CategoriesCtrl'
       }
     }
   })
