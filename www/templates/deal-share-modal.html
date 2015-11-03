@@ -5,8 +5,9 @@
   </ion-header-bar>
 
   <ion-content>
-    <div class="row">
-      <!-- TODO: add in deal circles here -->
+    <div class="button-bar deal-share-seg-control">
+      <a class="button" ng-class="{highlighted: viewOwnDeals}" ng-click="viewOwnDeals=true">Own liked deals</a>
+      <a class="button" ng-class="{highlighted: !viewOwnDeals}" ng-click="viewOwnDeals=false">User's liked deals</a>
     </div>
   </ion-content>
 </ion-modal-view>

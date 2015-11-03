@@ -19,6 +19,7 @@ angular.module('letterbox.controllers')
   $scope.recipient = '';
   $scope.recipientId = '';
   $scope.data = {message: ''};
+  $scope.viewOwnDeals = false;
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
@@ -89,19 +90,19 @@ angular.module('letterbox.controllers')
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.modal = modal;
+    $scope.shareModal = modal;
   });
 
   $scope.openShareModal = function() {
-    $scope.modal.show();
+    $scope.shareModal.show();
   };
 
   $scope.closeShareModal = function() {
-    $scope.modal.hide();
+    $scope.shareModal.hide();
   };
 
   $scope.$on('$destroy', function() {
-    $scope.modal.remove();
+    $scope.shareModal.remove();
   });
 
   $scope.showPopover = function($event) {
