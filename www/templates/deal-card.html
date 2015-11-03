@@ -5,6 +5,9 @@
         <div class="large-profile-pic-header">
           <div class="large-profile-pic" style="background-image: url({{ ctrl.data.image_url }})">
           </div>
+          <div class="deal-overlay">
+            <span class="provider-name">NUStyles</span>
+          </div>
           <div class="item profile-pic-overlay">
             <span class="name">{{ ctrl.data.title }}</span>
             <span class="favorite" ng-class="liked ? 'liked' : ''" ng-click="favoriteCard()">0 liked<i class="icon ion-heart"></i></span>

@@ -1,5 +1,14 @@
 .deal.profile-card  {
   margin-bottom: 20px;
+  .deal-overlay {
+    position: absolute;
+    bottom: 10vh;
+    background-color: $colourPrimary;
+    color: white;
+    padding: 10px;
+    width: 15vh;
+    text-align: center;
+  }
   .favorite {
     i {
       margin-left: 3vw;
