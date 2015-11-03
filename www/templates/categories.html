@@ -1,4 +1,10 @@
 <ion-view view-title="Deals">
+
+  <ion-nav-buttons side="right">
+    <button class="button button-small button-icon button-clear ion-android-star" data-ng-click="viewFavorite()">
+    </button>
+  </ion-nav-buttons>
+
   <ion-content ng-controller="CategoriesCtrl">
     <div class="categories">
       <div ng-repeat="category in categories">

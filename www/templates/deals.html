@@ -1,4 +1,10 @@
 <ion-view view-title="{{ currentCategory }} Deals">
+
+  <ion-nav-buttons side="right">
+    <button class="button button-small button-icon button-clear ion-android-star" data-ng-click="viewFavorite()">
+    </button>
+  </ion-nav-buttons>
+
   <ion-content ng-controller="DealsCtrl">
     <deal-card ng-repeat="deal in deals"
                data-set="{ title: deal.title,
