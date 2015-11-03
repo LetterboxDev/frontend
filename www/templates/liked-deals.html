@@ -1,0 +1,15 @@
+<ion-view view-title="Liked Deals">
+  <ion-content>
+    <div class="feedback" ng-if="likedDeals.length === 0">
+      <h2>No favorite deals yet!</h2>
+    </div>
+    <div ng-if="likedDeals.length > 0">
+      <ion-list class="deals-list">
+        <ion-item ng-repeat="deal in likedDeals" href="#/app/deal/{{ deal.id }}" class="item item-avatar">
+          <img class="deal-pic" ng-src="{{ deal.image }}">
+          <div class="deal-title">{{ deal.title }}</div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>
