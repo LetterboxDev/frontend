@@ -6,8 +6,19 @@
 
   <ion-content>
     <div class="button-bar deal-share-seg-control">
-      <a class="button" ng-class="{highlighted: viewOwnDeals}" ng-click="viewOwnDeals=true">Own liked deals</a>
-      <a class="button" ng-class="{highlighted: !viewOwnDeals}" ng-click="viewOwnDeals=false">User's liked deals</a>
+      <a class="button" ng-class="{highlighted: viewingDeals==='own'}" ng-click="viewingDeals='own'">Own liked deals</a>
+      <a class="button" ng-class="{highlighted: viewingDeals==='user'}" ng-click="viewingDeals='user'">User's liked deals</a>
+    </div>
+
+    <div class="row deal-share-deals">
+      <div ng-repeat="deal in deals[viewingDeals]" class="col col-33">
+        <div class="deal-share-deal">
+          <img class="deal-share-deal-image" ng-src="{{ deal.image }}">
+          <div class="deal-share-deal-title">
+            {{ deal.title }}
+          </div>
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-modal-view>

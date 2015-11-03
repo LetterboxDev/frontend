@@ -19,7 +19,79 @@ angular.module('letterbox.controllers')
   $scope.recipient = '';
   $scope.recipientId = '';
   $scope.data = {message: ''};
-  $scope.viewOwnDeals = false;
+  $scope.viewingDeals = 'user';
+  $scope.deals = {
+    own: [
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the best deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jrssssss',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the best deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the best deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the best deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the best deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the best deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the best deal ever!'
+      }
+    ],
+
+    user: [
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the worst deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the worst deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the worst deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the worst deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the worst deal ever!'
+      },
+      {
+        title: '1-for-1 at Carl\'s Jr',
+        image: 'http://lorempixel.com/250/250',
+        description: 'This is the worst deal ever!'
+      }
+    ]
+  };
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
