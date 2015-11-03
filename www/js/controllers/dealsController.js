@@ -2,6 +2,24 @@ angular.module('letterbox.controllers')
 
 .controller('DealsCtrl', function($scope,
                                   $state) {
+  $scope.categories = [
+    {
+      title: 'Featured',
+    },
+    {
+      title: 'Dining',
+      image_url: '/img/category-images/dining.jpg'
+    },
+    {
+      title: 'Entertainment',
+      image_url: '/img/category-images/entertainment.jpg'
+    },
+    {
+      title: 'Leisure',
+      image_url: '/img/category-images/leisure.jpg'
+    },
+  ];
+
   $scope.deals = [
     {
       title: '1-for-1 at Carl\'s Jr',
