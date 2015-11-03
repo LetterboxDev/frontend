@@ -1,0 +1,10 @@
+.deals-list {
+  .deal-title {
+    @extend .list-item-heading;
+
+    height: $item-avatar-height;
+    display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+  }
+}
