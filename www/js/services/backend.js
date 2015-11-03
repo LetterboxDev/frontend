@@ -451,13 +451,25 @@ angular.module('letterbox.services')
 
   backend.getDealCategories = function() {
     var deferred = $q.defer();
-    dealCategoriesHandler.get({letterbox_token: getToken()}).$promise.then(deferred.resolve, deferred.reject);
+    dealCategoriesHandler.get({letterbox_token: getToken()}).$promise.then(function(res) {
+      var cats = [];
+      res.forEach(function(cat) {
+        cats.push(cat);
+      });
+      deferred.resolve(cats);
+    }, deferred.reject);
     return deferred.promise;
   };
 
   backend.getDealsByCat = function(category) {
     var deferred = $q.defer();
-    dealsByCatHandler.get({letterbox_token: getToken(), dealCat: category}).$promise.then(deferred.resolve, deferred.reject);
+    dealsByCatHandler.get({letterbox_token: getToken(), dealCat: category}).$promise.then(function(res) {
+      var deals = [];
+      res.forEach(function(deal) {
+        deals.push(deal);
+      });
+      deferred.resolve(deals);
+    }, deferred.reject);
     return deferred.promise;
   };
 
@@ -478,13 +490,25 @@ angular.module('letterbox.services')
 
   backend.getUserLikedDeals = function(userId) {
     var deferred = $q.defer();
-    userLikedDealsHandler.get({letterbox_token: getToken(), otherUserId: userId}).$promise.then(deferred.resolve, deferred.reject);
+    userLikedDealsHandler.get({letterbox_token: getToken(), otherUserId: userId}).$promise.then(function(res) {
+      var deals = [];
+      res.forEach(function(deal) {
+        deals.push(deal);
+      });
+      deferred.resolve(deals);
+    }, deferred.reject);
     return deferred.promise;
   };
 
   backend.getMutualLikedDeals = function(userId) {
     var deferred = $q.defer();
-    mutualLikedDealsHandler.get({letterbox_token: getToken(), otherUserId: userId}).$promise.then(deferred.resolve, deferred.reject);
+    mutualLikedDealsHandler.get({letterbox_token: getToken(), otherUserId: userId}).$promise.then(function(res) {
+      var deals = [];
+      res.forEach(function(deal) {
+        deals.push(deal);
+      });
+      deferred.resolve(deals);
+    }, deferred.reject);
     return deferred.promise;
   };
 
