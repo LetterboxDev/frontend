@@ -23,7 +23,7 @@ angular.module('letterbox.services')
         db.sqlite = $window.sqlitePlugin.openDatabase({name: 'letterbox.db', createFromLocation: 1});
         db.sqlite.transaction(function(tx) {
           tx.executeSql('CREATE TABLE IF NOT EXISTS rooms (hash CHAR(32) PRIMARY KEY, userId CHAR(32) NOT NULL, userName VARCHAR(256) NOT NULL, thumbnail TEXT NOT NULL, profilePicture TEXT NOT NULL, createdAt DATETIME NOT NULL)');
-          tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent BIGINT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, PRIMARY KEY (roomHash, sender, timeSent))');
+          tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent BIGINT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, type VARCHAR(256) NOT NULL DEFAULT \'message\', DealId INTEGER, PRIMARY KEY (roomHash, sender, timeSent))');
           db.isInitialized = true;
           eventbus.call('dbInitialized');
         });
@@ -51,14 +51,14 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
-  DbService.addMessage = function(roomHash, sender, content, timeSent) {
+  DbService.addMessage = function(roomHash, sender, content, timeSent, type, dealId) {
     var deferred = $q.defer();
     checkInit(deferred);
 
     db.sqlite.transaction(function(tx) {
       tx.executeSql("SELECT COUNT(*) AS cnt FROM messages WHERE roomHash=? AND sender=? AND content=? AND timeSent=?", [roomHash, sender, content, timeSent], function(tx, res) {
         if (!res.rows.item(0).cnt) {
-          tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent) VALUES (?,?,?,?)", [roomHash, sender, content, timeSent], function(tx, res) {
+          tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent, type, DealId) VALUES (?,?,?,?)", [roomHash, sender, content, timeSent, type ? type : 'message', dealId ? dealId : null], function(tx, res) {
             deferred.resolve(res);
           });
         } else {
@@ -171,7 +171,9 @@ angular.module('letterbox.services')
             RoomHash: row.roomHash,
             content: row.content,
             timeSent: row.timeSent,
-            sender: row.sender
+            sender: row.sender,
+            type: row.type,
+            DealId: row.DealId
           });
         }
         deferred.resolve(messages);
