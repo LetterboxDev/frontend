@@ -7,7 +7,7 @@
           </div>
           <div class="item profile-pic-overlay">
             <span class="name">{{ ctrl.data.title }}</span>
-            <span class="favorite" ng-click="favoriteCard()">0 liked<i class="icon ion-heart"></i></span>
+            <span class="favorite" ng-class="liked ? 'liked' : ''" ng-click="favoriteCard()">0 liked<i class="icon ion-heart"></i></span>
           </div>
         </div>
         <div class="item card-content">

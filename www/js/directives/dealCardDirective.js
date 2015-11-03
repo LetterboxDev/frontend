@@ -8,8 +8,10 @@ angular.module('letterbox.directives')
     restrict: 'EA',
     replace: true,
     controller: function($scope) {
+      $scope.liked = false;
       $scope.favoriteCard = function() {
         // TODO: hookup with backend
+        $scope.liked = !$scope.liked;
         console.log('Favorite card.');
       };
     },

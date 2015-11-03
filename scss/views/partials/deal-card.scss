@@ -7,6 +7,13 @@
     font-size: 15px;
     color: $colourPrimary;
     float: right;
+    border: 1px solid $colourPrimary;
+    border-radius: 5px;
+    padding: 0 5px;
+  }
+  .favorite.liked {
+    background-color: $colourPrimary;
+    color: white;
   }
   .card-content {
     height: 20vh;
