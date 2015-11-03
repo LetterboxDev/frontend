@@ -36,6 +36,49 @@
     .sent-msg {
       @include message(sent);
     }
+    
+    .shared-deal {
+      display: flex;
+      display: -webkit-flex; /* Safari */
+      align-items: center;
+      -webkit-align-items: center; /* Safari */
+      flex-flow: row wrap;
+      -webkit-flex-flow: row wrap; /* Safari */
+      margin: 5px 5px 5px 0;
+      padding: 7px;
+      border: $colourBorder solid 1px;
+      border-radius: 10px;
+      cursor: pointer;
+      max-width: 300px;
+      background-color: #eee;
+
+      .deal-img {
+        min-height: 50px;
+        min-width: 50px;
+        height: 10vw;
+        width: 10vw;
+        max-height: 70px;
+        max-width: 70px;
+        margin-right: 10px;
+        border-radius: 50%;
+        border: white solid 3px;
+        background: center center no-repeat;
+        background-size: cover;
+      }
+
+      .deal-title {
+        white-space: normal;
+        font-weight: bold;
+        flex: 1;
+        line-height: 1.2em;
+      }
+
+      i {
+        margin-left: 10px;
+        color: $colourPrimary;
+        font-size: 20px;
+      }
+    }
   }
 }
 

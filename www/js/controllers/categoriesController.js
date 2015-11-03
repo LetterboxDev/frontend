@@ -22,7 +22,6 @@ angular.module('letterbox.controllers')
   ];
 
   $scope.viewCategory = function(categoryTitle) {
-    console.log(categoryTitle);
     DealCategoryService.setCurrentCategory(categoryTitle);
     $state.go('app.deals');
   };
