@@ -3,7 +3,8 @@ angular.module('letterbox.controllers')
 .controller('DealsCtrl', function($scope,
                                   $rootScope,
                                   $state,
-                                  DealCategoryService) {
+                                  DealCategoryService,
+                                  DealService) {
   $scope.deals = [
     {
       title: '1-for-1 at Carl\'s Jr',
@@ -43,6 +44,13 @@ angular.module('letterbox.controllers')
   ];
 
   $scope.currentCategory = DealCategoryService.currentCategory;
+
+  // $scope.$on("$ionicView.enter", function(scopes, states) {
+  //   $scope.deals = [];
+  //   DealService.getDeals($scope.currentCategory).then(function(deals) {
+  //     $scope.deals = deals;
+  //   });
+  // });
 
   $scope.viewLiked = function() {
     $state.go('app.liked-deals');
