@@ -25,5 +25,9 @@ angular.module('letterbox.controllers')
     DealCategoryService.setCurrentCategory(categoryTitle);
     $state.go('app.deals');
   };
+
+  $scope.viewFavorite = function() {
+    $state.go('app.favorite-deals');
+  };
 });
 
