@@ -95,6 +95,16 @@ angular.module('letterbox')
     cache: false
   })
 
+  .state('app.favorite-deals', {
+    url: '/favorite-deals',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/favorite-deals.html',
+        controller: 'FavoriteDealsCtrl'
+      }
+    }
+  })
+
   .state('app.response', {
     url: '/responses/:responseId:isExistingChat',
     views: {
