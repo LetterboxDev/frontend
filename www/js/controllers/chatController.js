@@ -10,6 +10,7 @@ angular.module('letterbox.controllers')
                                  $ionicPopover,
                                  backend,
                                  ChatService,
+                                 DealService,
                                  RoomsService,
                                  UserProfileService,
                                  UserLetterService,
@@ -19,6 +20,11 @@ angular.module('letterbox.controllers')
   $scope.recipient = '';
   $scope.recipientId = '';
   $scope.data = {message: ''};
+  $scope.viewingDeals = 'user';
+  $scope.deals = {
+    own: [],
+    user: []
+  };
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
@@ -89,19 +95,20 @@ angular.module('letterbox.controllers')
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.modal = modal;
+    $scope.shareModal = modal;
   });
 
   $scope.openShareModal = function() {
-    $scope.modal.show();
+    $scope.fetchLikedDeals();
+    $scope.shareModal.show();
   };
 
   $scope.closeShareModal = function() {
-    $scope.modal.hide();
+    $scope.shareModal.hide();
   };
 
   $scope.$on('$destroy', function() {
-    $scope.modal.remove();
+    $scope.shareModal.remove();
   });
 
   $scope.showPopover = function($event) {
@@ -126,5 +133,21 @@ angular.module('letterbox.controllers')
 
   $scope.closePopover = function() {
     $scope.popover.hide();
+  };
+
+  $scope.viewDeal = function(dealId) {
+    // TODO: go to deal view
+    $state.go('app.home');
+    $scope.closeShareModal();
+  };
+
+  $scope.fetchLikedDeals = function() {
+    DealService.getOwnLikedDeals().then(function(deals) {
+      $scope.viewingDeals['own'] = deals;
+    });
+
+    DealService.getUserLikedDeals($scope.recipientId).then(function(deals) {
+      $scope.viewingDeals['user'] = deals;
+    });
   };
 });

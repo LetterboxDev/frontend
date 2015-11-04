@@ -1,0 +1,32 @@
+<ion-view view-title="{{ deal.title }}">
+  <ion-content ng-controller="DealCtrl">
+    <div class="deal-view">
+
+      <div class="img-wrapper">
+        <img ng-src="{{ deal.image }}" alt="{{ deal.title }}"></img>
+      </div>
+
+      <div class="row deal-title">
+        <div class="col">
+          <h3>{{ deal.title }}</h3>
+        </div>
+        <div class="col">
+          <deal-like-btn></deal-like-btn>
+        </div>
+      </div>
+
+      <div class="deal-info">
+        <p class="title">Description</p>
+        <p>{{ deal.description }}</p>
+
+        <p class="title">Expires on</p>
+        <p>{{ deal.expiry }}</p>
+
+        <p class="title">Provided by</p>
+        <p>{{ deal.provider }}</p>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>
+

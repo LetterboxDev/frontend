@@ -1,0 +1,31 @@
+.deal-view {
+  .img-wrapper {
+    img {
+      width: 100%;
+      height: auto;
+    }
+    padding: 0;
+  }
+  .deal-title {
+    display: inline-block;
+    height: 100%;
+    h3 {
+      text-transform: uppercase;
+      color: $colourPrimaryText;
+      margin: 0;
+      padding: 10px;
+      float: left;
+    }
+    .deal-favorite {
+      float: right;
+    }
+  }
+  .deal-info {
+    padding: 10px;
+    .title {
+      text-transform: uppercase;
+      color: $colourSubtitle;
+    }
+  }
+}
+

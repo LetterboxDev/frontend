@@ -1,0 +1,23 @@
+.deal-share-seg-control {
+  background-color: red;
+  .highlighted {
+    background-color: $colourOption;
+    color: white;
+  }
+}
+
+.deal-share-deals {
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  .deal-share-deal {
+    text-align: center;
+    margin: 20px 0px;
+
+    .deal-share-deal-image {
+      height: $item-avatar-height;
+      width: $item-avatar-height;
+      border-radius: 300px;
+    }
+  }
+}

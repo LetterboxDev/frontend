@@ -3,10 +3,15 @@ angular.module('letterbox.services')
 .service('DealService', function($q, backend) {
   var deal = this;
 
-  deal.currentDealCard = {};
+  deal.currentDealId = {};
+  deal.currentDealId = '';
 
   deal.setCurrentDeal = function(deal) {
-    deal.currentDealCard = deal;
+    deal.currentDeal = deal;
+  };
+
+  deal.setCurrentDealId = function(dealId) {
+    deal.currentDealId = dealId;
   };
 
   deal.getAllDeals = function() {

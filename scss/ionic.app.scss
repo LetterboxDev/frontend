@@ -26,6 +26,7 @@
 // Partials
 @import 'views/partials/profile-card.scss';
 @import 'views/partials/deal-card.scss';
+@import 'views/partials/deal-like-btn.scss';
 
 // Onboarding view
 @import 'views/onboard/login-page.scss';
@@ -51,5 +52,7 @@
 @import 'views/response/response.scss';
 
 // Deals views
+@import 'views/deals/deal-view.scss';
 @import 'views/deals/categories.scss';
 @import 'views/deals/liked-deals.scss';
+@import 'views/deals/deal-share-modal.scss';

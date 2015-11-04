@@ -10,7 +10,7 @@
           <div class="message-data">
             <h2 class="message-from">{{recipient}}</h2>
             <p class="message-content">{{message.content}}</p>
-            
+
             <!-- <p ng-if="message.type === 'text'" class="message-content">{{message.content}}</p>
             <div ng-if="message.type === 'share'">
               <p class="message-content">Check this out!</p>
@@ -40,7 +40,7 @@
                 <i class="icon ion-chevron-right"></i>
               </div>
             </div> -->
-            
+
           </div>
           <div class="message-meta">
             <div am-time-ago="message.timestamp" class="message-timestamp"></div>
@@ -51,7 +51,9 @@
   </ion-content>
   <div class="list enter-message-bar" keyboard-attach="true">
     <div class="item item-input-inset">
-      <button class="share" ng-click="openShareModal()"><i class="icon ion-ios-flame-outline"></i></button>
+      <button class="share" ng-click="openShareModal()">
+        <i class="icon ion-ios-flame-outline"></i>
+      </button>
       <label class="item-input-wrapper">
         <textarea msd-elastic ng-model="data.message" type="text" placeholder="Message" maxlength="2000" ng-keydown="onKeyPress($event)">
         </textarea>

@@ -10,11 +10,14 @@
           </div>
           <div class="item profile-pic-overlay">
             <span class="name">{{ ctrl.data.title }}</span>
-            <span class="favorite" ng-class="liked ? 'liked' : ''" ng-click="favoriteCard()">0 liked<i class="icon ion-heart"></i></span>
+            <deal-like-btn></deal-like-btn>
           </div>
         </div>
         <div class="item card-content">
           <p>{{ ctrl.data.description }}</p>
+        </div>
+        <div class="item learn-more" ng-click="learnMore(ctrl.data.id)">
+          <p>Learn More</p>
         </div>
       </div>
     </div>

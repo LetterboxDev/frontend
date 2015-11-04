@@ -1,6 +1,6 @@
 angular.module('letterbox.directives')
 
-.directive('dealCard', function($document) {
+.directive('dealLikeBtn', function($document) {
   return {
     scope: {
       data: '=set',
@@ -14,14 +14,10 @@ angular.module('letterbox.directives')
         $scope.liked = !$scope.liked;
         console.log('Favorite card.');
       };
-      $scope.learnMore = function(dealId) {
-        DealService.setCurrentDealId(dealId);
-        $state.go('app.deal');
-      };
     },
     controllerAs: 'ctrl',
     bindToController: true,
-    templateUrl: 'templates/deal-card.html'
+    templateUrl: 'templates/deal-like-button.html'
   };
 });
 
