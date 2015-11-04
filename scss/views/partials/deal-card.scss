@@ -27,5 +27,15 @@
   .card-content {
     height: 20vh;
   }
+  .learn-more {
+    p {
+      font-weight: bold;
+      text-transform: uppercase;
+      color: white;
+    }
+    background-color: $colourPrimary;
+    width: 100%;
+    text-align: center;
+  }
 }
 
