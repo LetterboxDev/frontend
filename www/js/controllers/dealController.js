@@ -5,6 +5,13 @@ angular.module('letterbox.controllers')
                                   $state,
                                   DealService) {
   $scope.dealId = DealService.currentDealId;
-  console.log('dealId', $scope.dealId);
+  $scope.deal = {
+    title: 'Carl\'s Jr 1-for-1',
+    image: 'http://lorempixel.com/300/300',
+    description: 'Best deal ever!',
+    location: 'ION Orchard',
+    expiry: '2015/05/21',
+    provider: 'NUStyles'
+  };
 });
 
