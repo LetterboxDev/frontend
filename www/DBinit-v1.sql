@@ -17,3 +17,5 @@ CREATE TABLE messages (
   DealId INTEGER,
   PRIMARY KEY (roomHash, sender, timeSent)
 );
+
+PRAGMA user_version=1;
