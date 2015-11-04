@@ -7,36 +7,43 @@ angular.module('letterbox.controllers')
                                   DealService) {
   $scope.deals = [
     {
+      id: '1234',
       title: '1-for-1 at Carl\'s Jr',
       image_url: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
+      id: '1234',
       title: '1-for-1 at Carl\'s Jr',
       image_url: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
+      id: '1234',
       title: '1-for-1 at Carl\'s Jr',
       image_url: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
+      id: '1234',
       title: '1-for-1 at Carl\'s Jr',
       image_url: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
+      id: '1234',
       title: '1-for-1 at Carl\'s Jr',
       image_url: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
+      id: '1234',
       title: '1-for-1 at Carl\'s Jr',
       image_url: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'
     },
     {
+      id: '1234',
       title: '1-for-1 at Carl\'s Jr',
       image_url: 'http://lorempixel.com/250/250',
       description: 'This is the best deal ever!'

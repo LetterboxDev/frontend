@@ -95,6 +95,17 @@ angular.module('letterbox')
     cache: false
   })
 
+  .state('app.deal', {
+    url: '/deal',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/deal.html',
+        controller: 'DealCtrl'
+      }
+    },
+    cache: false
+  })
+
   .state('app.liked-deals', {
     url: '/liked-deals',
     views: {
