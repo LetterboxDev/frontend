@@ -30,6 +30,7 @@ angular.module('letterbox.services')
   var singleLetterPath = '/letters/:letterId';
   var reportPath = '/report';
 
+  var featuredDealsPath = '/deal/featured';
   var dealCategoriesPath = '/deal/cat';
   var dealsByCatPath = '/deal/cat/:dealCat';
   var dealByIdPath = '/deal/id/:dealId';
@@ -227,6 +228,13 @@ angular.module('letterbox.services')
       params: {
         letterbox_token: '@token'
       }
+    }
+  });
+
+  var featuredDealsHandler = $resource(URL.concat(featuredDealsPath), {}, {
+    get: {
+      'GET',
+      isArray: true
     }
   });
 
@@ -447,6 +455,18 @@ angular.module('letterbox.services')
     handler.userId = userId;
     handler.reason = reason;
     return handler.$reportUser(successPromise, errorPromise);
+  };
+
+  backend.getFeaturedDeals = function() {
+    var deferred = $q.defer();
+    featuredDealsHandler.get({letterbox_token: getToken()}).$promise.then(function(res) {
+      var deals = [];
+      res.forEach(function(deal) {
+        deals.push(deal);
+      });
+      deferred.resolve(deals);
+    }, deferred.reject);
+    return deferred.promise;
   };
 
   backend.getDealCategories = function() {
