@@ -8,6 +8,7 @@ angular.module('letterbox.services')
 
   var db = {isInitialized: false};
   var DbService = {};
+  var DB_VERSION = 1;
 
   function checkInit(deferred) {
     if (!DbService.isInitialized()) deferred.reject({err: 'DbService not initialized'});
@@ -24,8 +25,16 @@ angular.module('letterbox.services')
         db.sqlite.transaction(function(tx) {
           tx.executeSql('CREATE TABLE IF NOT EXISTS rooms (hash CHAR(32) PRIMARY KEY, userId CHAR(32) NOT NULL, userName VARCHAR(256) NOT NULL, thumbnail TEXT NOT NULL, profilePicture TEXT NOT NULL, createdAt DATETIME NOT NULL)');
           tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent BIGINT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, type VARCHAR(256) NOT NULL DEFAULT \'message\', DealId INTEGER, PRIMARY KEY (roomHash, sender, timeSent))');
-          db.isInitialized = true;
-          eventbus.call('dbInitialized');
+          db.sqlite.executeSql('PRAGMA user_version', [], function(res) {
+            var userVersion = res.rows.item(0).user_version;
+            if (userVersion < 1) { // updates to user_version 1
+              db.sqlite.executeSql('ALTER TABLE messages ADD COLUMN type VARCHAR(256) NOT NULL DEFAULT \'message\'');
+              db.sqlite.executeSql('ALTER TABLE messages ADD COLUMN DealId INTEGER');
+              db.sqlite.executeSql('PRAGMA user_version=1');
+            }
+            db.isInitialized = true;
+            eventbus.call('dbInitialized');
+          });
         });
       }, false);
     }
