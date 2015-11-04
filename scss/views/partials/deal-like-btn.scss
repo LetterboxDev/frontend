@@ -1,0 +1,16 @@
+.deal-favorite {
+  i {
+    margin-left: 3vw;
+  }
+  font-size: 15px;
+  color: $colourPrimary;
+  float: right;
+  border: 1px solid $colourPrimary;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+.deal-favorite.liked {
+  background-color: $colourPrimary;
+  color: white;
+}
+
