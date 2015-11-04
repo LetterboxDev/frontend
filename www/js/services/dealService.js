@@ -24,6 +24,12 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
+  deal.getFeaturedDeals = function() {
+    var deferred = $q.defer();
+    backend.getFeaturedDeals().then(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
+
   deal.getDeal = function(id) {
     var deferred = $q.defer();
     backend.getDealById(id).then(deferred.resolve, deferred.reject);
