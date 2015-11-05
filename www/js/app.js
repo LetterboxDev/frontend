@@ -58,11 +58,3 @@ angular.module('letterbox', ['ionic',
 .config(function(FacebookProvider) {
   FacebookProvider.init('1674828996062928');
 })
-
-.config(function($cordovaFacebookProvider) {
-  if (window.cordova) {
-    var appID = 1674828996062928;
-    var version = "v2.4";
-    $cordovaFacebookProvider.browserInit(appID, version);
-  }
-});
