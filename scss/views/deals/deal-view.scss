@@ -1,30 +1,39 @@
 .deal-view {
   .img-wrapper {
-    img {
-      width: 100%;
-      height: auto;
-    }
     padding: 0;
+    .deal-img {
+      width: 100vw;
+      height: 100vw;
+      background: $colourPrimary center center no-repeat;
+      background-size: cover; 
+    }
   }
   .deal-title {
-    display: inline-block;
-    height: 100%;
-    h3 {
-      text-transform: uppercase;
+    padding: 20px;
+    -webkit-align-items: center; /* Safari */
+    align-items:         center;
+    border-bottom: 1px solid $colourBorder;
+    h2 {
+      @include uppercase_bold_font();
       color: $colourPrimaryText;
+      font-size: 18px;
       margin: 0;
-      padding: 10px;
-      float: left;
-    }
-    .deal-favorite {
-      float: right;
+      flex: 1;
     }
   }
   .deal-info {
-    padding: 10px;
+    padding: 20px;
+    margin-bottom: 10vh;
     .title {
-      text-transform: uppercase;
+      @include uppercase_bold_font();
       color: $colourSubtitle;
+      letter-spacing: 2px;
+      font-size: 11px;
+      margin-bottom: 5px;
+    }
+    p {
+      letter-spacing: .5px;
+      font-size: 13px;
     }
   }
 }

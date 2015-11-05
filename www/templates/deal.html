@@ -3,26 +3,23 @@
     <div class="deal-view">
 
       <div class="img-wrapper">
-        <img ng-src="{{ deal.image }}" alt="{{ deal.title }}"></img>
+        <div class="deal-img" style="background-image: url({{ deal.image }})"></div>
+        <!-- <img ng-src="{{ deal.image }}" alt="{{ deal.title }}"></img> -->
       </div>
 
       <div class="row deal-title">
-        <div class="col">
-          <h3>{{ deal.title }}</h3>
-        </div>
-        <div class="col">
+          <h2>{{ deal.title }}</h2>
           <deal-like-btn></deal-like-btn>
-        </div>
       </div>
 
       <div class="deal-info">
-        <p class="title">Description</p>
+        <h3 class="title">Description</h3>
         <p>{{ deal.description }}</p>
 
-        <p class="title">Expires on</p>
+        <h3 class="title">Expires on</h3>
         <p>{{ deal.expiry }}</p>
 
-        <p class="title">Provided by</p>
+        <h3 class="title">Provided by</h3>
         <p>{{ deal.provider }}</p>
       </div>
 
