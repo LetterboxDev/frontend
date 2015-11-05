@@ -26,6 +26,14 @@
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
     "cordova-plugin-geolocation",
+    {
+      "variables": {
+        "APP_ID": "1674828996062928",
+        "APP_NAME": "Letterbox"
+      },
+      "locator": "cordova-plugin-facebook4",
+      "id": "cordova-plugin-facebook4"
+    },
     "phonegap-plugin-push"
   ],
   "cordovaPlatforms": [
