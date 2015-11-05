@@ -233,7 +233,7 @@ angular.module('letterbox.services')
 
   var featuredDealsHandler = $resource(URL.concat(featuredDealsPath), {}, {
     get: {
-      'GET',
+      method: 'GET',
       isArray: true
     }
   });
