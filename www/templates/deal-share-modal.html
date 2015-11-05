@@ -1,13 +1,15 @@
-<ion-modal-view>
+<ion-modal-view class="deal-share-modal">
   <ion-header-bar>
     <h1 class="title">Share a deal!</h1>
     <span class="button button-clear" ng-click="closeShareModal()">Close</span>
   </ion-header-bar>
 
   <ion-content>
-    <div class="button-bar deal-share-seg-control">
-      <a class="button" ng-class="{highlighted: viewingDeals==='own'}" ng-click="viewingDeals='own'">Own liked deals</a>
-      <a class="button" ng-class="{highlighted: viewingDeals==='user'}" ng-click="viewingDeals='user'">{{ recipient }}'s liked deals</a>
+    <div class="bar bar-header">
+      <div class="button-bar bar-light deal-share-seg-control">
+        <a class="button left" ng-class="{highlighted: viewingDeals==='own'}" ng-click="viewingDeals='own'">Your liked deals</a>
+        <a class="button right" ng-class="{highlighted: viewingDeals==='user'}" ng-click="viewingDeals='user'">{{ recipient }}'s liked deals</a>
+      </div>
     </div>
 
     <div class="feedback" ng-if="deals[viewingDeals].length === 0">

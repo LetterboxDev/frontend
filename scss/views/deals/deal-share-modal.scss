@@ -1,8 +1,29 @@
+.deal-share-modal {
+  .title {
+    @include uppercase_bold_font();
+  }
+  .bar-header {
+    justify-content: center;
+    -webkit-justify-content: center; /* Safari */
+    .button-bar {
+      max-width: 80vw;
+      .button.left {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      .button.right {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  }
+
+}
 .deal-share-seg-control {
-  background-color: red;
   .highlighted {
-    background-color: $colourOption;
+    background-color: $colourPrimary;
     color: white;
+    font-weight: bold;
   }
 }
 
