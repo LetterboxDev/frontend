@@ -16,10 +16,10 @@
       <h2>No liked deals yet!</h2>
     </div>
 
-    <div class="row deal-share-deals" ng-if="deals[viewingDeals].length === 0">
+    <div class="row deal-share-deals" ng-if="deals[viewingDeals].length !== 0">
       <div ng-repeat="deal in deals[viewingDeals]" class="col col-33">
         <div class="deal-share-deal" ng-click="viewDeal(deal.id)">
-          <img class="deal-share-deal-image" ng-src="{{ deal.image }}">
+          <img class="deal-share-deal-image" ng-src="{{ deal.images[0] }}">
           <div class="deal-share-deal-title">
             {{ deal.title }}
           </div>
