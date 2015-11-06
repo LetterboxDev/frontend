@@ -499,13 +499,12 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
-  backend.likeDeal = function(dealId) {
+  backend.toggleDealLike = function(dealId) {
     var deferred = $q.defer();
     handler = new dealByIdHandler();
     handler.token = getToken();
-    handler.dealId = dealId;
-    handler.$likeDeal(deferred.resolve, deferred.reject);
-    return deferred;
+    handler.$likeDeal({dealId: dealId}, deferred.resolve, deferred.reject);
+    return deferred.promise;
   };
 
   backend.getUserLikedDeals = function(userId) {
