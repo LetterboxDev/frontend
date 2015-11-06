@@ -22,8 +22,228 @@ angular.module('letterbox.controllers')
   $scope.data = {message: ''};
   $scope.viewingDeals = 'user';
   $scope.deals = {
-    own: [],
-    user: []
+    // own: [],
+    own: [
+      {
+         "id": 6,
+         "title": "Marriott Cafe, Singapore Marriott Tang Plaza Hotel",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "Marriott Cafe, Singapore Marriott Tang Plaza Hotel",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "Marriott Cafe, Singapore Marriott Tang Plaza Hotel",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "Marriott Cafe, Singapore Marriott Tang Plaza Hotel",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "Marriott Cafe, Singapore Marriott Tang Plaza Hotel",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "Marriott Cafe, Singapore Marriott Tang Plaza Hotel",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      }
+    ],
+    // user: []
+    user: [
+      {
+         "id": 6,
+         "title": "User deals",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "User deals",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "User deals",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "User deals",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "User deals",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      },
+      {
+         "id": 6,
+         "title": "User deals",
+         "description": "1-for-1 Lunch & Dinner Buffet. For dine-in only (Mon to Sun). Limited to first 50 customers per meal period per day. 2 days prior reservations required, subject to availability. Other terms and conditions apply.",
+         "location": "320 Orchard Road",
+         "expiry": "2015-12-31T00:00:00.000Z",
+         "type": "deal",
+         "createdAt": "2015-11-06T18:57:27.000Z",
+         "updatedAt": "2015-11-06T18:57:27.000Z",
+         "DealCategoryTitle": "Dining",
+         "DealProviderName": "UOB Cards",
+         "likeCount": 0,
+         "images":
+         [
+         "http://lorempixel.com/250/250"
+         ],
+         "isLiked": false
+      }
+    ]
   };
 
   $scope.roomHash = $stateParams.chatId;
@@ -99,7 +319,7 @@ angular.module('letterbox.controllers')
   });
 
   $scope.openShareModal = function() {
-    $scope.fetchLikedDeals();
+    // $scope.fetchLikedDeals();
     $scope.shareModal.show();
   };
 
@@ -136,18 +356,18 @@ angular.module('letterbox.controllers')
   };
 
   $scope.viewDeal = function(dealId) {
-    // TODO: go to deal view
-    $state.go('app.home');
+    DealService.setCurrentDealId(dealId);
+    $state.go('app.deal');
     $scope.closeShareModal();
   };
 
   $scope.fetchLikedDeals = function() {
     DealService.getOwnLikedDeals().then(function(deals) {
-      $scope.viewingDeals['own'] = deals;
+      $scope.deals['own'] = deals;
     });
 
     DealService.getUserLikedDeals($scope.recipientId).then(function(deals) {
-      $scope.viewingDeals['user'] = deals;
+      $scope.deals['user'] = deals;
     });
   };
 });

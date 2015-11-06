@@ -30,7 +30,7 @@ angular.module('letterbox.controllers')
     }
     $scope.chats = temp;
   }
-  RoomsService.updateRooms();
+  $scope.$on('$ionicView.enter', RoomsService.updateRooms);
   eventbus.registerListener('roomsUpdated', updateRooms);
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
