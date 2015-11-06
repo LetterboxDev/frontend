@@ -3,7 +3,7 @@ angular.module('letterbox.services')
 .service('DealService', function($q, backend) {
   var deal = this;
 
-  deal.currentDealId = {};
+  deal.currentDeal = {};
   deal.currentDealId = '';
 
   deal.setCurrentDeal = function(deal) {
@@ -36,9 +36,9 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
-  deal.likeDeal = function(id) {
+  deal.toggleDealLike = function(id) {
     var deferred = $q.defer();
-    backend.likeDeal(id).then(deferred.resolve, deferred.reject);
+    backend.toggleDealLike(id).then(deferred.resolve, deferred.reject);
     return deferred.promise;
   };
 
