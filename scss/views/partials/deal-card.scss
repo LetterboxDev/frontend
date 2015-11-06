@@ -20,8 +20,20 @@
     text-align: center;
   }
   .card-content {
-    height: 18vh;
-    max-height: 200px;
+    $font-size: 13px;
+    $line-height: 1.5;
+    $lines-to-show: 4;
+    padding: 16px;
+    p {
+      white-space: normal;
+      display: block; /* Fallback for non-webkit */
+      display: -webkit-box;
+      height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+      font-size: $font-size;
+      line-height: $line-height;
+      -webkit-line-clamp: $lines-to-show;
+      -webkit-box-orient: vertical;
+    }
   }
   .learn-more {
     p {
