@@ -18,9 +18,11 @@ angular.module('letterbox.controllers')
 
   $scope.dealId = DealService.currentDealId;
 
-  DealService.getDeal($scope.dealId).then(function(deal) {
-    $scope.deal = deal;
-    $scope.deal.description = $sce.trustAsHtml($scope.deal.description);
+  $scope.$on("$ionicView.enter", function(scopes, states) {
+    DealService.getDeal($scope.dealId).then(function(deal) {
+      $scope.deal = deal;
+      $scope.deal.description = $sce.trustAsHtml($scope.deal.description);
+    });
   });
 });
 
