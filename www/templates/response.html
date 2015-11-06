@@ -40,28 +40,46 @@
               </div>
             </div>
 
-            <profile-card data-info="{
-              name: response.from,
-              profile_pic: response.profilePicMed,
-              age: response.age,
-              bio: response.bio,
-              mutual_friends_count: response.mutual_friends_count
-            }">
-              <div class="item card-buttons">
-                <div class="card-button button-negative" ng-click="rejectLetter(response)" ng-show="!isExistingChat">
-                  <i class="icon ion-close"></i>
-                  <div class="button-detail">reject</div>
+            <div class="card back">
+              <div class="back-container">
+                <div class="small-profile-pic-header">
+                  <div class="small-profile-pic" style="background-image: url({{ response.profilePicMed }})">
+                  </div>
+                  <span class="name">{{ response.from }}</span><span class="age">, {{ response.age }}</span>
                 </div>
-                <div class="card-button button-flip button-back">
-                  <i class="icon ion-ios-undo"></i>
-                  <div class="button-detail">back</div>
+                <div class="item card-content">
+                  <div class="section">
+                    <h3>bio</h3>
+                    <p>{{ response.bio }}</p>
+                  </div>
+                  <div class="section">
+                    <h3>mutual friends</h3>
+                    <p>{{ (response.mutual_friends_count > 0) ? response.mutual_friends_count : 0 }} mutual friends</p>
+                  </div>
+                  <div class="section">
+                    <button class="btn-report button button-outline button-assertive" ng-click="reportUser(ctrl.data.name, ctrl.data.hashedId, ctrl.callback)">
+                      Report user
+                    </button>
+                  </div>
                 </div>
-                <div class="card-button button-positive" ng-click="approveLetter(response)" ng-show="!isExistingChat">
-                  <i class="icon ion-chatbubbles"></i>
-                  <div class="button-detail">start chat</div>
+
+                <div class="item card-buttons">
+                  <div class="card-button button-negative" ng-click="rejectLetter(response)" ng-show="!isExistingChat">
+                    <i class="icon ion-close"></i>
+                    <div class="button-detail">reject</div>
+                  </div>
+                  <div class="card-button button-flip button-back">
+                    <i class="icon ion-ios-undo"></i>
+                    <div class="button-detail">back</div>
+                  </div>
+                  <div class="card-button button-positive" ng-click="approveLetter(response)" ng-show="!isExistingChat">
+                    <i class="icon ion-chatbubbles"></i>
+                    <div class="button-detail">start chat</div>
+                  </div>
                 </div>
+
               </div>
-            </profile-card>
+            </div>
 
           </div>
         </div>

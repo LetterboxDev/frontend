@@ -2,6 +2,7 @@ angular.module('letterbox.services')
 
 .service('AuthService', function($q,
                                  $ionicHistory,
+                                 $cordovaFacebook,
                                  backend,
                                  eventbus,
                                  DbService,
@@ -68,6 +69,10 @@ angular.module('letterbox.services')
         window.localStorage.setItem('isRegistered', '');
         window.localStorage.setItem('genderPreference', '');
         window.localStorage.setItem('perfectMatch', '');
+
+        if (window.cordova) {
+          $cordovaFacebook.logout();
+        }
 
         socket.uninit();
 
