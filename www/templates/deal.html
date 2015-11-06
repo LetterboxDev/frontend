@@ -1,7 +1,11 @@
 <ion-view view-title="{{ deal.title }}">
+  <ion-nav-buttons side="right">
+    <button class="button button-clear" ng-if="dealShareButton" ng-click="shareDeal()">
+      Share
+    </button>
+  </ion-nav-buttons>
   <ion-content ng-controller="DealCtrl">
     <div class="deal-view">
-
       <div class="img-wrapper">
         <div class="deal-img" style="background-image: url({{ deal.images[0] }})"></div>
       </div>
@@ -17,17 +21,21 @@
       <div class="deal-info">
         <h3 class="title">Description</h3>
         <p ng-bind-html="deal.description"></p>
-        
+
         <div ng-if="deal.type == 'deal'">
           <h3 class="title">Expires on</h3>
           <p>{{ deal.expiry | amDateFormat:'dddd, Do MMMM YYYY' }}</p>
         </div>
-        
+
         <h3 class="title">Location</h3>
         <p>{{ deal.location }}</p>
 
         <h3 class="title">Provided by</h3>
         <p>{{ deal.DealProviderName }}</p>
+      </div>
+
+      <div class="deal-share-wrapper">
+        <button class="button button-calm share-button" ng-if="dealShareButton" ng-click="shareDeal()">Share Deal</button>
       </div>
 
     </div>

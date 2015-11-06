@@ -81,7 +81,8 @@ angular.module('letterbox')
         templateUrl: 'templates/categories.html',
         controller: 'CategoriesCtrl'
       }
-    }
+    },
+    cache: false
   })
 
   .state('app.deals', {
@@ -91,8 +92,7 @@ angular.module('letterbox')
         templateUrl: 'templates/deals.html',
         controller: 'DealsCtrl'
       }
-    },
-    cache: false
+    }
   })
 
   .state('app.deal', {
