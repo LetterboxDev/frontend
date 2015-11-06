@@ -1,5 +1,15 @@
 .deal.profile-card  {
   margin-bottom: 20px;
+  .profile-pic-overlay.deal-header {
+    display: flex;
+    -webkit-align-items: center; /* Safari */
+    align-items:         center;
+    .name {
+      white-space: normal;
+      flex: 1;
+      margin-right: 10px;
+    }
+  }
   .deal-overlay {
     position: absolute;
     bottom: 15vh;
