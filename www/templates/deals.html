@@ -7,10 +7,7 @@
 
   <ion-content ng-controller="DealsCtrl">
     <deal-card ng-repeat="deal in deals"
-               data-set="{ id: deal.id,
-                           title: deal.title,
-                           image_url: deal.image_url,
-                           description: deal.description }">
+               data-set="deal">
     </deal-card>
   </ion-content>
 </ion-view>

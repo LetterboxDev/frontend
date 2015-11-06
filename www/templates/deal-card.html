@@ -3,18 +3,18 @@
     <div class="flipper">
       <div class="card">
         <div class="large-profile-pic-header">
-          <div class="large-profile-pic" style="background-image: url({{ ctrl.data.image_url }})">
+          <div class="large-profile-pic" style="background-image: url({{ ctrl.data.images[0] }})">
           </div>
           <div class="deal-overlay">
-            <span class="provider-name">NUStyles</span>
+            <span class="provider-name">{{ ctrl.data.DealProviderName }}</span>
           </div>
-          <div class="item profile-pic-overlay">
+          <div class="item profile-pic-overlay deal-header">
             <span class="name">{{ ctrl.data.title }}</span>
             <deal-like-btn></deal-like-btn>
           </div>
         </div>
         <div class="item card-content">
-          <p>{{ ctrl.data.description }}</p>
+          <p class="deal-description">{{ ctrl.data.description }}</p>
         </div>
         <div class="item learn-more" ng-click="learnMore(ctrl.data.id)">
           <p>Learn More</p>
