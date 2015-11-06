@@ -3,8 +3,7 @@
     <div class="deal-view">
 
       <div class="img-wrapper">
-        <div class="deal-img" style="background-image: url({{ deal.image }})"></div>
-        <!-- <img ng-src="{{ deal.image }}" alt="{{ deal.title }}"></img> -->
+        <div class="deal-img" style="background-image: url({{ deal.images[0] }})"></div>
       </div>
 
       <div class="row deal-title">
@@ -14,13 +13,13 @@
 
       <div class="deal-info">
         <h3 class="title">Description</h3>
-        <p>{{ deal.description }}</p>
-
+        <p ng-bind-html="deal.description"></p>
+        
         <h3 class="title">Expires on</h3>
-        <p>{{ deal.expiry }}</p>
+        <p>{{ deal.expiry | amDateFormat:'dddd, Do MMMM YYYY' }}</p>
 
         <h3 class="title">Provided by</h3>
-        <p>{{ deal.provider }}</p>
+        <p>{{ deal.DealProviderName }}</p>
       </div>
 
     </div>
