@@ -8,12 +8,6 @@ angular.module('letterbox.directives')
     restrict: 'EA',
     replace: true,
     controller: function($scope, $state, DealService) {
-      $scope.liked = false;
-      $scope.favoriteCard = function() {
-        // TODO: hookup with backend
-        $scope.liked = !$scope.liked;
-        console.log('Favorite card.');
-      };
       $scope.learnMore = function(dealId) {
         DealService.setCurrentDealId(dealId);
         $state.go('app.deal');

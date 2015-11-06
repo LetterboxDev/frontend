@@ -7,8 +7,11 @@
       </div>
 
       <div class="row deal-title">
-          <h2>{{ deal.title }}</h2>
-          <deal-like-btn></deal-like-btn>
+        <h2>{{ deal.title }}</h2>
+        <deal-like-btn data-set="{ dealId: deal.id,
+                                   isLiked: deal.isLiked,
+                                   likeCount: deal.likeCount}">
+        </deal-like-btn>
       </div>
 
       <div class="deal-info">

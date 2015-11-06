@@ -8,10 +8,26 @@ angular.module('letterbox.directives')
     restrict: 'EA',
     replace: true,
     controller: function($scope, $state, DealService) {
-      $scope.liked = false;
-      $scope.favoriteCard = function() {
-        // TODO: hookup with backend
-        $scope.liked = !$scope.liked;
+      
+      $scope.dealId = $scope.ctrl.data.dealId;
+      $scope.isLiked = $scope.ctrl.data.isLiked;
+      $scope.likeCount = $scope.ctrl.data.likeCount;
+      
+      console.log("like count");
+      console.log($scope.dealId);
+      console.log($scope.likeCount);
+
+      $scope.toggleLike = function() {
+        $scope.isLiked = !$scope.isLiked;
+        if ($scope.isLiked) {
+          $scope.likeCount++;
+        } else {
+          $scope.likeCount--;
+        }
+
+
+        DealService.toggleDealLike($scope.dealId);
+
         console.log('Favorite card.');
       };
     },
