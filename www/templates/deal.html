@@ -15,8 +15,13 @@
         <h3 class="title">Description</h3>
         <p ng-bind-html="deal.description"></p>
         
-        <h3 class="title">Expires on</h3>
-        <p>{{ deal.expiry | amDateFormat:'dddd, Do MMMM YYYY' }}</p>
+        <div ng-if="deal.type == 'deal'">
+          <h3 class="title">Expires on</h3>
+          <p>{{ deal.expiry | amDateFormat:'dddd, Do MMMM YYYY' }}</p>
+        </div>
+        
+        <h3 class="title">Location</h3>
+        <p>{{ deal.location }}</p>
 
         <h3 class="title">Provided by</h3>
         <p>{{ deal.DealProviderName }}</p>

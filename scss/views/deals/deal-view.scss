@@ -34,6 +34,9 @@
     p {
       letter-spacing: .5px;
       font-size: 13px;
+      color: $colourPrimaryText;
+      white-space: pre-wrap;
+      margin-bottom: 25px;
     }
   }
 }
