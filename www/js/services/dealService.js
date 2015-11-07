@@ -59,4 +59,16 @@ angular.module('letterbox.services')
     backend.getMutualLikedDeals(userId).then(deferred.resolve, deferred.reject);
     return deferred.promise;
   };
+
+  deal.checkDealCompatability = function(userId) {
+    var deferred = $q.defer();
+    backend.getOtherUserVersion(userId).then(function(version) {
+      if (version.minor >= 1) {
+        deferred.resolve();
+      } else {
+        deferred.reject();
+      }
+    }, deferred.reject);
+    return deferred.promise;
+  };
 });
