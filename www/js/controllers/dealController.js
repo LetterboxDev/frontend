@@ -16,8 +16,6 @@ angular.module('letterbox.controllers')
     console.log('share deal');
   };
 
-  $scope.$on("$ionicView.enter", function(scopes, states) {
-    $scope.deal = DealService.currentDeal;
-  });
+  $scope.deal = DealService.currentDeal;
 });
 

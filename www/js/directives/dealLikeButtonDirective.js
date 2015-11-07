@@ -13,12 +13,6 @@ angular.module('letterbox.directives')
       $scope.isLiked = this.data.isLiked;
       $scope.likeCount = this.data.likeCount;
 
-      $scope.$watch('ctrl.data', function(newVal, oldVal) {
-        $scope.dealId = newVal.dealId;
-        $scope.isLiked = newVal.isLiked;
-        $scope.likeCount = newVal.likeCount;
-      });
-
       $scope.toggleLike = function() {
         $scope.isLiked = !$scope.isLiked;
         if ($scope.isLiked) {
