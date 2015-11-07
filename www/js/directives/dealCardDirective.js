@@ -8,8 +8,8 @@ angular.module('letterbox.directives')
     restrict: 'EA',
     replace: true,
     controller: function($scope, $state, DealService) {
-      $scope.learnMore = function(dealId) {
-        DealService.setCurrentDealId(dealId);
+      $scope.learnMore = function(deal) {
+        DealService.setCurrentDeal(deal);
         $state.go('app.deal');
       };
     },

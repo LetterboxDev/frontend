@@ -6,8 +6,8 @@ angular.module('letterbox.services')
   deal.currentDeal = {};
   deal.currentDealId = '';
 
-  deal.setCurrentDeal = function(deal) {
-    deal.currentDeal = deal;
+  deal.setCurrentDeal = function(dealObject) {
+    deal.currentDeal = dealObject;
   };
 
   deal.setCurrentDealId = function(dealId) {
