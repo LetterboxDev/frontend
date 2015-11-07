@@ -5,10 +5,14 @@ angular.module('letterbox.controllers')
                                      $ionicPopup,
                                      $cordovaInAppBrowser,
                                      backend,
-                                     AuthService) {
+                                     AuthService,
+                                     VERSION) {
 
   $scope.minAge = 18;
   $scope.maxAge = 80;
+  $scope.versionMajor = VERSION.major;
+  $scope.versionMinor = VERSION.minor;
+  $scope.versionRevision = VERSION.revision;
 
   var perfectMatch = window.localStorage.getItem('perfectMatch');
   var preferredGender = window.localStorage.getItem('genderPreference');
