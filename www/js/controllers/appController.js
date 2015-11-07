@@ -12,7 +12,8 @@ angular.module('letterbox.controllers')
                                 RoomsService,
                                 ChatService,
                                 AuthService,
-                                PushService) {
+                                PushService,
+                                VibrateService) { // Leave VibrateService here to init the service
 
   $scope.username = window.localStorage.getItem('firstName') ? window.localStorage.getItem('firstName') : '';
   // With the new view caching in Ionic, Controllers are only called
