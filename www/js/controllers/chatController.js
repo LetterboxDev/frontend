@@ -8,6 +8,7 @@ angular.module('letterbox.controllers')
                                  $timeout,
                                  $state,
                                  $ionicPopover,
+                                 $ionicPopup,
                                  backend,
                                  ChatService,
                                  DealService,
@@ -319,8 +320,15 @@ angular.module('letterbox.controllers')
   });
 
   $scope.openShareModal = function() {
-    // $scope.fetchLikedDeals();
-    $scope.shareModal.show();
+    DealService.checkDealCompatability($scope.recipientId)
+    .then(function() {
+      $scope.shareModal.show();      
+    }, function() {
+      var alertPopup = $ionicPopup.alert({
+        title: $scope.recipient + '\'s Letterbox doesn\'t support deals yet!',
+        template: 'Try informing ' + $scope.recipient + ' to get the latest Letterbox app'
+      });
+    });
   };
 
   $scope.closeShareModal = function() {
