@@ -24,7 +24,7 @@
         </div>
 
         <ion-scroll direction="x" ng-if="likedDeals.length > 0" has-bouncing="false">
-          <div class="deal-pic" ng-repeat="deal in likedDeals" style="background-image: url({{ deal.images[0] }})">
+          <div class="deal-pic" ng-repeat="deal in likedDeals" style="background-image: url({{ deal.images[0] }})" ng-click="viewDeal(deal)">
           </div>
         </ion-scroll>
       </div>
