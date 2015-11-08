@@ -5,6 +5,7 @@ angular.module('letterbox.services')
 
   deal.currentDeal = {};
   deal.currentDealId = '';
+  deal.showShare = false;
 
   deal.addDealThumbnail = function(dealObject) {
     var imgurImageSize = "b";

@@ -15,10 +15,7 @@ angular.module('letterbox.controllers')
 
   $scope.deal = DealService.currentDeal;
 
-  $scope.dealShareButton = false;
-  if ($ionicHistory.backView().stateName === 'app.chat') {
-    $scope.dealShareButton = true;
-  }
+  $scope.dealShareButton = DealService.showShare;
 
   $scope.shareDeal = function() {
     var roomHash = DealShareService.currentRoomHash;
