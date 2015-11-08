@@ -3,6 +3,7 @@
     @include uppercase_bold_font();
   }
   .bar-header {
+    position: relative;
     justify-content: center;
     -webkit-justify-content: center; /* Safari */
     .button-bar {
@@ -28,20 +29,36 @@
 }
 
 .deal-share-deals {
-  position: absolute;
-  top: 30px;
-
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+  margin: 10px 0;
 
   .deal-share-deal {
     text-align: center;
-    margin: 20px 0px;
+    margin: 8px 0;
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    align-items: center;
+    -webkit-align-items: center; /* Safari */
+    flex-flow: column wrap;
+    -webkit-flex-flow: column wrap; /* Safari */
 
     .deal-share-deal-image {
-      height: $item-avatar-height;
-      width: $item-avatar-height;
-      border-radius: 300px;
+      height: 20vw;
+      width: 20vw;
+      max-height: 100px;
+      max-width: 100px;
+      border-radius: 50%;
+      margin-bottom: 8px;
+      background: center center no-repeat;
+      background-size: cover;
+    }
+
+    .deal-share-deal-title {
+      color: $colourPrimaryText;
+      letter-spacing: 0.5px;
+      font-size: 13px;
+      line-height: 1.3;
     }
   }
 }
