@@ -1,4 +1,7 @@
 .chats-list {
+  .chat-profile-pic {
+    @extend .list-item-picture;
+  }
   .chat-from {
     @extend .list-item-heading;
   }

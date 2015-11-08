@@ -1,4 +1,7 @@
 .deals-list {
+  .deal-pic {
+    @extend .list-item-picture;
+  }
   .deal-title {
     $font-size: 15px;
     $line-height: 1.3;
