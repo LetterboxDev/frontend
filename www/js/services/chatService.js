@@ -48,7 +48,6 @@ angular.module('letterbox.services')
         formatted.DealId = deal.id;
       });
     } else if (message.type === 'share' && message.Deal) {
-      DealService.addDealThumbnail(message.Deal);
       formatted.DealId = message.Deal.id;
       formatted.Deal = message.Deal;
     }
