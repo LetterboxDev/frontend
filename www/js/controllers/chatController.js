@@ -71,7 +71,7 @@ angular.module('letterbox.controllers')
       while (i < messages.length && j < $scope.messages.length) {
         if (messages[i].timestamp > $scope.messages[j].timestamp) {
           j++;
-        } else if (messages[i].timestamp === $scope.messages[j].timestamp && messages[i].content === $scope.messages[j].content) {
+        } else if (messages[i].timestamp.getTime() === $scope.messages[j].timestamp.getTime()) {
           i++;
         } else {
           $scope.messages.splice(j, 0, messages[i]);
@@ -79,12 +79,15 @@ angular.module('letterbox.controllers')
         }
       }
       if (messages.length > $scope.messages.length) {
+        messageAdded = true;
         for (var k = $scope.messages.length; k < messages.length; k++) {
           $scope.messages.push(messages[k]);
         }
       }
       $scope.messages = messages;
-      if (messageAdded) $ionicScrollDelegate.scrollBottom(false);
+      if (messageAdded) {
+        $ionicScrollDelegate.scrollBottom(true);
+      }
     });
 
     $scope.fetchLikedDeals();
