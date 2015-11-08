@@ -2,7 +2,8 @@ angular.module('letterbox.services')
 
 .service('backend', function($q,
                              $resource,
-                             $http) {
+                             $http,
+                             VERSION) {
 
   var backend = {};
   var URL = 'http://ec2-52-74-138-177.ap-southeast-1.compute.amazonaws.com';
@@ -29,6 +30,8 @@ angular.module('letterbox.services')
   var lettersPath = '/letters';
   var singleLetterPath = '/letters/:letterId';
   var reportPath = '/report';
+  var getUserVersionPath = '/user/id/:hashedId/version';
+  var setVersionPath = '/user/version';
 
   var featuredDealsPath = '/deal/featured';
   var dealCategoriesPath = '/deal/cat';
@@ -278,6 +281,21 @@ angular.module('letterbox.services')
     }
   });
 
+  var otherUserVersionHandler = $resource(URL.concat(getUserVersionPath), {hashedId: '@hashedId'}, {
+    get: {
+      method: 'GET'
+    }
+  });
+
+  var ownUserVersionHandler = $resource(URL.concat(setVersionPath), {}, {
+    update: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
   backend.auth = function(fbToken) {
     return auth.get({fb_token: fbToken});
   };
@@ -499,13 +517,12 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
-  backend.likeDeal = function(dealId) {
+  backend.toggleDealLike = function(dealId) {
     var deferred = $q.defer();
     handler = new dealByIdHandler();
     handler.token = getToken();
-    handler.dealId = dealId;
-    handler.$likeDeal(deferred.resolve, deferred.reject);
-    return deferred;
+    handler.$likeDeal({dealId: dealId}, deferred.resolve, deferred.reject);
+    return deferred.promise;
   };
 
   backend.getUserLikedDeals = function(userId) {
@@ -529,6 +546,23 @@ angular.module('letterbox.services')
       });
       deferred.resolve(deals);
     }, deferred.reject);
+    return deferred.promise;
+  };
+
+  backend.getOtherUserVersion = function(userId) {
+    var deferred = $q.defer();
+    otherUserVersionHandler.get({letterbox_token: getToken(), hashedId: userId}).$promise.then(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
+
+  backend.updateVersion = function() {
+    var deferred = $q.defer();
+    handler = new ownUserVersionHandler();
+    handler.token = getToken();
+    handler.major = VERSION.major;
+    handler.minor = VERSION.minor;
+    handler.revision = VERSION.revision;
+    handler.$update(deferred.resolve, deferred.reject);
     return deferred.promise;
   };
 

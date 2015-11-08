@@ -8,6 +8,7 @@ angular.module('letterbox.controllers')
                                  $timeout,
                                  $state,
                                  $ionicPopover,
+                                 $ionicPopup,
                                  backend,
                                  ChatService,
                                  DealService,
@@ -24,6 +25,7 @@ angular.module('letterbox.controllers')
   $scope.deals = {
     own: [],
     user: []
+
   };
 
   $scope.roomHash = $stateParams.chatId;
@@ -67,6 +69,8 @@ angular.module('letterbox.controllers')
       $ionicScrollDelegate.scrollBottom(false);
     });
 
+    $scope.fetchLikedDeals();
+
     window.addEventListener('native.keyboardhide', onKeyboardHide, false);
     window.addEventListener('native.keyboardshow', onKeyboardShow, false);
   });
@@ -99,8 +103,16 @@ angular.module('letterbox.controllers')
   });
 
   $scope.openShareModal = function() {
-    $scope.fetchLikedDeals();
-    $scope.shareModal.show();
+    DealService.checkDealCompatability($scope.recipientId)
+    .then(function() {
+      $scope.fetchLikedDeals();
+      $scope.shareModal.show();
+    }, function() {
+      var alertPopup = $ionicPopup.alert({
+        title: $scope.recipient + '\'s Letterbox doesn\'t support deals yet!',
+        template: 'Try informing ' + $scope.recipient + ' to get the latest Letterbox app'
+      });
+    });
   };
 
   $scope.closeShareModal = function() {
@@ -135,8 +147,8 @@ angular.module('letterbox.controllers')
     $scope.popover.hide();
   };
 
-  $scope.viewDeal = function(dealId) {
-    DealService.setCurrentDealId(dealId);
+  $scope.viewDeal = function(deal) {
+    DealService.setCurrentDeal(deal);
     $state.go('app.deal');
     $scope.closeShareModal();
   };

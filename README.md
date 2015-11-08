@@ -32,6 +32,8 @@
 
 `ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git`
 
+`cordova plugin add cordova-plugin-vibration`
+
 `ionic plugin add phonegap-plugin-push`
 
 **For building for iOS:**

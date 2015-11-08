@@ -12,8 +12,8 @@ angular.module('letterbox.controllers')
     });
   };
 
-  $scope.viewDeal = function(dealId) {
-    DealService.setCurrentDealId(dealId);
+  $scope.viewDeal = function(deal) {
+    DealService.setCurrentDeal(deal);
     $state.go('app.deal');
   }
 

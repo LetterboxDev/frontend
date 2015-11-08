@@ -5,7 +5,7 @@
     </div>
     <div ng-if="likedDeals.length > 0">
       <ion-list class="deals-list">
-        <ion-item ng-repeat="deal in likedDeals" ng-click="viewDeal(deal.id)" class="item item-avatar">
+        <ion-item ng-repeat="deal in likedDeals" ng-click="viewDeal(deal)" class="item item-avatar">
           <img class="deal-pic" ng-src="{{ deal.images[0] }}">
           <div class="deal-title">{{ deal.title }}</div>
         </ion-item>

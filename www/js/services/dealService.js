@@ -3,11 +3,11 @@ angular.module('letterbox.services')
 .service('DealService', function($q, backend) {
   var deal = this;
 
-  deal.currentDealId = {};
+  deal.currentDeal = {};
   deal.currentDealId = '';
 
-  deal.setCurrentDeal = function(deal) {
-    deal.currentDeal = deal;
+  deal.setCurrentDeal = function(dealObject) {
+    deal.currentDeal = dealObject;
   };
 
   deal.setCurrentDealId = function(dealId) {
@@ -36,9 +36,9 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
-  deal.likeDeal = function(id) {
+  deal.toggleDealLike = function(id) {
     var deferred = $q.defer();
-    backend.likeDeal(id).then(deferred.resolve, deferred.reject);
+    backend.toggleDealLike(id).then(deferred.resolve, deferred.reject);
     return deferred.promise;
   };
 
@@ -57,6 +57,18 @@ angular.module('letterbox.services')
   deal.getMutualLikedDeals = function(userId) {
     var deferred = $q.defer();
     backend.getMutualLikedDeals(userId).then(deferred.resolve, deferred.reject);
+    return deferred.promise;
+  };
+
+  deal.checkDealCompatability = function(userId) {
+    var deferred = $q.defer();
+    backend.getOtherUserVersion(userId).then(function(version) {
+      if (version.minor >= 1) {
+        deferred.resolve();
+      } else {
+        deferred.reject();
+      }
+    }, deferred.reject);
     return deferred.promise;
   };
 });

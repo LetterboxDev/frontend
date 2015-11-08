@@ -25,6 +25,7 @@ angular.module('letterbox.services')
     backend.auth(fbToken).$promise
     .then(function(success) {
       saveDetails(success);
+      backend.updateVersion();
       deferred.resolve();
     }, function(error) {
       deferred.reject();
@@ -39,6 +40,7 @@ angular.module('letterbox.services')
     backend.renewToken().$promise
     .then(function(success) {
       saveDetails(success);
+      backend.updateVersion();
       deferred.resolve();
     }, function(err) {
       AuthService.logout().then(function() {

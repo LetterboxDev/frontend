@@ -7,11 +7,15 @@
 
   <ion-content ng-controller="CategoriesCtrl">
     <div class="categories">
+      <div class="card" ng-click="viewCategory('Featured')">
+        <i class="icon ion-bonfire"></i>
+        <h4>Featured</h4>
+      </div>
       <div ng-repeat="category in categories">
-        <div ng-if="category.image_url" class="card" ng-click="viewCategory(category.title)" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{category.image_url}});">
+        <div ng-if="category.image" class="card" ng-click="viewCategory(category.title)" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{category.image}});">
           <h4>{{category.title}}</h4>
         </div>
-        <div ng-if="!category.image_url" class="card" ng-click="viewCategory(category.title)">
+        <div ng-if="!category.image" class="card" ng-click="viewCategory(category.title)">
           <i class="icon ion-bonfire"></i>
           <h4>{{category.title}}</h4>
         </div>

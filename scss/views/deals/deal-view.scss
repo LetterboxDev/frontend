@@ -1,11 +1,17 @@
 .deal-view {
+  .deal-share-wrapper {
+    padding: 10px;
+  }
+  .share-button {
+    width: 100%;
+  }
   .img-wrapper {
     padding: 0;
     .deal-img {
       width: 100vw;
       height: 100vw;
       background: $colourPrimary center center no-repeat;
-      background-size: cover; 
+      background-size: cover;
     }
   }
   .deal-title {
@@ -17,7 +23,7 @@
       @include uppercase_bold_font();
       color: $colourPrimaryText;
       font-size: 18px;
-      margin: 0;
+      margin: 0 5px 0 0;
       flex: 1;
     }
   }
