@@ -90,8 +90,6 @@ angular.module('letterbox.controllers')
       }
     });
 
-    $scope.fetchLikedDeals();
-
     window.addEventListener('native.keyboardhide', onKeyboardHide, false);
     window.addEventListener('native.keyboardshow', onKeyboardShow, false);
   });
