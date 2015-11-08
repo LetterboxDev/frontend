@@ -6,7 +6,10 @@
   </ion-nav-buttons>
 
   <ion-content ng-controller="CategoriesCtrl">
-    <div class="categories">
+    <div ng-if="isLoading" class="feedback">
+      <ion-spinner icon="dots"></ion-spinner>
+    </div>
+    <div ng-if="!isLoading" class="categories">
       <div class="card" ng-click="viewCategory('Featured')">
         <i class="icon ion-bonfire"></i>
         <h4>Featured</h4>
