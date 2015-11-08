@@ -73,6 +73,15 @@ ion-content {
 }
 
 // List item styles which can be extended by any list
+.list-item-picture {
+  float: left;
+  height: 40px;
+  width: 40px;
+  margin-right: 16px;
+  border-radius: 50%;
+  background: center center no-repeat;
+  background-size: cover;
+}
 .list-item-heading {
   font-weight: bold;
   font-size: 15px;
