@@ -40,6 +40,9 @@ angular.module('letterbox.controllers')
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
+    if (message.Deal) {
+      DealService.addDealThumbnail(message.Deal);
+    }
     if (message.RoomHash === $scope.roomHash) {
       $scope.messages.push(ChatService.formatMessage(message));
       $scope.$apply();

@@ -20,7 +20,7 @@
     <div class="row deal-share-deals" ng-if="deals[viewingDeals].length !== 0">
       <div ng-repeat="deal in deals[viewingDeals]" class="col col-33">
         <div class="deal-share-deal" ng-click="viewDeal(deal)">
-          <div class="deal-share-deal-image" style="background-image: url({{ deal.images[0] }})"></div>
+          <div class="deal-share-deal-image" style="background-image: url({{ deal.thumbnail }})"></div>
           <div class="deal-share-deal-title">
             {{ deal.title }}
           </div>

@@ -24,7 +24,7 @@
             <div ng-if="message.type === 'share'" ng-click="viewSharedDeal(message.Deal)">
               <p class="message-content">Check this out!</p>
               <div class="shared-deal">
-                <div class="deal-img" style="background-image: url({{message.Deal.images[0]}})"></div>
+                <div class="deal-img" style="background-image: url({{message.Deal.thumbnail}})"></div>
                 <p class="deal-title">{{message.content}}</p>
                 <i class="icon ion-chevron-right"></i>
               </div>
