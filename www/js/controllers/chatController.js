@@ -151,8 +151,15 @@ angular.module('letterbox.controllers')
 
   $scope.viewDeal = function(deal) {
     DealService.setCurrentDeal(deal);
+    DealService.showShare = true;
     $state.go('app.deal');
     $scope.closeShareModal();
+  };
+
+  $scope.viewSharedDeal = function(deal) {
+    DealService.setCurrentDeal(deal);
+    DealService.showShare = false;
+    $state.go('app.deal');
   };
 
   $scope.fetchLikedDeals = function() {

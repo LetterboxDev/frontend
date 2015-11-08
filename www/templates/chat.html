@@ -21,7 +21,7 @@
             <h2 class="message-from">You</h2>
 
             <p ng-if="message.type === 'message'" class="message-content">{{message.content}}</p>
-            <div ng-if="message.type === 'share'">
+            <div ng-if="message.type === 'share'" ng-click="viewSharedDeal(message.Deal)">
               <p class="message-content">Check this out!</p>
               <div class="shared-deal">
                 <div class="deal-img" style="background-image: url({{message.Deal.images[0]}})"></div>
