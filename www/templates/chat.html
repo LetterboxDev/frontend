@@ -16,11 +16,14 @@
               <p class="message-content">Check this out!</p>
               <div class="shared-deal">
                 <div class="deal-img" style="background-image: url({{message.Deal.thumbnail}})"></div>
-                <p class="deal-title">{{message.content}}</p>
+                <div class="deal-content">
+                  <p class="deal-title">{{message.content}}</p>
+                  <p class="deal-description" ng-bind-html="message.Deal.description"></p>
+                </div>
                 <i class="icon ion-chevron-right"></i>
               </div>
             </div>
-            
+
           </div>
           <div class="message-meta">
             <span am-time-ago="message.timestamp" class="message-timestamp"></span>
@@ -36,7 +39,10 @@
               <p class="message-content">Check this out!</p>
               <div class="shared-deal">
                 <div class="deal-img" style="background-image: url({{message.Deal.thumbnail}})"></div>
-                <p class="deal-title">{{message.content}}</p>
+                <div class="deal-content">
+                  <p class="deal-title">{{message.content}}</p>
+                  <p class="deal-description" ng-bind-html="message.Deal.description"></p>
+                </div>
                 <i class="icon ion-chevron-right"></i>
               </div>
             </div>
