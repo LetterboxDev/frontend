@@ -15,6 +15,7 @@ angular.module('letterbox.controllers')
                                  RoomsService,
                                  UserProfileService,
                                  UserLetterService,
+                                 DealShareService,
                                  eventbus,
                                  socket) {
 
@@ -106,6 +107,7 @@ angular.module('letterbox.controllers')
     DealService.checkDealCompatability($scope.recipientId)
     .then(function() {
       $scope.fetchLikedDeals();
+      DealShareService.setCurrentRoomHash($scope.roomHash);
       $scope.shareModal.show();
     }, function() {
       var alertPopup = $ionicPopup.alert({

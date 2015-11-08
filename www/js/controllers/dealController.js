@@ -8,7 +8,12 @@ angular.module('letterbox.controllers')
                                   $ionicModal,
                                   $ionicScrollDelegate,
                                   $ionicSlideBoxDelegate,
-                                  DealService) {
+                                  socket,
+                                  DealService,
+                                  ChatService,
+                                  DealShareService) {
+
+  $scope.deal = DealService.currentDeal;
 
   $scope.dealShareButton = false;
   if ($ionicHistory.backView().stateName === 'app.chat') {
@@ -16,10 +21,11 @@ angular.module('letterbox.controllers')
   }
 
   $scope.shareDeal = function() {
-    console.log('share deal');
+    var roomHash = DealShareService.currentRoomHash;
+    socket.shareDeal(roomHash, $scope.deal.title, $scope.deal.id);
+    $state.go('app.chat', { chatId: roomHash });
   };
 
-  $scope.deal = DealService.currentDeal;
   $scope.zoomMin = 1;
 
   $scope.showImages = function(index) {
@@ -46,6 +52,5 @@ angular.module('letterbox.controllers')
       $ionicSlideBoxDelegate.enableSlide(false);
     }
   };
-
 });
 

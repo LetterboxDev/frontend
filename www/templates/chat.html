@@ -10,18 +10,8 @@
           <div class="message-data">
             <h2 class="message-from">{{recipient}}</h2>
             <p class="message-content">{{message.content}}</p>
-
-            <!-- <p ng-if="message.type === 'text'" class="message-content">{{message.content}}</p>
-            <div ng-if="message.type === 'share'">
-              <p class="message-content">Check this out!</p>
-              <div class="shared-deal">
-                <div class="deal-img" style="background-image: url({{message.content.image_url}})"></div>
-                <p class="deal-title">{{message.content.title}}</p>
-                <i class="icon ion-chevron-right"></i>
-              </div>
-            </div> -->
-
           </div>
+
           <div class="message-meta">
             <span am-time-ago="message.timestamp" class="message-timestamp"></span>
           </div>
@@ -34,8 +24,8 @@
             <div ng-if="message.type === 'share'">
               <p class="message-content">Check this out!</p>
               <div class="shared-deal">
-                <div class="deal-img" style="background-image: url({{message.content.image_url}})"></div>
-                <p class="deal-title">{{message.content.title}}</p>
+                <div class="deal-img" style="background-image: url({{message.Deal.images[0]}})"></div>
+                <p class="deal-title">{{message.content}}</p>
                 <i class="icon ion-chevron-right"></i>
               </div>
             </div>
