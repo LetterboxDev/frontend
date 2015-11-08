@@ -19,12 +19,12 @@
       <div class="section">
         <h3>liked deals</h3>
 
-        <div ng-if="likedDeals.length === 0">
+        <div ng-if="ctrl.data.likedDeals.length === 0">
           <p>{{ ctrl.data.name }} hasn't liked any deal yet</p>
         </div>
 
-        <ion-scroll direction="x" ng-if="likedDeals.length > 0" has-bouncing="false">
-          <div class="deal-pic" ng-repeat="deal in likedDeals" style="background-image: url({{ deal.images[0] }})" ng-click="viewDeal(deal)">
+        <ion-scroll direction="x" ng-if="ctrl.data.likedDeals.length > 0" has-bouncing="false">
+          <div class="deal-pic" ng-repeat="deal in ctrl.data.likedDeals" style="background-image: url({{ deal.images[0] }})" ng-click="viewDeal(deal)">
           </div>
         </ion-scroll>
       </div>
