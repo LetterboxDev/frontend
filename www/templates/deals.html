@@ -6,7 +6,10 @@
   </ion-nav-buttons>
 
   <ion-content ng-controller="DealsCtrl">
-    <deal-card ng-repeat="deal in deals"
+    <div ng-if="isLoading" class="feedback">
+      <ion-spinner icon="dots"></ion-spinner>
+    </div>
+    <deal-card ng-if="!isLoading" ng-repeat="deal in deals"
                data-set="deal">
     </deal-card>
   </ion-content>
