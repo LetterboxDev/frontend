@@ -21,11 +21,11 @@ angular.module('letterbox.controllers')
   $scope.recipient = '';
   $scope.recipientId = '';
   $scope.data = {message: ''};
-  $scope.viewingDeals = 'user';
+  $scope.viewingDeals = 'mutual';
   $scope.deals = {
     own: [],
-    user: []
-
+    user: [],
+    mutual: []
   };
 
   $scope.roomHash = $stateParams.chatId;
@@ -160,6 +160,10 @@ angular.module('letterbox.controllers')
 
     DealService.getUserLikedDeals($scope.recipientId).then(function(deals) {
       $scope.deals['user'] = deals;
+    });
+
+    DealService.getMutualLikedDeals($scope.recipientId).then(function(deals) {
+      $scope.deals['mutual'] = deals;
     });
   };
 });
