@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="item card-content">
-          <p class="deal-description">{{ ctrl.data.description }}</p>
+          <p class="deal-description" ng-bind-html="ctrl.data.description"></p>
         </div>
         <div class="item learn-more" ng-click="learnMore(ctrl.data)">
           <p>Learn More</p>
