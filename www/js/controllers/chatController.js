@@ -150,6 +150,7 @@ angular.module('letterbox.controllers')
 
   $scope.showOtherUserProfile = function() {
     ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
+      user.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count,
       UserProfileService.setCurrentProfile(user);
       $state.go('app.other-profile');
     });
