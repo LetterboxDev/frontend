@@ -29,9 +29,8 @@
         <div ng-if="message.isOwner" class="sent-msg">
           <div class="message-data">
             <h2 class="message-from">You</h2>
-            <p class="message-content">{{message.content}}</p>
 
-<!--             <p ng-if="message.type === 'text'" class="message-content">{{message.content}}</p>
+            <p ng-if="message.type === 'message'" class="message-content">{{message.content}}</p>
             <div ng-if="message.type === 'share'">
               <p class="message-content">Check this out!</p>
               <div class="shared-deal">
@@ -39,7 +38,7 @@
                 <p class="deal-title">{{message.content.title}}</p>
                 <i class="icon ion-chevron-right"></i>
               </div>
-            </div> -->
+            </div>
 
           </div>
           <div class="message-meta">
