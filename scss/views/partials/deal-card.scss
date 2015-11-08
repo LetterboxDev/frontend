@@ -1,5 +1,19 @@
 .deal.profile-card  {
   margin-bottom: 20px;
+
+  .card {
+    .image-loader-container {
+      position: absolute;
+      margin-top: -260px;
+      width: 100%;
+      text-align: center;
+
+      .image-loader {
+        width: 100%;
+      }
+    }
+  }
+
   .profile-pic-overlay.deal-header {
     display: flex;
     -webkit-align-items: center; /* Safari */
@@ -10,6 +24,7 @@
       margin-right: 10px;
     }
   }
+
   .deal-overlay {
     position: absolute;
     bottom: 20vh;
@@ -19,6 +34,7 @@
     width: 15vh;
     text-align: center;
   }
+
   .card-content {
     $font-size: 13px;
     $line-height: 1.5;
@@ -35,6 +51,7 @@
       -webkit-box-orient: vertical;
     }
   }
+
   .learn-more {
     p {
       font-weight: bold;
