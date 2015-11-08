@@ -67,6 +67,7 @@ angular.module('letterbox.controllers')
 
     ChatService.getMessagesFromBackend($scope.roomHash).then(function(messages) {
       var i = 0, j = 0;
+      var initialMessageCount = $scope.messages.length;
       var messageAdded = false;
       while (i < messages.length && j < $scope.messages.length) {
         if (messages[i].timestamp > $scope.messages[j].timestamp) {
@@ -86,7 +87,7 @@ angular.module('letterbox.controllers')
       }
       $scope.messages = messages;
       if (messageAdded) {
-        $ionicScrollDelegate.scrollBottom(true);
+        $ionicScrollDelegate.scrollBottom(initialMessageCount !== 0);
       }
     });
 
