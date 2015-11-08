@@ -15,8 +15,7 @@ angular.module('letterbox', ['ionic',
                              'ionic.ion.imageCacheFactory',
                              'ngCordova',
                              'ngResource',
-                             'ngIOS9UIWebViewPatch',
-                             'ionicLazyLoad'
+                             'ngIOS9UIWebViewPatch'
                             ])
 
 .constant('VERSION', {

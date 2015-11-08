@@ -1,19 +1,6 @@
 .deal.profile-card  {
   margin-bottom: 20px;
 
-  .card {
-    .image-loader-container {
-      position: absolute;
-      margin-top: -260px;
-      width: 100%;
-      text-align: center;
-
-      .image-loader {
-        width: 100%;
-      }
-    }
-  }
-
   .profile-pic-overlay.deal-header {
     display: flex;
     -webkit-align-items: center; /* Safari */
