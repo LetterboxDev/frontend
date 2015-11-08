@@ -15,13 +15,14 @@ angular.module('letterbox', ['ionic',
                              'ionic.ion.imageCacheFactory',
                              'ngCordova',
                              'ngResource',
-                             'ngIOS9UIWebViewPatch'
+                             'ngIOS9UIWebViewPatch',
+                             'ionicLazyLoad'
                             ])
 
 .constant('VERSION', {
   major: 0,
   minor: 1,
-  revision: 0  
+  revision: 0
 })
 
 .run(function($ionicPlatform, $rootScope, eventbus) {
