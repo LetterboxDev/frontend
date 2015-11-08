@@ -70,8 +70,6 @@ angular.module('letterbox.controllers')
       $ionicScrollDelegate.scrollBottom(false);
     });
 
-    $scope.fetchLikedDeals();
-
     window.addEventListener('native.keyboardhide', onKeyboardHide, false);
     window.addEventListener('native.keyboardshow', onKeyboardShow, false);
   });
