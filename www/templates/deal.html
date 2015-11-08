@@ -9,7 +9,7 @@
       <div class="img-wrapper">
         <ion-slide-box does-continue="true" on-slide-changed="slideHasChanged($index)">
           <ion-slide ng-repeat="image in deal.images">
-            <div class="deal-img" style="background-image: url({{ image }})"></div>
+            <div class="deal-img" style="background-image: url({{ image }})" ng-click="showImages($index)"></div>
           </ion-slide>
         </ion-slide-box>
       </div>
