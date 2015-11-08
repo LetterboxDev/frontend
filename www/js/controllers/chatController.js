@@ -67,6 +67,7 @@ angular.module('letterbox.controllers')
 
     ChatService.getMessagesFromBackend($scope.roomHash).then(function(messages) {
       var i = 0, j = 0;
+      var messageAdded = false;
       while (i < messages.length && j < $scope.messages.length) {
         if (messages[i].timestamp > $scope.messages[j].timestamp) {
           j++;
@@ -74,6 +75,7 @@ angular.module('letterbox.controllers')
           i++;
         } else {
           $scope.messages.splice(j, 0, messages[i]);
+          messageAdded = true;
         }
       }
       if (messages.length > $scope.messages.length) {
@@ -82,7 +84,7 @@ angular.module('letterbox.controllers')
         }
       }
       $scope.messages = messages;
-      $ionicScrollDelegate.scrollBottom(false);
+      if (messageAdded) $ionicScrollDelegate.scrollBottom(false);
     });
 
     $scope.fetchLikedDeals();
