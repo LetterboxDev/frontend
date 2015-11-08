@@ -6,16 +6,27 @@
   <ion-content class="chat-view" overflow-scroll="true">
     <ion-list class="messages-list">
       <ion-item ng-repeat="message in messages" class="item">
+
         <div ng-if="!message.isOwner" class="received-msg">
           <div class="message-data">
             <h2 class="message-from">{{recipient}}</h2>
-            <p class="message-content">{{message.content}}</p>
-          </div>
 
+            <p ng-if="message.type === 'message'" class="message-content">{{message.content}}</p>
+            <div ng-if="message.type === 'share'" ng-click="viewSharedDeal(message.Deal)">
+              <p class="message-content">Check this out!</p>
+              <div class="shared-deal">
+                <div class="deal-img" style="background-image: url({{message.Deal.thumbnail}})"></div>
+                <p class="deal-title">{{message.content}}</p>
+                <i class="icon ion-chevron-right"></i>
+              </div>
+            </div>
+            
+          </div>
           <div class="message-meta">
             <span am-time-ago="message.timestamp" class="message-timestamp"></span>
           </div>
         </div>
+
         <div ng-if="message.isOwner" class="sent-msg">
           <div class="message-data">
             <h2 class="message-from">You</h2>
@@ -35,6 +46,7 @@
             <div am-time-ago="message.timestamp" class="message-timestamp"></div>
           </div>
         </div>
+
       </ion-item>
     </ion-list>
   </ion-content>
