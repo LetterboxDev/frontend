@@ -38,6 +38,7 @@ angular.module('letterbox.controllers')
       $scope.isLoading = true;
       MatchService.getMatch()
       .then(function(match) {
+        console.log(match.likedDeals);
         $scope.cards.push(createNewCard(match));
         $timeout(function() {
           // timeout for moving out animation
@@ -89,7 +90,8 @@ angular.module('letterbox.controllers')
       bio: match.bio,
       profile_pic: match.pictureMed,
       questions: match.questions,
-      mutual_friends_count: (typeof match.mutualFriends === 'undefined') ? 'unknown' : match.mutualFriends.summary.total_count
+      mutual_friends_count: (typeof match.mutualFriends === 'undefined') ? 'unknown' : match.mutualFriends.summary.total_count,
+      likedDeals: match.likedDeals
     };
   }
 
