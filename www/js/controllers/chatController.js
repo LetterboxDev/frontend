@@ -19,6 +19,7 @@ angular.module('letterbox.controllers')
                                  eventbus,
                                  socket) {
 
+  $scope.messages = [];
   $scope.recipient = '';
   $scope.recipientId = '';
   $scope.data = {message: ''};
@@ -56,7 +57,6 @@ angular.module('letterbox.controllers')
   };
 
   $scope.$on("$ionicView.enter", function(scopes, states) {
-    $scope.messages = [];
     ChatService.getRecipientName($scope.roomHash).then(function(recipient) {
       $scope.recipient = recipient;
     });
@@ -66,6 +66,21 @@ angular.module('letterbox.controllers')
     });
 
     ChatService.getMessagesFromBackend($scope.roomHash).then(function(messages) {
+      var i = 0, j = 0;
+      while (i < messages.length && j < $scope.messages.length) {
+        if (messages[i].timestamp > $scope.messages[j].timestamp) {
+          j++;
+        } else if (messages[i].timestamp === $scope.messages[j].timestamp && messages[i].content === $scope.messages[j].content) {
+          i++;
+        } else {
+          $scope.messages.splice(j, 0, messages[i]);
+        }
+      }
+      if (messages.length > $scope.messages.length) {
+        for (var k = $scope.messages.length; k < messages.length; k++) {
+          $scope.messages.push(messages[k]);
+        }
+      }
       $scope.messages = messages;
       $ionicScrollDelegate.scrollBottom(false);
     });
