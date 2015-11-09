@@ -10,11 +10,10 @@ angular.module('letterbox.controllers')
   $scope.deals = [];
   $scope.hasReachedEnd = false;
 
-  var limit = 2;
+  var limit = 3;
   var offset = 0;
 
   $scope.loadDeals = function() {
-    // console.log("offset: " + offset + ", limit: " + limit);
     if ($scope.currentCategory === "Featured") {
       DealService.getFeaturedDeals(offset, limit).then($scope.appendDeals);
     } else {
