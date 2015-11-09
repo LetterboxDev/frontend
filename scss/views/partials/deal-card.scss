@@ -1,6 +1,9 @@
 .deal.profile-card  {
   margin-bottom: 20px;
-
+  .large-profile-pic {
+    background-repeat: no-repeat;
+    background-position: center, center;
+  }
   .profile-pic-overlay.deal-header {
     display: flex;
     -webkit-align-items: center; /* Safari */
