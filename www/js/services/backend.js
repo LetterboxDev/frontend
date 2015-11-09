@@ -475,9 +475,9 @@ angular.module('letterbox.services')
     return handler.$reportUser(successPromise, errorPromise);
   };
 
-  backend.getFeaturedDeals = function() {
+  backend.getFeaturedDeals = function(offset, limit) {
     var deferred = $q.defer();
-    featuredDealsHandler.get({letterbox_token: getToken()}).$promise.then(function(res) {
+    featuredDealsHandler.get({letterbox_token: getToken(), offset: offset, limit: limit}).$promise.then(function(res) {
       var deals = [];
       res.forEach(function(deal) {
         deals.push(deal);
@@ -499,9 +499,9 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
-  backend.getDealsByCat = function(category) {
+  backend.getDealsByCat = function(category, offset, limit) {
     var deferred = $q.defer();
-    dealsByCatHandler.get({letterbox_token: getToken(), dealCat: category}).$promise.then(function(res) {
+    dealsByCatHandler.get({letterbox_token: getToken(), dealCat: category, offset: offset, limit: limit}).$promise.then(function(res) {
       var deals = [];
       res.forEach(function(deal) {
         deals.push(deal);

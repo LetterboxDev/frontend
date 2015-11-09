@@ -15,19 +15,19 @@ angular.module('letterbox.services')
     deal.currentDealId = dealId;
   };
 
-  deal.getAllDeals = function() {
-    return deal.getDeals('all');
+  deal.getAllDeals = function(offset, limit) {
+    return deal.getDeals('all', offset, limit);
   };
 
-  deal.getDeals = function(category) {
+  deal.getDeals = function(category, offset, limit) {
     var deferred = $q.defer();
-    backend.getDealsByCat(category).then(deferred.resolve, deferred.reject);
+    backend.getDealsByCat(category, offset, limit).then(deferred.resolve, deferred.reject);
     return deferred.promise;
   };
 
-  deal.getFeaturedDeals = function() {
+  deal.getFeaturedDeals = function(offset, limit) {
     var deferred = $q.defer();
-    backend.getFeaturedDeals().then(deferred.resolve, deferred.reject);
+    backend.getFeaturedDeals(offset, limit).then(deferred.resolve, deferred.reject);
     return deferred.promise;
   };
 
