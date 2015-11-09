@@ -33,7 +33,7 @@
         <p ng-bind-html="deal.location"></p>
 
         <h3 class="title">Provided by</h3>
-        <p>{{ deal.DealProviderName }} | <a ng-if="deal.DealProviderName === 'NUStyle'" href="https://www.facebook.com/nusdiscount/?fref=ts">Facebook Page</a></p>
+        <p>{{ deal.DealProviderName }}<a ng-if="deal.DealProviderName === 'NUStyle'" ng-click="openLink('https://www.facebook.com/nusdiscount/?fref=ts')"> | Facebook Page</a></p>
       </div>
 
       <div class="deal-share-wrapper">

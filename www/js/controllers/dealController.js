@@ -49,5 +49,9 @@ angular.module('letterbox.controllers')
       $ionicSlideBoxDelegate.enableSlide(false);
     }
   };
+
+  $scope.openLink = function(link) {
+    window.open(link, '_system');
+  };
 });
 
