@@ -68,6 +68,9 @@
     }
   }
 
+  ion-scroll {
+    margin-top: 10px;
+  }
   .deal-pic {
     display: inline-block;
     height: 60px;
@@ -79,6 +82,7 @@
   }
 
   .card-content {
+    background: none;
     padding: 10px 16px;
     .section {
       padding: 12px 0 8px;
