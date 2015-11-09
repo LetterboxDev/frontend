@@ -6,6 +6,7 @@ angular.module('letterbox.controllers')
                                      $cordovaInAppBrowser,
                                      backend,
                                      AuthService,
+                                     eventbus,
                                      VERSION) {
 
   $scope.minAge = 18;
@@ -36,6 +37,7 @@ angular.module('letterbox.controllers')
   }
 
   $scope.onChangePreferredGender = function() {
+    eventbus.call('changeGender');
     window.localStorage.setItem('genderPreference', $scope.preference.preferredGender);
     backend.updateGenderPreference($scope.preference.preferredGender);
   }
