@@ -17,6 +17,7 @@ angular.module('letterbox.controllers')
 
   eventbus.registerListener('enterHome', getCard);
   eventbus.registerListener('closeLetter', removeTopCard);
+  eventbus.registerListener('changeGender', checkAndGetCard);
   getCard();
 
   $scope.changeCard = function() {
@@ -38,7 +39,6 @@ angular.module('letterbox.controllers')
       $scope.isLoading = true;
       MatchService.getMatch()
       .then(function(match) {
-        console.log(match.likedDeals);
         $scope.cards.push(createNewCard(match));
         $timeout(function() {
           // timeout for moving out animation
@@ -59,6 +59,16 @@ angular.module('letterbox.controllers')
   /**
    * Helper functions
    */
+  function checkAndGetCard() {
+    // if there is card currently loaded, change it
+    // otherwise, load new card
+    if ($scope.cards.length === 0) {
+      getCard();
+    } else {
+      $scope.changeCard();
+    }
+  }
+
   function getCard() {
     if (window.localStorage.getItem('token') && $scope.cards.length === 0 && !$scope.isLoading) {
       $scope.isLoading = true;
