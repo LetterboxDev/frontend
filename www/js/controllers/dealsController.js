@@ -3,24 +3,37 @@ angular.module('letterbox.controllers')
 .controller('DealsCtrl', function($scope,
                                   $rootScope,
                                   $state,
+                                  $ionicScrollDelegate,
                                   DealCategoryService,
                                   DealService) {
-
   $scope.currentCategory = DealCategoryService.currentCategory;
+  $scope.deals = [];
+  $scope.hasReachedEnd = false;
 
-  $scope.isLoading = true;
-  if ($scope.currentCategory === "Featured") {
-    DealService.getFeaturedDeals().then(function(deals) {
-      $scope.deals = deals;
-      $scope.isLoading = false;
-    });
-  } else {
-    DealService.getDeals($scope.currentCategory).then(function(deals) {
-      $scope.deals = deals;
-      $scope.isLoading = false;
-    });
+  var limit = 2;
+  var offset = 0;
+
+  $scope.loadDeals = function() {
+    // console.log("offset: " + offset + ", limit: " + limit);
+    if ($scope.currentCategory === "Featured") {
+      DealService.getFeaturedDeals(offset, limit).then($scope.appendDeals);
+    } else {
+      DealService.getDeals($scope.currentCategory, offset, limit).then($scope.appendDeals);
+    }
   }
-  
+
+  $scope.appendDeals = function(deals) {
+    for (var i = 0; i < limit; i++) {
+      if (deals[i]) {
+        $scope.deals.push(deals[i]);
+        offset++;
+      } else {
+        $scope.hasReachedEnd = true;
+      }
+    }
+    $scope.$broadcast('scroll.infiniteScrollComplete');
+  }
+
   $scope.viewLiked = function() {
     $state.go('app.liked-deals');
   }

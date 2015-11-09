@@ -5,13 +5,19 @@
     </button>
   </ion-nav-buttons>
 
-  <ion-content overflow-scroll="true">
+  <ion-content delegate-handle="deals" overflow-scroll="false">
     <div ng-if="isLoading" class="feedback">
       <ion-spinner icon="dots"></ion-spinner>
     </div>
     <deal-card ng-if="!isLoading" ng-repeat="deal in deals"
                data-set="deal">
     </deal-card>
+    <ion-infinite-scroll
+      ng-if="!hasReachedEnd"
+      on-infinite="loadDeals()"
+      distance="10%"
+      spinner="dots">
+    </ion-infinite-scroll>
   </ion-content>
 </ion-view>
 
