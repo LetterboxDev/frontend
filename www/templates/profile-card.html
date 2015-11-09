@@ -1,10 +1,6 @@
 <div class="card back">
   <div class="back-container">
-    <div class="small-profile-pic-header">
-      <div class="small-profile-pic" style="background-image: url({{ ctrl.data.profile_pic }})">
-      </div>
-      <span class="name">{{ ctrl.data.name }}</span><span class="age">, {{ ctrl.data.age }}</span>
-    </div>
+    <profile-pic-small data-set="ctrl.data"></profile-pic-small>
     <div class="item card-content">
       <div class="section">
         <h3>bio</h3>
