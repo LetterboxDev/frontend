@@ -42,11 +42,7 @@
 
             <div class="card back">
               <div class="back-container">
-                <div class="small-profile-pic-header">
-                  <div class="small-profile-pic" style="background-image: url({{ response.profilePicMed }})">
-                  </div>
-                  <span class="name">{{ response.from }}</span><span class="age">, {{ response.age }}</span>
-                </div>
+                <profile-pic-card data-set="response"></profile-pic-card>
                 <div class="item card-content">
                   <div class="section">
                     <h3>bio</h3>
