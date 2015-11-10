@@ -44,6 +44,10 @@
       white-space: pre-wrap;
       margin-bottom: 25px;
     }
+    a {
+      border-bottom: $colourLink 1px solid;
+      color: $colourLink;
+    }
   }
 }
 
