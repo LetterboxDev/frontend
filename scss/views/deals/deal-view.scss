@@ -50,35 +50,3 @@
     }
   }
 }
-
-.fullscreen-image {
-  width: 100%;
-  height: 100vh;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center, center;
-}
-
-.image-modal {
-  width: 100% !important;
-  height: 100%;
-  top: 0 !important;
-  left: 0 !important;
-  background: rgba(0,0,0,0.7);
-
-  .close-button {
-    z-index: 5;
-    color: white;
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    width: 30px;
-    height: 30px;
-    font-size: 18pt;
-    text-align: center;
-  }
-}
-
-.slider-pager-page i{
-  color: white;
-}
