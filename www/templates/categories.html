@@ -18,10 +18,6 @@
         <div ng-if="category.image" class="card" ng-click="viewCategory(category.title)" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{category.image}});">
           <h4>{{category.title}}</h4>
         </div>
-        <div ng-if="!category.image" class="card" ng-click="viewCategory(category.title)">
-          <i class="icon ion-bonfire"></i>
-          <h4>{{category.title}}</h4>
-        </div>
       </div>
     </div>
   </ion-content>
