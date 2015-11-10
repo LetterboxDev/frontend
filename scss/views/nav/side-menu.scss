@@ -61,7 +61,7 @@
 
     .item-active {
       .item-content {
-        background-color: $colourSideMenuItem;
+        background-color: lighten($colourSideMenu, 10%);
       }
     }
   }
