@@ -39,7 +39,7 @@
     .sent-msg {
       @include message(sent);
     }
-    
+
     .shared-deal {
       display: flex;
       display: -webkit-flex; /* Safari */
@@ -63,9 +63,9 @@
         border: white solid 2px;
         background: center center no-repeat;
         background-size: cover;
-        
+
       }
-      
+
       .deal-content {
         $font-size: 11px;
         $line-height: 1.3;
@@ -97,7 +97,7 @@
 
 
       i {
-        margin-left: 10px;
+        margin-right: 10px;
         color: $colourPrimary;
         font-size: 20px;
       }
