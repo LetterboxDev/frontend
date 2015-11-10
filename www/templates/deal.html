@@ -28,6 +28,10 @@
           <h3 class="title">Expires on</h3>
           <p>{{ deal.expiry | amDateFormat:'dddd, Do MMMM YYYY' }}</p>
         </div>
+        <div ng-if="deal.type == 'event'">
+          <h3 class="title">Event ends on</h3>
+          <p>{{ deal.expiry | amDateFormat:'dddd, Do MMMM YYYY' }}</p>
+        </div>
 
         <h3 class="title">Location</h3>
         <p ng-bind-html="deal.location"></p>
