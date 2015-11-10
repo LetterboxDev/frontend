@@ -9,6 +9,7 @@ angular.module('letterbox.controllers')
                                  $state,
                                  $ionicPopover,
                                  $ionicPopup,
+                                 $ionicLoading,
                                  backend,
                                  ChatService,
                                  DealService,
@@ -149,12 +150,23 @@ angular.module('letterbox.controllers')
   };
 
   $scope.showOtherUserProfile = function() {
+    $scope.showLoading();
     ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
       user.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count,
       UserProfileService.setCurrentProfile(user);
+      $scope.hideLoading();
       $state.go('app.other-profile');
     });
     $scope.closePopover();
+  };
+
+  $scope.showLoading = function() {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="dots"></ion-spinner>'
+    });
+  };
+  $scope.hideLoading = function(){
+    $ionicLoading.hide();
   };
 
   $scope.showResponses = function() {
