@@ -5,7 +5,7 @@
         <div class="large-profile-pic-header">
           <div class="large-profile-pic" style="background-image: url({{ ctrl.data.thumbnail }})" ng-click="learnMore(ctrl.data)">
           </div>
-          <div class="deal-overlay">
+          <div ng-if="ctrl.data.type != 'place'" class="deal-overlay">
             <span class="provider-name">{{ ctrl.data.DealProviderName }}</span>
           </div>
           <div class="item profile-pic-overlay deal-header">
