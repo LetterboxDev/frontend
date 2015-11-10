@@ -28,8 +28,10 @@ angular.module('letterbox.controllers')
     $scope.modal = modal;
   });
 
-  $ionicHistory.nextViewOptions({
-    disableBack: true
+  $scope.$on('$ionicView.enter', function() {
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
   });
 
   $scope.showLoading = function() {
