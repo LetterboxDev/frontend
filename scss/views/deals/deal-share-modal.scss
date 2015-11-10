@@ -6,8 +6,13 @@
     position: relative;
     justify-content: center;
     -webkit-justify-content: center; /* Safari */
-    .button-bar {
+    .button-bar.deal-share-seg-control {
       max-width: 90vw;
+      .button.highlighted {
+        background-color: $colourPrimary;
+        color: white;
+        font-weight: bold;
+      }
       .button.left {
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
@@ -17,14 +22,6 @@
         border-bottom-right-radius: 5px;
       }
     }
-  }
-
-}
-.deal-share-seg-control {
-  .highlighted {
-    background-color: $colourPrimary;
-    color: white;
-    font-weight: bold;
   }
 }
 
