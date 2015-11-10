@@ -32,8 +32,9 @@
         <h3 class="title">Location</h3>
         <p ng-bind-html="deal.location"></p>
 
-        <h3 class="title">Provided by</h3>
-        <p>{{ deal.DealProviderName }}<a ng-if="deal.DealProviderName === 'NUStyle'" ng-click="openLink('https://www.facebook.com/nusdiscount/?fref=ts')"> | Facebook Page</a></p>
+        <h3 ng-if="deal.type == 'place'" class="title">More information</h3>
+        <h3 ng-if="deal.type != 'place'" class="title">Provided by</h3>
+        <p><a ng-click="openLink(deal.DealProvider.url)">{{ deal.DealProviderName }}</a></p>
       </div>
 
       <div class="deal-share-wrapper">
