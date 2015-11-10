@@ -2,5 +2,8 @@
   <div class="close-button" ng-click="closeModal()">
     <i class="icon ion-close"></i>
   </div>
-  <div class="fullscreen-image" style="background-image: url({{ ctrl.data.profile_pic }})"/>
+  <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" zooming="true" min-zoom="1">       
+    <div class="fullscreen-image" style="background-image: url({{ ctrl.data.profile_pic }})"/>
+  </ion-scroll>
+  
 </ion-modal-view>
