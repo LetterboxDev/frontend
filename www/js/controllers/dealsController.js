@@ -10,6 +10,9 @@ angular.module('letterbox.controllers')
   $scope.deals = [];
   $scope.hasReachedEnd = false;
 
+  // Force share button to be disabled if navigating from the deals page
+  DealService.showShare = false;
+
   var limit = 3;
   var offset = 0;
 
