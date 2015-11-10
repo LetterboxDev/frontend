@@ -5,10 +5,9 @@
         <div class="flipper-container" flip-card>
           <div class="flipper">
             <div class="card front">
-              <div class="small-profile-pic-header">
-                <img class="small-profile-pic" ng-src="{{ response.profilePicMed }}" alt="Image" />
-                <span class="name">{{ response.from }}</span><span class="age">, {{ response.age }}</span>
-              </div>
+              <profile-pic-small data-set="{'profile_pic': response.profilePicMed,
+                                           'name': response.from,
+                                           'age': response.age }"></profile-pic-small>
               <div class="item card-content">
                 <div class="section">
                   <h3>{{ response.from }} would rather...</h3>
@@ -42,7 +41,9 @@
 
             <div class="card back">
               <div class="back-container">
-                <profile-pic-card data-set="response"></profile-pic-card>
+                <profile-pic-small data-set="{'profile_pic': response.profilePicMed,
+                                              'name': response.from,
+                                              'age': response.age }"></profile-pic-small>
                 <div class="item card-content">
                   <div class="section">
                     <h3>bio</h3>
