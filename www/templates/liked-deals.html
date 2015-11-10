@@ -1,5 +1,5 @@
 <ion-view view-title="Your cutouts">
-  <ion-content>
+  <ion-content overflow-scroll="true">
     <div class="feedback" ng-if="likedDeals.length === 0">
       <h2>You haven't liked any deals yet!</h2>
     </div>
@@ -8,6 +8,7 @@
         <ion-item ng-repeat="deal in likedDeals" ng-click="viewDeal(deal)" class="item">
           <div class="deal-pic" style="background-image: url({{ deal.thumbnail }})"></div>
           <div class="deal-title">{{ deal.title }}</div>
+          <div class="deal-description" ng-bind-html="deal.description"</div>
         </ion-item>
       </ion-list>
     </div>
