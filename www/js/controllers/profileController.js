@@ -16,6 +16,7 @@ angular.module('letterbox.controllers')
   $scope.$on("$ionicView.enter", function(scopes, states) {
     ProfileService.getProfile().then(function(profile) {
       $scope.profile = profile;
+      $scope.nameAndAge = profile.firstName + ", " + profile.age;
       $scope.isLoading = false;
     })
   });
