@@ -37,6 +37,9 @@ angular.module('letterbox.controllers')
 
     NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
       $scope.response = notification;
+      $scope.numCorrect = notification.questionsAnswers.filter(function(obj) {
+        return obj.isCorrect == true 
+      }).length;
     });
   }
 });

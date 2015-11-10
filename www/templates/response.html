@@ -10,14 +10,18 @@
                                            'age': response.age }"></profile-pic-small>
               <div class="item card-content">
                 <div class="section">
-                  <h3>{{ response.from }} would rather...</h3>
+                  <h3>{{ response.from }} got {{ numCorrect }} questions correct.</h3>
                   <div class="questions">
                     <div class="question" ng-repeat="question in response.questionsAnswers">
-                      <div class="option option0" ng-class="{ 'selected' : !question.answer}">
-                        {{ question.option0 }}
+                      <div class="option option0" ng-class="{ 'selected' : !question.answer }">
+                        <span>{{ question.option0 }}</span>
+                        <i ng-if="question.isCorrect && !question.answer" class="is-correct icon ion-checkmark-circled"></i>
+                        <i ng-if="!question.isCorrect && !question.answer" class="is-correct icon ion-close-circled"></i>
                       </div>
-                      <div class="option option1" ng-class="{ 'selected' : question.answer}">
-                        {{ question.option1 }}
+                      <div class="option option1" ng-class="{ 'selected' : question.answer }">
+                        <span>{{ question.option1 }}</span>
+                        <i ng-if="question.isCorrect && question.answer" class="is-correct icon ion-checkmark-circled"></i>
+                        <i ng-if="!question.isCorrect && question.answer" class="is-correct icon ion-close-circled"></i>
                       </div>
                     </div>
                   </div>

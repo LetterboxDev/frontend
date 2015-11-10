@@ -145,11 +145,19 @@ ion-content {
       &.selected {
         color: white;
         font-weight: bold;
-      }
-
-      &.option0.selected, &.option1.selected {
         background-color: $colourOption;
         border: 1px solid $colourOption;
+      }
+
+      span {
+        flex: 1;
+      }
+
+      .is-correct.icon {
+        align-self: flex-end;
+        font-size: 16px;
+        margin-right: -5px;
+        margin-bottom: -5px;
       }
     }
 
