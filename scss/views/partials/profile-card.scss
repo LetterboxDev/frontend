@@ -27,10 +27,6 @@
   margin: 0 auto;
 
   &.moving-out {
-    top: 10px;
-    position: absolute;
-    height: 710px;
-    z-index: 100;
     -webkit-animation: card-move-out 0.3s linear forwards;
   }
   &.moving-in {
