@@ -36,6 +36,10 @@ angular.module('letterbox.controllers')
     });
   };
 
+  $scope.slide = function(index) {
+    $ionicSlideBoxDelegate.slide(index);
+  };
+
   $scope.closeModal = function() {
     $scope.modal.hide();
     $scope.modal.remove();
