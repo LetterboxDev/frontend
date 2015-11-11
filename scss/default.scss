@@ -66,6 +66,19 @@ ion-content {
   }
 }
 
+body {
+  background-color: $colourDarkerBackground;
+}
+
+#main-wrapper {
+  max-width: $maximumWidth + 300;
+  margin: 0 auto;
+  ion-nav-view:first-child {
+    max-width: $maximumWidth + 300;
+    box-shadow: 0px 0px 4px $colourShadow;
+  }
+}
+
 // View container styles
 .view-container {
   .scroll-content.has-header {
