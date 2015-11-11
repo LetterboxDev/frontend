@@ -24,6 +24,7 @@
   max-width: 500px;
   min-width: 280px;
   width: 100vw;
+  margin: 0 auto;
 
   &.moving-out {
     top: 10px;
@@ -83,7 +84,7 @@
 
   .card-content {
     background: none;
-    padding: 10px 16px;
+    padding: 10px 18px;
     .section {
       padding: 12px 0 8px;
       h3 {
