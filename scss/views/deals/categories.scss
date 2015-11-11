@@ -1,4 +1,4 @@
-$break-large: 1200px;
+$break-large: 700px;
 
 .categories {
   display: flex;
@@ -12,10 +12,10 @@ $break-large: 1200px;
     cursor: pointer;
     width: 46vw;
     height: 46vw;
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 300px;
+    max-height: 300px;
     background: $colourPrimary center center no-repeat;
-    background-size: auto 50vw; 
+    background-size: auto 100%; 
     margin: 3vw 1.5vw 0;
 
     display: flex;
@@ -29,9 +29,9 @@ $break-large: 1200px;
 
     i {
       color: white;
-      font-size: 12vw;
+      font-size: 10vw;
       @media screen and (min-width: $break-large) {
-        font-size: 90px;
+        font-size: 75px;
       }
     }
     h4 {
@@ -39,14 +39,14 @@ $break-large: 1200px;
       color: white;
       margin-top: 2vw;
       margin-bottom: 0;
-      font-size: 3.5vw;
+      font-size: 3vw;
       letter-spacing: 2px;
       line-height: 1.4;
       text-align: center;
 
       @media screen and (min-width: $break-large) {
         margin-top: 10px;
-        font-size: 30px;
+        font-size: 22px;
       }
     }
   }
