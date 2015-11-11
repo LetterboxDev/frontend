@@ -1,9 +1,6 @@
 .settings-list {
   .list {
-    @media screen and (min-width: $maximumWidth) {
-      max-width: $maximumWidth;
-      margin: 0 auto;
-    }
+    @extend .list-max-width;
   }
   .setting-header {
     @extend .list-item-heading;

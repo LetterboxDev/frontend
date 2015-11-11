@@ -87,7 +87,7 @@ body {
 }
 
 // List item styles which can be extended by any list
-.list { // this overrides ionic's list
+.list-max-width {
   @media screen and (min-width: $maximumWidth) {
     max-width: $maximumWidth;
     margin: 20px auto;
