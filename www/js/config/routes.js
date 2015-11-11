@@ -95,7 +95,7 @@ angular.module('letterbox')
   })
 
   .state('app.deal', {
-    url: '/deal',
+    url: '/deal/:dealId',
     views: {
       'menuContent': {
         templateUrl: 'templates/deal.html',
