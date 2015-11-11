@@ -5,7 +5,6 @@ angular.module('letterbox.controllers')
                                   $state,
                                   $stateParams,
                                   $ionicScrollDelegate,
-                                  DealCategoryService,
                                   DealService) {
   var category = $stateParams.category;
   $scope.currentCategory = category;

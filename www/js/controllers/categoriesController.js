@@ -2,10 +2,10 @@ angular.module('letterbox.controllers')
 
 .controller('CategoriesCtrl', function( $scope,
                                         $state,
-                                        DealCategoryService) {
+                                        CategoryService) {
   $scope.isLoading = true;
 
-  DealCategoryService.getCategories()
+  CategoryService.getCategories()
     .then(function(categories) {
       $scope.categories = categories;
       $scope.isLoading = false;
