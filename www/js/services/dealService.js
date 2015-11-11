@@ -3,17 +3,7 @@ angular.module('letterbox.services')
 .service('DealService', function($q, backend) {
   var deal = this;
 
-  deal.currentDeal = {};
-  deal.currentDealId = '';
   deal.showShare = false;
-
-  deal.setCurrentDeal = function(dealObject) {
-    deal.currentDeal = dealObject;
-  };
-
-  deal.setCurrentDealId = function(dealId) {
-    deal.currentDealId = dealId;
-  };
 
   deal.getAllDeals = function(offset, limit) {
     return deal.getDeals('all', offset, limit);

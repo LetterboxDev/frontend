@@ -9,8 +9,7 @@ angular.module('letterbox.directives')
     replace: true,
     controller: function($scope, $state, DealService) {
       $scope.learnMore = function(deal) {
-        DealService.setCurrentDeal(deal);
-        $state.go('app.deal');
+        $state.go('app.deal', { dealId: deal.id });
       };
     },
     controllerAs: 'ctrl',
