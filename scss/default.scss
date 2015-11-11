@@ -270,6 +270,7 @@ ion-popover-view.fit ion-content {
   background: rgba(0,0,0,0.7);
 
   .close-button {
+    cursor: pointer;
     z-index: 5;
     color: white;
     position: fixed;
