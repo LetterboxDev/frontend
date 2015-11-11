@@ -95,7 +95,7 @@ angular.module('letterbox')
   })
 
   .state('app.deal', {
-    url: '/deal/:dealId',
+    url: '/deal/:dealId/:roomHash',
     views: {
       'menuContent': {
         templateUrl: 'templates/deal.html',
