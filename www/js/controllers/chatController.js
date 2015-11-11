@@ -183,16 +183,14 @@ angular.module('letterbox.controllers')
   };
 
   $scope.viewDeal = function(deal) {
-    DealService.setCurrentDeal(deal);
     DealService.showShare = true;
-    $state.go('app.deal');
+    $state.go('app.deal', { dealId: deal.id });
     $scope.closeShareModal();
   };
 
   $scope.viewSharedDeal = function(deal) {
-    DealService.setCurrentDeal(deal);
     DealService.showShare = false;
-    $state.go('app.deal');
+    $state.go('app.deal', { dealId: deal.id });
   };
 
   $scope.fetchLikedDeals = function() {

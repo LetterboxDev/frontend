@@ -2,6 +2,7 @@ angular.module('letterbox.controllers')
 
 .controller('DealCtrl', function($scope,
                                   $rootScope,
+                                  $stateParams,
                                   $state,
                                   $sce,
                                   $ionicHistory,
@@ -13,7 +14,11 @@ angular.module('letterbox.controllers')
                                   ChatService,
                                   DealShareService) {
 
-  $scope.deal = DealService.currentDeal;
+  // Loads deal
+  var dealId = $stateParams.dealId;
+  DealService.getDeal(dealId).then(function(deal) {
+    $scope.deal = deal;
+  });
 
   $scope.dealShareButton = DealService.showShare;
 
