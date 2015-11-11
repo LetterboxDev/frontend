@@ -12,8 +12,7 @@ angular.module('letterbox.controllers')
     });
 
   $scope.viewCategory = function(categoryTitle) {
-    DealCategoryService.setCurrentCategory(categoryTitle);
-    $state.go('app.deals');
+    $state.go('app.deals', { category: categoryTitle });
   };
 
   $scope.viewLiked = function() {

@@ -3,10 +3,13 @@ angular.module('letterbox.controllers')
 .controller('DealsCtrl', function($scope,
                                   $rootScope,
                                   $state,
+                                  $stateParams,
                                   $ionicScrollDelegate,
                                   DealCategoryService,
                                   DealService) {
-  $scope.currentCategory = DealCategoryService.currentCategory;
+  var category = $stateParams.category;
+  $scope.currentCategory = category;
+
   $scope.deals = [];
   $scope.hasReachedEnd = false;
 
