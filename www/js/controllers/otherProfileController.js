@@ -2,9 +2,7 @@ angular.module('letterbox.controllers')
 
 .controller('OtherProfileCtrl', function($scope,
                                          $stateParams,
-                                         ProfileService,
-                                         UserProfileService) {
-
+                                         ProfileService) {
   var userId = $stateParams.userId;
   ProfileService.getOtherProfile(userId)
     .then(function(user) {

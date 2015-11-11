@@ -14,7 +14,6 @@ angular.module('letterbox.controllers')
                                  ChatService,
                                  DealService,
                                  RoomsService,
-                                 UserProfileService,
                                  UserLetterService,
                                  DealShareService,
                                  eventbus,
