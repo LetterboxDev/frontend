@@ -1,5 +1,4 @@
 .deal-view {
-  $maximumWidth: 600px;
   background: white;
   @media screen and (min-width: $maximumWidth) {
     max-width: $maximumWidth;

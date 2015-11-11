@@ -1,4 +1,10 @@
 .settings-list {
+  .list {
+    @media screen and (min-width: $maximumWidth) {
+      max-width: $maximumWidth;
+      margin: 0 auto;
+    }
+  }
   .setting-header {
     @extend .list-item-heading;
     font-size: 14px;
@@ -19,15 +25,12 @@
     letter-spacing: 2px;
     color: $colourSecondaryText;
     font-size: 10px;
+    background-color: $colourBackground;
+    border: none;
+    z-index: 0;
   }
 
-  // .inline-checkbox {
-  //   border: none;
-  // }
-
   .item-gender {
-    // padding-bottom: 0px; // padding already set by inline item
-
     i {
       font-size: 35px;
     }
