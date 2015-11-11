@@ -131,8 +131,9 @@ angular.module('letterbox.controllers')
       $scope.shareModal.show();
     }, function() {
       var alertPopup = $ionicPopup.alert({
-        title: $scope.recipient + '\'s Letterbox doesn\'t support deals yet!',
-        template: 'Try informing ' + $scope.recipient + ' to get the latest Letterbox app'
+        title: $scope.recipient + '\'s Letterbox doesn\'t support cutouts yet!',
+        template: 'Try informing ' + $scope.recipient + ' to get the latest Letterbox app',
+        cssClass: "popup-alert"
       });
     });
   };
