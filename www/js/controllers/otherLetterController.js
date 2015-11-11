@@ -1,6 +1,10 @@
 angular.module('letterbox.controllers')
 
 .controller('OtherLetterCtrl', function($scope,
-                                        UserLetterService) {
-  $scope.letter = UserLetterService.getCurrentLetter();
+                                        $stateParams,
+                                        RoomsService) {
+  var roomHash = $stateParams.roomHash;
+  RoomsService.getRoomLetter(roomHash).then(function(letter) {
+    $scope.letter = letter;
+  });
 });

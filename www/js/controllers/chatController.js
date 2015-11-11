@@ -14,7 +14,6 @@ angular.module('letterbox.controllers')
                                  ChatService,
                                  DealService,
                                  RoomsService,
-                                 UserLetterService,
                                  DealShareService,
                                  eventbus,
                                  socket) {
@@ -169,11 +168,8 @@ angular.module('letterbox.controllers')
   };
 
   $scope.showResponses = function() {
-    RoomsService.getRoomLetter($scope.roomHash).then(function(letter) {
-      UserLetterService.setCurrentLetter(letter);
-      $state.go('app.other-letter');
-    });
     $scope.closePopover();
+    $state.go('app.other-letter', { roomHash: $scope.roomHash });
   };
 
   $scope.closePopover = function() {

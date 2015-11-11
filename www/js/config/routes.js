@@ -146,7 +146,7 @@ angular.module('letterbox')
   })
 
   .state('app.other-letter', {
-    url: '/other-letter',
+    url: '/other-letter/:roomHash',
     views: {
       'menuContent': {
         templateUrl: 'templates/other-letter.html',
