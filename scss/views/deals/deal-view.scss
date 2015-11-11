@@ -1,4 +1,11 @@
 .deal-view {
+  $maximumWidth: 600px;
+  background: white;
+  @media screen and (min-width: $maximumWidth) {
+    max-width: $maximumWidth;
+    margin: 20px auto;
+    border: $colourBorder 1px solid;
+  }
   .deal-share-wrapper {
     padding: 10px;
   }
@@ -10,6 +17,8 @@
     .deal-img {
       width: 100vw;
       height: 100vw;
+      max-width: $maximumWidth;
+      max-height: $maximumWidth;
       background: $colourPrimary center center no-repeat;
       background-size: cover;
     }
