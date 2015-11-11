@@ -136,7 +136,7 @@ angular.module('letterbox')
   })
 
   .state('app.other-profile', {
-    url: '/other-profile',
+    url: '/other-profile/:userId',
     views: {
       'menuContent': {
         templateUrl: 'templates/other-profile.html',

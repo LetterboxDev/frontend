@@ -1,11 +1,16 @@
 angular.module('letterbox.controllers')
 
 .controller('OtherProfileCtrl', function($scope,
+                                         $stateParams,
+                                         ProfileService,
                                          UserProfileService) {
 
-  $scope.user = UserProfileService.getCurrentProfile();
-  $scope.user.name = $scope.user.firstName;
-  $scope.user.profile_pic = $scope.user.pictureMed;
-
+  var userId = $stateParams.userId;
+  ProfileService.getOtherProfile(userId)
+    .then(function(user) {
+      $scope.user = user;
+      $scope.user.name = $scope.user.firstName;
+      $scope.user.profile_pic = $scope.user.pictureMed;
+    });
 });
 
