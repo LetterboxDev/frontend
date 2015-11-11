@@ -42,9 +42,33 @@ angular.module('letterbox.controllers')
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
+
+    var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+    Notification.requestPermission(function (permission) {
+    });
+
+    function show(title, message) {
+      var instance = new Notification(
+        title, {
+          body: message,
+          icon: "img/android-icon-48x48.png"
+        }
+      );
+
+      instance.onshow = function () {
+        window.setTimeout(function(){ instance.close(); }, 10000);
+      };
+
+      return false;
+    }
+
     if (message.RoomHash === $scope.roomHash) {
-      $scope.messages.push(ChatService.formatMessage(message));
+      var formattedMessage = ChatService.formatMessage(message);
+      $scope.messages.push(formattedMessage);
       $scope.$apply();
+      if (!formattedMessage.isOwner) {
+        show($scope.recipient, formattedMessage.content);  
+      }
       $ionicScrollDelegate.scrollBottom(true);
     }
   });

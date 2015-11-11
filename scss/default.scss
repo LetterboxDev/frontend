@@ -1,6 +1,7 @@
 $nav-bar-height: 50px;
 $ios-status-bar-height: 20px;
 $ios-side-menu-title-height: 120px;
+$maximumWidth: 600px;
 
 ion-content {
   background-color: $colourBackground;
@@ -65,6 +66,19 @@ ion-content {
   }
 }
 
+body {
+  background-color: $colourDarkerBackground;
+}
+
+#main-wrapper {
+  max-width: $maximumWidth + 300;
+  margin: 0 auto;
+  ion-nav-view:first-child {
+    max-width: $maximumWidth + 300;
+    box-shadow: 0px 0px 4px $colourShadow;
+  }
+}
+
 // View container styles
 .view-container {
   .scroll-content.has-header {
@@ -73,6 +87,12 @@ ion-content {
 }
 
 // List item styles which can be extended by any list
+.list-max-width {
+  @media screen and (min-width: $maximumWidth) {
+    max-width: $maximumWidth;
+    margin: 20px auto;
+  }
+}
 .list-item-picture {
   float: left;
   height: 40px;
@@ -250,6 +270,7 @@ ion-popover-view.fit ion-content {
   background: rgba(0,0,0,0.7);
 
   .close-button {
+    cursor: pointer;
     z-index: 5;
     color: white;
     position: fixed;
@@ -262,6 +283,7 @@ ion-popover-view.fit ion-content {
   }
 }
 
-.slider-pager-page i{
+.slider-pager-page i {
   color: white;
+  cursor: pointer;
 }

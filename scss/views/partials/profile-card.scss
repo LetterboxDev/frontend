@@ -24,12 +24,9 @@
   max-width: 500px;
   min-width: 280px;
   width: 100vw;
+  margin: 0 auto;
 
   &.moving-out {
-    top: 10px;
-    position: absolute;
-    height: 710px;
-    z-index: 100;
     -webkit-animation: card-move-out 0.3s linear forwards;
   }
   &.moving-in {
@@ -83,7 +80,7 @@
 
   .card-content {
     background: none;
-    padding: 10px 16px;
+    padding: 10px 18px;
     .section {
       padding: 12px 0 8px;
       h3 {

@@ -1,6 +1,7 @@
 .deal-share-modal {
   .title {
     @include uppercase_bold_font();
+    color: $colourPrimaryText;
   }
   .bar-header {
     position: relative;
@@ -31,6 +32,7 @@
   margin: 10px 0;
 
   .deal-share-deal {
+    cursor: pointer;
     text-align: center;
     margin: 8px 0;
     display: flex;
