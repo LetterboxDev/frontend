@@ -74,6 +74,12 @@ ion-content {
 }
 
 // List item styles which can be extended by any list
+.list { // this overrides ionic's list
+  @media screen and (min-width: $maximumWidth) {
+    max-width: $maximumWidth;
+    margin: 20px auto;
+  }
+}
 .list-item-picture {
   float: left;
   height: 40px;
