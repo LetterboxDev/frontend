@@ -14,9 +14,6 @@ angular.module('letterbox.controllers')
                                  ChatService,
                                  DealService,
                                  RoomsService,
-                                 UserProfileService,
-                                 UserLetterService,
-                                 DealShareService,
                                  eventbus,
                                  socket) {
 
@@ -151,7 +148,6 @@ angular.module('letterbox.controllers')
     DealService.checkDealCompatability($scope.recipientId)
     .then(function() {
       $scope.fetchLikedDeals();
-      DealShareService.setCurrentRoomHash($scope.roomHash);
       $scope.shareModal.show();
     }, function() {
       var alertPopup = $ionicPopup.alert({
@@ -178,9 +174,8 @@ angular.module('letterbox.controllers')
     $scope.showLoading();
     ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
       user.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count,
-      UserProfileService.setCurrentProfile(user);
       $scope.hideLoading();
-      $state.go('app.other-profile');
+      $state.go('app.other-profile', { userId: user.hashedId });
     });
     $scope.closePopover();
   };
@@ -195,11 +190,8 @@ angular.module('letterbox.controllers')
   };
 
   $scope.showResponses = function() {
-    RoomsService.getRoomLetter($scope.roomHash).then(function(letter) {
-      UserLetterService.setCurrentLetter(letter);
-      $state.go('app.other-letter');
-    });
     $scope.closePopover();
+    $state.go('app.other-letter', { roomHash: $scope.roomHash });
   };
 
   $scope.closePopover = function() {
@@ -208,7 +200,7 @@ angular.module('letterbox.controllers')
 
   $scope.viewDeal = function(deal) {
     DealService.showShare = true;
-    $state.go('app.deal', { dealId: deal.id });
+    $state.go('app.deal', { dealId: deal.id, roomHash: $scope.roomHash });
     $scope.closeShareModal();
   };
 

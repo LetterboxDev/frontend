@@ -13,8 +13,7 @@ angular.module('letterbox.controllers')
   };
 
   $scope.viewDeal = function(deal) {
-    DealService.setCurrentDeal(deal);
-    $state.go('app.deal');
+    $state.go('app.deal', { dealId: deal.id });
   }
 
   fetchLikedDeals();

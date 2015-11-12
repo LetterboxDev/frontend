@@ -85,7 +85,7 @@ angular.module('letterbox')
   })
 
   .state('app.deals', {
-    url: '/deals',
+    url: '/deals/:category',
     views: {
       'menuContent': {
         templateUrl: 'templates/deals.html',
@@ -95,7 +95,7 @@ angular.module('letterbox')
   })
 
   .state('app.deal', {
-    url: '/deal/:dealId',
+    url: '/deal/:dealId/:roomHash',
     views: {
       'menuContent': {
         templateUrl: 'templates/deal.html',
@@ -136,7 +136,7 @@ angular.module('letterbox')
   })
 
   .state('app.other-profile', {
-    url: '/other-profile',
+    url: '/other-profile/:userId',
     views: {
       'menuContent': {
         templateUrl: 'templates/other-profile.html',
@@ -146,7 +146,7 @@ angular.module('letterbox')
   })
 
   .state('app.other-letter', {
-    url: '/other-letter',
+    url: '/other-letter/:roomHash',
     views: {
       'menuContent': {
         templateUrl: 'templates/other-letter.html',
