@@ -40,9 +40,11 @@ angular.module('letterbox.controllers')
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
 
-    var Notification = window.Notification || window.mozNotification || window.webkitNotification;
-    Notification.requestPermission(function (permission) {
-    });
+    if (!window.cordova) {
+      var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+      Notification.requestPermission(function (permission) {
+      });
+    }
 
     function show(title, message) {
       var instance = new Notification(
@@ -63,7 +65,7 @@ angular.module('letterbox.controllers')
       var formattedMessage = ChatService.formatMessage(message);
       $scope.messages.push(formattedMessage);
       $scope.$apply();
-      if (!formattedMessage.isOwner) {
+      if (!window.cordova && !formattedMessage.isOwner) {
         show($scope.recipient, formattedMessage.content);  
       }
       $ionicScrollDelegate.scrollBottom(true);
