@@ -1,7 +1,7 @@
 angular.module('letterbox.services')
 
 .service('BackgroundService', function() {
-  var isActive = false;
+  var isActive = true;
   var BackgroundService = {};
   var onResumeListeners = [];
   var onPauseListeners = [];
