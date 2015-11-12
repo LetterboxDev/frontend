@@ -149,22 +149,24 @@ angular.module('letterbox.services')
   }
 
   DbService.updateRooms = function() {
+    var deferred = $q.defer();
     backend.getRooms().$promise.then(function(rooms) {
       rooms.forEach(function(room) {
-        DbService.addRoom(room.hash, room.userId, room.userName, room.thumbnail, room.profilePicture, room.createdAt).then(function(success) {
-          eventbus.call('roomsUpdated', rooms);
-        });
+        DbService.addRoom(room.hash, room.userId, room.userName, room.thumbnail, room.profilePicture, room.createdAt).then(function(success) {});
       });
+      deferred.resolve(rooms);
     });
+    return deferred.promise;
   };
 
   DbService.getRooms = function() {
     var deferred = $q.defer();
     checkInit(deferred);
     if (socket.isConnected()) {// Is connected to Internet and backend is awake
-      DbService.updateRooms();
+      DbService.updateRooms().then(deferred.resolve);
+    } else {
+      getRoomsFromDb().then(deferred.resolve);
     }
-    getRoomsFromDb().then(deferred.resolve);
     return deferred.promise;
   };
 
