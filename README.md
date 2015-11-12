@@ -36,6 +36,8 @@
 
 `ionic plugin add phonegap-plugin-push`
 
+`ionic plugin add https://github.com/katzer/cordova-plugin-local-notifications`
+
 **For building for iOS:**
 
 `git clone https://github.com/Wizcorp/phonegap-facebook-plugin.git`
