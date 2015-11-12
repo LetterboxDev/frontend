@@ -14,7 +14,6 @@ angular.module('letterbox.controllers')
                                  ChatService,
                                  DealService,
                                  RoomsService,
-                                 ChromeNotifService,
                                  eventbus,
                                  socket) {
 
