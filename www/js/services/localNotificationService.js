@@ -10,9 +10,10 @@ angular.module('letterbox.services')
   function registerListeners() {
     if (window.cordova) {
       window.cordova.plugins.notification.local.on("click", function(notification) {
-        if (notification.data.type === 'room') {
-          $state.go('app.chat', {chatId: notification.data.RoomHash});
-        } else if (notification.data.type === 'letter') {
+        var data = JSON.parse(notification.data);
+        if (data.type === 'room') {
+          $state.go('app.chat', {chatId: data.RoomHash});
+        } else if (data.type === 'letter') {
           $state.go('app.notifications');
         }
       });
