@@ -1,4 +1,4 @@
-<ion-view view-title="Send a Letter">
+<ion-view view-title="To: {{ card.name }}">
   <ion-content scroll="false">
     <div class="letter-wrapper">
       <div class="letter" ng-controller="LetterCtrl">
@@ -6,9 +6,9 @@
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
-                <h3>Would you rather...</h3>
-                <p class="warning">{{ warning }}</p>
+                <h3 class="header-title">I would rather...</h3>
                 <p class="current">Question {{ curr + 1 }} of 5</p>
+                <p class="warning">{{ warning }}</p>
                 <div class="row answer-row">
                   <div ng-class="{'active' : selectedTab === 0}" ng-click="selectTab(0)" class="left col">
                     <p>{{ currentQuestion.option0 }}</p>
@@ -37,10 +37,7 @@
 
               <div class="card back">
                 <div class="back-container">
-                  <div class="small-profile-pic-header">
-                    <img class="small-profile-pic" ng-src="{{ card.profile_pic }}" />
-                    <span class="name">{{ card.name }}</span><span class="age">, {{ card.age }}</span>
-                  </div>
+                  <profile-pic-small data-set="card"></profile-pic-small>
                   <div class="item card-content">
                     <div class="section">
                       <h3>bio</h3>

@@ -7,30 +7,42 @@ angular.module('letterbox.controllers')
 
   $scope.chats = [];
 
+  function formatChat(room) {
+    var latestMessage = room.latestMessage;
+    var last_message = latestMessage.content ? (latestMessage.sender === window.localStorage.getItem('hashedId') ? 'You: ' : room.userName + ': ') + latestMessage.content : 'No messages yet';
+    var last_activity = latestMessage.timeSent ? new Date(latestMessage.timeSent) : new Date(room.createdAt);
+    return {
+      id: room.hash,
+      from: room.userName,
+      profile_pic: room.thumbnail,
+      last_message: last_message,
+      last_activity: last_activity
+    };
+  }
+
   function updateRooms(rooms) {
-    var temp = [];
     for (var i = 0; i < rooms.length; i++) {
       var room = rooms[i];
       RoomsService.getLatestRoomInfo(room.hash).then(function(room) {
-        var latestMessage = room.latestMessage;
-        var last_message = latestMessage.content ? (latestMessage.sender === window.localStorage.getItem('hashedId') ? 'You: ' : room.userName + ': ') + latestMessage.content : 'No messages yet';
-        var last_activity = latestMessage.timeSent ? new Date(latestMessage.timeSent) : new Date(room.createdAt);
-        var newChat = {
-          id: room.hash,
-          from: room.userName,
-          profile_pic: room.thumbnail,
-          last_message: last_message,
-          last_activity: last_activity
-        };
-        temp.push(newChat);
-        temp.sort(function(a, b) {
+        var chat = formatChat(room);
+        var chatModified = false;
+        for (var j = 0; j < $scope.chats.length; j++) {
+          if ($scope.chats[j].id === chat.id) {
+            $scope.chats[j] = chat;
+            chatModified = true;
+            break;
+          }
+        }
+        if (!chatModified) {
+          $scope.chats.push(chat);
+        }
+        $scope.chats.sort(function(a, b) {
           return b.last_activity.getTime() - a.last_activity.getTime();
         });
       });
     }
-    $scope.chats = temp;
   }
-  RoomsService.updateRooms();
+  $scope.$on('$ionicView.enter', RoomsService.updateRooms);
   eventbus.registerListener('roomsUpdated', updateRooms);
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;

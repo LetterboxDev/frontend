@@ -3,13 +3,14 @@ angular.module('letterbox.services')
 .service('ChatService', function($q,
                                  RoomsService,
                                  DbService,
+                                 DealService,
                                  backend,
                                  eventbus) {
 
   var ChatService = {};
 
   function insertMessageIntoDb(message) {
-    DbService.addMessage(message.RoomHash, message.sender, message.content, message.timeSent);
+    DbService.addMessage(message.RoomHash, message.sender, message.content, message.timeSent, message.type, message.DealId);
   };
 
   ChatService.init = function() {
@@ -34,11 +35,23 @@ angular.module('letterbox.services')
   };
 
   ChatService.formatMessage = function(message) {
-    return {
+    var formatted = {
       isOwner: message.sender === window.localStorage.getItem('hashedId'),
       content: message.content,
-      timestamp: new Date(message.timeSent)
+      timestamp: new Date(message.timeSent),
+      type: message.type,
     };
+    if (message.type === 'share' && !message.Deal) {
+      DealService.getDeal(message.DealId)
+      .then(function(deal) {
+        formatted.Deal = deal;
+        formatted.DealId = deal.id;
+      });
+    } else if (message.type === 'share' && message.Deal) {
+      formatted.DealId = message.Deal.id;
+      formatted.Deal = message.Deal;
+    }
+    return formatted;
   };
 
   ChatService.getRecipientName = function(chatId) {

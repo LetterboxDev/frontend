@@ -1,0 +1,28 @@
+.deal-favorite {
+  position: relative;
+  cursor: pointer;
+  font-size: 12px;
+  color: $colourPrimary;
+
+  border: 1px solid $colourPrimary;
+  border-radius: 5px;
+  padding: 0 5px;
+  box-shadow: 0 2px darken($colourPrimary, 25%);
+  top: -2px;
+
+  &:active {
+    box-shadow: 0 0 darken($colourPrimary, 25%);
+    top: 0;
+  }
+
+  i {
+    margin-left: 6px;
+    font-size: 16px;
+    vertical-align: middle;
+  }
+}
+.deal-favorite.liked {
+  background-color: $colourPrimary;
+  color: white;
+}
+

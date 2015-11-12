@@ -18,6 +18,12 @@ angular.module('letterbox', ['ionic',
                              'ngIOS9UIWebViewPatch'
                             ])
 
+.constant('VERSION', {
+  major: 0,
+  minor: 1,
+  revision: 0
+})
+
 .run(function($ionicPlatform, $rootScope, eventbus) {
   $rootScope.$on("$stateChangeError", console.log.bind(console));
 
@@ -58,4 +64,3 @@ angular.module('letterbox', ['ionic',
 .config(function(FacebookProvider) {
   FacebookProvider.init('1674828996062928');
 });
-

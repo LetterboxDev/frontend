@@ -9,13 +9,15 @@ angular.module('letterbox.controllers')
                                   eventbus,
                                   backend,
                                   letterService,
-                                  MatchService) {
+                                  MatchService,
+                                  ReportService) {
 
   $scope.cards = [];
   $scope.isLoading = false;
 
   eventbus.registerListener('enterHome', getCard);
   eventbus.registerListener('closeLetter', removeTopCard);
+  eventbus.registerListener('changeGender', checkAndGetCard);
   getCard();
 
   $scope.changeCard = function() {
@@ -57,6 +59,16 @@ angular.module('letterbox.controllers')
   /**
    * Helper functions
    */
+  function checkAndGetCard() {
+    // if there is card currently loaded, change it
+    // otherwise, load new card
+    if ($scope.cards.length === 0) {
+      getCard();
+    } else {
+      $scope.changeCard();
+    }
+  }
+
   function getCard() {
     if (window.localStorage.getItem('token') && $scope.cards.length === 0 && !$scope.isLoading) {
       $scope.isLoading = true;
@@ -88,7 +100,8 @@ angular.module('letterbox.controllers')
       bio: match.bio,
       profile_pic: match.pictureMed,
       questions: match.questions,
-      mutual_friends_count: (typeof match.mutualFriends === 'undefined') ? 'unknown' : match.mutualFriends.summary.total_count
+      mutual_friends_count: (typeof match.mutualFriends === 'undefined') ? 'unknown' : match.mutualFriends.summary.total_count,
+      likedDeals: match.likedDeals
     };
   }
 

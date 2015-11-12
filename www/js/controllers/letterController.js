@@ -10,6 +10,7 @@ angular.module('letterbox.controllers')
 
   // Makes sure that cache is cleared after every time user submits/closes letter
   $scope.$on("$ionicView.afterLeave", function () {
+    $('.button-next').qtip('destroy');
     $ionicHistory.clearCache();
   });
 
@@ -32,6 +33,7 @@ angular.module('letterbox.controllers')
     $scope.currentQuestion = targetUser.questions[0];
     $scope.warning = '';
     $scope.tooltipShown = false;
+    $scope.selectedTab = -1;
   }
 
   $scope.nextQuestion = function() {
@@ -46,7 +48,7 @@ angular.module('letterbox.controllers')
       eventbus.call('closeLetter');
       return;
     } else if ($scope.curr === $scope.max) {
-      $scope.warning = 'Please complete all answers.';
+      $scope.warning = 'Please answer all questions.';
       return;
     }
     $scope.curr++;

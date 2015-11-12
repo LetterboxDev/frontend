@@ -7,7 +7,6 @@ angular.module('letterbox.controllers')
                                      backend,
                                      NotificationsService,
                                      eventbus) {
-
   getNotification();
 
   $ionicHistory.nextViewOptions({
@@ -35,9 +34,15 @@ angular.module('letterbox.controllers')
       $scope.isExistingChat = false;
     }
 
-    NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
-      $scope.response = notification;
+    NotificationsService.getNotificationsList().then(function(notifications) {
+      NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
+        $scope.response = notification;
+        $scope.numCorrect = notification.questionsAnswers.filter(function(obj) {
+          return obj.isCorrect == true 
+        }).length;
+      });
     });
+    
   }
 });
 

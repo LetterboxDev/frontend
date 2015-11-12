@@ -3,19 +3,30 @@ angular.module('letterbox.controllers')
 .controller('ChatCtrl', function($scope,
                                  $stateParams,
                                  $ionicScrollDelegate,
+                                 $ionicModal,
                                  $window,
                                  $timeout,
                                  $state,
                                  $ionicPopover,
+                                 $ionicPopup,
+                                 $ionicLoading,
                                  backend,
                                  ChatService,
+                                 DealService,
                                  RoomsService,
                                  eventbus,
                                  socket) {
 
+  $scope.messages = [];
   $scope.recipient = '';
   $scope.recipientId = '';
   $scope.data = {message: ''};
+  $scope.viewingDeals = 'mutual';
+  $scope.deals = {
+    own: [],
+    user: [],
+    mutual: []
+  };
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
@@ -28,9 +39,33 @@ angular.module('letterbox.controllers')
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
+
+    var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+    Notification.requestPermission(function (permission) {
+    });
+
+    function show(title, message) {
+      var instance = new Notification(
+        title, {
+          body: message,
+          icon: "img/android-icon-48x48.png"
+        }
+      );
+
+      instance.onshow = function () {
+        window.setTimeout(function(){ instance.close(); }, 10000);
+      };
+
+      return false;
+    }
+
     if (message.RoomHash === $scope.roomHash) {
-      $scope.messages.push(ChatService.formatMessage(message));
+      var formattedMessage = ChatService.formatMessage(message);
+      $scope.messages.push(formattedMessage);
       $scope.$apply();
+      if (!formattedMessage.isOwner) {
+        show($scope.recipient, formattedMessage.content);  
+      }
       $ionicScrollDelegate.scrollBottom(true);
     }
   });
@@ -44,7 +79,6 @@ angular.module('letterbox.controllers')
   };
 
   $scope.$on("$ionicView.enter", function(scopes, states) {
-    $scope.messages = [];
     ChatService.getRecipientName($scope.roomHash).then(function(recipient) {
       $scope.recipient = recipient;
     });
@@ -54,8 +88,29 @@ angular.module('letterbox.controllers')
     });
 
     ChatService.getMessagesFromBackend($scope.roomHash).then(function(messages) {
+      var i = 0, j = 0;
+      var initialMessageCount = $scope.messages.length;
+      var messageAdded = false;
+      while (i < messages.length && j < $scope.messages.length) {
+        if (messages[i].timestamp > $scope.messages[j].timestamp) {
+          j++;
+        } else if (messages[i].timestamp.getTime() === $scope.messages[j].timestamp.getTime()) {
+          i++;
+        } else {
+          $scope.messages.splice(j, 0, messages[i]);
+          messageAdded = true;
+        }
+      }
+      if (messages.length > $scope.messages.length) {
+        messageAdded = true;
+        for (var k = $scope.messages.length; k < messages.length; k++) {
+          $scope.messages.push(messages[k]);
+        }
+      }
       $scope.messages = messages;
-      $ionicScrollDelegate.scrollBottom(false);
+      if (messageAdded) {
+        $ionicScrollDelegate.scrollBottom(initialMessageCount !== 0);
+      }
     });
 
     window.addEventListener('native.keyboardhide', onKeyboardHide, false);
@@ -82,29 +137,89 @@ angular.module('letterbox.controllers')
     }
   };
 
+  $ionicModal.fromTemplateUrl('templates/deal-share-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.shareModal = modal;
+  });
+
+  $scope.openShareModal = function() {
+    DealService.checkDealCompatability($scope.recipientId)
+    .then(function() {
+      $scope.fetchLikedDeals();
+      $scope.shareModal.show();
+    }, function() {
+      var alertPopup = $ionicPopup.alert({
+        title: $scope.recipient + '\'s Letterbox doesn\'t support cutouts yet!',
+        template: 'Try informing ' + $scope.recipient + ' to get the latest Letterbox app',
+        cssClass: "popup-alert"
+      });
+    });
+  };
+
+  $scope.closeShareModal = function() {
+    $scope.shareModal.hide();
+  };
+
+  $scope.$on('$destroy', function() {
+    $scope.shareModal.remove();
+  });
+
   $scope.showPopover = function($event) {
     $scope.popover.show($event);
   };
 
   $scope.showOtherUserProfile = function() {
-    // TODO show other user profile
+    $scope.showLoading();
     ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
-      // Handle going to profile here, This could also be done in profile page
-      console.log(user); // For you to see format of data
+      user.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count,
+      $scope.hideLoading();
+      $state.go('app.other-profile', { userId: user.hashedId });
     });
     $scope.closePopover();
   };
 
-  $scope.showResponses = function() {
-    // TODO show responses to questions
-    RoomsService.getRoomLetter($scope.roomHash).then(function(letter) {
-      // Handle letter here, This could also be done in the responses page
-      console.log(letter); // For you to see format of data
+  $scope.showLoading = function() {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="dots"></ion-spinner>'
     });
+  };
+  $scope.hideLoading = function(){
+    $ionicLoading.hide();
+  };
+
+  $scope.showResponses = function() {
     $scope.closePopover();
+    $state.go('app.other-letter', { roomHash: $scope.roomHash });
   };
 
   $scope.closePopover = function() {
     $scope.popover.hide();
+  };
+
+  $scope.viewDeal = function(deal) {
+    DealService.showShare = true;
+    $state.go('app.deal', { dealId: deal.id, roomHash: $scope.roomHash });
+    $scope.closeShareModal();
+  };
+
+  $scope.viewSharedDeal = function(deal) {
+    DealService.showShare = false;
+    $state.go('app.deal', { dealId: deal.id });
+  };
+
+  $scope.fetchLikedDeals = function() {
+    DealService.getOwnLikedDeals().then(function(deals) {
+      $scope.deals['own'] = deals;
+    });
+
+    DealService.getUserLikedDeals($scope.recipientId).then(function(deals) {
+      $scope.deals['user'] = deals;
+    });
+
+    DealService.getMutualLikedDeals($scope.recipientId).then(function(deals) {
+      $scope.deals['mutual'] = deals;
+    });
   };
 });

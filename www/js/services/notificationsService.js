@@ -10,7 +10,8 @@ angular.module('letterbox.services')
       questionsAnswers.push({
         option0: question.WyrQuestion.option0,
         option1: question.WyrQuestion.option1,
-        answer: question.answer
+        answer: question.answer,
+        isCorrect: question.isCorrect
       });
     }
     var message = 'answered your questions. Click here to see ' + (letter.UserAccount.gender === 'male' ? 'his' : 'her') + ' responses.';

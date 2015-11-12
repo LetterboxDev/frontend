@@ -1,0 +1,34 @@
+<!-- other response will show the response of the sender's letter in a room, not necessary to be the other people's response, can be yours. -->
+<ion-view view-title="Letter">
+  <ion-content>
+    <div class="response-cards">
+      <div class="profile-card moving-in">
+        <div class="flipper-container" flip-card>
+          <div class="flipper">
+            <div class="card front">
+              <div class="item card-content">
+                <div class="section">
+                  <h3>{{ letter.senderName }} would rather...</h3>
+                  <div class="questions">
+                    <div class="question" ng-repeat="question in letter.questions">
+                      <div class="option option0" ng-class="{ 'selected' : !question.answer}">
+                        <span>{{ question.option0 }}</span>
+                        <i ng-if="question.isCorrect && !question.answer" class="is-correct icon ion-checkmark-circled"></i>
+                        <i ng-if="!question.isCorrect && !question.answer" class="is-correct icon ion-close-circled"></i>
+                      </div>
+                      <div class="option option1" ng-class="{ 'selected' : question.answer}">
+                        <span>{{ question.option1 }}</span>
+                        <i ng-if="question.isCorrect && question.answer" class="is-correct icon ion-checkmark-circled"></i>
+                        <i ng-if="!question.isCorrect && question.answer" class="is-correct icon ion-close-circled"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

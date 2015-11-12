@@ -1,4 +1,7 @@
 .chats-list {
+  .chat-profile-pic {
+    @extend .list-item-picture;
+  }
   .chat-from {
     @extend .list-item-heading;
   }
@@ -15,7 +18,7 @@
 }
 
 .messages-list .list {
-  padding: 20px 10px 70px;
+  padding: 20px 5px 70px;
 
   .item {
     padding: 0 10px;
@@ -36,6 +39,69 @@
     .sent-msg {
       @include message(sent);
     }
+
+    .shared-deal {
+      display: flex;
+      display: -webkit-flex; /* Safari */
+      align-items: center;
+      -webkit-align-items: center; /* Safari */
+      flex-flow: row nowrap;
+      -webkit-flex-flow: row nowrap; /* Safari */
+      margin-bottom: 5px;
+      padding: 7px;
+      border: $colourBorder solid 1px;
+      border-radius: 10px;
+      cursor: pointer;
+      max-width: 400px;
+      background-color: #eee;
+
+      .deal-img {
+        min-height: 50px;
+        min-width: 50px;
+        margin-right: 10px;
+        border-radius: 50%;
+        border: white solid 2px;
+        background: center center no-repeat;
+        background-size: cover;
+
+      }
+
+      .deal-content {
+        $font-size: 11px;
+        $line-height: 1.3;
+        $lines-to-show: 4;
+
+        display: flex;
+        display: -webkit-flex; /* Safari */
+        flex-flow: column nowrap;
+        -webkit-flex-flow: column nowrap; /* Safari */
+        .deal-title {
+          color: $colourPrimary;
+          white-space: normal;
+          font-weight: bold;
+          line-height: 1.2em;
+          margin-bottom: 5px;
+        }
+
+        .deal-description {
+          white-space: normal;
+          display: block; /* Fallback for non-webkit */
+          display: -webkit-box;
+          height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+          font-size: $font-size;
+          line-height: $line-height;
+          -webkit-line-clamp: $lines-to-show;
+          -webkit-box-orient: vertical;
+        }
+      }
+
+
+      i {
+        margin: 0px 5px;
+        color: $colourPrimary;
+        font-size: 20px;
+      }
+    }
   }
 }
 
@@ -55,11 +121,18 @@
       resize: none;
     }
   }
-  .send {
+  .send,
+  .share {
     background-color: white;
     color: $colourPrimary;
-    margin-left: 2vw;
     border: none;
+  }
+  .send {
+    margin-left: 2vw;
+  }
+  .share {
+    font-size: 1.5em;
+    padding-right: 20px;
   }
 }
 

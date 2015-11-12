@@ -2,6 +2,7 @@ angular.module('letterbox.services')
 
 .service('AuthService', function($q,
                                  $ionicHistory,
+                                 $cordovaFacebook,
                                  backend,
                                  eventbus,
                                  DbService,
@@ -24,6 +25,7 @@ angular.module('letterbox.services')
     backend.auth(fbToken).$promise
     .then(function(success) {
       saveDetails(success);
+      backend.updateVersion();
       deferred.resolve();
     }, function(error) {
       deferred.reject();
@@ -38,6 +40,7 @@ angular.module('letterbox.services')
     backend.renewToken().$promise
     .then(function(success) {
       saveDetails(success);
+      backend.updateVersion();
       deferred.resolve();
     }, function(err) {
       AuthService.logout().then(function() {
@@ -68,6 +71,10 @@ angular.module('letterbox.services')
         window.localStorage.setItem('isRegistered', '');
         window.localStorage.setItem('genderPreference', '');
         window.localStorage.setItem('perfectMatch', '');
+
+        if (window.cordova) {
+          $cordovaFacebook.logout();
+        }
 
         socket.uninit();
 

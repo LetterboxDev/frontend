@@ -1,0 +1,56 @@
+.deal.profile-card  {
+  margin-bottom: 20px;
+  .large-profile-pic {
+    background-repeat: no-repeat;
+    background-position: center, center;
+  }
+  .profile-pic-overlay.deal-header {
+    display: flex;
+    -webkit-align-items: center; /* Safari */
+    align-items:         center;
+    .name {
+      white-space: normal;
+      flex: 1;
+      margin-right: 10px;
+    }
+  }
+
+  .deal-overlay {
+    position: absolute;
+    bottom: 20vh;
+    background-color: $colourPrimary;
+    color: white;
+    padding: 10px;
+    max-width: 40vw;
+    text-align: center;
+  }
+
+  .card-content {
+    $font-size: 13px;
+    $line-height: 1.5;
+    $lines-to-show: 4;
+    padding: 16px;
+    p {
+      white-space: normal;
+      display: block; /* Fallback for non-webkit */
+      display: -webkit-box;
+      height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+      font-size: $font-size;
+      line-height: $line-height;
+      -webkit-line-clamp: $lines-to-show;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  .learn-more {
+    p {
+      font-weight: bold;
+      text-transform: uppercase;
+      color: white;
+    }
+    background-color: $colourPrimary;
+    width: 100%;
+    text-align: center;
+  }
+}
+
