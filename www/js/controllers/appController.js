@@ -8,6 +8,8 @@ angular.module('letterbox.controllers')
                                 eventbus,
                                 socket,
                                 LocationService,
+                                LocalNotificationService,
+                                BackgroundService,
                                 DbService,
                                 RoomsService,
                                 ChatService,
