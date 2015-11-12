@@ -21,7 +21,7 @@ angular.module('letterbox', ['ionic',
 .constant('VERSION', {
   major: 0,
   minor: 1,
-  revision: 0
+  revision: 1
 })
 
 .run(function($ionicPlatform, $rootScope, eventbus) {
