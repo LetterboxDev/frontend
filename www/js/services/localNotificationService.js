@@ -9,17 +9,26 @@ angular.module('letterbox.services')
 
   function registerListeners() {
     if (window.cordova) {
+      window.cordova.plugins.notification.local.on("click", function(notification) {
+        if (notification.data.type === 'room') {
+          $state.go('app.chat', {chatId: data.room.RoomHash});
+        } else if (notification.data.type === 'letter') {
+          $state.go('app.notifications');
+        }
+      });
+
       eventbus.registerListener('roomMessage', function(roomMessage) {
-        if (BackgroundService.isInBackground() ||
-           (!$state.includes('app.chat', {chatId: roomMessage.message.RoomHash}) &&
-            roomMessage.message.sender !== window.localStorage.getItem('hashedId'))) {
+        if (roomMessage.message.sender !== window.localStorage.getItem('hashedId') &&
+          (BackgroundService.isInBackground() ||
+           !$state.includes('app.chat', {chatId: roomMessage.message.RoomHash}))) {
           window.cordova.plugins.notification.local.schedule({
             id: 1,
             text: roomMessage.senderName + ": " + roomMessage.message.content,
             data: {
               type: 'room',              
               RoomHash: roomMessage.message.RoomHash
-            }
+            },
+            smallIcon: 'res://notification'
           });
         }
       });
@@ -32,7 +41,8 @@ angular.module('letterbox.services')
             data: {
               type: 'room',
               RoomHash: roomMessage.message.RoomHash
-            }
+            },
+            smallIcon: 'res://notification'
           });
         }
       });
@@ -45,7 +55,8 @@ angular.module('letterbox.services')
             data: {
               type: 'letter',
               LetterHash: letterData.hash
-            }
+            },
+            smallIcon: 'res://notification'
           });
         }
       });
