@@ -64,3 +64,4 @@ angular.module('letterbox', ['ionic',
 .config(function(FacebookProvider) {
   FacebookProvider.init('1674828996062928');
 });
+
