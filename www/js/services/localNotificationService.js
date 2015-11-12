@@ -11,7 +11,7 @@ angular.module('letterbox.services')
     if (window.cordova) {
       window.cordova.plugins.notification.local.on("click", function(notification) {
         if (notification.data.type === 'room') {
-          $state.go('app.chat', {chatId: data.room.RoomHash});
+          $state.go('app.chat', {chatId: notification.data.RoomHash});
         } else if (notification.data.type === 'letter') {
           $state.go('app.notifications');
         }
