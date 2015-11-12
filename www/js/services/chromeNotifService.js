@@ -3,7 +3,7 @@ angular.module('letterbox.services')
 .service('ChromeNotifService', function($timeout, eventbus, ChatService) {
   var ChromeNotif = this;
 
-  if (!window.cordova) {
+  if (document.URL.indexOf( 'http://' ) !== -1 || document.URL.indexOf( 'https://' ) !== -1) {
     var Notification = window.Notification ||
                        window.mozNotification ||
                        window.webkitNotification;
@@ -11,31 +11,31 @@ angular.module('letterbox.services')
     if (Notification.permission !== 'granted') {
       Notification.requestPermission();
     }
-  }
 
-  eventbus.registerListener('roomMessage', function(roomMessage) {
-    var message = roomMessage.message;
-    var senderName = roomMessage.senderName;
-    var formattedMessage = ChatService.formatMessage(message);
+    eventbus.registerListener('roomMessage', function(roomMessage) {
+      var message = roomMessage.message;
+      var senderName = roomMessage.senderName;
+      var formattedMessage = ChatService.formatMessage(message);
 
-    if (!window.cordova && !formattedMessage.isOwner) {
-      show(senderName, formattedMessage.content);
-    }
-  });
-
-  function show(title, message) {
-    var instance = new Notification(
-      title, {
-        body: message,
-        icon: "img/android-icon-48x48.png"
+      if (!formattedMessage.isOwner) {
+        show(senderName, formattedMessage.content);
       }
-    );
+    });
 
-    instance.onshow = function () {
-      $timeout(function(){
-        instance.close();
-      }, 10000);
-    };
+    function show(title, message) {
+      var instance = new Notification(
+        title, {
+          body: message,
+          icon: "img/android-icon-48x48.png"
+        }
+      );
+
+      instance.onshow = function () {
+        $timeout(function(){
+          instance.close();
+        }, 10000);
+      };
+    }
   }
 });
 
