@@ -174,10 +174,9 @@ angular.module('letterbox.controllers')
 
   $scope.showOtherUserProfile = function() {
     $scope.showLoading();
-    ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
-      user.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count,
+    ChatService.getRecipientHashedId($scope.roomHash).then(function(userId) {
       $scope.hideLoading();
-      $state.go('app.other-profile', { userId: user.hashedId });
+      $state.go('app.other-profile', { userId: userId });
     });
     $scope.closePopover();
   };
