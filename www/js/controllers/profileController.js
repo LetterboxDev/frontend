@@ -140,15 +140,10 @@ angular.module('letterbox.controllers')
   }
 
   function showSuccess() {
-    $ionicPopup.confirm({
+    $ionicPopup.alert({
       title: "Your profile has been updated!",
-      cssClass: "popup-alert",
-      okType: "button-positive",
-      okText: "Home"
+      cssClass: "popup-alert"
     }).then(function(res) {
-      if (res) {
-        $state.go('app.home');
-      }
     });
   }
 
