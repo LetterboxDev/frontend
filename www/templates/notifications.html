@@ -5,18 +5,31 @@
       <ion-spinner icon="dots"></ion-spinner>
     </div>
     <div ng-if="!isLoading">
-      <div ng-if="notifications.length > 0">
-        <ion-list class="notifications-list">
-          <ion-item ng-repeat="notification in notifications" class="item item-avatar" ng-click="selectNotification(notification)">
-            <img class="notification-profile-pic" ng-src="{{notification.profilePicThumb}}">
-            <h2 class="notification-from">{{notification.from}}<span ng-if="!notification.isRead">UNREAD</span></h2>
-            <p class="notification-message">{{notification.message}}</p>
-            <span am-time-ago="notification.createdAt" class="notification-timestamp"></span>
-          </ion-item>
-        </ion-list>
+
+      <div class="bar bar-header">
+        <div class="button-bar bar-light deal-share-seg-control">
+          <a class="button left" ng-class="{highlighted: viewingNotifications==='letters'}" ng-click="viewingNotifications='letters'">Letters</a>
+          <a class="button right" ng-class="{highlighted: viewingNotifications==='chats'}" ng-click="viewingNotifications='chats'">Chats</a>
+        </div>
       </div>
-      <div class="feedback" ng-if="notifications.length === 0" >
-        <h2>No notifications!</h2>
+
+      <div ng-if="viewingNotifications==='letters'">
+        <div ng-if="notifications.length > 0">
+          <ion-list class="notifications-list">
+            <ion-item ng-repeat="notification in notifications" class="item item-avatar" ng-click="selectNotification(notification)">
+              <img class="notification-profile-pic" ng-src="{{notification.profilePicThumb}}">
+              <h2 class="notification-from">{{notification.from}}<span ng-if="!notification.isRead">UNREAD</span></h2>
+              <p class="notification-message">{{notification.message}}</p>
+              <span am-time-ago="notification.createdAt" class="notification-timestamp"></span>
+            </ion-item>
+          </ion-list>
+        </div>
+        <div class="feedback" ng-if="notifications.length === 0" >
+          <h2>No notifications!</h2>
+        </div>
+      </div>
+
+      <div ng-if="viewingNotifications==='chats'">
       </div>
     </div>
   </ion-content>
