@@ -6,6 +6,7 @@ angular.module('letterbox.controllers')
                                      $ionicHistory,
                                      backend,
                                      NotificationsService,
+                                     ProfileService,
                                      eventbus) {
   getNotification();
 
@@ -40,6 +41,10 @@ angular.module('letterbox.controllers')
         $scope.numCorrect = notification.questionsAnswers.filter(function(obj) {
           return obj.isCorrect == true 
         }).length;
+        ProfileService.getOtherProfile(notification.userId).then(function(user) {
+          $scope.response.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count;
+          $scope.response.likedDeals = user.likedDeals;
+        })
       });
     });
     

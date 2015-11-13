@@ -58,6 +58,18 @@
                     <p>{{ (response.mutual_friends_count > 0) ? response.mutual_friends_count : 0 }} mutual friends</p>
                   </div>
                   <div class="section">
+                    <h3>cutouts</h3>
+
+                    <div ng-if="response.likedDeals.length === 0">
+                      <p>{{ response.from }} does not have any cutouts yet!</p>
+                    </div>
+
+                    <ion-scroll direction="x" ng-if="response.likedDeals.length > 0" has-bouncing="false">
+                      <div class="deal-pic" ng-repeat="deal in response.likedDeals" style="background-image: url({{ deal.images[0] }})" ng-click="viewDeal(deal)">
+                      </div>
+                    </ion-scroll>
+                  </div>
+                  <div class="section">
                     <button class="btn-report button button-outline button-assertive" ng-click="reportUser(ctrl.data.name, ctrl.data.hashedId, ctrl.callback)">
                       Report user
                     </button>
