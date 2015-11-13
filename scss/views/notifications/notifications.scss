@@ -1,6 +1,14 @@
 .notifications-list {
   .notification-from {
     @extend .list-item-heading;
+    span {
+      margin-left: 15px;
+      color: white;
+      border-radius: 3px;
+      font-size: 9px;
+      padding: 1px 5px;
+      background: $colourPrimary;
+    }
   }
   .notification-message {
     @extend .list-item-message;
