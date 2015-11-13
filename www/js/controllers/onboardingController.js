@@ -55,21 +55,26 @@ angular.module('letterbox.controllers')
       Facebook.login(function(response) {
         if (response.status === 'connected') {
           $scope.authenticateToken(response.authResponse.accessToken);
+        } else {
+          $scope.hideLoading();
+          var alertPopup = $ionicPopup.alert({
+            title: 'An error when trying to login with Facebook!',
+            template: 'Please try again later',
+            cssClass: "popup-alert"
+          });
         }
       }, {scope: 'public_profile,user_birthday,user_photos,user_friends', return_scopes: true});
     } else {
-      /*
-      $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_photos','user_friends']).then(function(res) {
-        $scope.authenticateToken(res.access_token);
-      }, function(err) {
-        // inform of error
-      });*/
       $cordovaFacebook.login(["public_profile", "user_birthday", "user_photos", "user_friends"])
       .then(function(res) {
         $scope.authenticateToken(res.authResponse.accessToken);
       }, function(err) {
-        alert('An error has occurred when trying to login with Facebook');
         $scope.hideLoading();
+        var alertPopup = $ionicPopup.alert({
+          title: 'An error when trying to login with Facebook!',
+          template: 'Please try again later',
+          cssClass: "popup-alert"
+        });
       })
     }
   };
