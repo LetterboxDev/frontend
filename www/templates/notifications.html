@@ -30,6 +30,23 @@
       </div>
 
       <div class="notification-wrapper" ng-if="viewingNotifications==='chats'">
+        <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="refreshRooms()">
+        </ion-refresher>
+        <div class="feedback" ng-if="chats.length === 0">
+          <h2>No chats yet!</h2>
+        </div>
+        <div ng-if="chats.length > 0">
+          <ion-list class="chats-list">
+            <ion-item ng-repeat="chat in chats" href="#/app/chats/{{chat.id}}" class="item">
+              <div class="chat-profile-pic" style="background-image: url({{ chat.profile_pic }})"></div>
+              <h2 class="chat-from">{{chat.from}}</h2>
+              <p class="chat-last-message">{{chat.last_message}}</p>
+              <span am-time-ago="chat.last_activity" class="chat-last-activity"></span>
+            </ion-item>
+          </ion-list>
+        </div>
       </div>
     </div>
   </ion-content>
