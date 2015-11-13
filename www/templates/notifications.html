@@ -1,5 +1,5 @@
 <ion-view view-title="Notifications">
-  <ion-content>
+  <ion-content class="notification-page">
     <div class="feedback" ng-if="isLoading">
       <h2>Loading notifications</h2>
       <ion-spinner icon="dots"></ion-spinner>
@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      <div ng-if="viewingNotifications==='letters'">
+      <div class="notification-wrapper" ng-if="viewingNotifications==='letters'">
         <div ng-if="notifications.length > 0">
           <ion-list class="notifications-list">
             <ion-item ng-repeat="notification in notifications" class="item item-avatar" ng-click="selectNotification(notification)">
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div ng-if="viewingNotifications==='chats'">
+      <div class="notification-wrapper" ng-if="viewingNotifications==='chats'">
       </div>
     </div>
   </ion-content>
