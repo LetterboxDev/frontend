@@ -1,9 +1,26 @@
 .my-profile {
-  .small-profile-pic {
+  .small-profile-pic-wrapper {
+    position: relative;
     cursor: pointer;
     float: left;
     margin-right: 24px;
     margin-bottom: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    h4.change-overlay {
+      color: white;
+      background: rgba(0,0,0,0.5);
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      padding: 4px 0 8px;
+      font-size: 9px;
+      letter-spacing: 0;
+      font-weight: bold;
+    }
   }
 
   .bio {
