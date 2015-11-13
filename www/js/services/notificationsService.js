@@ -17,6 +17,7 @@ angular.module('letterbox.services')
     var message = 'answered your questions. Click here to see ' + (letter.UserAccount.gender === 'male' ? 'his' : 'her') + ' responses.';
     return {
       id: letter.hash,
+      userId: letter.UserAccount.hashedId,
       isRead: letter.isRead,
       createdAt: letter.createdAt,
       from: letter.UserAccount.firstName,
@@ -26,7 +27,8 @@ angular.module('letterbox.services')
       profilePicThumb: letter.UserAccount.pictureThumb,
       profilePicMed: letter.UserAccount.pictureMed,
       questionsAnswers: questionsAnswers,
-      message: message
+      message: message,
+      likedDeals: []
     };
   }
 

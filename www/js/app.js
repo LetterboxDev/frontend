@@ -28,6 +28,12 @@ angular.module('letterbox', ['ionic',
   $rootScope.$on("$stateChangeError", console.log.bind(console));
 
   $ionicPlatform.ready(function() {
+
+    if (typeof analytics !== 'undefined'){
+      analytics.startTrackerWithId('UA-69523125-2');
+      analytics.trackView('Letterbox');
+    }
+
     if (window.cordova) {
       var push = new Ionic.Push({
         "pluginConfig": {

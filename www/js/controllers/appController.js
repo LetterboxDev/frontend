@@ -88,8 +88,8 @@ angular.module('letterbox.controllers')
     $ionicLoading.hide();
   };
 
-  $scope.showLoading();
   if (window.localStorage.getItem('token')) {
+    $scope.showLoading();
     AuthService.renewToken()
     .then(function() {
       $scope.hideLoading();
@@ -109,7 +109,6 @@ angular.module('letterbox.controllers')
       });
     });
   } else {
-    $scope.hideLoading();
     $state.go('login');
   }
 

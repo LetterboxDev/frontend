@@ -6,6 +6,8 @@ angular.module('letterbox.controllers')
                                      $ionicHistory,
                                      backend,
                                      NotificationsService,
+                                     ProfileService,
+                                     ReportService,
                                      eventbus) {
   getNotification();
 
@@ -27,6 +29,17 @@ angular.module('letterbox.controllers')
     });
   };
 
+  $scope.viewDeal = function(deal) {
+    $state.go('app.deal', { dealId: deal.id });
+    $ionicHistory.nextViewOptions({
+      disableBack: false
+    });
+  };
+
+  $scope.reportUser = function(userName, userId, callback) {
+    ReportService.showReportPopup(userName, userId, $scope, callback);
+  };
+
   function getNotification() {
     if ($stateParams.isExistingChat) {
       $scope.isExistingChat = $stateParams.isExistingChat;
@@ -38,11 +51,15 @@ angular.module('letterbox.controllers')
       NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
         $scope.response = notification;
         $scope.numCorrect = notification.questionsAnswers.filter(function(obj) {
-          return obj.isCorrect == true 
+          return obj.isCorrect == true
         }).length;
+        ProfileService.getOtherProfile(notification.userId).then(function(user) {
+          $scope.response.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count;
+          $scope.response.likedDeals = user.likedDeals;
+        })
       });
     });
-    
+
   }
 });
 
