@@ -4,6 +4,7 @@ angular.module('letterbox.controllers')
                                      $state,
                                      $ionicPopup,
                                      $cordovaInAppBrowser,
+                                     $window,
                                      backend,
                                      AuthService,
                                      eventbus,
@@ -81,5 +82,9 @@ angular.module('letterbox.controllers')
         AuthService.logout().then(function(){$state.go('login')});
       }
     });
+  }
+
+  $scope.feedback = function() {
+    $window.location = 'mailto:letterboxdev@gmail.com';
   }
 });
