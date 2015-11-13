@@ -7,6 +7,7 @@ angular.module('letterbox.controllers')
                                      backend,
                                      NotificationsService,
                                      ProfileService,
+                                     ReportService,
                                      eventbus) {
   getNotification();
 
@@ -33,6 +34,10 @@ angular.module('letterbox.controllers')
     $ionicHistory.nextViewOptions({
       disableBack: false
     });
+  };
+
+  $scope.reportUser = function(userName, userId, callback) {
+    ReportService.showReportPopup(userName, userId, $scope, callback);
   };
 
   function getNotification() {
