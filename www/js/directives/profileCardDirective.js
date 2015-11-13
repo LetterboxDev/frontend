@@ -9,7 +9,6 @@ angular.module('letterbox.directives')
       }.bind(this);
 
       $scope.viewDeal = function(deal) {
-        DealService.showShare = true;
         $state.go('app.deal', { dealId: deal.id });
       }.bind(this);
     }],
