@@ -28,6 +28,10 @@ angular.module('letterbox.controllers')
     });
   };
 
+  $scope.viewDeal = function(deal) {
+    $state.go('app.deal', { dealId: deal.id });
+  };
+
   function getNotification() {
     if ($stateParams.isExistingChat) {
       $scope.isExistingChat = $stateParams.isExistingChat;
