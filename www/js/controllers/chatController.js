@@ -14,9 +14,6 @@ angular.module('letterbox.controllers')
                                  ChatService,
                                  DealService,
                                  RoomsService,
-                                 UserProfileService,
-                                 UserLetterService,
-                                 DealShareService,
                                  eventbus,
                                  socket) {
 
@@ -43,32 +40,10 @@ angular.module('letterbox.controllers')
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
 
-    var Notification = window.Notification || window.mozNotification || window.webkitNotification;
-    Notification.requestPermission(function (permission) {
-    });
-
-    function show(title, message) {
-      var instance = new Notification(
-        title, {
-          body: message,
-          icon: "img/android-icon-48x48.png"
-        }
-      );
-
-      instance.onshow = function () {
-        window.setTimeout(function(){ instance.close(); }, 10000);
-      };
-
-      return false;
-    }
-
     if (message.RoomHash === $scope.roomHash) {
       var formattedMessage = ChatService.formatMessage(message);
       $scope.messages.push(formattedMessage);
       $scope.$apply();
-      if (!formattedMessage.isOwner) {
-        show($scope.recipient, formattedMessage.content);  
-      }
       $ionicScrollDelegate.scrollBottom(true);
     }
   });
@@ -151,7 +126,6 @@ angular.module('letterbox.controllers')
     DealService.checkDealCompatability($scope.recipientId)
     .then(function() {
       $scope.fetchLikedDeals();
-      DealShareService.setCurrentRoomHash($scope.roomHash);
       $scope.shareModal.show();
     }, function() {
       var alertPopup = $ionicPopup.alert({
@@ -176,11 +150,9 @@ angular.module('letterbox.controllers')
 
   $scope.showOtherUserProfile = function() {
     $scope.showLoading();
-    ChatService.getRecipientUserData($scope.roomHash).then(function(user) {
-      user.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count,
-      UserProfileService.setCurrentProfile(user);
+    ChatService.getRecipientHashedId($scope.roomHash).then(function(userId) {
       $scope.hideLoading();
-      $state.go('app.other-profile');
+      $state.go('app.other-profile', { userId: userId });
     });
     $scope.closePopover();
   };
@@ -195,11 +167,8 @@ angular.module('letterbox.controllers')
   };
 
   $scope.showResponses = function() {
-    RoomsService.getRoomLetter($scope.roomHash).then(function(letter) {
-      UserLetterService.setCurrentLetter(letter);
-      $state.go('app.other-letter');
-    });
     $scope.closePopover();
+    $state.go('app.other-letter', { roomHash: $scope.roomHash });
   };
 
   $scope.closePopover = function() {
@@ -207,16 +176,14 @@ angular.module('letterbox.controllers')
   };
 
   $scope.viewDeal = function(deal) {
-    DealService.setCurrentDeal(deal);
     DealService.showShare = true;
-    $state.go('app.deal');
+    $state.go('app.deal', { dealId: deal.id, roomHash: $scope.roomHash });
     $scope.closeShareModal();
   };
 
   $scope.viewSharedDeal = function(deal) {
-    DealService.setCurrentDeal(deal);
     DealService.showShare = false;
-    $state.go('app.deal');
+    $state.go('app.deal', { dealId: deal.id });
   };
 
   $scope.fetchLikedDeals = function() {

@@ -31,6 +31,25 @@
     }
   }
 
+  h4 {
+    width: 100%;
+    text-align: center;
+    span {
+      color: white;
+      opacity: 0.6;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.6;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
   h6 {
     width: 100%;
     text-align: center;
@@ -44,4 +63,3 @@
     }
   }
 }
-

@@ -12,10 +12,14 @@
                   <div class="questions">
                     <div class="question" ng-repeat="question in letter.questions">
                       <div class="option option0" ng-class="{ 'selected' : !question.answer}">
-                        {{ question.option0 }}
+                        <span>{{ question.option0 }}</span>
+                        <i ng-if="question.isCorrect && !question.answer" class="is-correct icon ion-checkmark-circled"></i>
+                        <i ng-if="!question.isCorrect && !question.answer" class="is-correct icon ion-close-circled"></i>
                       </div>
                       <div class="option option1" ng-class="{ 'selected' : question.answer}">
-                        {{ question.option1 }}
+                        <span>{{ question.option1 }}</span>
+                        <i ng-if="question.isCorrect && question.answer" class="is-correct icon ion-checkmark-circled"></i>
+                        <i ng-if="!question.isCorrect && question.answer" class="is-correct icon ion-close-circled"></i>
                       </div>
                     </div>
                   </div>

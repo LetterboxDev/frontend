@@ -8,11 +8,14 @@ angular.module('letterbox.controllers')
                                 eventbus,
                                 socket,
                                 LocationService,
+                                LocalNotificationService,
+                                BackgroundService,
                                 DbService,
                                 RoomsService,
                                 ChatService,
                                 AuthService,
                                 PushService,
+                                ChromeNotifService,
                                 VibrateService) { // Leave VibrateService here to init the service
 
   $scope.username = window.localStorage.getItem('firstName') ? window.localStorage.getItem('firstName') : '';

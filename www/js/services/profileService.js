@@ -10,6 +10,15 @@ angular.module('letterbox.services')
       return deferred.promise;
     },
 
+    getOtherProfile: function(userId) {
+      var deferred = $q.defer();
+      backend.getOtherUser(userId).$promise
+      .then(function(user) {
+        deferred.resolve(user);
+      });
+      return deferred.promise;
+    },
+
     getNewQuestion: function(qnIds) {
       var deferred = $q.defer();
       backend.getOneRandomQuestion(qnIds).$promise.then(function(qn){

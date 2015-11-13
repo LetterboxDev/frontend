@@ -2,6 +2,7 @@ angular.module('letterbox.controllers')
 
 .controller('DealCtrl', function($scope,
                                   $rootScope,
+                                  $stateParams,
                                   $state,
                                   $sce,
                                   $ionicHistory,
@@ -10,17 +11,20 @@ angular.module('letterbox.controllers')
                                   $ionicSlideBoxDelegate,
                                   socket,
                                   DealService,
-                                  ChatService,
-                                  DealShareService) {
+                                  ChatService) {
 
-  $scope.deal = DealService.currentDeal;
+  // Loads deal
+  var dealId = $stateParams.dealId;
+  DealService.getDeal(dealId).then(function(deal) {
+    $scope.deal = deal;
+  });
 
   $scope.dealShareButton = DealService.showShare;
 
   $scope.shareDeal = function() {
-    var roomHash = DealShareService.currentRoomHash;
+    var roomHash = $stateParams.roomHash;
     socket.shareDeal(roomHash, $scope.deal.title, $scope.deal.id);
-    $state.go('app.chat', { chatId: roomHash });
+    $ionicHistory.goBack(-1);
   };
 
   $scope.zoomMin = 1;

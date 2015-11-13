@@ -24,6 +24,7 @@ angular.module('letterbox.services')
       IOContainer.socketio = io.connect(URL, {
         'query': 'token=' + token
       });
+      IOContainer.socketio.connect();
       IOContainer.socketio.on('connect', function() {
         eventbus.call('socketConnected');
       });
