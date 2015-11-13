@@ -38,6 +38,8 @@
 
 `ionic plugin add https://github.com/katzer/cordova-plugin-local-notifications`
 
+`cordova plugin add cordova-plugin-google-analytics`
+
 **For building for iOS:**
 
 `git clone https://github.com/Wizcorp/phonegap-facebook-plugin.git`
