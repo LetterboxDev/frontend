@@ -30,6 +30,9 @@ angular.module('letterbox.controllers')
 
   $scope.viewDeal = function(deal) {
     $state.go('app.deal', { dealId: deal.id });
+    $ionicHistory.nextViewOptions({
+      disableBack: false
+    });
   };
 
   function getNotification() {
@@ -43,7 +46,7 @@ angular.module('letterbox.controllers')
       NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
         $scope.response = notification;
         $scope.numCorrect = notification.questionsAnswers.filter(function(obj) {
-          return obj.isCorrect == true 
+          return obj.isCorrect == true
         }).length;
         ProfileService.getOtherProfile(notification.userId).then(function(user) {
           $scope.response.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count;
@@ -51,7 +54,7 @@ angular.module('letterbox.controllers')
         })
       });
     });
-    
+
   }
 });
 
