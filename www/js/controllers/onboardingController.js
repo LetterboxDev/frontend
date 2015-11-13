@@ -5,6 +5,7 @@ angular.module('letterbox.controllers')
                                        $timeout,
                                        $ionicPopup,
                                        $ionicLoading,
+                                       $ionicSlideBoxDelegate,
                                        $cordovaOauth,
                                        $ionicHistory,
                                        $cordovaInAppBrowser,
@@ -81,12 +82,17 @@ angular.module('letterbox.controllers')
 
   $scope.beginOnboarding = function() {
     if (!AuthService.isRegistered()) {
-      $state.go('onboarding', {onboardStep: 1});
+      $state.go('onboarding', {onboardStep: 0});
     } else {
       $state.go('app.home');
     }
   };
 
+
+  // Onboarding step 0 logic
+  $scope.startOnboard = function(index) {
+    $state.go('onboarding', {onboardStep: 1});
+  };
 
   // Onboarding step 1 logic
 
