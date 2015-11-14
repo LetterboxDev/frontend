@@ -4,7 +4,6 @@ angular.module('letterbox.controllers')
                                      $state,
                                      $ionicPopup,
                                      $cordovaInAppBrowser,
-                                     $window,
                                      backend,
                                      AuthService,
                                      eventbus,
@@ -85,6 +84,11 @@ angular.module('letterbox.controllers')
   }
 
   $scope.feedback = function() {
-    $window.location = 'mailto:letterboxdev@gmail.com';
+    var ref = $cordovaInAppBrowser.open('https://www.facebook.com/getletterbox', '_blank', {
+      hardwareback: 'yes',
+      zoom: 'no',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'bottom'
+    });
   }
 });
