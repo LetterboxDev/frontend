@@ -1,6 +1,6 @@
 <ion-view view-title="Letterbox">
    <ion-nav-buttons side="right">
-    <button class="button button-small button-icon button-clear ion-ios-bell" data-ng-click="goNotifications()">
+     <button class="button button-small button-icon button-clear" ng-class="{true:'ion-android-mail', false:'ion-android-drafts'}[numberOfNotifications > 0]" data-ng-click="goNotifications()">
     </button>
     <div class="notification-bubble" data-ng-show="numberOfLetters + numberOfMessages > 0" data-ng-click="goNotifications()">
        {{ numberOfLetters + numberOfMessages }}
