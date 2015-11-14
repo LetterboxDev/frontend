@@ -14,7 +14,7 @@ angular.module('letterbox.services')
   }
 
   function markMessagesInDbAsRead(roomHash, time) {
-    DbService.markMessagesAsRead(roomHash, timeSent);
+    DbService.markMessagesAsRead(roomHash, time);
   }
 
   ChatService.init = function() {
