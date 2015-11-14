@@ -35,6 +35,7 @@ angular.module('letterbox.services')
         chats[i].last_activity = new Date(message.timeSent);
         if (message.sender !== window.localStorage.getItem('hashedId')) {
           chats[i].unread_count++;
+          eventbus.call('unreadCountChanged');
         }
         break;
       }
@@ -43,8 +44,6 @@ angular.module('letterbox.services')
       return b.last_activity.getTime() - a.last_activity.getTime();
     });
   });
-
-  eventbus.registerListener('loginCompleted', RoomsService.updateRooms);
 
   function formatChat(room) {
     var latestMessage = room.latestMessage;
@@ -88,6 +87,7 @@ angular.module('letterbox.services')
         }
         if (!chatPresent) {
           chats.push(chat);
+          if (chat.unread_count) eventbus.call('unreadCountChanged');
           chatModified = true;
         }
         if (chatModified) {
@@ -152,7 +152,7 @@ angular.module('letterbox.services')
         var res = [];
         rooms.forEach(function(room) {
           res.push(room);
-        })
+        });
         eventbus.call('roomsUpdated', res);
       });
     } else {
@@ -172,6 +172,8 @@ angular.module('letterbox.services')
     });
     return deferred.promise;
   };
+
+  eventbus.registerListener('loginCompleted', RoomsService.updateRooms);
 
   return RoomsService;
 });

@@ -24,7 +24,6 @@ angular.module('letterbox.controllers')
   }
 
   eventbus.registerListener('letterReceived', updateLetterCount);
-  eventbus.registerListener('roomMessage', updateMessagesCount);
   eventbus.registerListener('unreadCountChanged', updateMessagesCount);
 
   $scope.$on('$ionicView.enter', function() {
