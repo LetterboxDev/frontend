@@ -30,10 +30,6 @@
       </div>
 
       <div class="notification-wrapper" ng-if="viewingNotifications==='chats'">
-        <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="refreshRooms()">
-        </ion-refresher>
         <div class="feedback" ng-if="chats.length === 0">
           <h2>No chats yet!</h2>
         </div>

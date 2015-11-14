@@ -59,10 +59,6 @@ angular.module('letterbox.controllers')
     $scope.$broadcast('scroll.refreshComplete');
   }
 
-  $scope.refreshRooms = function() {
-    RoomsService.updateRooms();
-  };
-
   eventbus.registerListener('roomsUpdated', updateRooms);
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
