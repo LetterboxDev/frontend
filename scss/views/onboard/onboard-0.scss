@@ -15,15 +15,16 @@
       max-width: 700px;
     }
     p {
+      font-weight: bold;
       color: white;
       text-align: center;
     }
   }
   .button-start-onboard {
     color: white;
-    border: 1px solid $colourBorder;
-    font-weight: bold;
+    border: 2px solid $colourBorder;
     border-radius: 5px;
+    font-weight: bold;
     padding: 0 20px;
   }
 }
