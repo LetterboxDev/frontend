@@ -114,7 +114,7 @@ angular.module('letterbox.services')
               room.latestMessage.content = row.content;
               room.latestMessage.timeSent = row.timeSent;
             }
-            tx.executeSql("SELECT COUNT(*) AS unreadCount FROM messages WHERE roomHash=? AND isRead=0 AND sender!=?", [roomHash, window.localStorage.getItem('hashedId')], function(tx, res) {
+            tx.executeSql("SELECT COUNT(*) AS unreadCount FROM messages WHERE roomHash=? AND isRead!=1 AND sender<>?", [roomHash, window.localStorage.getItem('hashedId')], function(tx, res) {
               room.unreadCount = res.rows.item(0).unreadCount;
               deferred.resolve(room);
             });
