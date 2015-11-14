@@ -78,15 +78,18 @@ angular.module('letterbox.controllers')
       $scope.isLoading = true;
 
       for (i = 0; i < bufferSize; i ++) {
-        MatchService.getMatch()
-        .then(function(match) {
-          $scope.isLoading = false;
-          if (match) {
-            $scope.cards.push(createNewCard(match));
-          }
-        }, function() {
-          $scope.isLoading = false;
-        });
+        // avoid concurrency issue
+        setTimeout(function() {
+          MatchService.getMatch()
+          .then(function(match) {
+            $scope.isLoading = false;
+            if (match) {
+              $scope.cards.push(createNewCard(match));
+            }
+          }, function() {
+            $scope.isLoading = false;
+          });
+        }, i * 500);
       }
     }
   }
