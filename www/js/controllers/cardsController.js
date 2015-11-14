@@ -12,20 +12,23 @@ angular.module('letterbox.controllers')
                                   MatchService,
                                   ReportService) {
 
-  var bufferSize = 8;
+  var bufferSize = 20;
 
   $scope.cards = [];
   $scope.isLoading = false;
+  $scope.requestingNumber = 0;
 
   eventbus.registerListener('enterHome', checkAndGetCard);
   eventbus.registerListener('changeGender', checkAndGetCard);
   // eventbus.registerListener('closeLetter', removeTopCard);
+
   getInitialCards();
 
   $scope.changeCard = function() {
-    $scope.addCard();
+    if ($scope.requestingNumber === 0) {
+      $scope.addCard();
+    }
 
-    selectFirst('.profile-card').removeClass('moving-in');
     selectFirst('.profile-card').addClass('moving-out');
 
     $timeout(function() {
@@ -34,7 +37,13 @@ angular.module('letterbox.controllers')
       selectFirst('.profile-card').addClass('moving-in');
       $scope.cards.splice(0, 1);
       $scope.isLoading = false;
-    }, 200);
+
+      // timeout for remove moving in animation
+      $timeout(function() {
+        selectFirst('.profile-card').removeClass('moving-in');
+      }, 500);
+
+    }, 500);
   };
 
   $scope.openSendLetter = function(card) {
@@ -73,18 +82,39 @@ angular.module('letterbox.controllers')
       $scope.isLoading = true;
 
       for (i = 0; i < bufferSize; i ++) {
+        $scope.requestingNumber ++;
         // avoid concurrency issue
-        setTimeout(function() {
+        $timeout(function() {
           MatchService.getMatch()
           .then(function(match) {
-            $scope.isLoading = false;
-            if (match) {
-              $scope.cards.push(createNewCard(match));
+            $scope.requestingNumber --;
+
+            if ($scope.cards.length === 2) {
+              // temp hack
+              $scope.isLoading = false;
+              $timeout(function() {
+                selectFirst('.profile-card').removeClass('moving-in');
+              }, 500);
             }
+
+            if (match) {
+              var duplicatedMatch = false;
+
+              $scope.cards.forEach(function(matched) {
+                if (matched.hashedId === match.hashedId) {
+                  duplicatedMatch = true;
+                }
+              });
+
+              if (!duplicatedMatch) {
+                $scope.cards.push(createNewCard(match));
+              }
+            }
+
           }, function() {
             $scope.isLoading = false;
           });
-        }, i * 500);
+        }, i * 800);
       }
     }
   }
