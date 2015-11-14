@@ -26,6 +26,7 @@ angular.module('letterbox.controllers')
     user: [],
     mutual: []
   };
+  $scope.limit = 40;
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
@@ -37,10 +38,14 @@ angular.module('letterbox.controllers')
   });
 
   var onKeyboardHide = function() {
+    $scope.limit = 40;
+    $scope.$apply();
     $ionicScrollDelegate.scrollBottom(true);
   };
 
   var onKeyboardShow = function() {
+    $scope.limit = 40;
+    $scope.$apply();
     $ionicScrollDelegate.scrollBottom(false);
   };
 
@@ -69,6 +74,13 @@ angular.module('letterbox.controllers')
     window.removeEventListener('native.keyboardhide', onKeyboardHide, false);
     window.removeEventListener('native.keyboardshow', onKeyboardShow, false);
   });
+
+  $scope.onChatScroll = function() {
+    if ($ionicScrollDelegate.getScrollPosition().top === 0) {
+      $scope.limit = Math.min($scope.limit + 40, $scope.messages.length);
+      $scope.$apply();
+    }
+  };
 
   $scope.onKeyPress = function(event) {
     if (event.keyCode === 13) {

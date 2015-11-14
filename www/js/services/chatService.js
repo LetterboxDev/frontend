@@ -46,6 +46,7 @@ angular.module('letterbox.services')
       var formattedMessage = ChatService.formatMessage(message);
       currentMessages.push(formattedMessage);
       if (message.RoomHash === currentRoom) {
+        currentScope.limit = 40;
         currentScope.$apply();
         currentScrollDelegate.scrollBottom(true);
       }
