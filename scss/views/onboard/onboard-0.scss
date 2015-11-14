@@ -4,7 +4,7 @@
   .box {
     background-color: $colourPrimary;
     height: 100%;
-    padding: 10vh 10vw;
+    padding: 5vh 5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,6 +12,7 @@
     img {
       height: auto;
       width: 100%;
+      max-width: 700px;
     }
     p {
       color: white;
@@ -25,3 +26,19 @@
   }
 }
 
+.prev-page-arrow, .next-page-arrow {
+  position: absolute;
+  top: 45%;
+  color: white;
+  font-size: 20px;
+  z-index: 99;
+  padding: 20px;
+  cursor: pointer;
+  &.disabled {
+    display: none;
+  }
+}
+
+.next-page-arrow {
+  right: 0;
+}

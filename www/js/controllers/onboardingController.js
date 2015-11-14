@@ -94,6 +94,36 @@ angular.module('letterbox.controllers')
     $state.go('onboarding', {onboardStep: 1});
   };
 
+  $scope.isAtStart = true;
+  $scope.isAtEnd = false;
+
+  $scope.slide = function(index) {
+    $ionicSlideBoxDelegate.slide(index);
+    updateStartAndEndVars();
+  };
+
+  $scope.prevSlide = function() {
+    $ionicSlideBoxDelegate.previous();
+    updateStartAndEndVars();
+  };
+
+  $scope.nextSlide = function() {
+    $ionicSlideBoxDelegate.next();
+    updateStartAndEndVars();
+  };
+
+  function updateStartAndEndVars() {
+    var index = $ionicSlideBoxDelegate.currentIndex();
+    if (index == 0) {
+      $scope.isAtStart = true;
+    } else if (index == $ionicSlideBoxDelegate.slidesCount() - 1) {
+      $scope.isAtEnd = true;
+    } else {
+      $scope.isAtStart = false;
+      $scope.isAtEnd = false;
+    }
+  }
+
   // Onboarding step 1 logic
 
   $scope.getRandomQuestions = function() {
