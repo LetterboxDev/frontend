@@ -55,7 +55,9 @@ angular.module('letterbox.controllers')
       if ($scope.chats[i].id === message.RoomHash) {
         $scope.chats[i].last_message = (message.sender === window.localStorage.getItem('hashedId') ? 'You: ' : $scope.chats[i].from + ': ') + message.content;
         $scope.chats[i].last_activity = new Date(message.timeSent);
-        $scope.chats[i].unread_count++;
+        if (message.sender !== window.localStorage.getItem('hashedId')) {
+          $scope.chats[i].unread_count++;
+        }
         break;
       }
     }
