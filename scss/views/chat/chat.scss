@@ -2,8 +2,25 @@
   .chat-profile-pic {
     @extend .list-item-picture;
   }
-  .chat-from {
-    @extend .list-item-heading;
+  .chat-from-wrapper {
+    margin-top: -3px;
+    margin-bottom: 3px;
+    
+    .chat-from {
+      @extend .list-item-heading;
+      display: inline;
+      vertical-align: middle;
+    }
+    span {
+      vertical-align: middle;
+      margin-left: 6px;
+      color: white;
+      font-weight: bold;
+      border-radius: 3px;
+      font-size: 10px;
+      padding: 2px 6px;
+      background: $colourPrimary;
+    }
   }
   .chat-last-message {
     @extend .list-item-message;
