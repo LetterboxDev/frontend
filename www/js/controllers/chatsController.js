@@ -6,6 +6,7 @@ angular.module('letterbox.controllers')
                                   eventbus) {
 
   $scope.chats = [];
+  $scope.isLoading = false;
 
   function formatChat(room) {
     var latestMessage = room.latestMessage;
@@ -43,11 +44,15 @@ angular.module('letterbox.controllers')
       });
     }
     $scope.$broadcast('scroll.refreshComplete');
+    $scope.isLoading = false;
   }
   $scope.refreshRooms = function() {
     RoomsService.updateRooms();
   };
-  $scope.$on('$ionicView.enter', RoomsService.updateRooms);
+  $scope.$on('$ionicView.enter', function() {
+    $scope.isLoading = true;
+    RoomsService.updateRooms();
+  });
   eventbus.registerListener('roomsUpdated', updateRooms);
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
