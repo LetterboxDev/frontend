@@ -12,6 +12,8 @@ angular.module('letterbox.controllers')
                                   MatchService,
                                   ReportService) {
 
+  var bufferSize = 5;
+
   $scope.cards = [];
   $scope.isLoading = false;
 
@@ -48,6 +50,7 @@ angular.module('letterbox.controllers')
             selectFirst('.profile-card').removeClass('moving-in');
           }, 200);
           $scope.isLoading = false;
+          $scope.card = $scope.cards[0];
         }, 200);
       }, function() {
         $scope.isLoading = false;
@@ -77,6 +80,7 @@ angular.module('letterbox.controllers')
         $scope.isLoading = false;
         if (match) {
           $scope.cards.push(createNewCard(match));
+          $scope.card = $scope.cards[0];
           $timeout(function() {
             selectFirst('.profile-card').removeClass('moving-in');
           }, 400);

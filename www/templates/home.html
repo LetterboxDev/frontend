@@ -20,8 +20,8 @@
       <div ng-if="isLoading" class="feedback">
         <ion-spinner icon="dots"></ion-spinner>
       </div>
-      <div ng-if="!isLoading" class="profile-cards">
-        <div class="profile-card moving-in" ng-repeat="card in cards">
+      <div ng-if="!isLoading && cards.length > 0" class="profile-cards">
+        <div class="profile-card moving-in">
           <div class="flipper-container" flip-card>
             <div class="flipper">
               <div class="card front">
