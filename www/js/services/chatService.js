@@ -11,12 +11,19 @@ angular.module('letterbox.services')
 
   function insertMessageIntoDb(message) {
     DbService.addMessage(message.RoomHash, message.sender, message.content, message.timeSent, message.type, message.DealId);
-  };
+  }
+
+  function markMessagesInDbAsRead(roomHash, time) {
+    DbService.markMessagesAsRead(roomHash, timeSent);
+  }
 
   ChatService.init = function() {
     if (window.cordova && DbService.isInitialized()) {
       eventbus.registerListener('roomMessage', function(roomMessage) {
         insertMessageIntoDb(roomMessage.message);
+      });
+      eventbus.registerListener('roomRead', function(roomRead) {
+        markMessagesInDbAsRead(roomRead.roomHash, roomRead.time);
       });
     }
   };
