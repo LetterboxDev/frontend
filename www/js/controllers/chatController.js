@@ -24,6 +24,7 @@ angular.module('letterbox.controllers')
   $scope.recipientId = '';
   $scope.data = {message: ''};
   $scope.viewingDeals = 'mutual';
+  $scope.fromSubPage = false;
   $scope.deals = {
     own: [],
     user: [],
@@ -37,27 +38,6 @@ angular.module('letterbox.controllers')
     scope: $scope
   }).then(function(popover) {
     $scope.popover = popover;
-  });
-
-  eventbus.registerListener('roomMessage', function(roomMessage) {
-    var message = roomMessage.message;
-
-    if (message.RoomHash === $scope.roomHash) {
-      var formattedMessage = ChatService.formatMessage(message);
-      $scope.messages.push(formattedMessage);
-      $scope.$apply();
-      $ionicScrollDelegate.scrollBottom(true);
-    }
-
-    if (!BackgroundService.isInBackground() && $state.includes('app.chat', {chatId: roomMessage.message.RoomHash})) {
-      socket.roomRead(roomMessage.message.RoomHash, roomMessage.message.timeSent);
-    }
-  });
-
-  eventbus.registerListener('windowFocused', function() {
-    if ($state.includes('app.chat', {chatId: $scope.roomHash}) && $scope.messages.length > 0) {
-      socket.roomRead($scope.roomHash, $scope.messages[$scope.messages.length-1].timestamp.getTime());
-    }
   });
 
   var onKeyboardHide = function() {
@@ -78,31 +58,10 @@ angular.module('letterbox.controllers')
     });
 
     ChatService.getMessagesFromBackend($scope.roomHash).then(function(messages) {
-      var i = 0, j = 0;
-      var initialMessageCount = $scope.messages.length;
-      var messageAdded = false;
-      while (i < messages.length && j < $scope.messages.length) {
-        if (messages[i].timestamp > $scope.messages[j].timestamp) {
-          j++;
-        } else if (messages[i].timestamp.getTime() === $scope.messages[j].timestamp.getTime()) {
-          i++;
-        } else {
-          $scope.messages.splice(j, 0, messages[i]);
-          messageAdded = true;
-        }
-      }
-      if (messages.length > $scope.messages.length) {
-        messageAdded = true;
-        for (var k = $scope.messages.length; k < messages.length; k++) {
-          $scope.messages.push(messages[k]);
-        }
-      }
-      if (messages.length > 0) {
-        socket.roomRead($scope.roomHash, messages[messages.length-1].timestamp.getTime());
-      }
-      $scope.messages = messages;
-      if (messageAdded) {
-        $ionicScrollDelegate.scrollBottom(initialMessageCount !== 0);
+      ChatService.setCurrentRoom($scope.roomHash, $scope, $ionicScrollDelegate);
+      if (!$scope.fromSubPage) {
+        $scope.messages = messages;
+        $ionicScrollDelegate.scrollBottom(false);
       }
     });
 
@@ -167,6 +126,7 @@ angular.module('letterbox.controllers')
     $scope.showLoading();
     ChatService.getRecipientHashedId($scope.roomHash).then(function(userId) {
       $scope.hideLoading();
+      $scope.fromSubPage = true;
       $state.go('app.other-profile', { userId: userId });
     });
     $scope.closePopover();
@@ -183,6 +143,7 @@ angular.module('letterbox.controllers')
 
   $scope.showResponses = function() {
     $scope.closePopover();
+    $scope.fromSubPage = true;
     $state.go('app.other-letter', { roomHash: $scope.roomHash });
   };
 
@@ -192,12 +153,14 @@ angular.module('letterbox.controllers')
 
   $scope.viewDeal = function(deal) {
     DealService.showShare = true;
+    $scope.fromSubPage = true;
     $state.go('app.deal', { dealId: deal.id, roomHash: $scope.roomHash });
     $scope.closeShareModal();
   };
 
   $scope.viewSharedDeal = function(deal) {
     DealService.showShare = false;
+    $scope.fromSubPage = true;
     $state.go('app.deal', { dealId: deal.id });
   };
 
