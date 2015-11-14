@@ -163,32 +163,10 @@ angular.module('letterbox.controllers')
     });
 
     backend.setQuestionsAndAnswers(questions, function(res){
-      $state.go('onboarding', {onboardStep: 2});
+      $scope.completeOnboarding();
     }, function(err){
       console.log("Couldn't save question and answers");
     });
-  }
-
-
-  // Onboarding step 2 logic
-  $scope.data = {
-    bio: ""
-  }
-
-  $scope.onEnterText = function() {
-    // console.log($scope.data.bio);
-  }
-
-  $scope.completeOnboardingStep2 = function() {
-    if ($scope.data.bio.length > 0) {
-      backend.updateUserBio($scope.data.bio, function(res){
-        $scope.completeOnboarding();
-      }, function(err){
-        console.log("Couldn't save bio");
-      });
-    } else {
-      showError("Please add a short bio");
-    }
   }
 
   $scope.completeOnboarding = function() {
