@@ -24,8 +24,22 @@ angular.module('letterbox.controllers')
   getInitialCards();
 
   $scope.changeCard = function() {
+    $scope.addCard();
+
+    selectFirst('.profile-card').removeClass('moving-in');
     selectFirst('.profile-card').addClass('moving-out');
-    $timeout($scope.addCard, 100);
+
+    $timeout(function() {
+      // timeout for moving out animation
+      selectFirst('.profile-card').removeClass('moving-out');
+      selectFirst('.profile-card').addClass('moving-in');
+      $scope.cards.splice(0, 1);
+      $timeout(function() {
+        // timeout for moving in animation
+        selectFirst('.profile-card').removeClass('moving-in');
+      }, 200);
+      $scope.isLoading = false;
+    }, 200);
   };
 
   $scope.openSendLetter = function(card) {
@@ -39,22 +53,9 @@ angular.module('letterbox.controllers')
 
   $scope.addCard = function() {
     if (!$scope.isLoading) {
-      $scope.isLoading = true;
       MatchService.getMatch()
       .then(function(match) {
         $scope.cards.push(createNewCard(match));
-        $timeout(function() {
-          // timeout for moving out animation
-          $scope.cards.splice(0, 1);
-          $timeout(function() {
-            // timeout for moving in animation
-            selectFirst('.profile-card').removeClass('moving-in');
-          }, 200);
-          $scope.isLoading = false;
-        }, 200);
-      }, function() {
-        $scope.isLoading = false;
-        $scope.cards.splice(0, 1);
       });
     }
   };
@@ -76,18 +77,17 @@ angular.module('letterbox.controllers')
     if (window.localStorage.getItem('token') && !$scope.isLoading) {
       $scope.isLoading = true;
 
-      MatchService.getMatch()
-      .then(function(match) {
-        $scope.isLoading = false;
-        if (match) {
-          $scope.cards.push(createNewCard(match));
-          $timeout(function() {
-            selectFirst('.profile-card').removeClass('moving-in');
-          }, 400);
-        }
-      }, function() {
-        $scope.isLoading = false;
-      });
+      for (i = 0; i < bufferSize; i ++) {
+        MatchService.getMatch()
+        .then(function(match) {
+          $scope.isLoading = false;
+          if (match) {
+            $scope.cards.push(createNewCard(match));
+          }
+        }, function() {
+          $scope.isLoading = false;
+        });
+      }
     }
   }
 
