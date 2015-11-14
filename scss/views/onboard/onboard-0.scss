@@ -6,11 +6,22 @@
     height: 100%;
     padding: 10vh 10vw;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    img {
+      height: auto;
+      width: 100%;
+    }
+    p {
+      color: white;
+      text-align: center;
+    }
   }
   .button-start-onboard {
-    display: flex;
+    color: white;
+    border: 1px solid $colourBorder;
+    border-radius: 5px;
   }
 }
 
