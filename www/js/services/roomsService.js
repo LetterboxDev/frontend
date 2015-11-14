@@ -24,6 +24,7 @@ angular.module('letterbox.services')
         break;
       }
     }
+    eventbus.call('unreadCountChanged');
   });
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
@@ -78,6 +79,7 @@ angular.module('letterbox.services')
             }
             if (chats[j].unread_count !== chat.unread_count) {
               chats[j].unread_count = chat.unread_count;
+              eventbus.call('unreadCountChanged');
               chatModified = true;
             }
             chatPresent = true;
@@ -98,6 +100,16 @@ angular.module('letterbox.services')
       });
     }
   }
+
+  RoomsService.getTotalUnreadCount = function() {
+    var deferred = $q.defer();
+    var total = 0;
+    for (var i = 0; i < chats.length; i++) {
+      total += chats[i].unread_count;
+    }
+    deferred.resolve(total);
+    return deferred.promise;
+  };
 
   RoomsService.setChatsPageScope = function($scope) {
     chatsPageScope = $scope;
