@@ -19,8 +19,7 @@ angular.module('letterbox.controllers')
 
   eventbus.registerListener('enterHome', checkAndGetCard);
   eventbus.registerListener('changeGender', checkAndGetCard);
-
-  eventbus.registerListener('closeLetter', removeTopCard);
+  // eventbus.registerListener('closeLetter', removeTopCard);
   getInitialCards();
 
   $scope.changeCard = function() {
@@ -34,10 +33,6 @@ angular.module('letterbox.controllers')
       selectFirst('.profile-card').removeClass('moving-out');
       selectFirst('.profile-card').addClass('moving-in');
       $scope.cards.splice(0, 1);
-      $timeout(function() {
-        // timeout for moving in animation
-        selectFirst('.profile-card').removeClass('moving-in');
-      }, 200);
       $scope.isLoading = false;
     }, 200);
   };
