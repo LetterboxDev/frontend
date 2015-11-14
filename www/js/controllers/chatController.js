@@ -62,6 +62,7 @@ angular.module('letterbox.controllers')
       ChatService.setCurrentRoom($scope.roomHash, $scope, $ionicScrollDelegate);
       if (!$scope.fromSubPage) {
         $scope.messages = messages;
+        if (messages.length) socket.roomRead($scope.roomHash, messages[messages.length-1].timestamp.getTime());
         $ionicScrollDelegate.scrollBottom(false);
       }
     });
