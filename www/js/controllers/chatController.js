@@ -7,16 +7,12 @@ angular.module('letterbox.controllers')
                                  $ionicModal,
                                  $window,
                                  $timeout,
-                                 $state,
                                  $ionicPopover,
                                  $ionicPopup,
                                  $ionicLoading,
-                                 backend,
-                                 BackgroundService,
                                  ChatService,
                                  DealService,
                                  RoomsService,
-                                 eventbus,
                                  socket) {
 
   $scope.messages = [];
