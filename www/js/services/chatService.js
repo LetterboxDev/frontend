@@ -10,7 +10,7 @@ angular.module('letterbox.services')
   var ChatService = {};
 
   function insertMessageIntoDb(message) {
-    DbService.addMessage(message.RoomHash, message.sender, message.content, message.timeSent, message.type, message.DealId);
+    DbService.addMessage(message.RoomHash, message.sender, message.content, message.timeSent, message.isRead, message.type, message.DealId);
   }
 
   function markMessagesInDbAsRead(roomHash, time) {

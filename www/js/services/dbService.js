@@ -60,14 +60,14 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
-  DbService.addMessage = function(roomHash, sender, content, timeSent, type, dealId) {
+  DbService.addMessage = function(roomHash, sender, content, timeSent, isRead, type, dealId) {
     var deferred = $q.defer();
     checkInit(deferred);
 
     db.sqlite.transaction(function(tx) {
       tx.executeSql("SELECT COUNT(*) AS cnt FROM messages WHERE roomHash=? AND sender=? AND content=? AND timeSent=?", [roomHash, sender, content, timeSent], function(tx, res) {
         if (!res.rows.item(0).cnt) {
-          tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent, type, DealId) VALUES (?,?,?,?,?,?)", [roomHash, sender, content, timeSent, type ? type : 'message', dealId ? dealId : null], function(tx, res) {
+          tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent, isRead, type, DealId) VALUES (?,?,?,?,?,?,?)", [roomHash, sender, content, timeSent, isRead, type ? type : 'message', dealId ? dealId : null], function(tx, res) {
             deferred.resolve(res);
           });
         } else {
