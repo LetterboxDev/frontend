@@ -98,6 +98,8 @@ angular.module('letterbox.controllers')
     if (content && content.length !== 0) {
       socket.sendMessage($scope.roomHash, content);
       $scope.data.message = '';
+      $scope.limit = 40;
+      $scope.$apply();
     }
   };
 

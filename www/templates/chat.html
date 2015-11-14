@@ -5,7 +5,7 @@
   </ion-nav-buttons>
   <ion-content class="chat-view" delegate-handle="chatScroll" overflow-scroll="true">
     <ion-list class="messages-list">
-      <div class="load-prev" ng-if="messages.length > 0" ng-click="loadPrevious()">  <div class="button button-small button-light">Load previous messages</div>
+      <div class="load-prev" ng-if="messages.length > 40" ng-click="loadPrevious()">  <div class="button button-small button-light">Load previous messages</div>
       </div>
       <ion-item ng-repeat="message in messages | limitTo:-limit" class="item">
 
