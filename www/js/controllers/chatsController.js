@@ -16,7 +16,8 @@ angular.module('letterbox.controllers')
       from: room.userName,
       profile_pic: room.thumbnail,
       last_message: last_message,
-      last_activity: last_activity
+      last_activity: last_activity,
+      unread_count: room.unreadCount
     };
   }
 
@@ -54,6 +55,7 @@ angular.module('letterbox.controllers')
       if ($scope.chats[i].id === message.RoomHash) {
         $scope.chats[i].last_message = (message.sender === window.localStorage.getItem('hashedId') ? 'You: ' : $scope.chats[i].from + ': ') + message.content;
         $scope.chats[i].last_activity = new Date(message.timeSent);
+        $scope.chats[i].unread_count++;
         break;
       }
     }
@@ -61,5 +63,14 @@ angular.module('letterbox.controllers')
       return b.last_activity.getTime() - a.last_activity.getTime();
     });
     $scope.$apply();
+  });
+  eventbus.registerListener('roomRead', function(roomRead) {
+    for (var i = 0; i < $scope.chats.length; i++) {
+      var chat = $scope.chats[i];
+      if (chat.id === roomRead.roomHash) {
+        chat.unread_count = 0;
+        break;
+      }
+    }
   });
 });
