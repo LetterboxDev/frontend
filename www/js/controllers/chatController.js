@@ -1,6 +1,7 @@
 angular.module('letterbox.controllers')
 
 .controller('ChatCtrl', function($scope,
+                                 $state,
                                  $stateParams,
                                  $ionicScrollDelegate,
                                  $ionicModal,
@@ -11,6 +12,7 @@ angular.module('letterbox.controllers')
                                  $ionicPopup,
                                  $ionicLoading,
                                  backend,
+                                 BackgroundService,
                                  ChatService,
                                  DealService,
                                  RoomsService,
@@ -45,6 +47,16 @@ angular.module('letterbox.controllers')
       $scope.messages.push(formattedMessage);
       $scope.$apply();
       $ionicScrollDelegate.scrollBottom(true);
+    }
+
+    if (!BackgroundService.isInBackground() && $state.includes('app.chat', {chatId: roomMessage.message.RoomHash})) {
+      socket.roomRead(roomMessage.roomHash, roomMessage.message.timeSent);
+    }
+  });
+
+  eventbus.registerListener('windowFocused', function() {
+    if ($state.includes('app.chat', {chatId: $scope.roomHash}) && $scope.message.length > 0) {
+      socket.roomRead($scope.roomHash, $scope.messages[$scope.messages.length-1].timestamp.getTime());
     }
   });
 
@@ -84,6 +96,9 @@ angular.module('letterbox.controllers')
         for (var k = $scope.messages.length; k < messages.length; k++) {
           $scope.messages.push(messages[k]);
         }
+      }
+      if (messages.length > 0) {
+        socket.roomRead($scope.roomHash, messages[messages.length-1].timestamp.getTime());
       }
       $scope.messages = messages;
       if (messageAdded) {
