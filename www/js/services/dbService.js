@@ -68,6 +68,7 @@ angular.module('letterbox.services')
       tx.executeSql("SELECT COUNT(*) AS cnt FROM messages WHERE roomHash=? AND sender=? AND content=? AND timeSent=?", [roomHash, sender, content, timeSent], function(tx, res) {
         if (!res.rows.item(0).cnt) {
           tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent, isRead, type, DealId) VALUES (?,?,?,?,?,?,?)", [roomHash, sender, content, timeSent, isRead, type ? type : 'message', dealId ? dealId : null], function(tx, res) {
+            if (isRead) DbService.markMessagesAsRead(roomHash, timeSent);
             deferred.resolve(res);
           });
         } else {
