@@ -18,8 +18,8 @@ angular.module('letterbox.controllers')
   var perfectMatch = window.localStorage.getItem('perfectMatch');
   var preferredGender = window.localStorage.getItem('genderPreference');
   var distanceRadius = window.localStorage.getItem('distanceRadius');
-  var minAge = parseInt(window.localStorage.getItem('minAge'));
-  var maxAge = parseInt(window.localStorage.getItem('maxAge'));
+  var minAge = window.localStorage.getItem('minAge');
+  var maxAge = window.localStorage.getItem('maxAge');
 
   $scope.preference = {
     perfectMatch: (perfectMatch === 'true' ? true : false),
@@ -47,8 +47,13 @@ angular.module('letterbox.controllers')
   }
 
   $scope.$watch('preference.age', function() {
-    window.localStorage.setItem('minAge', $scope.preference.age.min);
-    window.localStorage.setItem('maxAge', $scope.preference.age.max);
+    if (!isNaN($scope.preference.age.min)) {
+      window.localStorage.setItem('minAge', $scope.preference.age.min);
+    }
+
+    if (!isNaN($scope.preference.age.max)) {
+      window.localStorage.setItem('maxAge', $scope.preference.age.max);
+    }
   }, true);
 
   $scope.openTermsOfUse = function() {
