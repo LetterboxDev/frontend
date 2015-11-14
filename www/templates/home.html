@@ -9,8 +9,13 @@
   <ion-content scroll="true" has-bouncing="false">
     <div ng-controller="CardsCtrl">
       <div ng-if="cards.length === 0" class="feedback">
-        <h2>No letterboxes nearby</h2>
-        <p>Try again later or tweak your settings</p>
+        <div ng-if="isLoading" class="feedback">
+          <ion-spinner icon="dots"></ion-spinner>
+        </div>
+        <div ng-if="!isLoading">
+          <h2>No letterboxes nearby</h2>
+          <p>Try again later or tweak your settings</p>
+        </div>
       </div>
       <div ng-if="isLoading" class="feedback">
         <ion-spinner icon="dots"></ion-spinner>
