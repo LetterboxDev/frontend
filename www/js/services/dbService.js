@@ -117,7 +117,7 @@ angular.module('letterbox.services')
             tx.executeSql("SELECT COUNT(*) AS unreadCount FROM messages WHERE roomHash=? AND isRead=0 AND sender!=?", [roomHash, window.localStorage.getItem('hashedId')], function(tx, res) {
               room.unreadCount = res.rows.item(0).unreadCount;
               deferred.resolve(room);
-            }
+            });
           });
         } else {
           deferred.reject({
