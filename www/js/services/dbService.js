@@ -51,8 +51,8 @@ angular.module('letterbox.services')
             deferred.resolve(res);
           });
         } else {
-          deferred.reject({
-            error: 'room already exists'
+          tx.executeSql("UPDATE rooms SET userName=?, thumbnail=?, profilePicture=? WHERE hash=?", [userFirstName, thumbnailPic, mediumPic, roomHash], function(tx, res) {
+            deferred.resolve(res);
           });
         }
       });
