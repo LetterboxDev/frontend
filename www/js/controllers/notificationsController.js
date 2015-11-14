@@ -71,6 +71,9 @@ angular.module('letterbox.controllers')
       if ($scope.chats[i].id === message.RoomHash) {
         $scope.chats[i].last_message = (message.sender === window.localStorage.getItem('hashedId') ? 'You: ' : $scope.chats[i].from + ': ') + message.content;
         $scope.chats[i].last_activity = new Date(message.timeSent);
+        if (message.sender !== window.localStorage.getItem('hashedId')) {
+          $scope.chats[i].unread_count++;
+        }
         break;
       }
     }
@@ -81,6 +84,16 @@ angular.module('letterbox.controllers')
   });
 
   eventbus.registerListener('letterReceived', refreshNotifications);
+
+  eventbus.registerListener('roomRead', function(roomRead) {
+    for (var i = 0; i < $scope.chats.length; i++) {
+      var chat = $scope.chats[i];
+      if (chat.id === roomRead.roomHash) {
+        chat.unread_count = 0;
+        break;
+      }
+    }
+  });
 
   $scope.$on("$ionicView.enter", function(scopes, states) {
     refreshNotifications();
