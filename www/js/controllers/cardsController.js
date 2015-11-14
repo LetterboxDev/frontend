@@ -17,10 +17,11 @@ angular.module('letterbox.controllers')
   $scope.cards = [];
   $scope.isLoading = false;
 
-  eventbus.registerListener('enterHome', getCard);
-  eventbus.registerListener('closeLetter', removeTopCard);
+  eventbus.registerListener('enterHome', checkAndGetCard);
   eventbus.registerListener('changeGender', checkAndGetCard);
-  getCard();
+
+  eventbus.registerListener('closeLetter', removeTopCard);
+  getInitialCards();
 
   $scope.changeCard = function() {
     selectFirst('.profile-card').addClass('moving-out');
@@ -66,13 +67,13 @@ angular.module('letterbox.controllers')
     // if there is card currently loaded, change it
     // otherwise, load new card
     if ($scope.cards.length === 0) {
-      getCard();
+      getInitialCards();
     } else {
       $scope.changeCard();
     }
   }
 
-  function getCard() {
+  function getInitialCards() {
     if (window.localStorage.getItem('token') && $scope.cards.length === 0 && !$scope.isLoading) {
       $scope.isLoading = true;
       MatchService.getMatch()
