@@ -2,8 +2,7 @@ angular.module('letterbox.controllers')
 
 .controller('ChatsCtrl', function($scope,
                                   $state,
-                                  RoomsService,
-                                  eventbus) {
+                                  RoomsService) {
 
   $scope.chats = [];
 
