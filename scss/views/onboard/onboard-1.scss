@@ -25,10 +25,10 @@
 
   .questions {
     margin-top: 30px;
-    text-align: center;
 
     h2 {
       @include uppercase-bold-font();
+      text-align: center;
       color: $colourPrimaryText;
       font-size: 18px;
     }

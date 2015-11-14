@@ -1,6 +1,6 @@
 angular.module('letterbox.directives')
 
-.directive('profileCard', function() {
+.directive('profileCard', function($ionicHistory) {
   return {
     scope: {},
     controller: ['$scope', 'ReportService', '$state', 'DealService', function($scope, ReportService, $state, DealService) {
@@ -9,6 +9,9 @@ angular.module('letterbox.directives')
       }.bind(this);
 
       $scope.viewDeal = function(deal) {
+        $ionicHistory.nextViewOptions({
+          disableBack: false
+        });
         $state.go('app.deal', { dealId: deal.id });
       }.bind(this);
     }],
