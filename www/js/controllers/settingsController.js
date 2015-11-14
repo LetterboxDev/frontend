@@ -18,8 +18,8 @@ angular.module('letterbox.controllers')
   var perfectMatch = window.localStorage.getItem('perfectMatch');
   var preferredGender = window.localStorage.getItem('genderPreference');
   var distanceRadius = window.localStorage.getItem('distanceRadius');
-  var minAge = window.localStorage.getItem('minAge');
-  var maxAge = window.localStorage.getItem('maxAge');
+  var minAge = parseInt(window.localStorage.getItem('minAge'));
+  var maxAge = parseInt(window.localStorage.getItem('maxAge'));
 
   $scope.preference = {
     perfectMatch: (perfectMatch === 'true' ? true : false),
@@ -46,10 +46,10 @@ angular.module('letterbox.controllers')
     window.localStorage.setItem('distanceRadius', $scope.preference.distanceRadius);
   }
 
-  $scope.onChangeAgeRange = function() {
+  $scope.$watch('preference.age', function() {
     window.localStorage.setItem('minAge', $scope.preference.age.min);
     window.localStorage.setItem('maxAge', $scope.preference.age.max);
-  }
+  }, true);
 
   $scope.openTermsOfUse = function() {
     var ref = $cordovaInAppBrowser.open('http://getletterbox.com/terms', '_blank', {
