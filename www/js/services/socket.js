@@ -40,11 +40,31 @@ angular.module('letterbox.services')
       IOContainer.socketio.on('letter', function(letter) {
         eventbus.call('letterReceived', letter);
       });
+      IOContainer.socketio.on('roomRead', function(roomRead) {
+        eventbus.call('roomRead', roomRead);
+      });
     }
   };
 
   SocketService.isConnected = function() {
     return IOContainer.isInitialized && IOContainer.socketio.connected;
+  };
+
+  SocketService.roomRead = function(roomHash, time) {
+    var deferred = $q.defer();
+    if (SocketService.isConnected()) {
+      var roomRead = {
+        roomHash: roomHash,
+        time: time
+      };
+      IOContainer.socketio.emit('roomRead', roomRead);
+      deferred.resolve(roomRead);
+    } else if (IOContainer.isInitialized && IOContainer.socketio.connected) {
+      deferred.reject({error: 'socketio not connected'});
+    } else {
+      deferred.reject({error: 'socketio not initialized'});
+    }
+    return deferred.promise;
   };
 
   SocketService.sendMessage = function(roomHash, message) {

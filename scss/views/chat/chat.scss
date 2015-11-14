@@ -2,8 +2,25 @@
   .chat-profile-pic {
     @extend .list-item-picture;
   }
-  .chat-from {
-    @extend .list-item-heading;
+  .chat-from-wrapper {
+    margin-top: -3px;
+    margin-bottom: 3px;
+    
+    .chat-from {
+      @extend .list-item-heading;
+      display: inline;
+      vertical-align: middle;
+    }
+    span {
+      vertical-align: middle;
+      margin-left: 6px;
+      color: white;
+      font-weight: bold;
+      border-radius: 3px;
+      font-size: 10px;
+      padding: 2px 6px;
+      background: $colourPrimary;
+    }
   }
   .chat-last-message {
     @extend .list-item-message;
@@ -13,6 +30,13 @@
   }
 }
 
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+
 .chat-view {
   background-color: darken($colourBackground, 4%);
 }
@@ -20,7 +44,22 @@
 .messages-list .list {
   padding: 20px 5px 70px;
 
+  .load-prev {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    justify-content: center;
+    -webkit-justify-content: center; /* Safari */
+    margin-bottom: 10px;
+    .button {
+      font-size: 11px;
+      padding: 0 10px;
+      border-radius: 2px;
+      background-color: $colourBorder;
+    }
+  }
+
   .item {
+    animation: fadein 1.5s;
     padding: 0 10px;
     margin: 5px;
     border: none;

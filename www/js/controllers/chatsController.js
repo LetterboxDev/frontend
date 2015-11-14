@@ -6,6 +6,7 @@ angular.module('letterbox.controllers')
                                   eventbus) {
 
   $scope.chats = [];
+  $scope.isLoading = false;
 
   function formatChat(room) {
     var latestMessage = room.latestMessage;
@@ -16,7 +17,8 @@ angular.module('letterbox.controllers')
       from: room.userName,
       profile_pic: room.thumbnail,
       last_message: last_message,
-      last_activity: last_activity
+      last_activity: last_activity,
+      unread_count: room.unreadCount
     };
   }
 
@@ -28,7 +30,9 @@ angular.module('letterbox.controllers')
         var chatModified = false;
         for (var j = 0; j < $scope.chats.length; j++) {
           if ($scope.chats[j].id === chat.id) {
-            $scope.chats[j] = chat;
+            $scope.chats[j].last_message = chat.last_message;
+            $scope.chats[j].last_activity = chat.last_activity;
+            $scope.chats[j].unread_count = chat.unread_count;
             chatModified = true;
             break;
           }
@@ -46,7 +50,9 @@ angular.module('letterbox.controllers')
   $scope.refreshRooms = function() {
     RoomsService.updateRooms();
   };
-  $scope.$on('$ionicView.enter', RoomsService.updateRooms);
+  $scope.$on('$ionicView.enter', function() {
+    RoomsService.updateRooms();
+  });
   eventbus.registerListener('roomsUpdated', updateRooms);
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
@@ -54,6 +60,9 @@ angular.module('letterbox.controllers')
       if ($scope.chats[i].id === message.RoomHash) {
         $scope.chats[i].last_message = (message.sender === window.localStorage.getItem('hashedId') ? 'You: ' : $scope.chats[i].from + ': ') + message.content;
         $scope.chats[i].last_activity = new Date(message.timeSent);
+        if (message.sender !== window.localStorage.getItem('hashedId')) {
+          $scope.chats[i].unread_count++;
+        }
         break;
       }
     }
@@ -61,5 +70,14 @@ angular.module('letterbox.controllers')
       return b.last_activity.getTime() - a.last_activity.getTime();
     });
     $scope.$apply();
+  });
+  eventbus.registerListener('roomRead', function(roomRead) {
+    for (var i = 0; i < $scope.chats.length; i++) {
+      var chat = $scope.chats[i];
+      if (chat.id === roomRead.roomHash) {
+        chat.unread_count = 0;
+        break;
+      }
+    }
   });
 });

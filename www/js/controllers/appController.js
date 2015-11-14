@@ -78,6 +78,10 @@ angular.module('letterbox.controllers')
     });
   });
 
+  window.addEventListener('focus', function(event) {
+    eventbus.call('windowFocused');
+  }, false);
+
   $scope.showLoading = function() {
     $ionicLoading.show({
       template: '<ion-spinner icon="ripple"></ion-spinner>'
