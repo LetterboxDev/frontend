@@ -76,9 +76,14 @@ angular.module('letterbox.controllers')
   });
 
   $scope.onChatScroll = function() {
-    if ($ionicScrollDelegate.getScrollPosition().top === 0) {
+    if ($ionicScrollDelegate.$getByHandle('chatScroll').getScrollPosition().top === 0) {
+      var previousHeight = $('.messages-list > .list').height();
       $scope.limit = Math.min($scope.limit + 40, $scope.messages.length);
       $scope.$apply();
+      $ionicScrollDelegate.$getByHandle('chatScroll')
+                          .scrollBy(0,
+                                    $('.messages-list > .list').height() - previousHeight - 100,
+                                    false);
     }
   };
 

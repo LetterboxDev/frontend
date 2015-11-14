@@ -3,7 +3,7 @@
     <button class="button button-small button-icon button-clear ion-more" data-ng-click="showPopover($event)">
     </button>
   </ion-nav-buttons>
-  <ion-content class="chat-view" overflow-scroll="true" on-scroll="onChatScroll()">
+  <ion-content class="chat-view" delegate-handle="chatScroll" overflow-scroll="true" on-scroll="onChatScroll()">
     <ion-list class="messages-list">
       <ion-item ng-repeat="message in messages | limitTo:-limit" class="item">
 
