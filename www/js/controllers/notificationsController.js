@@ -11,8 +11,12 @@ angular.module('letterbox.controllers')
   $scope.notifications = [];
   $scope.chats = [];
   $scope.isLoading = false;
-  $scope.viewingNotifications = 'letters';
+  $scope.currentTab = NotificationsService.getTab();
 
+  $scope.setTab = function(tab) {
+    $scope.currentTab = tab;
+    NotificationsService.setTab(tab);
+  }
   function refreshNotifications() {
     $scope.isLoading = true;
     NotificationsService.getNotificationsList().then(function(notifications) {

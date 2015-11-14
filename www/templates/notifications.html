@@ -8,12 +8,12 @@
 
       <div class="bar bar-header">
         <div class="button-bar bar-light deal-share-seg-control">
-          <a class="button left" ng-class="{highlighted: viewingNotifications==='letters'}" ng-click="viewingNotifications='letters'">Letters</a>
-          <a class="button right" ng-class="{highlighted: viewingNotifications==='chats'}" ng-click="viewingNotifications='chats'">Chats</a>
+          <a class="button left" ng-class="{highlighted: currentTab==='letters'}" ng-click="setTab('letters')">Letters</a>
+          <a class="button right" ng-class="{highlighted: currentTab==='chats'}" ng-click="setTab('chats')">Chats</a>
         </div>
       </div>
 
-      <div class="notification-wrapper" ng-if="viewingNotifications==='letters'">
+      <div class="notification-wrapper" ng-if="currentTab==='letters'">
         <div ng-if="notifications.length > 0">
           <ion-list class="notifications-list">
             <ion-item ng-repeat="notification in notifications" class="item item-avatar" ng-click="selectNotification(notification)">
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div class="notification-wrapper" ng-if="viewingNotifications==='chats'">
+      <div class="notification-wrapper" ng-if="currentTab==='chats'">
         <div class="feedback" ng-if="chats.length === 0">
           <h2>No chats yet!</h2>
         </div>
