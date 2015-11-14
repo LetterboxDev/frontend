@@ -11,7 +11,7 @@
       <ion-list class="chats-list">
         <ion-item ng-repeat="chat in chats" href="#/app/chats/{{chat.id}}" class="item">
           <div class="chat-profile-pic" style="background-image: url({{ chat.profile_pic }})"></div>
-          <h2 class="chat-from">{{chat.from}}</h2>
+          <h2 class="chat-from">{{chat.from}} <span ng-if="chat.unread_count > 0">UNREAD: {{ chat.unread_count }}</span></h2>
           <p class="chat-last-message">{{chat.last_message}}</p>
           <span am-time-ago="chat.last_activity" class="chat-last-activity"></span>
         </ion-item>
