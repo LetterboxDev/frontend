@@ -30,7 +30,9 @@ angular.module('letterbox.controllers')
         var chatModified = false;
         for (var j = 0; j < $scope.chats.length; j++) {
           if ($scope.chats[j].id === chat.id) {
-            $scope.chats[j] = chat;
+            $scope.chats[j].last_message = chat.last_message;
+            $scope.chats[j].last_activity = chat.last_activity;
+            $scope.chats[j].unread_count = chat.unread_count;
             chatModified = true;
             break;
           }
@@ -44,13 +46,11 @@ angular.module('letterbox.controllers')
       });
     }
     $scope.$broadcast('scroll.refreshComplete');
-    $scope.isLoading = false;
   }
   $scope.refreshRooms = function() {
     RoomsService.updateRooms();
   };
   $scope.$on('$ionicView.enter', function() {
-    $scope.isLoading = true;
     RoomsService.updateRooms();
   });
   eventbus.registerListener('roomsUpdated', updateRooms);
