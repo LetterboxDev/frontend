@@ -84,7 +84,7 @@ angular.module('letterbox.services')
     var deferred = $q.defer();
     checkInit(deferred);
     db.sqlite.transaction(function(tx) {
-      tx.executeSql("UPDATE messages SET isRead=1 WHERE roomHash=? AND timeSent<=? ORDER BY timeSent DESC", [roomHash, timeSent], function(tx, res) {
+      tx.executeSql("UPDATE messages SET isRead=1 WHERE roomHash=? AND timeSent<=?", [roomHash, timeSent], function(tx, res) {
         deferred.resolve(res);
       });
     });
