@@ -95,7 +95,7 @@ angular.module('letterbox.controllers')
       $scope.hideLoading();
       eventbus.call('loginCompleted');
       if (window.localStorage.getItem('isRegistered') === 'false') {
-        $state.go('onboarding', {onboardStep: 1});
+        $state.go('onboarding', {onboardStep: 0});
       }
     }, function() {
       $scope.hideLoading();
