@@ -50,12 +50,12 @@ angular.module('letterbox.controllers')
     }
 
     if (!BackgroundService.isInBackground() && $state.includes('app.chat', {chatId: roomMessage.message.RoomHash})) {
-      socket.roomRead(roomMessage.roomHash, roomMessage.message.timeSent);
+      socket.roomRead(roomMessage.message.RoomHash, roomMessage.message.timeSent);
     }
   });
 
   eventbus.registerListener('windowFocused', function() {
-    if ($state.includes('app.chat', {chatId: $scope.roomHash}) && $scope.message.length > 0) {
+    if ($state.includes('app.chat', {chatId: $scope.roomHash}) && $scope.messages.length > 0) {
       socket.roomRead($scope.roomHash, $scope.messages[$scope.messages.length-1].timestamp.getTime());
     }
   });
