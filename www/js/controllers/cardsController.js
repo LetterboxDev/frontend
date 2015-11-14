@@ -12,7 +12,7 @@ angular.module('letterbox.controllers')
                                   MatchService,
                                   ReportService) {
 
-  var bufferSize = 5;
+  var bufferSize = 8;
 
   $scope.cards = [];
   $scope.isLoading = false;
