@@ -29,8 +29,6 @@ angular.module('letterbox.controllers')
   // Eventbus for loose coupling of components
   // Initialize DbService when logged in
   eventbus.registerListener('loginCompleted', DbService.init);
-  // Update all rooms when logged in
-  eventbus.registerListener('loginCompleted', RoomsService.updateRooms);
   // Initialize socketio when logged in
   eventbus.registerListener('loginCompleted', socket.init);
   // Update user location when logged in
