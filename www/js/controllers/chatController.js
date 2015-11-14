@@ -75,17 +75,15 @@ angular.module('letterbox.controllers')
     window.removeEventListener('native.keyboardshow', onKeyboardShow, false);
   });
 
-  $scope.onChatScroll = function() {
-    if ($ionicScrollDelegate.$getByHandle('chatScroll').getScrollPosition().top === 0) {
-      var previousHeight = $('.messages-list > .list').height();
-      $scope.limit = Math.min($scope.limit + 40, $scope.messages.length);
-      $scope.$apply();
-      $ionicScrollDelegate.$getByHandle('chatScroll')
-                          .scrollBy(0,
-                                    $('.messages-list > .list').height() - previousHeight - 100,
-                                    false);
-    }
-  };
+  $scope.loadPrevious = function() {
+    var previousHeight = $('.messages-list > .list').height();
+    $scope.limit = Math.min($scope.limit + 15, $scope.messages.length);
+    $scope.$apply();
+    $ionicScrollDelegate.$getByHandle('chatScroll')
+                        .scrollBy(0,
+                                  $('.messages-list > .list').height() - previousHeight,
+                                  false);
+  }
 
   $scope.onKeyPress = function(event) {
     if (event.keyCode === 13) {
