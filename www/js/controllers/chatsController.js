@@ -6,7 +6,6 @@ angular.module('letterbox.controllers')
                                   eventbus) {
 
   $scope.chats = [];
-  $scope.isLoading = false;
 
   $scope.$on('$ionicView.enter', function() {
     RoomsService.setChatsPageScope($scope);
