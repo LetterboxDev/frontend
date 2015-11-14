@@ -32,12 +32,15 @@ angular.module('letterbox.services')
     }
   }
 
-  eventbus.registerListener('windowFocused', function() {
+  function onWindowFocus() {
     var currentMessages = getChatMessages(currentRoom);
     if (currentRoom && $state.includes('app.chat', {chatId: currentRoom}) && currentMessages !== null && currentMessages.length > 0) {
       socket.roomRead(currentRoom, currentMessages[currentMessages.length-1].timestamp.getTime());
     }
-  });
+  }
+
+  eventbus.registerListener('windowFocused', onWindowFocus);
+  BackgroundService.registerOnResume(onWindowFocus);
 
   eventbus.registerListener('roomMessage', function(roomMessage) {
     var message = roomMessage.message;
