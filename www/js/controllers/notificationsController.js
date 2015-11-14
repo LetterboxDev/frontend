@@ -30,7 +30,8 @@ angular.module('letterbox.controllers')
       from: room.userName,
       profile_pic: room.thumbnail,
       last_message: last_message,
-      last_activity: last_activity
+      last_activity: last_activity,
+      unread_count: room.unreadCount
     };
   }
 
