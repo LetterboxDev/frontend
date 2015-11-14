@@ -3,8 +3,10 @@
     <button class="button button-small button-icon button-clear ion-more" data-ng-click="showPopover($event)">
     </button>
   </ion-nav-buttons>
-  <ion-content class="chat-view" delegate-handle="chatScroll" overflow-scroll="true" on-scroll="onChatScroll()">
+  <ion-content class="chat-view" delegate-handle="chatScroll" overflow-scroll="true">
     <ion-list class="messages-list">
+      <div class="load-prev" ng-if="messages.length > 0" ng-click="loadPrevious()">  <div class="button button-small button-light">Load previous messages</div>
+      </div>
       <ion-item ng-repeat="message in messages | limitTo:-limit" class="item">
 
         <div ng-if="!message.isOwner" class="received-msg">
