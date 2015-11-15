@@ -11,6 +11,8 @@ angular.module('letterbox.services')
   var MatchService = this;
   var maleMatches = [];
   var femaleMatches = [];
+  var maleFiltered = [];
+  var femaleFiltered = [];
   var outstandingRequests = 0;
   var isMaleInit = false;
   var isFemaleInit = false;
@@ -24,6 +26,45 @@ angular.module('letterbox.services')
   eventbus.registerListener('changePreference', changePreference);
 
   function changePreference() {
+    var newFiltered = [];
+    var matches = window.localStorage.getItem('genderPreference') === 'male' ? maleMatches : femaleMatches;
+    var filtered = window.localStorage.getItem('genderPreference') === 'male' ? maleFiltered : femaleFiltered;
+
+    for (i = 0; i < matches.length; i ++) {
+      var match = matches[i];
+      if (!isPreffered(match)) {
+        console.log(match);
+        console.log('buyao');
+        matches.splice(i, 1);
+        newFiltered.push(match);
+      }
+    }
+
+    for (i = 0; i < filtered.length; i ++) {
+      var match = filtered[i];
+      if (isPreffered(match)) {
+        console.log(match);
+        console.log('yaole');
+        filtered.splice(i, 1);
+        matches.push(match);
+      }
+    }
+
+    for (i = 0; i < newFiltered.length; i ++) {
+      filtered.push(newFiltered[i]);
+    }
+  }
+
+  function isPreffered(match) {
+    var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
+    var minAge = window.localStorage.getItem('minAge') ? window.localStorage.getItem('minAge') : 18;
+    var maxAge = window.localStorage.getItem('maxAge') ? window.localStorage.getItem('maxAge') : 80;
+
+    if ((match.age >= minAge) && (match.age <= maxAge) && (match.distance <= distance)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   MatchService.getMatch = function() {
