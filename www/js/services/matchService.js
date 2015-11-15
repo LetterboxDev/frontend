@@ -29,24 +29,21 @@ angular.module('letterbox.services')
     var newFiltered = [];
     var matches = window.localStorage.getItem('genderPreference') === 'male' ? maleMatches : femaleMatches;
     var filtered = window.localStorage.getItem('genderPreference') === 'male' ? maleFiltered : femaleFiltered;
-
     for (i = 0; i < matches.length; i ++) {
       var match = matches[i];
       if (!isPreffered(match)) {
-        console.log(match);
-        console.log('buyao');
         matches.splice(i, 1);
         newFiltered.push(match);
+        i --;
       }
     }
 
     for (i = 0; i < filtered.length; i ++) {
       var match = filtered[i];
       if (isPreffered(match)) {
-        console.log(match);
-        console.log('yaole');
         filtered.splice(i, 1);
         matches.push(match);
+        i --;
       }
     }
 
@@ -121,8 +118,12 @@ angular.module('letterbox.services')
             outstandingRequests--;
             totalCompleted++;
             if (seen.indexOf(match.hashedId) === -1) {
-              seen.push(match.hashedId);
-              matches.push(match);
+              console.log(match);
+              if (isPreffered(match)) {
+                console.log('aaa');
+                seen.push(match.hashedId);
+                matches.push(match);
+              }
             }
             if (totalCompleted >= INITIAL_REQUESTS && matches.length && !resolved) {
               resolved = true;
