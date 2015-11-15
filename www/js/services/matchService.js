@@ -118,9 +118,7 @@ angular.module('letterbox.services')
             outstandingRequests--;
             totalCompleted++;
             if (seen.indexOf(match.hashedId) === -1) {
-              console.log(match);
               if (isPreffered(match)) {
-                console.log('aaa');
                 seen.push(match.hashedId);
                 matches.push(match);
               }
