@@ -1,0 +1,54 @@
+<ion-view can-swipe-back="false">
+  <ion-nav-title>
+    {{ deal.title }}
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear" ng-if="dealShareButton" ng-click="shareDeal()">
+      Share
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="deal-view">
+      <div class="img-wrapper">
+        <ion-slide-box pager-click="slide(index)" does-continue="true" on-slide-changed="slideHasChanged($index)">
+          <ion-slide ng-repeat="image in deal.images">
+            <div class="deal-img" style="background-image: url({{ image }})" ng-click="showImages($index)"></div>
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+
+      <div class="row deal-title">
+        <h2>{{ deal.title }}</h2>
+        <deal-like-btn data-set="deal">
+        </deal-like-btn>
+      </div>
+
+      <div class="deal-info">
+        <h3 class="title">Description</h3>
+        <p ng-bind-html="deal.description"></p>
+
+        <div ng-if="deal.type == 'deal'">
+          <h3 class="title">Expires on</h3>
+          <p>{{ deal.expiry | amDateFormat:'dddd, Do MMMM YYYY' }}</p>
+        </div>
+        <div ng-if="deal.type == 'event'">
+          <h3 class="title">Event ends on</h3>
+          <p>{{ deal.expiry | amDateFormat:'dddd, Do MMMM YYYY' }}</p>
+        </div>
+
+        <h3 class="title">Location</h3>
+        <p ng-bind-html="deal.location"></p>
+
+        <h3 ng-if="deal.type == 'place'" class="title">More information</h3>
+        <h3 ng-if="deal.type != 'place'" class="title">Provided by</h3>
+        <p><a ng-click="openLink(deal.DealProvider.url)">{{ deal.DealProviderName }}</a></p>
+      </div>
+
+      <div class="deal-share-wrapper">
+        <button class="button button-calm share-button" ng-if="dealShareButton" ng-click="shareDeal()">Share Cutout</button>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>
+

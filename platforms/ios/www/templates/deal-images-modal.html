@@ -1,0 +1,12 @@
+<ion-modal-view class="image-modal">
+  <div class="close-button" ng-click="closeModal()">
+    <i class="icon ion-close"></i>
+  </div>
+  <ion-slide-box pager-click="slide(index)" on-slide-changed="slideChanged(index)" active-slide="activeSlide">
+    <ion-slide ng-repeat="image in deal.images">
+      <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" zooming="true" min-zoom="{{zoomMin}}" style="width: 100%; height: 100%" delegate-handle="scrollHandle{{$index}}" on-scroll="updateSlideStatus(activeSlide)" on-release="updateSlideStatus(activeSlide)">       
+        <div style="background-image: url({{image}})" class="fullscreen-image"></div>
+      </ion-scroll>
+    </ion-slide>
+  </ion-slide-box>
+</ion-modal-view>

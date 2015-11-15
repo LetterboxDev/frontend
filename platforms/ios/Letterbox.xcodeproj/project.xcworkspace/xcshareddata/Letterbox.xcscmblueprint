@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9E30B39F71445ED88C6328048FAB01FD502BD84F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9E30B39F71445ED88C6328048FAB01FD502BD84F" : 0,
+    "1CC0658EDB535161AE2B45DD2F84FA0782FDABBE" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6196392E-EADD-4875-9529-E0949DC99296",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9E30B39F71445ED88C6328048FAB01FD502BD84F" : "frontend\/",
+    "1CC0658EDB535161AE2B45DD2F84FA0782FDABBE" : "phonegap-facebook-plugin\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Letterbox",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "platforms\/ios\/Letterbox.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Wizcorp\/phonegap-facebook-plugin.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1CC0658EDB535161AE2B45DD2F84FA0782FDABBE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:LetterboxDev\/frontend.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9E30B39F71445ED88C6328048FAB01FD502BD84F"
+    }
+  ]
+}

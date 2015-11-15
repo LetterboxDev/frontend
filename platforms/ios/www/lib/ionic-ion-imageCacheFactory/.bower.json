@@ -1,0 +1,12 @@
+{
+  "name": "ionic-ion-imageCacheFactory",
+  "homepage": "https://github.com/andrewmcgivery/ionic-ion-imageCacheFactory",
+  "_release": "2fedef12fb",
+  "_resolution": {
+    "type": "commit",
+    "commit": "2fedef12fb039f6aaa5995981d4178cf0249b129"
+  },
+  "_source": "git://github.com/andrewmcgivery/ionic-ion-imageCacheFactory.git",
+  "_target": "2fedef12fb039f6aaa5995981d4178cf0249b129",
+  "_originalSource": "andrewmcgivery/ionic-ion-imageCacheFactory"
+}
