@@ -1,8 +1,14 @@
 angular.module('letterbox.services')
 
-.service('DbService', function($q, $window, socket, backend, eventbus) {
+.service('DbService', function($q,
+                               $window,
+                               socket,
+                               backend,
+                               eventbus) {
+
   var db = {isInitialized: false};
   var DbService = {};
+  var DB_VERSION = 1;
 
   function checkInit(deferred) {
     if (!DbService.isInitialized()) deferred.reject({err: 'DbService not initialized'});
@@ -18,9 +24,17 @@ angular.module('letterbox.services')
         db.sqlite = $window.sqlitePlugin.openDatabase({name: 'letterbox.db', createFromLocation: 1});
         db.sqlite.transaction(function(tx) {
           tx.executeSql('CREATE TABLE IF NOT EXISTS rooms (hash CHAR(32) PRIMARY KEY, userId CHAR(32) NOT NULL, userName VARCHAR(256) NOT NULL, thumbnail TEXT NOT NULL, profilePicture TEXT NOT NULL, createdAt DATETIME NOT NULL)');
-          tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent BIGINT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, PRIMARY KEY (roomHash, sender, timeSent))');
-          db.isInitialized = true;
-          eventbus.call('dbInitialized');
+          tx.executeSql('CREATE TABLE IF NOT EXISTS messages (roomHash CHAR(32) NOT NULL REFERENCES rooms(hash), sender VARCHAR(256) NOT NULL, content TEXT NOT NULL, timeSent BIGINT NOT NULL, isRead BOOLEAN NOT NULL DEFAULT 0, type VARCHAR(256) NOT NULL DEFAULT \'message\', DealId INTEGER, PRIMARY KEY (roomHash, sender, timeSent))');
+          db.sqlite.executeSql('PRAGMA user_version', [], function(res) {
+            var userVersion = res.rows.item(0).user_version;
+            if (userVersion < 1) { // updates to user_version 1
+              db.sqlite.executeSql('ALTER TABLE messages ADD COLUMN type VARCHAR(256) NOT NULL DEFAULT \'message\'');
+              db.sqlite.executeSql('ALTER TABLE messages ADD COLUMN DealId INTEGER');
+              db.sqlite.executeSql('PRAGMA user_version=1');
+            }
+            db.isInitialized = true;
+            eventbus.call('dbInitialized');
+          });
         });
       }, false);
     }
@@ -37,8 +51,8 @@ angular.module('letterbox.services')
             deferred.resolve(res);
           });
         } else {
-          deferred.reject({
-            error: 'room already exists'
+          tx.executeSql("UPDATE rooms SET userName=?, thumbnail=?, profilePicture=? WHERE hash=?", [userFirstName, thumbnailPic, mediumPic, roomHash], function(tx, res) {
+            deferred.resolve(res);
           });
         }
       });
@@ -46,14 +60,15 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
-  DbService.addMessage = function(roomHash, sender, content, timeSent) {
+  DbService.addMessage = function(roomHash, sender, content, timeSent, isRead, type, dealId) {
     var deferred = $q.defer();
     checkInit(deferred);
 
     db.sqlite.transaction(function(tx) {
       tx.executeSql("SELECT COUNT(*) AS cnt FROM messages WHERE roomHash=? AND sender=? AND content=? AND timeSent=?", [roomHash, sender, content, timeSent], function(tx, res) {
         if (!res.rows.item(0).cnt) {
-          tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent) VALUES (?,?,?,?)", [roomHash, sender, content, timeSent], function(tx, res) {
+          tx.executeSql("INSERT INTO messages (roomHash, sender, content, timeSent, isRead, type, DealId) VALUES (?,?,?,?,?,?,?)", [roomHash, sender, content, timeSent, isRead, type ? type : 'message', dealId ? dealId : null], function(tx, res) {
+            if (isRead) DbService.markMessagesAsRead(roomHash, timeSent);
             deferred.resolve(res);
           });
         } else {
@@ -70,7 +85,7 @@ angular.module('letterbox.services')
     var deferred = $q.defer();
     checkInit(deferred);
     db.sqlite.transaction(function(tx) {
-      tx.executeSql("UPDATE messages SET isRead=1 WHERE roomHash=? AND timeSent<=? ORDER BY timeSent DESC", [roomHash, timeSent], function(tx, res) {
+      tx.executeSql("UPDATE messages SET isRead=1 WHERE roomHash=? AND timeSent<=?", [roomHash, timeSent], function(tx, res) {
         deferred.resolve(res);
       });
     });
@@ -100,7 +115,10 @@ angular.module('letterbox.services')
               room.latestMessage.content = row.content;
               room.latestMessage.timeSent = row.timeSent;
             }
-            deferred.resolve(room);
+            tx.executeSql("SELECT COUNT(*) AS unreadCount FROM messages WHERE roomHash=? AND isRead!=1 AND sender<>?", [roomHash, window.localStorage.getItem('hashedId')], function(tx, res) {
+              room.unreadCount = res.rows.item(0).unreadCount;
+              deferred.resolve(room);
+            });
           });
         } else {
           deferred.reject({
@@ -135,22 +153,24 @@ angular.module('letterbox.services')
   }
 
   DbService.updateRooms = function() {
+    var deferred = $q.defer();
     backend.getRooms().$promise.then(function(rooms) {
       rooms.forEach(function(room) {
-        DbService.addRoom(room.hash, room.userId, room.userName, room.thumbnail, room.profilePicture, room.createdAt).then(function(success) {
-          eventbus.call('roomsUpdated', rooms);
-        });
+        DbService.addRoom(room.hash, room.userId, room.userName, room.thumbnail, room.profilePicture, room.createdAt).then(function(success) {});
       });
+      deferred.resolve(rooms);
     });
+    return deferred.promise;
   };
 
   DbService.getRooms = function() {
     var deferred = $q.defer();
     checkInit(deferred);
     if (socket.isConnected()) {// Is connected to Internet and backend is awake
-      DbService.updateRooms();
+      DbService.updateRooms().then(deferred.resolve);
+    } else {
+      getRoomsFromDb().then(deferred.resolve);
     }
-    getRoomsFromDb().then(deferred.resolve);
     return deferred.promise;
   };
 
@@ -166,7 +186,9 @@ angular.module('letterbox.services')
             RoomHash: row.roomHash,
             content: row.content,
             timeSent: row.timeSent,
-            sender: row.sender
+            sender: row.sender,
+            type: row.type,
+            DealId: row.DealId
           });
         }
         deferred.resolve(messages);

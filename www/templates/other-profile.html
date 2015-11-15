@@ -1,0 +1,14 @@
+<ion-view view-title="{{ user.firstName }}, {{ user.age }}">
+  <ion-content>
+    <div class="feedback" ng-if="isLoading">
+      <h2>Loading profile</h2>
+      <ion-spinner icon="dots"></ion-spinner>
+    </div>
+    <div ng-if="!isLoading" class="profile-card moving-in">
+
+      <profile-card data-info="user">
+      </profile-card>
+
+    </div>
+  </ion-content>
+</ion-view>

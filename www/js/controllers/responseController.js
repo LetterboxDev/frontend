@@ -1,13 +1,13 @@
 angular.module('letterbox.controllers')
 
-.controller('ResponseCtrl', function($scope, $state, $stateParams, $ionicHistory, backend, NotificationsService, eventbus) {
-
-  function getNotification() {
-    NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
-      $scope.response = notification;
-    });
-  }
-
+.controller('ResponseCtrl', function($scope,
+                                     $state,
+                                     $stateParams,
+                                     $ionicHistory,
+                                     backend,
+                                     NotificationsService,
+                                     ProfileService,
+                                     ReportService) {
   getNotification();
 
   $ionicHistory.nextViewOptions({
@@ -27,4 +27,38 @@ angular.module('letterbox.controllers')
       $state.go('app.chat', {chatId: room.hash});
     });
   };
+
+  $scope.viewDeal = function(deal) {
+    $state.go('app.deal', { dealId: deal.id });
+    $ionicHistory.nextViewOptions({
+      disableBack: false
+    });
+  };
+
+  $scope.reportUser = function(userName, userId, callback) {
+    ReportService.showReportPopup(userName, userId, $scope, callback);
+  };
+
+  function getNotification() {
+    if ($stateParams.isExistingChat) {
+      $scope.isExistingChat = $stateParams.isExistingChat;
+    } else {
+      $scope.isExistingChat = false;
+    }
+
+    NotificationsService.getNotificationsList().then(function(notifications) {
+      NotificationsService.getNotificationFromId($stateParams.responseId).then(function(notification) {
+        $scope.response = notification;
+        $scope.numCorrect = notification.questionsAnswers.filter(function(obj) {
+          return obj.isCorrect == true
+        }).length;
+        ProfileService.getOtherProfile(notification.userId).then(function(user) {
+          $scope.response.mutual_friends_count = (typeof user.mutualFriends === 'undefined') ? 'unknown' : user.mutualFriends.summary.total_count;
+          $scope.response.likedDeals = user.likedDeals;
+        })
+      });
+    });
+
+  }
 });
+

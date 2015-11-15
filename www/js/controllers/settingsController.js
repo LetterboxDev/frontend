@@ -1,11 +1,22 @@
 angular.module('letterbox.controllers')
 
-.controller('SettingsCtrl', function($scope, $state, $ionicPopup, backend, AuthService) {
+.controller('SettingsCtrl', function($scope,
+                                     $state,
+                                     $ionicPopup,
+                                     $cordovaInAppBrowser,
+                                     backend,
+                                     AuthService,
+                                     eventbus,
+                                     VERSION) {
+
   $scope.minAge = 18;
   $scope.maxAge = 80;
+  $scope.versionMajor = VERSION.major;
+  $scope.versionMinor = VERSION.minor;
+  $scope.versionRevision = VERSION.revision;
 
   var perfectMatch = window.localStorage.getItem('perfectMatch');
-  var preferredGender = window.localStorage.getItem('preferredGender');
+  var preferredGender = window.localStorage.getItem('genderPreference');
   var distanceRadius = window.localStorage.getItem('distanceRadius');
   var minAge = window.localStorage.getItem('minAge');
   var maxAge = window.localStorage.getItem('maxAge');
@@ -26,7 +37,8 @@ angular.module('letterbox.controllers')
   }
 
   $scope.onChangePreferredGender = function() {
-    window.localStorage.setItem('preferredGender', $scope.preference.preferredGender);
+    eventbus.call('changeGender');
+    window.localStorage.setItem('genderPreference', $scope.preference.preferredGender);
     backend.updateGenderPreference($scope.preference.preferredGender);
   }
 
@@ -34,10 +46,33 @@ angular.module('letterbox.controllers')
     window.localStorage.setItem('distanceRadius', $scope.preference.distanceRadius);
   }
 
-  $scope.onChangeAgeRange = function() {
-    window.localStorage.setItem('minAge', $scope.preference.age.min);
-    window.localStorage.setItem('maxAge', $scope.preference.age.max);
-  }
+  $scope.$watch('preference.age', function() {
+    if (!isNaN($scope.preference.age.min)) {
+      window.localStorage.setItem('minAge', $scope.preference.age.min);
+    }
+
+    if (!isNaN($scope.preference.age.max)) {
+      window.localStorage.setItem('maxAge', $scope.preference.age.max);
+    }
+  }, true);
+
+  $scope.openTermsOfUse = function() {
+    var ref = $cordovaInAppBrowser.open('http://getletterbox.com/terms', '_blank', {
+      hardwareback: 'yes',
+      zoom: 'no',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'bottom'
+    });
+  };
+
+  $scope.openPrivacyPolicy = function() {
+    var ref = $cordovaInAppBrowser.open('http://getletterbox.com/privacy', '_blank', {
+      hardwareback: 'yes',
+      zoom: 'no',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'bottom'
+    });
+  };
 
   $scope.logout = function() {
     $ionicPopup.confirm({
@@ -50,6 +85,15 @@ angular.module('letterbox.controllers')
       if (res) {
         AuthService.logout().then(function(){$state.go('login')});
       }
+    });
+  }
+
+  $scope.feedback = function() {
+    var ref = $cordovaInAppBrowser.open('https://www.facebook.com/getletterbox', '_blank', {
+      hardwareback: 'yes',
+      zoom: 'no',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'bottom'
     });
   }
 });

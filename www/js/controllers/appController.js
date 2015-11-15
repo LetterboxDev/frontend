@@ -1,6 +1,23 @@
-angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
+angular.module('letterbox.controllers')
 
-.controller('AppCtrl', function($scope, $state, $location, $ionicPopup, $ionicLoading, eventbus, socket, LocationService, DbService, RoomsService, ChatService, AuthService, PushService) {
+.controller('AppCtrl', function($scope,
+                                $state,
+                                $location,
+                                $ionicPopup,
+                                $ionicLoading,
+                                eventbus,
+                                socket,
+                                LocationService,
+                                LocalNotificationService,
+                                BackgroundService,
+                                DbService,
+                                RoomsService,
+                                ChatService,
+                                AuthService,
+                                PushService,
+                                ChromeNotifService,
+                                VibrateService) { // Leave VibrateService here to init the service
+
   $scope.username = window.localStorage.getItem('firstName') ? window.localStorage.getItem('firstName') : '';
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -12,8 +29,6 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
   // Eventbus for loose coupling of components
   // Initialize DbService when logged in
   eventbus.registerListener('loginCompleted', DbService.init);
-  // Update all rooms when logged in
-  eventbus.registerListener('loginCompleted', RoomsService.updateRooms);
   // Initialize socketio when logged in
   eventbus.registerListener('loginCompleted', socket.init);
   // Update user location when logged in
@@ -61,6 +76,10 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
     });
   });
 
+  window.addEventListener('focus', function(event) {
+    eventbus.call('windowFocused');
+  }, false);
+
   $scope.showLoading = function() {
     $ionicLoading.show({
       template: '<ion-spinner icon="ripple"></ion-spinner>'
@@ -71,14 +90,14 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
     $ionicLoading.hide();
   };
 
-  $scope.showLoading();
   if (window.localStorage.getItem('token')) {
+    $scope.showLoading();
     AuthService.renewToken()
     .then(function() {
       $scope.hideLoading();
       eventbus.call('loginCompleted');
       if (window.localStorage.getItem('isRegistered') === 'false') {
-        $state.go('onboarding', {onboardStep: 1});
+        $state.go('onboarding', {onboardStep: 0});
       }
     }, function() {
       $scope.hideLoading();
@@ -92,7 +111,6 @@ angular.module('letterbox.controllers', ['ionic.contrib.ui.cards'])
       });
     });
   } else {
-    $scope.hideLoading();
     $state.go('login');
   }
 

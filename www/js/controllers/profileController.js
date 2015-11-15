@@ -1,6 +1,13 @@
 angular.module('letterbox.controllers')
 
-.controller('ProfileCtrl', function($scope, $state, $ionicHistory, $ionicPopup, $ionicLoading, $ionicModal, ProfileService) {
+.controller('ProfileCtrl', function($scope,
+                                    $state,
+                                    $ionicHistory,
+                                    $ionicPopup,
+                                    $ionicLoading,
+                                    $ionicModal,
+                                    ProfileService) {
+
   $scope.profile = {};
   $scope.isLoading = true;
   $scope.profilePhotos = [];
@@ -9,6 +16,7 @@ angular.module('letterbox.controllers')
   $scope.$on("$ionicView.enter", function(scopes, states) {
     ProfileService.getProfile().then(function(profile) {
       $scope.profile = profile;
+      $scope.nameAndAge = profile.firstName + ", " + profile.age;
       $scope.isLoading = false;
     })
   });
@@ -20,8 +28,10 @@ angular.module('letterbox.controllers')
     $scope.modal = modal;
   });
 
-  $ionicHistory.nextViewOptions({
-    disableBack: true
+  $scope.$on('$ionicView.enter', function() {
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
   });
 
   $scope.showLoading = function() {
@@ -57,7 +67,7 @@ angular.module('letterbox.controllers')
     }, function(err) {
       $scope.hideLoading();
     });
-  };  
+  };
 
   $scope.hideProfilePhotoModal = function() {
     $scope.modal.hide();
@@ -126,20 +136,15 @@ angular.module('letterbox.controllers')
       cssClass: "popup-alert",
       okType: "button-stable"
     }).then(function(res) {
-    });  
+    });
   }
 
   function showSuccess() {
-    $ionicPopup.confirm({
+    $ionicPopup.alert({
       title: "Your profile has been updated!",
-      cssClass: "popup-alert",
-      okType: "button-positive",
-      okText: "Home"
+      cssClass: "popup-alert"
     }).then(function(res) {
-      if (res) {
-        $state.go('app.home');
-      }
-    });      
+    });
   }
-  
+
 });

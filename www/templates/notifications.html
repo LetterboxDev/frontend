@@ -1,22 +1,51 @@
 <ion-view view-title="Notifications">
-  <ion-content>
+  <ion-content class="notification-page">
     <div class="feedback" ng-if="isLoading">
       <h2>Loading notifications</h2>
       <ion-spinner icon="dots"></ion-spinner>
     </div>
     <div ng-if="!isLoading">
-      <div ng-if="notifications.length > 0">
-        <ion-list class="notifications-list">
-          <ion-item ng-repeat="notification in notifications" class="item item-avatar" ng-click="selectNotification(notification)">
-            <img class="notification-profile-pic" ng-src="{{notification.profilePicThumb}}">
-            <h2 class="notification-from">{{notification.from}}</h2>
-            <p class="notification-message">{{notification.message}}</p>
-            <span am-time-ago="notification.createdAt" class="notification-timestamp"></span>
-          </ion-item>
-        </ion-list>
+
+      <div class="bar bar-header">
+        <div class="button-bar bar-light deal-share-seg-control">
+          <a class="button left" ng-class="{highlighted: currentTab==='letters'}" ng-click="setTab('letters')">Letters</a>
+          <a class="button right" ng-class="{highlighted: currentTab==='chats'}" ng-click="setTab('chats')">Chats</a>
+        </div>
       </div>
-      <div class="feedback" ng-if="notifications.length === 0" >
-        <h2>No notifications!</h2>
+
+      <div class="notification-wrapper" ng-if="currentTab==='letters'">
+        <div ng-if="notifications.length > 0">
+          <ion-list class="notifications-list">
+            <ion-item ng-repeat="notification in notifications" class="item item-avatar" ng-click="selectNotification(notification)">
+              <img class="notification-profile-pic" ng-src="{{notification.profilePicThumb}}">
+              <h2 class="notification-from">{{notification.from}}<span ng-if="!notification.isRead">UNREAD</span></h2>
+              <p class="notification-message">{{notification.message}}</p>
+              <span am-time-ago="notification.createdAt" class="notification-timestamp"></span>
+            </ion-item>
+          </ion-list>
+        </div>
+        <div class="feedback" ng-if="notifications.length === 0" >
+          <h2>No notifications!</h2>
+        </div>
+      </div>
+
+      <div class="notification-wrapper" ng-if="currentTab==='chats'">
+        <div class="feedback" ng-if="chats.length === 0">
+          <h2>No chats yet!</h2>
+        </div>
+        <div ng-if="chats.length > 0">
+          <ion-list class="chats-list">
+            <ion-item ng-repeat="chat in chats" href="#/app/chats/{{chat.id}}" class="item" ng-if="chat.unread_count > 0">
+              <div class="chat-profile-pic" style="background-image: url({{ chat.profile_pic }})"></div>
+              <div class="chat-from-wrapper">
+                <h2 class="chat-from">{{chat.from}}</h2> 
+                <span ng-if="chat.unread_count > 0">{{ chat.unread_count }} new</span>
+              </div>
+              <p class="chat-last-message">{{chat.last_message}}</p>
+              <span am-time-ago="chat.last_activity" class="chat-last-activity"></span>
+            </ion-item>
+          </ion-list>
+        </div>
       </div>
     </div>
   </ion-content>

@@ -1,0 +1,41 @@
+<ion-view>
+  <div class="prev-page-arrow" ng-click="prevSlide()" ng-class="{'disabled': isAtStart}">
+    <i class="icon ion-chevron-left"></i>
+  </div>
+  <div class="next-page-arrow" ng-click="nextSlide()" ng-class="{'disabled': isAtEnd}">
+    <i class="icon ion-chevron-right"></i>
+  </div>
+  <ion-slide-box pager-click="slide(index)" class="onboard-0">
+    <ion-slide>
+      <div class="box">
+        <img ng-src="img/onboarding-01.png" />
+        <p>Browse interesting profiles of people.</p>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="box">
+        <img ng-src="img/onboarding-02.png" />
+        <p>Answer 5 Would You Rather Questions to request to start a chat.</p>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="box">
+        <img ng-src="img/onboarding-03.png" />
+        <p>Evaluate other people's answers of your Would You Rather questions.</p>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="box">
+        <img ng-src="img/onboarding-04.png" />
+        <p>Browse through interesting offers and events in our catalogue and save them as cutouts, you can share them with people whom you're matched with.</p>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="box">
+        <img ng-src="img/onboarding-05.png" />
+        <button ng-click="startOnboard()" class="button button-clear button-start-onboard">Setup your Profile <i class="icon ion-arrow-right-b"></i></button>
+      </div>
+    </ion-slide>
+  </ion-slide-box>
+</ion-view>
+

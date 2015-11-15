@@ -1,5 +1,7 @@
 angular.module('letterbox.services')
-.service('LocationService', function(backend, $cordovaGeolocation) {
+
+.service('LocationService', function($cordovaGeolocation, backend) {
+
   var LocationService = {};
 
   function locationObtainedCallback(position) {

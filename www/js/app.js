@@ -1,9 +1,39 @@
-angular.module('letterbox', ['ionic','ionic.service.core', 'letterbox.controllers', 'ngResource', 'letterbox.services', 'letterbox.directives', 'facebook', 'ngCordova', 'angularMoment', 'ui.slider', 'monospaced.elastic', 'ionic.ion.imageCacheFactory', 'ngIOS9UIWebViewPatch'])
+// Initialize modules
+angular.module('letterbox.controllers', []);
+angular.module('letterbox.directives', []);
+angular.module('letterbox.services', []);
+
+angular.module('letterbox', ['ionic',
+                             'ionic.service.core',
+                             'letterbox.controllers',
+                             'letterbox.directives',
+                             'letterbox.services',
+                             'facebook',
+                             'angularMoment',
+                             'ui.slider',
+                             'monospaced.elastic',
+                             'ionic.ion.imageCacheFactory',
+                             'ngCordova',
+                             'ngResource',
+                             'ngIOS9UIWebViewPatch'
+                            ])
+
+.constant('VERSION', {
+  major: 0,
+  minor: 2,
+  revision: 0
+})
 
 .run(function($ionicPlatform, $rootScope, eventbus) {
   $rootScope.$on("$stateChangeError", console.log.bind(console));
 
   $ionicPlatform.ready(function() {
+
+    // if (typeof analytics !== 'undefined'){
+    //   analytics.startTrackerWithId('UA-69523125-2');
+    //   analytics.trackView('Letterbox');
+    // }
+
     if (window.cordova) {
       var push = new Ionic.Push({
         "pluginConfig": {
@@ -40,6 +70,4 @@ angular.module('letterbox', ['ionic','ionic.service.core', 'letterbox.controller
 .config(function(FacebookProvider) {
   FacebookProvider.init('1674828996062928');
 });
-
-angular.module('letterbox.services', []);
 

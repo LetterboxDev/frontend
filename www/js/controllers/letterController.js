@@ -1,8 +1,16 @@
 angular.module('letterbox.controllers')
 
-.controller('LetterCtrl', function($scope, $state, $ionicHistory, backend, letterService, eventbus, $timeout) {
+.controller('LetterCtrl', function($scope,
+                                   $state,
+                                   $ionicHistory,
+                                   backend,
+                                   letterService,
+                                   eventbus,
+                                   $timeout) {
+
   // Makes sure that cache is cleared after every time user submits/closes letter
   $scope.$on("$ionicView.afterLeave", function () {
+    $('.button-next').qtip('destroy');
     $ionicHistory.clearCache();
   });
 
@@ -25,6 +33,7 @@ angular.module('letterbox.controllers')
     $scope.currentQuestion = targetUser.questions[0];
     $scope.warning = '';
     $scope.tooltipShown = false;
+    $scope.selectedTab = -1;
   }
 
   $scope.nextQuestion = function() {
@@ -35,11 +44,11 @@ angular.module('letterbox.controllers')
       removeTooltip();
       updateQuestionAnswers(questions, selected);
       backend.sendALetter(targetUser.hashedId, questions);
-      $scope.closeLetter();
+      $ionicHistory.goBack();
       eventbus.call('closeLetter');
       return;
     } else if ($scope.curr === $scope.max) {
-      $scope.warning = 'Please complete all answers.';
+      $scope.warning = 'Please answer all questions.';
       return;
     }
     $scope.curr++;
@@ -53,13 +62,6 @@ angular.module('letterbox.controllers')
     if (selected[$scope.curr] === -1) selected[$scope.curr] = $scope.selectedTab;
     $scope.curr--;
     updateQuestionView($scope.curr, questions, selected);
-  };
-
-  $scope.closeLetter = function() {
-    $ionicHistory.nextViewOptions({
-      disableBack: true,
-    });
-    $state.go('app.home');
   };
 
   $scope.selectTab = function(tab) {

@@ -46,10 +46,22 @@
         <p class="setting-description">See the letterbox of people within this age range.</p>
         <div class="range range-positive">
           {{ minAge }}
-          <slider floor="{{ minAge }}" ceiling="{{ maxAge }}" ng-model-low="preference.age.min" ng-model-high="preference.age.max" change="onChangeAgeRange()">
+          <slider floor="{{ minAge }}" ceiling="{{ maxAge }}" ng-model-low="preference.age.min" ng-model-high="preference.age.max">
           </slider>
           {{ maxAge }}
         </div>
+      </ion-item>
+
+      <ion-item class="item item-divider">
+        Feedback
+      </ion-item>
+      <ion-item class="item item-button-right">
+        <h2 class="setting-header">
+          Found bugs? Contact us!
+        </h2>
+        <button class="button button-feedback button-stable" ng-click="feedback()">
+          <i class="icon ion-social-facebook"></i>
+        </button>
       </ion-item>
 
       <ion-item class="item item-divider">
@@ -65,9 +77,10 @@
       </ion-item>
 
       <div class="settings-etc">
-        <h2>Letterbox 0.1</h2>
+        <h2>Letterbox {{ versionMajor }}.{{ versionMinor }}.{{ versionRevision }}</h2>
         <ul class="settings-links">
-          <li><a href="#/app/privacy">Privacy Policy</a></li>
+          <li><a ng-click="openPrivacyPolicy()">Privacy Policy</a></li>
+          <li><a ng-click="openTermsOfUse()">Terms of Use</a></li>
         </ul>
       </div>
     </ion-list>

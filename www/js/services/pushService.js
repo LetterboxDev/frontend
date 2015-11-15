@@ -1,4 +1,5 @@
 angular.module('letterbox.services')
+
 .service('PushService', function(backend) {
   return {
     updatePushToken: function() {

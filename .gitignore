@@ -3,8 +3,7 @@
 
 node_modules/
 plugins/
-www/css/*.min.css
-www/css/*.css
+www/dist/
 www/lib/
 .io-config.json
 

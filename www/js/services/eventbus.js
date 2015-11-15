@@ -1,7 +1,20 @@
 angular.module('letterbox.services')
-.service('eventbus', function() {
+
+.service('eventbus', function($q) {
   var Eventbus = {};
   var listeners = {};
+
+  function asyncRun(fn, arg) {
+    return $q(function(resolve, reject) {
+      try {
+        fn(arg);
+        resolve();
+      } catch (e) {
+        console.log(e.stack);
+        reject();
+      }
+    });
+  }
 
   Eventbus.deregisterAllListeners = function(event) {
     console.log('deregistered listener: ' + event);
@@ -23,7 +36,12 @@ angular.module('letterbox.services')
     console.log('called listener: ' + event);
     if (listeners[event] instanceof Array) {
       for (var i = 0; i < listeners[event].length; i++) {
-        listeners[event][i](argument);
+        var promise = asyncRun(listeners[event][i], argument);
+        promise.then(function() {
+          console.log('successfully called ' + event);
+        }, function() {
+          console.log('error when calling ' + event);
+        });
       }
     }
   };

@@ -1,6 +1,7 @@
 $nav-bar-height: 50px;
 $ios-status-bar-height: 20px;
 $ios-side-menu-title-height: 120px;
+$maximumWidth: 600px;
 
 ion-content {
   background-color: $colourBackground;
@@ -15,8 +16,8 @@ ion-content {
 }
 
 .spinner-ripple svg {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   stroke: white;
 
   margin: auto;
@@ -65,6 +66,19 @@ ion-content {
   }
 }
 
+body {
+  background-color: $colourDarkerBackground;
+}
+
+#main-wrapper {
+  max-width: $maximumWidth + 300;
+  margin: 0 auto;
+  ion-nav-view:first-child {
+    max-width: $maximumWidth + 300;
+    box-shadow: 0px 0px 4px $colourShadow;
+  }
+}
+
 // View container styles
 .view-container {
   .scroll-content.has-header {
@@ -73,6 +87,21 @@ ion-content {
 }
 
 // List item styles which can be extended by any list
+.list-max-width {
+  @media screen and (min-width: $maximumWidth) {
+    max-width: $maximumWidth;
+    margin: 20px auto;
+  }
+}
+.list-item-picture {
+  float: left;
+  height: 40px;
+  width: 40px;
+  margin-right: 16px;
+  border-radius: 50%;
+  background: center center no-repeat;
+  background-size: cover;
+}
 .list-item-heading {
   font-weight: bold;
   font-size: 15px;
@@ -132,18 +161,23 @@ ion-content {
       display: flex;
       align-items: center;
       -webkit-align-items: center;
-      justify-content: center;
-      -webkit-justify-content: center;
-      text-align: center;
 
       &.selected {
         color: white;
         font-weight: bold;
-      }
-
-      &.option0.selected, &.option1.selected {
         background-color: $colourOption;
         border: 1px solid $colourOption;
+      }
+
+      span {
+        flex: 1;
+      }
+
+      .is-correct.icon {
+        align-self: flex-end;
+        font-size: 16px;
+        margin-right: -5px;
+        margin-bottom: -5px;
       }
     }
 
@@ -162,7 +196,7 @@ ion-content {
 
 .popup-alert {
   .popup {
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
   }
   .popup-head {
@@ -175,6 +209,14 @@ ion-content {
   }
   .popup-body {
     padding: 15px;
+  }
+
+  .warning {
+    margin: 5px 0 0;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+    color: darken($colourPrimary, 10%);
   }
 }
 
@@ -193,4 +235,55 @@ ion-content {
   &:checked + .radio-icon {
     visibility: visible;
   }
+}
+
+ion-popover-view.fit {
+  height: auto !important;
+}
+
+ion-popover-view.fit ion-content {
+  position: relative !important;
+}
+
+.platform-ios ion-popover-view.fit {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+
+/**
+ * Styles for fullscreen image modal
+ */
+.fullscreen-image {
+  width: 100%;
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center, center;
+}
+
+.image-modal {
+  width: 100% !important;
+  height: 100%;
+  top: 0 !important;
+  left: 0 !important;
+  background: rgba(0,0,0,0.7);
+
+  .close-button {
+    cursor: pointer;
+    z-index: 5;
+    color: white;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    font-size: 18pt;
+    text-align: center;
+  }
+}
+
+.slider-pager-page i {
+  color: white;
+  cursor: pointer;
 }

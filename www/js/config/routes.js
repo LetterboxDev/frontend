@@ -34,15 +34,6 @@ angular.module('letterbox')
     }
   })
 
-  .state('app.privacy', {
-    url: '/privacy',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/privacy.html',
-      }
-    }
-  })
-
   .state('app.letter', {
     url: '/letter',
     views: {
@@ -83,8 +74,49 @@ angular.module('letterbox')
     }
   })
 
+  .state('app.categories', {
+    url: '/categories',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/categories.html',
+        controller: 'CategoriesCtrl'
+      }
+    }
+  })
+
+  .state('app.deals', {
+    url: '/deals/:category',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/deals.html',
+        controller: 'DealsCtrl'
+      }
+    }
+  })
+
+  .state('app.deal', {
+    url: '/deal/:dealId/:roomHash',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/deal.html',
+        controller: 'DealCtrl'
+      }
+    },
+    cache: false
+  })
+
+  .state('app.liked-deals', {
+    url: '/liked-deals',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/liked-deals.html',
+        controller: 'LikedDealsCtrl'
+      }
+    }
+  })
+
   .state('app.response', {
-    url: '/responses/:responseId',
+    url: '/responses/:responseId:isExistingChat',
     views: {
       'menuContent': {
         templateUrl: 'templates/response.html',
@@ -99,6 +131,26 @@ angular.module('letterbox')
       'menuContent': {
         templateUrl: 'templates/profile.html',
         controller: 'ProfileCtrl'
+      }
+    }
+  })
+
+  .state('app.other-profile', {
+    url: '/other-profile/:userId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/other-profile.html',
+        controller: 'OtherProfileCtrl'
+      }
+    }
+  })
+
+  .state('app.other-letter', {
+    url: '/other-letter/:roomHash',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/other-letter.html',
+        controller: 'OtherLetterCtrl'
       }
     }
   })

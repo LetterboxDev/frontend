@@ -1,4 +1,4 @@
-<ion-view view-title="{{ profile.firstName }}, {{ profile.age }}">
+<ion-view view-title="{{ nameAndAge }}">
   <ion-content>
     <div class="feedback" ng-if="isLoading">
       <h2>Loading your profile</h2>
@@ -10,7 +10,10 @@
           <div class="my-profile card front">
             <div class="item card-content">
               <div class="section">
-                <div class="small-profile-pic" style="background-image: url({{ profile.pictureMed }})" ng-click="openProfilePhotoModal()">
+                <div class="small-profile-pic-wrapper" ng-click="openProfilePhotoModal()">
+                  <div class="small-profile-pic" style="background-image: url({{ profile.pictureMed }})">
+                  </div>
+                  <h4 class="change-overlay">Change</h4>
                 </div>
                 <div class="bio">
                   <h3>bio</h3>

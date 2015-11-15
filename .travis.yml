@@ -8,11 +8,14 @@ before_script:
   - cordova plugin add ionic-plugin-keyboard
   - cordova plugin add cordova-plugin-statusbar
   - ionic add ionic-platform-web-client
-  - ionic plugin add phonegap-plugin-push
   - cordova plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git
   - cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git
   - cordova plugin add https://github.com/apache/cordova-plugin-splashscreen.git
   - ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git
+  - cordova plugin add cordova-plugin-vibration
+  - ionic plugin add phonegap-plugin-push
+  - ionic plugin add https://github.com/katzer/cordova-plugin-local-notifications
+  - cordova plugin add cordova-plugin-google-analytics
   - bower install
   - gulp
 deploy:
@@ -22,7 +25,7 @@ deploy:
   access_key_id: AKIAIROYTKH27NV6N5XQ
   secret_access_key:
     secure: tYQtUgnYsUplxkcg6Gs+MXCwZbnEZm9bqh763W+bg3vta4rirtKvHIsP2IOiTApJRBbSy03zea5aEkK8N7bn4OR/y/nSTLsPFkhx+9hBKZ3negKh2s5YPWzYTaJuQjVCdP/EYjdYVZgzGtLVTU746k7jC8UwjA5IAa9o4X0aA5wRdTf/9EttxxLUiHNqw/vogiKS2CN4cRLwlQGEXMW7iiv6Y5oCIzgiUsRbpAFslhJSfgvZjcZj5hgFO0Ggg7v08jfsz+c14tkYY6S+Gng7Ox3ffVKj7vkwyQCMUCDAOPGjKyWkfylNWa9IMyoB2GQWU5L7JfD3ntM1n53LhMRNjqCRofXmHLHaAog3E5wrUqCPXb3SQppHsjLEFOLsvH0i/S31ve3OUkP2vJZpqkGoutp7QyBKYYC9ujBIxnI9mHMNdY40PhAGNLdCpirSPR9KZEsxSF7wOcu3OPaOEqUHO1H/ka84z/JxHNSh1aG6Blrp45GNNdAN09YlLMi4pTtRFsCQFohqXVrAxmpKztJNO8DYW9LHUxHzh8QZZXqj1VaUeQdsBcaezgN+y70gMKFE9Bz49zHGCrVUZtcE6yjRkm07lgKtIPaWu0nO/pAwCEPP+Xfby1EhYOBSwVijWfh7TQTxAGSw+HhQicNoimEk7y2/ODGq9595m5LgrYMoEs0=
-  bucket: 'getletterbox.com'
+  bucket: 'web.getletterbox.com'
   region: 'ap-southeast-1'
   skip_cleanup: true
   acl: public_read

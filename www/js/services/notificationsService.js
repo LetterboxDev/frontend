@@ -2,6 +2,7 @@ angular.module('letterbox.services')
 
 .service('NotificationsService', function($q, backend) {
   var currentNotifications = [];
+  var tab = 'letters';
 
   function convertLetterToNotif(letter) {
     var questionsAnswers = [];
@@ -10,12 +11,14 @@ angular.module('letterbox.services')
       questionsAnswers.push({
         option0: question.WyrQuestion.option0,
         option1: question.WyrQuestion.option1,
-        answer: question.answer
+        answer: question.answer,
+        isCorrect: question.isCorrect
       });
     }
     var message = 'answered your questions. Click here to see ' + (letter.UserAccount.gender === 'male' ? 'his' : 'her') + ' responses.';
     return {
       id: letter.hash,
+      userId: letter.UserAccount.hashedId,
       isRead: letter.isRead,
       createdAt: letter.createdAt,
       from: letter.UserAccount.firstName,
@@ -25,11 +28,20 @@ angular.module('letterbox.services')
       profilePicThumb: letter.UserAccount.pictureThumb,
       profilePicMed: letter.UserAccount.pictureMed,
       questionsAnswers: questionsAnswers,
-      message: message
+      message: message,
+      likedDeals: []
     };
   }
 
   return {
+    getTab: function() {
+      return tab;
+    },
+
+    setTab: function(newTab) {
+      tab = newTab; 
+    },
+
     getNotificationsList: function() {
       var deferred = $q.defer();
       backend.getAllLetters().$promise

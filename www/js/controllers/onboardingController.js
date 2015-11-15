@@ -1,6 +1,29 @@
 angular.module('letterbox.controllers')
 
-.controller('OnboardingCtrl', function($scope, $state, $timeout, $ionicPopup, $ionicLoading, Facebook, $cordovaOauth, $ionicHistory, AuthService, backend, eventbus) {
+.controller('OnboardingCtrl', function($scope,
+                                       $state,
+                                       $timeout,
+                                       $ionicPopup,
+                                       $ionicLoading,
+                                       $ionicSlideBoxDelegate,
+                                       $cordovaOauth,
+                                       $ionicHistory,
+                                       $cordovaInAppBrowser,
+                                       $cordovaFacebook,
+                                       Facebook,
+                                       AuthService,
+                                       backend,
+                                       eventbus) {
+
+  $scope.openTermsOfUse = function() {
+    var ref = $cordovaInAppBrowser.open('http://getletterbox.com/terms', '_blank', {
+      hardwareback: 'yes',
+      zoom: 'no',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'bottom'
+    });
+  };
+
   $scope.showLoading = function() {
     $ionicLoading.show({
       template: '<ion-spinner icon="ripple"></ion-spinner>'
@@ -33,25 +56,73 @@ angular.module('letterbox.controllers')
       Facebook.login(function(response) {
         if (response.status === 'connected') {
           $scope.authenticateToken(response.authResponse.accessToken);
+        } else {
+          $scope.hideLoading();
+          var alertPopup = $ionicPopup.alert({
+            title: 'An error when trying to login with Facebook!',
+            template: 'Please try again later',
+            cssClass: "popup-alert"
+          });
         }
-      }, {scope: 'public_profile,user_birthday,user_photos', return_scopes: true});
+      }, {scope: 'public_profile,user_birthday,user_photos,user_friends', return_scopes: true});
     } else {
-      $cordovaOauth.facebook('1674828996062928', ['public_profile','user_birthday','user_photos']).then(function(res) {
-        $scope.authenticateToken(res.access_token);
+      $cordovaFacebook.login(["public_profile", "user_birthday", "user_photos", "user_friends"])
+      .then(function(res) {
+        $scope.authenticateToken(res.authResponse.accessToken);
       }, function(err) {
-        // inform of error
-      });
+        $scope.hideLoading();
+        var alertPopup = $ionicPopup.alert({
+          title: 'An error when trying to login with Facebook!',
+          template: 'Please try again later',
+          cssClass: "popup-alert"
+        });
+      })
     }
   };
 
   $scope.beginOnboarding = function() {
     if (!AuthService.isRegistered()) {
-      $state.go('onboarding', {onboardStep: 1});
+      $state.go('onboarding', {onboardStep: 0});
     } else {
       $state.go('app.home');
     }
   };
 
+
+  // Onboarding step 0 logic
+  $scope.startOnboard = function(index) {
+    $state.go('onboarding', {onboardStep: 1});
+  };
+
+  $scope.isAtStart = true;
+  $scope.isAtEnd = false;
+
+  $scope.slide = function(index) {
+    $ionicSlideBoxDelegate.slide(index);
+    updateStartAndEndVars();
+  };
+
+  $scope.prevSlide = function() {
+    $ionicSlideBoxDelegate.previous();
+    updateStartAndEndVars();
+  };
+
+  $scope.nextSlide = function() {
+    $ionicSlideBoxDelegate.next();
+    updateStartAndEndVars();
+  };
+
+  function updateStartAndEndVars() {
+    var index = $ionicSlideBoxDelegate.currentIndex();
+    if (index == 0) {
+      $scope.isAtStart = true;
+    } else if (index == $ionicSlideBoxDelegate.slidesCount() - 1) {
+      $scope.isAtEnd = true;
+    } else {
+      $scope.isAtStart = false;
+      $scope.isAtEnd = false;
+    }
+  }
 
   // Onboarding step 1 logic
 
@@ -92,32 +163,10 @@ angular.module('letterbox.controllers')
     });
 
     backend.setQuestionsAndAnswers(questions, function(res){
-      $state.go('onboarding', {onboardStep: 2});
+      $scope.completeOnboarding();
     }, function(err){
       console.log("Couldn't save question and answers");
     });
-  }
-
-
-  // Onboarding step 2 logic
-  $scope.data = {
-    bio: ""
-  }
-
-  $scope.onEnterText = function() {
-    // console.log($scope.data.bio);
-  }
-
-  $scope.completeOnboardingStep2 = function() {
-    if ($scope.data.bio.length > 0) {
-      backend.updateUserBio($scope.data.bio, function(res){
-        $scope.completeOnboarding();
-      }, function(err){
-        console.log("Couldn't save bio");
-      });
-    } else {
-      showError("Please add a short bio");
-    }
   }
 
   $scope.completeOnboarding = function() {

@@ -1,0 +1,25 @@
+<ion-view view-title="Catalogue">
+
+  <ion-nav-buttons side="right">
+    <button class="button button-small button-icon button-clear ion-heart" data-ng-click="viewLiked()">
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <div ng-if="isLoading" class="feedback">
+      <ion-spinner icon="dots"></ion-spinner>
+    </div>
+    <div ng-if="!isLoading" class="categories">
+      <div class="card" ng-click="viewCategory('Featured')">
+        <i class="icon ion-thumbsup"></i>
+        <h4>Featured<br>Cutouts</h4>
+      </div>
+      <div ng-repeat="category in categories">
+        <div ng-if="category.image" class="card" ng-click="viewCategory(category.title)" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{category.image}});">
+          <h4>{{category.title}}</h4>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+

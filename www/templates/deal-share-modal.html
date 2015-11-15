@@ -1,0 +1,32 @@
+<ion-modal-view class="deal-share-modal">
+  <ion-header-bar>
+    <h1 class="title">Share a cutout!</h1>
+    <span class="button button-clear" ng-click="closeShareModal()">Close</span>
+  </ion-header-bar>
+
+  <ion-content>
+    <div class="bar bar-header">
+      <div class="button-bar bar-light deal-share-seg-control">
+        <a class="button left" ng-class="{highlighted: viewingDeals==='own'}" ng-click="viewingDeals='own'">Yours</a>
+        <a class="button" ng-class="{highlighted: viewingDeals==='user'}" ng-click="viewingDeals='user'">{{ recipient }}'s</a>
+        <a class="button right" ng-class="{highlighted: viewingDeals==='mutual'}" ng-click="viewingDeals='mutual'">Mutual</a>
+      </div>
+    </div>
+
+    <div class="feedback" ng-if="deals[viewingDeals].length === 0">
+      <h2>No liked deals yet!</h2>
+    </div>
+
+    <div class="row deal-share-deals" ng-if="deals[viewingDeals].length !== 0">
+      <div ng-repeat="deal in deals[viewingDeals]" class="col col-33">
+        <div class="deal-share-deal" ng-click="viewDeal(deal)">
+          <div class="deal-share-deal-image" style="background-image: url({{ deal.thumbnail }})"></div>
+          <div class="deal-share-deal-title">
+            {{ deal.title }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
+

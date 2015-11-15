@@ -5,27 +5,30 @@
         <div class="flipper-container" flip-card>
           <div class="flipper">
             <div class="card front">
-              <div class="small-profile-pic-header">
-                <img class="small-profile-pic" ng-src="{{ response.profilePicMed }}" alt="Image" />
-                <span class="name">{{ response.from }}</span><span class="age">, {{ response.age }}</span>
-              </div>
+              <profile-pic-small data-set="{'profile_pic': response.profilePicMed,
+                                           'name': response.from,
+                                           'age': response.age }"></profile-pic-small>
               <div class="item card-content">
                 <div class="section">
-                  <h3>responses</h3>
+                  <h3>{{ response.from }} got {{ numCorrect }} questions correct.</h3>
                   <div class="questions">
                     <div class="question" ng-repeat="question in response.questionsAnswers">
-                      <div class="option option0" ng-class="{ 'selected' : !question.answer}">
-                        {{ question.option0 }}
+                      <div class="option option0" ng-class="{ 'selected' : !question.answer }">
+                        <span>{{ question.option0 }}</span>
+                        <i ng-if="question.isCorrect && !question.answer" class="is-correct icon ion-checkmark-circled"></i>
+                        <i ng-if="!question.isCorrect && !question.answer" class="is-correct icon ion-close-circled"></i>
                       </div>
-                      <div class="option option1" ng-class="{ 'selected' : question.answer}">
-                        {{ question.option1 }}
+                      <div class="option option1" ng-class="{ 'selected' : question.answer }">
+                        <span>{{ question.option1 }}</span>
+                        <i ng-if="question.isCorrect && question.answer" class="is-correct icon ion-checkmark-circled"></i>
+                        <i ng-if="!question.isCorrect && question.answer" class="is-correct icon ion-close-circled"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="item card-buttons">
-                <div class="card-button button-negative" ng-click="rejectLetter(response)">
+                <div class="card-button button-negative" ng-click="rejectLetter(response)" ng-show="!isExistingChat">
                   <i class="icon ion-close"></i>
                   <div class="button-detail">reject</div>
                 </div>
@@ -33,7 +36,7 @@
                   <i class="icon ion-person"></i>
                   <div class="button-detail">profile</div>
                 </div>
-                <div class="card-button button-positive" ng-click="approveLetter(response)">
+                <div class="card-button button-positive" ng-click="approveLetter(response)" ng-show="!isExistingChat">
                   <i class="icon ion-chatbubbles"></i>
                   <div class="button-detail">start chat</div>
                 </div>
@@ -42,26 +45,39 @@
 
             <div class="card back">
               <div class="back-container">
-                <div class="small-profile-pic-header">
-                  <img class="small-profile-pic" ng-src="{{ response.profilePicMed }}" alt="Image" />
-                  <span class="name">{{ response.from }}</span><span class="age">, {{ response.age }}</span>
-                </div>
+                <profile-pic-small data-set="{'profile_pic': response.profilePicMed,
+                                              'name': response.from,
+                                              'age': response.age }"></profile-pic-small>
                 <div class="item card-content">
                   <div class="section">
                     <h3>bio</h3>
-                    <p>{{ (response.bio.length > 0) ? response.bio : '&nbsp;' }}</p>
+                    <p>{{ response.bio }}</p>
                   </div>
                   <div class="section">
                     <h3>mutual friends</h3>
-                    <p>{{ (card.mutual_friends_count > 0) ? card.mutual_friends_count : 0 }} mutual friends</p>
+                    <p>{{ (response.mutual_friends_count > 0) ? response.mutual_friends_count : 0 }} mutual friends</p>
                   </div>
                   <div class="section">
-                    <h3>Likes</h3>
+                    <h3>cutouts</h3>
+
+                    <div ng-if="response.likedDeals.length === 0">
+                      <p>{{ response.from }} does not have any cutouts yet!</p>
+                    </div>
+
+                    <ion-scroll direction="x" ng-if="response.likedDeals.length > 0" has-bouncing="false">
+                      <div class="deal-pic" ng-repeat="deal in response.likedDeals" style="background-image: url({{ deal.images[0] }})" ng-click="viewDeal(deal)">
+                      </div>
+                    </ion-scroll>
+                  </div>
+                  <div class="section">
+                    <button class="btn-report button button-outline button-assertive" ng-click="reportUser(response.from, response.userId)">
+                      Report user
+                    </button>
                   </div>
                 </div>
 
                 <div class="item card-buttons">
-                  <div class="card-button button-negative" ng-click="rejectLetter(response)">
+                  <div class="card-button button-negative" ng-click="rejectLetter(response)" ng-show="!isExistingChat">
                     <i class="icon ion-close"></i>
                     <div class="button-detail">reject</div>
                   </div>
@@ -69,13 +85,15 @@
                     <i class="icon ion-ios-undo"></i>
                     <div class="button-detail">back</div>
                   </div>
-                  <div class="card-button button-positive" ng-click="approveLetter(response)">
+                  <div class="card-button button-positive" ng-click="approveLetter(response)" ng-show="!isExistingChat">
                     <i class="icon ion-chatbubbles"></i>
                     <div class="button-detail">start chat</div>
                   </div>
                 </div>
+
               </div>
             </div>
+
           </div>
         </div>
       </div>
