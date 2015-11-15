@@ -20,36 +20,37 @@ angular.module('letterbox.controllers')
   $scope.requestingNumber = 0;
 
   eventbus.registerListener('enterHome', checkAndGetCard);
-  eventbus.registerListener('changeGender', checkAndGetCard);
-  // eventbus.registerListener('closeLetter', removeTopCard);
+  eventbus.registerListener('changeGender', changeGender);
+  eventbus.registerListener('closeLetter', $scope.changeCard);
 
-  getInitialCards();
+  getInitialCard();
 
   $scope.changeCard = function() {
     if ($scope.isCardAnimating) {
       return;
     }
-
-    if ($scope.requestingNumber === 0) {
-      $scope.addCard();
-    }
-
     $scope.isCardAnimating = true;
     selectFirst('.profile-card').addClass('moving-out');
 
     $timeout(function() {
       // timeout for moving out animation
       selectFirst('.profile-card').removeClass('moving-out');
-      selectFirst('.profile-card').addClass('moving-in');
-      $scope.cards.splice(0, 1);
-      $scope.isLoading = false;
-      $scope.isCardAnimating = false;
-
-      // timeout for remove moving in animation
-      $timeout(function() {
-        selectFirst('.profile-card').removeClass('moving-in');
-      }, 500);
-
+      $scope.isLoading = true;
+      MatchService.getCard().then(function(card) {
+        $scope.cards.splice(0, 1);
+        $scope.cards.push(card);
+        selectFirst('.profile-card').addClass('moving-in');
+        $scope.isLoading = false;
+        $scope.isCardAnimating = false;
+        // timeout for remove moving in animation
+        $timeout(function() {
+          selectFirst('.profile-card').removeClass('moving-in');
+        }, 500);
+      }, function() {
+        $scope.cards.splice(0, 1);
+        $scope.isLoading = false;
+        $scope.isCardAnimating = false;
+      });
     }, 500);
   };
 
@@ -62,15 +63,6 @@ angular.module('letterbox.controllers')
     $state.go('app.letter');
   };
 
-  $scope.addCard = function() {
-    if (!$scope.isLoading) {
-      MatchService.getMatch()
-      .then(function(match) {
-        $scope.cards.push(createNewCard(match));
-      });
-    }
-  };
-
   /**
    * Helper functions
    */
@@ -78,70 +70,33 @@ angular.module('letterbox.controllers')
     // if there is card currently loaded, change it
     // otherwise, load new card
     if ($scope.cards.length === 0) {
-      getInitialCards();
+      getInitialCard();
+    }
+  }
+
+  function changeGender() {
+    if ($scope.cards.length === 0) {
+      getInitialCard();
     } else {
       $scope.changeCard();
     }
   }
 
-  function getInitialCards() {
+  function getInitialCard() {
     if (window.localStorage.getItem('token') && !$scope.isLoading) {
       $scope.isLoading = true;
-
-      for (i = 0; i < bufferSize; i ++) {
-        $scope.requestingNumber ++;
-        // avoid concurrency issue
+      MatchService.getCard().then(function(card) {
+        $scope.isLoading = false;
+        $scope.cards.push(card);
+        $scope.isCardAnimating = true;
         $timeout(function() {
-          MatchService.getMatch()
-          .then(function(match) {
-            $scope.requestingNumber --;
-
-            if ($scope.cards.length === 2) {
-              // temp hack
-              $scope.isLoading = false;
-              $timeout(function() {
-                selectFirst('.profile-card').removeClass('moving-in');
-              }, 500);
-            }
-
-            if (match) {
-              var duplicatedMatch = false;
-
-              $scope.cards.forEach(function(matched) {
-                if (matched.hashedId === match.hashedId) {
-                  duplicatedMatch = true;
-                }
-              });
-
-              if (!duplicatedMatch) {
-                $scope.cards.push(createNewCard(match));
-              }
-            }
-
-          }, function() {
-            $scope.isLoading = false;
-          });
-        }, i * 800);
-      }
+          selectFirst('.profile-card').removeClass('moving-in');
+          $scope.isCardAnimating = false;
+        }, 500);
+      }, function() {
+        $scope.isLoading = false;
+      });
     }
-  }
-
-  function removeTopCard() {
-    $scope.cards.shift();
-  }
-
-  function createNewCard(match) {
-    return {
-      hashedId: match.hashedId,
-      name: match.firstName,
-      age: match.age,
-      location: Math.floor(match.distance) + 'km',
-      bio: match.bio,
-      profile_pic: match.pictureMed,
-      questions: match.questions,
-      mutual_friends_count: (typeof match.mutualFriends === 'undefined') ? 'unknown' : match.mutualFriends.summary.total_count,
-      likedDeals: match.likedDeals
-    };
   }
 
   function selectFirst(selector) {
