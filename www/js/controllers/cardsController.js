@@ -19,8 +19,8 @@ angular.module('letterbox.controllers')
   $scope.isCardAnimating = false;
   $scope.requestingNumber = 0;
 
-  eventbus.registerListener('enterHome', checkAndGetCard);
   eventbus.registerListener('changePreference', changePreference);
+  eventbus.registerListener('enterHome', checkAndGetCard);
   eventbus.registerListener('closeLetter', $scope.changeCard);
 
   getInitialCard();
