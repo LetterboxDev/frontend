@@ -4,26 +4,35 @@ angular.module('letterbox.controllers')
                                  $state,
                                  $ionicHistory,
                                  NotificationsService,
+                                 RoomsService,
                                  eventbus) {
 
-  $scope.numberOfNotifications = 0;
+  $scope.numberOfLetters = 0;
+  $scope.numberOfMessages = 0;
 
-  eventbus.registerListener('letterReceived', function() {
+  function updateLetterCount() {
     NotificationsService.getNumberOfNotifications()
-    .then(function(numberOfNotifications) {
-      $scope.numberOfNotifications = numberOfNotifications;
+    .then(function(numberOfLetters) {
+      $scope.numberOfLetters = numberOfLetters;
     });
-  });
+  }
+
+  function updateMessagesCount() {
+    RoomsService.getTotalUnreadCount().then(function(count) {
+      $scope.numberOfMessages = count;
+    });
+  }
+
+  eventbus.registerListener('letterReceived', updateLetterCount);
+  eventbus.registerListener('unreadCountChanged', updateMessagesCount);
 
   $scope.$on('$ionicView.enter', function() {
     eventbus.call('enterHome');
     $ionicHistory.nextViewOptions({
       disableBack: true
     });
-    NotificationsService.getNumberOfNotifications()
-    .then(function(numberOfNotifications) {
-      $scope.numberOfNotifications = numberOfNotifications;
-    });
+    updateLetterCount();
+    updateMessagesCount();
   });
 
   $scope.goNotifications = function() {

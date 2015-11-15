@@ -46,7 +46,7 @@
         <p class="setting-description">See the letterbox of people within this age range.</p>
         <div class="range range-positive">
           {{ minAge }}
-          <slider floor="{{ minAge }}" ceiling="{{ maxAge }}" ng-model-low="preference.age.min" ng-model-high="preference.age.max" change="onChangeAgeRange()">
+          <slider floor="{{ minAge }}" ceiling="{{ maxAge }}" ng-model-low="preference.age.min" ng-model-high="preference.age.max">
           </slider>
           {{ maxAge }}
         </div>

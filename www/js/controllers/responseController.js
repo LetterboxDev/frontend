@@ -7,8 +7,7 @@ angular.module('letterbox.controllers')
                                      backend,
                                      NotificationsService,
                                      ProfileService,
-                                     ReportService,
-                                     eventbus) {
+                                     ReportService) {
   getNotification();
 
   $ionicHistory.nextViewOptions({
