@@ -92,7 +92,7 @@ angular.module('letterbox.services')
               deferred.reject();
             }
           });
-        }, i*REQUEST_INTERVAL);
+        }, i * REQUEST_INTERVAL);
       }
     } else {
       deferred.reject();
@@ -136,7 +136,7 @@ angular.module('letterbox.services')
       MatchService.getMatch().then(function(matchedUser) {
         deferred.resolve(match);
       }, function() {
-        deferred.reject();        
+        deferred.reject();
       })
     }
     return deferred.promise;
@@ -147,21 +147,37 @@ angular.module('letterbox.services')
     if (window.localStorage.getItem('genderPreference') === 'male') {
       if (!isMaleInit) {
         MatchService.getInitialMatch().then(function(match) {
-          deferred.resolve(createNewCard(match));
+          if (typeof match === 'undefined') {
+            deferred.resolve(MatchService.getCard());
+          } else {
+            deferred.resolve(createNewCard(match));
+          }
         }, deferred.reject);
       } else {
         MatchService.getNextMatch().then(function(match) {
-          deferred.resolve(createNewCard(match));
+          if (typeof match === 'undefined') {
+            deferred.resolve(MatchService.getCard());
+          } else {
+            deferred.resolve(createNewCard(match));
+          }
         }, deferred.reject);
       }
     } else {
       if (!isFemaleInit) {
         MatchService.getInitialMatch().then(function(match) {
-          deferred.resolve(createNewCard(match));
+          if (typeof match === 'undefined') {
+            deferred.resolve(MatchService.getCard());
+          } else {
+            deferred.resolve(createNewCard(match));
+          }
         }, deferred.reject);
       } else {
         MatchService.getNextMatch().then(function(match) {
-          deferred.resolve(createNewCard(match));
+          if (typeof match === 'undefined') {
+            deferred.resolve(MatchService.getCard());
+          } else {
+            deferred.resolve(createNewCard(match));
+          }
         }, deferred.reject);
       }
     }
