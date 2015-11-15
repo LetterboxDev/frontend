@@ -20,7 +20,7 @@ angular.module('letterbox.controllers')
   $scope.requestingNumber = 0;
 
   eventbus.registerListener('enterHome', checkAndGetCard);
-  eventbus.registerListener('changeGender', changeGender);
+  eventbus.registerListener('changePreference', changePreference);
   eventbus.registerListener('closeLetter', $scope.changeCard);
 
   getInitialCard();
@@ -74,12 +74,9 @@ angular.module('letterbox.controllers')
     }
   }
 
-  function changeGender() {
-    if ($scope.cards.length === 0) {
-      getInitialCard();
-    } else {
-      $scope.changeCard();
-    }
+  function changePreference() {
+    $scope.cards = [];
+    getInitialCard();
   }
 
   function getInitialCard() {

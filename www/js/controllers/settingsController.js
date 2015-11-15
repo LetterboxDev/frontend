@@ -21,6 +21,10 @@ angular.module('letterbox.controllers')
   var minAge = window.localStorage.getItem('minAge');
   var maxAge = window.localStorage.getItem('maxAge');
 
+  $scope.$on('$ionicView.beforeLeave', function(){
+    eventbus.call('changePreference');
+  });
+
   $scope.preference = {
     perfectMatch: (perfectMatch === 'true' ? true : false),
     preferredGender: preferredGender,
@@ -37,7 +41,6 @@ angular.module('letterbox.controllers')
   }
 
   $scope.onChangePreferredGender = function() {
-    eventbus.call('changeGender');
     window.localStorage.setItem('genderPreference', $scope.preference.preferredGender);
     backend.updateGenderPreference($scope.preference.preferredGender);
   }
