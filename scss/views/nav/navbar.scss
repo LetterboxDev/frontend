@@ -24,17 +24,17 @@
       padding-right: 8px;
     }
     .notification-bubble {
-      border-radius: 40px; // make it circle
-      width: 18px;
-      height: 18px;
+      border-radius: 50%; // make it circle
+      width: 20px;
+      height: 20px;
       background-color: $colourPositive;
       text-align: center;
       color: white;
-      font-size: 10px;
-      padding-bottom: 2px;
+      font-weight: bold;
+      font-size: 9px;
       position: absolute;
-      top: 5px;
-      left: 10px;
+      top: 3px;
+      left: 5px;
       z-index: 1;
       cursor: pointer;
     }
