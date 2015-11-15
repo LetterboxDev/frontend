@@ -75,8 +75,11 @@ angular.module('letterbox.controllers')
   }
 
   function changePreference() {
-    $scope.cards = [];
-    getInitialCard();
+    if ($scope.cards.length === 0) {
+      getInitialCard();
+    } else {
+      $scope.changeCard();
+    }
   }
 
   function getInitialCard() {

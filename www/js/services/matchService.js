@@ -9,9 +9,11 @@ angular.module('letterbox.services')
                                   AuthService) {
 
   var MatchService = this;
-  var matches = [];
+  var maleMatches = [];
+  var femaleMatches = [];
   var outstandingRequests = 0;
-  var isInit = false;
+  var isMaleInit = false;
+  var isFemaleInit = false;
 
   var MAX_BUFFER = 20;
   var REQUEST_INTERVAL = 800;
@@ -22,8 +24,6 @@ angular.module('letterbox.services')
   eventbus.registerListener('changePreference', changePreference);
 
   function changePreference() {
-    isInit = false;
-    matches = [];
   }
 
   MatchService.getMatch = function() {
@@ -61,7 +61,14 @@ angular.module('letterbox.services')
     var resolved = false;
     var seen = [];
 
-    isInit = true;
+    matches = [];
+    var matches = window.localStorage.getItem('genderPreference') === 'male' ? maleMatches : femaleMatches;
+    if (window.localStorage.getItem('genderPreference') === 'male') {
+      isMaleInit = true;
+    } else {
+      isFemaleInit = true;
+    }
+
     if (outstandingRequests === 0 && matches.length && AuthService.isRegistered()) {
       var match = matches.shift();
       deferred.resolve(match);
@@ -104,7 +111,7 @@ angular.module('letterbox.services')
 
   MatchService.getNextMatch = function() {
     var deferred = $q.defer();
-    // var matches = window.localStorage.getItem('genderPreference') === 'male' ? maleMatches : femaleMatches;
+    var matches = window.localStorage.getItem('genderPreference') === 'male' ? maleMatches : femaleMatches;
     if (matches.length) {
       var match = matches.shift();
       outstandingRequests++;
@@ -147,23 +154,44 @@ angular.module('letterbox.services')
   MatchService.getCard = function() {
     var deferred = $q.defer();
 
-    if (!isInit) {
-      MatchService.getInitialMatch().then(function(match) {
-        if (typeof match === 'undefined') {
-          deferred.resolve(MatchService.getCard());
-        } else {
-          deferred.resolve(createNewCard(match));
-        }
-      }, deferred.reject);
+    if (window.localStorage.getItem('genderPreference') === 'male') {
+      if (!isMaleInit) {
+        MatchService.getInitialMatch().then(function(match) {
+          if (typeof match === 'undefined') {
+            deferred.resolve(MatchService.getCard());
+          } else {
+            deferred.resolve(createNewCard(match));
+          }
+        }, deferred.reject);
+      } else {
+        MatchService.getNextMatch().then(function(match) {
+          if (typeof match === 'undefined') {
+            deferred.resolve(MatchService.getCard());
+          } else {
+            deferred.resolve(createNewCard(match));
+          }
+        }, deferred.reject);
+      }
     } else {
-      MatchService.getNextMatch().then(function(match) {
-        if (typeof match === 'undefined') {
-          deferred.resolve(MatchService.getCard());
-        } else {
-          deferred.resolve(createNewCard(match));
-        }
-      }, deferred.reject);
+      if (!isFemaleInit) {
+        MatchService.getInitialMatch().then(function(match) {
+          if (typeof match === 'undefined') {
+            deferred.resolve(MatchService.getCard());
+          } else {
+            deferred.resolve(createNewCard(match));
+          }
+        }, deferred.reject);
+      } else {
+        MatchService.getNextMatch().then(function(match) {
+          if (typeof match === 'undefined') {
+            deferred.resolve(MatchService.getCard());
+          } else {
+            deferred.resolve(createNewCard(match));
+          }
+        }, deferred.reject);
+      }
     }
+
     return deferred.promise;
   };
 
