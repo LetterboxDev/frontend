@@ -10,6 +10,7 @@ angular.module('letterbox.services')
         fn(arg);
         resolve();
       } catch (e) {
+        console.log(e.stack);
         reject();
       }
     });

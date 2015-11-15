@@ -26,7 +26,11 @@ angular.module('letterbox.services')
   }
 
   BackgroundService.isInBackground = function() {
-    return !isActive;
+    if (window.cordova) {
+      return !isActive;      
+    } else {
+      return !window.document.hasFocus();
+    }
   };
 
   BackgroundService.registerOnResume = function(onResume) {

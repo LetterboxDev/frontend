@@ -2,6 +2,7 @@ angular.module('letterbox.services')
 
 .service('NotificationsService', function($q, backend) {
   var currentNotifications = [];
+  var tab = 'letters';
 
   function convertLetterToNotif(letter) {
     var questionsAnswers = [];
@@ -33,6 +34,14 @@ angular.module('letterbox.services')
   }
 
   return {
+    getTab: function() {
+      return tab;
+    },
+
+    setTab: function(newTab) {
+      tab = newTab; 
+    },
+
     getNotificationsList: function() {
       var deferred = $q.defer();
       backend.getAllLetters().$promise
