@@ -16,6 +16,7 @@ angular.module('letterbox.controllers')
 
   $scope.cards = [];
   $scope.isLoading = false;
+  $scope.isCardAnimating = false;
   $scope.requestingNumber = 0;
 
   eventbus.registerListener('enterHome', checkAndGetCard);
@@ -25,10 +26,15 @@ angular.module('letterbox.controllers')
   getInitialCards();
 
   $scope.changeCard = function() {
+    if ($scope.isCardAnimating) {
+      return;
+    }
+
     if ($scope.requestingNumber === 0) {
       $scope.addCard();
     }
 
+    $scope.isCardAnimating = true;
     selectFirst('.profile-card').addClass('moving-out');
 
     $timeout(function() {
@@ -37,6 +43,7 @@ angular.module('letterbox.controllers')
       selectFirst('.profile-card').addClass('moving-in');
       $scope.cards.splice(0, 1);
       $scope.isLoading = false;
+      $scope.isCardAnimating = false;
 
       // timeout for remove moving in animation
       $timeout(function() {
