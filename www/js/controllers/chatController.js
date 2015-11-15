@@ -1,20 +1,18 @@
 angular.module('letterbox.controllers')
 
 .controller('ChatCtrl', function($scope,
+                                 $state,
                                  $stateParams,
                                  $ionicScrollDelegate,
                                  $ionicModal,
                                  $window,
                                  $timeout,
-                                 $state,
                                  $ionicPopover,
                                  $ionicPopup,
                                  $ionicLoading,
-                                 backend,
                                  ChatService,
                                  DealService,
                                  RoomsService,
-                                 eventbus,
                                  socket) {
 
   $scope.messages = [];
@@ -22,11 +20,13 @@ angular.module('letterbox.controllers')
   $scope.recipientId = '';
   $scope.data = {message: ''};
   $scope.viewingDeals = 'mutual';
+  $scope.fromSubPage = false;
   $scope.deals = {
     own: [],
     user: [],
     mutual: []
   };
+  $scope.limit = 40;
 
   $scope.roomHash = $stateParams.chatId;
   $scope.room = RoomsService.getRoom($scope.roomHash);
@@ -37,22 +37,15 @@ angular.module('letterbox.controllers')
     $scope.popover = popover;
   });
 
-  eventbus.registerListener('roomMessage', function(roomMessage) {
-    var message = roomMessage.message;
-
-    if (message.RoomHash === $scope.roomHash) {
-      var formattedMessage = ChatService.formatMessage(message);
-      $scope.messages.push(formattedMessage);
-      $scope.$apply();
-      $ionicScrollDelegate.scrollBottom(true);
-    }
-  });
-
   var onKeyboardHide = function() {
+    $scope.limit = 40;
+    $scope.$apply();
     $ionicScrollDelegate.scrollBottom(true);
   };
 
   var onKeyboardShow = function() {
+    $scope.limit = 40;
+    $scope.$apply();
     $ionicScrollDelegate.scrollBottom(false);
   };
 
@@ -66,28 +59,11 @@ angular.module('letterbox.controllers')
     });
 
     ChatService.getMessagesFromBackend($scope.roomHash).then(function(messages) {
-      var i = 0, j = 0;
-      var initialMessageCount = $scope.messages.length;
-      var messageAdded = false;
-      while (i < messages.length && j < $scope.messages.length) {
-        if (messages[i].timestamp > $scope.messages[j].timestamp) {
-          j++;
-        } else if (messages[i].timestamp.getTime() === $scope.messages[j].timestamp.getTime()) {
-          i++;
-        } else {
-          $scope.messages.splice(j, 0, messages[i]);
-          messageAdded = true;
-        }
-      }
-      if (messages.length > $scope.messages.length) {
-        messageAdded = true;
-        for (var k = $scope.messages.length; k < messages.length; k++) {
-          $scope.messages.push(messages[k]);
-        }
-      }
-      $scope.messages = messages;
-      if (messageAdded) {
-        $ionicScrollDelegate.scrollBottom(initialMessageCount !== 0);
+      ChatService.setCurrentRoom($scope.roomHash, $scope, $ionicScrollDelegate);
+      if (!$scope.fromSubPage) {
+        $scope.messages = messages;
+        if (messages.length) socket.roomRead($scope.roomHash, messages[messages.length-1].timestamp.getTime());
+        $ionicScrollDelegate.scrollBottom(false);
       }
     });
 
@@ -99,6 +75,16 @@ angular.module('letterbox.controllers')
     window.removeEventListener('native.keyboardhide', onKeyboardHide, false);
     window.removeEventListener('native.keyboardshow', onKeyboardShow, false);
   });
+
+  $scope.loadPrevious = function() {
+    var previousHeight = $('.messages-list > .list').height();
+    $scope.limit = Math.min($scope.limit + 15, $scope.messages.length);
+    $scope.$apply();
+    $ionicScrollDelegate.$getByHandle('chatScroll')
+                        .scrollBy(0,
+                                  $('.messages-list > .list').height() - previousHeight,
+                                  false);
+  }
 
   $scope.onKeyPress = function(event) {
     if (event.keyCode === 13) {
@@ -152,6 +138,7 @@ angular.module('letterbox.controllers')
     $scope.showLoading();
     ChatService.getRecipientHashedId($scope.roomHash).then(function(userId) {
       $scope.hideLoading();
+      $scope.fromSubPage = true;
       $state.go('app.other-profile', { userId: userId });
     });
     $scope.closePopover();
@@ -168,6 +155,7 @@ angular.module('letterbox.controllers')
 
   $scope.showResponses = function() {
     $scope.closePopover();
+    $scope.fromSubPage = true;
     $state.go('app.other-letter', { roomHash: $scope.roomHash });
   };
 
@@ -177,12 +165,14 @@ angular.module('letterbox.controllers')
 
   $scope.viewDeal = function(deal) {
     DealService.showShare = true;
+    $scope.fromSubPage = true;
     $state.go('app.deal', { dealId: deal.id, roomHash: $scope.roomHash });
     $scope.closeShareModal();
   };
 
   $scope.viewSharedDeal = function(deal) {
     DealService.showShare = false;
+    $scope.fromSubPage = true;
     $state.go('app.deal', { dealId: deal.id });
   };
 

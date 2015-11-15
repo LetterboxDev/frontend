@@ -46,10 +46,15 @@ angular.module('letterbox.controllers')
     window.localStorage.setItem('distanceRadius', $scope.preference.distanceRadius);
   }
 
-  $scope.onChangeAgeRange = function() {
-    window.localStorage.setItem('minAge', $scope.preference.age.min);
-    window.localStorage.setItem('maxAge', $scope.preference.age.max);
-  }
+  $scope.$watch('preference.age', function() {
+    if (!isNaN($scope.preference.age.min)) {
+      window.localStorage.setItem('minAge', $scope.preference.age.min);
+    }
+
+    if (!isNaN($scope.preference.age.max)) {
+      window.localStorage.setItem('maxAge', $scope.preference.age.max);
+    }
+  }, true);
 
   $scope.openTermsOfUse = function() {
     var ref = $cordovaInAppBrowser.open('http://getletterbox.com/terms', '_blank', {
