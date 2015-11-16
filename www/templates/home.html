@@ -10,8 +10,8 @@
     <div ng-controller="CardsCtrl">
       <div ng-if="cards.length === 0" class="feedback">
         <div ng-if="isLoading" class="feedback">
-          <ion-spinner icon="dots"></ion-spinner>
           <h2>Finding letterboxes nearby</h2>
+          <ion-spinner icon="dots"></ion-spinner>
         </div>
         <div ng-if="!isLoading">
           <h2>No letterboxes nearby</h2>
