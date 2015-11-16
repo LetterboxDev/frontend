@@ -88,6 +88,20 @@ angular.module('letterbox.controllers')
     });
   }
 
+  $scope.deactivate = function () {
+    $ionicPopup.confirm({
+      title: "Are you sure you want to deactivate your account?",
+      cssClass: "popup-alert",
+      okType: "button-positive",
+      okText: "Yes",
+      cancelText: "No"
+    }).then(function(res) {
+      if (res) {
+        AuthService.deactivateUser().then(function(){$state.go('login')});
+      }
+    });
+  };
+
   $scope.feedback = function() {
     var ref = $cordovaInAppBrowser.open('https://www.facebook.com/getletterbox', '_blank', {
       hardwareback: 'yes',
