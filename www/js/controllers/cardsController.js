@@ -14,6 +14,7 @@ angular.module('letterbox.controllers')
 
   $scope.cards = [];
   $scope.isLoading = false;
+  $scope.clearingPrevious = false;
   $scope.isCardAnimating = false;
   $scope.letterClosed = false;
   $scope.requestingNumber = 0;
@@ -21,8 +22,6 @@ angular.module('letterbox.controllers')
   eventbus.registerListener('changePreference', changePreference);
   eventbus.registerListener('closeLetter', closeLetter);
   eventbus.registerListener('enterHome', checkAndGetCard);
-
-  getInitialCard();
 
   $scope.changeCard = function() {
     if ($scope.isCardAnimating) {
@@ -35,23 +34,38 @@ angular.module('letterbox.controllers')
       // timeout for moving out animation
       selectFirst('.profile-card').removeClass('moving-out');
       $scope.isLoading = true;
-      MatchService.getCard().then(function(card) {
-        $scope.cards.splice(0, 1);
-        $scope.cards.push(card);
-        selectFirst('.profile-card').addClass('moving-in');
-        $scope.isLoading = false;
-        $scope.isCardAnimating = false;
-        // timeout for remove moving in animation
-        $timeout(function() {
-          selectFirst('.profile-card').removeClass('moving-in');
-        }, 500);
+      MatchService.getCard(false).then(function(card) {
+        changeCardSuccess(card);
       }, function() {
-        $scope.cards.splice(0, 1);
-        $scope.isLoading = false;
-        $scope.isCardAnimating = false;
+        $scope.clearingPrevious = true;
+        MatchService.getCard(true).then(function(card) {
+          $scope.clearingPrevious = false;
+          changeCardSuccess(card);
+        }, function() {
+          $scope.clearingPrevious = false;
+          changeCardFail();
+        });
       });
     }, 500);
   };
+
+  function changeCardSuccess(card) {
+    $scope.cards.splice(0, 1);
+    $scope.cards.push(card);
+    selectFirst('.profile-card').addClass('moving-in');
+    $scope.isLoading = false;
+    $scope.isCardAnimating = false;
+    // timeout for remove moving in animation
+    $timeout(function() {
+      selectFirst('.profile-card').removeClass('moving-in');
+    }, 500);
+  }
+
+  function changeCardFail() {
+    $scope.cards.splice(0, 1);
+    $scope.isLoading = false;
+    $scope.isCardAnimating = false;
+  }
 
   $scope.openSendLetter = function(card) {
     $ionicHistory.nextViewOptions({
@@ -93,18 +107,33 @@ angular.module('letterbox.controllers')
   function getInitialCard() {
     if (window.localStorage.getItem('token') && !$scope.isLoading) {
       $scope.isLoading = true;
-      MatchService.getCard().then(function(card) {
-        $scope.isLoading = false;
-        $scope.cards.push(card);
-        $scope.isCardAnimating = true;
-        $timeout(function() {
-          selectFirst('.profile-card').removeClass('moving-in');
-          $scope.isCardAnimating = false;
-        }, 500);
+      MatchService.getCard(false).then(function(card) {
+        getInitialCardSuccess(card);
       }, function() {
-        $scope.isLoading = false;
+        $scope.clearingPrevious = true;
+        MatchService.getCard(true).then(function(card) {
+          $scope.clearingPrevious = false;
+          getInitialCardSuccess(card);
+        }, function() {
+          $scope.clearingPrevious = false;
+          getInitialCardFail();
+        });
       });
     }
+  }
+
+  function getInitialCardSuccess(card) {
+    $scope.isLoading = false;
+    $scope.cards.push(card);
+    $scope.isCardAnimating = true;
+    $timeout(function() {
+      selectFirst('.profile-card').removeClass('moving-in');
+      $scope.isCardAnimating = false;
+    }, 500);
+  }
+
+  function getInitialCardFail() {
+    $scope.isLoading = false;
   }
 
   function selectFirst(selector) {

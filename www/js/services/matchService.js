@@ -21,8 +21,6 @@ angular.module('letterbox.services')
   var REQUEST_INTERVAL = 600;
   var INITIAL_REQUESTS = 8;
 
-  MatchService.previousId = '';
-
   eventbus.registerListener('changePreference', changePreference);
 
   function changePreference() {
@@ -64,19 +62,18 @@ angular.module('letterbox.services')
     }
   }
 
-  MatchService.getMatch = function() {
+  MatchService.getMatch = function(clearPrevious) {
     var deferred = $q.defer();
     if (AuthService.isRegistered()) {
       var distance = window.localStorage.getItem('distanceRadius') ? window.localStorage.getItem('distanceRadius') : 50;
       var minAge = window.localStorage.getItem('minAge') ? window.localStorage.getItem('minAge') : 18;
       var maxAge = window.localStorage.getItem('maxAge') ? window.localStorage.getItem('maxAge') : 80;
-      backend.getMatch(distance, MatchService.previousId, minAge, maxAge).$promise
+      backend.getMatch(distance, clearPrevious, minAge, maxAge).$promise
       .then(function(match) {
         if (match.code === 200) {
           $ImageCacheFactory.Cache([
             match.pictureMed
           ]).then(function() {
-            MatchService.previousId = match.hashedId;
             deferred.resolve(match);
           }, function() {
             deferred.reject();
@@ -93,7 +90,7 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
-  MatchService.getInitialMatch = function() {
+  MatchService.getInitialMatch = function(clearPrevious) {
     var deferred = $q.defer();
     var totalCompleted = 0;
     var resolved = false;
@@ -110,13 +107,14 @@ angular.module('letterbox.services')
       var match = matches.shift();
       deferred.resolve(match);
     } else if (AuthService.isRegistered()) {
+      var count = 0;
       for (var i = 0; i < MAX_BUFFER; i++) {
         $timeout(function() {
           outstandingRequests++;
 
           // user may change preference half way
           matches = window.localStorage.getItem('genderPreference') === 'male' ? maleMatches : femaleMatches;
-          MatchService.getMatch().then(function(match) {
+          MatchService.getMatch(!(count++) && clearPrevious).then(function(match) {
             outstandingRequests--;
             totalCompleted++;
             if (seen.indexOf(match.hashedId) === -1) {
@@ -130,12 +128,13 @@ angular.module('letterbox.services')
               deferred.resolve(matches.shift());
             } else if (totalCompleted >= INITIAL_REQUESTS && !matches.length && !resolved) {
               resolved = true;
+
               deferred.reject();
             }
           }, function() {
             outstandingRequests--;
             totalCompleted++;
-            if (totalCompleted >= INITIAL_REQUESTS && matches.length && !resolved) {
+            if (matches.length && !resolved) {
               resolved = true;
               deferred.resolve(matches.shift());
             } else {
@@ -157,7 +156,7 @@ angular.module('letterbox.services')
     if (matches.length) {
       var match = matches.shift();
       outstandingRequests++;
-      MatchService.getMatch().then(function(matchedUser) {
+      MatchService.getMatch(false).then(function(matchedUser) {
         outstandingRequests--;
         matches.push(matchedUser);
       }, function() {
@@ -171,7 +170,7 @@ angular.module('letterbox.services')
         if (newValue === 0 && oldValue > 0) {
           if (matches.length) {
             outstandingRequests++;
-            MatchService.getMatch().then(function(matchedUser) {
+            MatchService.getMatch(false).then(function(matchedUser) {
               outstandingRequests--;
               matches.push(matchedUser);
             }, function() {
@@ -184,7 +183,7 @@ angular.module('letterbox.services')
         }
       });
     } else {
-      MatchService.getMatch().then(function(matchedUser) {
+      MatchService.getMatch(false).then(function(matchedUser) {
         deferred.resolve(match);
       }, function() {
         deferred.reject();
@@ -193,12 +192,12 @@ angular.module('letterbox.services')
     return deferred.promise;
   }
 
-  MatchService.getCard = function() {
+  MatchService.getCard = function(clearPrevious) {
     var deferred = $q.defer();
 
     if (window.localStorage.getItem('genderPreference') === 'male') {
-      if (!isMaleInit) {
-        MatchService.getInitialMatch().then(function(match) {
+      if (!isMaleInit || clearPrevious) {
+        MatchService.getInitialMatch(clearPrevious).then(function(match) {
           if (typeof match === 'undefined') {
             deferred.resolve(MatchService.getCard());
           } else {
@@ -215,8 +214,8 @@ angular.module('letterbox.services')
         }, deferred.reject);
       }
     } else {
-      if (!isFemaleInit) {
-        MatchService.getInitialMatch().then(function(match) {
+      if (!isFemaleInit || clearPrevious) {
+        MatchService.getInitialMatch(clearPrevious).then(function(match) {
           if (typeof match === 'undefined') {
             deferred.resolve(MatchService.getCard());
           } else {
