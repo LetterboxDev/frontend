@@ -19,6 +19,7 @@ angular.module('letterbox.services')
   var updateBioPath = '/user/bio';
   var userPhotoPath = '/user/photo';
   var updateGenderPreferencePath = '/user/genderPreference';
+  var deactivatePath = '/user/deactivate';
   var matchPath = '/match';
   var matchesPath = '/matches';
   var questionsPath = '/questions';
@@ -132,6 +133,15 @@ angular.module('letterbox.services')
 
   var updateGenderPreference = $resource(URL.concat(updateGenderPreferencePath), {}, {
     updateGenderPreference: {
+      method: 'PUT',
+      params: {
+        letterbox_token: '@token'
+      }
+    }
+  });
+
+  var deactivateHandler = $resource(URL.concat(deactivatePath), {}, {
+    deactivate: {
       method: 'PUT',
       params: {
         letterbox_token: '@token'
@@ -383,6 +393,15 @@ angular.module('letterbox.services')
     genderPreferenceUpdater.token = token;
     genderPreferenceUpdater.genderPreference = genderPreference;
     return genderPreferenceUpdater.$updateGenderPreference(successPromise);
+  };
+
+  backend.deactivateUser = function() {
+    var deferred = $q.defer();
+    var token = getToken();
+    handler = new deactivateHandler();
+    handler.token = token;
+    handler.$deactivate(deferred.resolve, deferred.reject);
+    return deferred.promise;
   };
 
   backend.getRandomQuestions = function() {
