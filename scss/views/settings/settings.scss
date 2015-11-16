@@ -135,5 +135,16 @@
       }
     }
   }
+
+  .btn-logout {
+    padding: 0 14px;
+  }
+  .btn-deactivate {
+    background-color: $colourPrimary;
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
 }
 
