@@ -3,6 +3,7 @@ angular.module('letterbox.controllers')
 .controller('LetterCtrl', function($scope,
                                    $state,
                                    $ionicHistory,
+                                   $ionicPopup,
                                    backend,
                                    letterService,
                                    eventbus,
@@ -43,9 +44,32 @@ angular.module('letterbox.controllers')
     if ($scope.curr === $scope.max && selected.length === 5 && selected.indexOf(-1) === -1) {
       removeTooltip();
       updateQuestionAnswers(questions, selected);
-      backend.sendALetter(targetUser.hashedId, questions);
-      $ionicHistory.goBack();
-      eventbus.call('closeLetter');
+      backend.sendALetter(targetUser.hashedId, questions).then(function() {
+        $ionicPopup.alert({
+          title: "Letter sent.",
+          cssClass: "popup-alert",
+          okType: "button-positive",
+          okText: "Home"
+        }).then(function(res) {
+          if (res) {
+            $ionicHistory.goBack();
+            eventbus.call('closeLetter');
+          }
+        });
+      }, function() {
+        $ionicPopup.alert({
+          title: "Failed to send letter.",
+          cssClass: "popup-alert",
+          okType: "button-positive",
+          okText: "Home"
+        }).then(function(res) {
+          if (res) {
+            $ionicHistory.goBack();
+            eventbus.call('closeLetter');
+          }
+        });
+      });
+
       return;
     } else if ($scope.curr === $scope.max) {
       $scope.warning = 'Please answer all questions.';
