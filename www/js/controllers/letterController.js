@@ -53,7 +53,6 @@ angular.module('letterbox.controllers')
         }).then(function(res) {
           if (res) {
             $ionicHistory.goBack();
-            eventbus.call('closeLetter');
           }
         });
       }, function() {
@@ -65,11 +64,11 @@ angular.module('letterbox.controllers')
         }).then(function(res) {
           if (res) {
             $ionicHistory.goBack();
-            eventbus.call('closeLetter');
           }
         });
       });
 
+      eventbus.call('closeLetter');
       return;
     } else if ($scope.curr === $scope.max) {
       $scope.warning = 'Please answer all questions.';
