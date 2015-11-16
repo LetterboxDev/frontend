@@ -17,9 +17,9 @@ angular.module('letterbox.services')
   var isMaleInit = false;
   var isFemaleInit = false;
 
-  var MAX_BUFFER = 20;
-  var REQUEST_INTERVAL = 800;
-  var INITIAL_REQUESTS = 4;
+  var MAX_BUFFER = 10;
+  var REQUEST_INTERVAL = 600;
+  var INITIAL_REQUESTS = 8;
 
   MatchService.previousId = '';
 
