@@ -12,16 +12,15 @@ angular.module('letterbox.controllers')
                                   MatchService,
                                   ReportService) {
 
-  var bufferSize = 20;
-
   $scope.cards = [];
   $scope.isLoading = false;
   $scope.isCardAnimating = false;
+  $scope.letterClosed = false;
   $scope.requestingNumber = 0;
 
   eventbus.registerListener('changePreference', changePreference);
+  eventbus.registerListener('closeLetter', closeLetter);
   eventbus.registerListener('enterHome', checkAndGetCard);
-  eventbus.registerListener('closeLetter', $scope.changeCard);
 
   getInitialCard();
 
@@ -67,6 +66,11 @@ angular.module('letterbox.controllers')
    * Helper functions
    */
   function checkAndGetCard() {
+    if ($scope.letterClosed) {
+      $scope.letterClosed = false;
+      $scope.changeCard();
+    }
+
     // if there is card currently loaded, change it
     // otherwise, load new card
     if ($scope.cards.length === 0) {
@@ -80,6 +84,10 @@ angular.module('letterbox.controllers')
     } else {
       $scope.changeCard();
     }
+  }
+
+  function closeLetter() {
+    $scope.letterClosed = true;
   }
 
   function getInitialCard() {
