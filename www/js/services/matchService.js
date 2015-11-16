@@ -99,14 +99,13 @@ angular.module('letterbox.services')
     var resolved = false;
     var seen = [];
 
-    matches = [];
-    var matches = window.localStorage.getItem('genderPreference') === 'male' ? maleMatches : femaleMatches;
     if (window.localStorage.getItem('genderPreference') === 'male') {
       isMaleInit = true;
     } else {
       isFemaleInit = true;
     }
 
+    var matches = window.localStorage.getItem('genderPreference') === 'male' ? maleMatches : femaleMatches;
     if (outstandingRequests === 0 && matches.length && AuthService.isRegistered()) {
       var match = matches.shift();
       deferred.resolve(match);
@@ -114,6 +113,9 @@ angular.module('letterbox.services')
       for (var i = 0; i < MAX_BUFFER; i++) {
         $timeout(function() {
           outstandingRequests++;
+
+          // user may change preference half way
+          matches = window.localStorage.getItem('genderPreference') === 'male' ? maleMatches : femaleMatches;
           MatchService.getMatch().then(function(match) {
             outstandingRequests--;
             totalCompleted++;
