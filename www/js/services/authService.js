@@ -93,5 +93,14 @@ angular.module('letterbox.services')
     return deferred.promise;
   };
 
+  AuthService.deactivateUser = function() {
+    var deferred = $q.defer();
+    backend.deactivateUser()
+    .then(function() {
+      AuthService.logout().then(deferred.resolve);
+    }, deferred.reject);
+    return deferred.promise;
+  };
+
   return AuthService;
 });
