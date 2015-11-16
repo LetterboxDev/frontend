@@ -3,8 +3,8 @@ angular.module('letterbox.controllers', []);
 angular.module('letterbox.directives', []);
 angular.module('letterbox.services', []);
 
-angular.module('letterbox', ['ionic',
-                             'ionic.service.core',
+angular.module('letterbox', ['ionic','ionic.service.core',
+                             
                              'letterbox.controllers',
                              'letterbox.directives',
                              'letterbox.services',
@@ -20,8 +20,8 @@ angular.module('letterbox', ['ionic',
 
 .constant('VERSION', {
   major: 0,
-  minor: 1,
-  revision: 2
+  minor: 2,
+  revision: 0
 })
 
 .run(function($ionicPlatform, $rootScope, eventbus) {

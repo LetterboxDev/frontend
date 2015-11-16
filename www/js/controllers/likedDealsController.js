@@ -14,8 +14,11 @@ angular.module('letterbox.controllers')
 
   $scope.viewDeal = function(deal) {
     $state.go('app.deal', { dealId: deal.id });
-  }
+  };
 
-  fetchLikedDeals();
+  // Ensure that deals get reloaded each time
+  $scope.$on('$ionicView.enter', function() {
+    fetchLikedDeals();
+  });
 });
 
