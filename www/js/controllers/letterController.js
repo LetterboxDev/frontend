@@ -17,12 +17,12 @@ angular.module('letterbox.controllers')
 
   var targetUser = letterService.targetUserCard;
 
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
+
   var questions = targetUser.questions;
   if (!questions) {
-    $ionicHistory.nextViewOptions({
-      disableBack: true
-    });
-
     $state.go('app.home');
   } else {
     var selected = [-1, -1, -1, -1, -1];
