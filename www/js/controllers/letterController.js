@@ -52,6 +52,7 @@ angular.module('letterbox.controllers')
           okText: "Home"
         }).then(function(res) {
           if (res) {
+            eventbus.call('closeLetter');
             $ionicHistory.goBack();
           }
         });
@@ -68,7 +69,6 @@ angular.module('letterbox.controllers')
         });
       });
 
-      eventbus.call('closeLetter');
       return;
     } else if ($scope.curr === $scope.max) {
       $scope.warning = 'Please answer all questions.';
