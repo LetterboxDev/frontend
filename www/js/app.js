@@ -3,8 +3,8 @@ angular.module('letterbox.controllers', []);
 angular.module('letterbox.directives', []);
 angular.module('letterbox.services', []);
 
-angular.module('letterbox', ['ionic',
-                             'ionic.service.core',
+angular.module('letterbox', ['ionic','ionic.service.core',
+                             
                              'letterbox.controllers',
                              'letterbox.directives',
                              'letterbox.services',
