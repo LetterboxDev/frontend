@@ -7,4 +7,4 @@ plugins/
 www/dist/
 www/lib/
 .io-config.json
-
+platforms/ios/Letterbox/Classes/

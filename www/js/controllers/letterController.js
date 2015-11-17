@@ -3,6 +3,7 @@ angular.module('letterbox.controllers')
 .controller('LetterCtrl', function($scope,
                                    $state,
                                    $ionicHistory,
+                                   $ionicPopup,
                                    backend,
                                    letterService,
                                    eventbus,
@@ -16,12 +17,12 @@ angular.module('letterbox.controllers')
 
   var targetUser = letterService.targetUserCard;
 
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
+
   var questions = targetUser.questions;
   if (!questions) {
-    $ionicHistory.nextViewOptions({
-      disableBack: true
-    });
-
     $state.go('app.home');
   } else {
     var selected = [-1, -1, -1, -1, -1];
@@ -43,9 +44,31 @@ angular.module('letterbox.controllers')
     if ($scope.curr === $scope.max && selected.length === 5 && selected.indexOf(-1) === -1) {
       removeTooltip();
       updateQuestionAnswers(questions, selected);
-      backend.sendALetter(targetUser.hashedId, questions);
-      $ionicHistory.goBack();
-      eventbus.call('closeLetter');
+      backend.sendALetter(targetUser.hashedId, questions).then(function() {
+        $ionicPopup.alert({
+          title: "Letter sent.",
+          cssClass: "popup-alert",
+          okType: "button-positive",
+          okText: "Home"
+        }).then(function(res) {
+          if (res) {
+            eventbus.call('closeLetter');
+            $ionicHistory.goBack();
+          }
+        });
+      }, function() {
+        $ionicPopup.alert({
+          title: "Failed to send letter.",
+          cssClass: "popup-alert",
+          okType: "button-positive",
+          okText: "Home"
+        }).then(function(res) {
+          if (res) {
+            $ionicHistory.goBack();
+          }
+        });
+      });
+
       return;
     } else if ($scope.curr === $scope.max) {
       $scope.warning = 'Please answer all questions.';
